@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
-// import './styles/index.css';
 import Profile from './containers/profile/Profile';
+import Login from './containers/login/Login';
+import ErrorPage from './containers/common/ErrorPage';
 
 class App extends Component {
     render() {
         return (
-            <div className="dip-container-fluid">
-                <Route exact path="/" component={Profile} />
-            </div>
+            // <div className="dip-container-fluid">
+            <Switch>
+                <Route exact path="/" component={Login} />
+                <Route exact path="/profile" component={Profile} />
+                <Route component={ErrorPage} />
+            </Switch>
+            // </div>
         );
     }
 }

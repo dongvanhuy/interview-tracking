@@ -8,7 +8,6 @@ import rootEpic from '../epics';
 import ajaxSetup from '../ajax';
 import ApiService from '../services/apiService';
 
-
 export const history = createHistory();
 
 const initialState = {};
@@ -37,11 +36,7 @@ const composedEnhancers = compose(
     ...enhancers,
 );
 
-const store = createStore(
-    rootReducer,
-    initialState,
-    composedEnhancers,
-);
+const store = createStore(rootReducer, initialState, composedEnhancers);
 
 ajaxSetup(store);
 
