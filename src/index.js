@@ -6,7 +6,7 @@ import { ConnectedRouter } from 'react-router-redux';
 import { addStyle } from 'react-bootstrap/lib/utils/bootstrapUtils';
 import Button from 'react-bootstrap/lib/Button';
 import './styles/index.css';
-import Header from './containers/header/Header';
+import App from './App';
 import store, { history } from './store';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
@@ -20,7 +20,7 @@ export default ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history} onUpdate={() => window.scrollTo(0, 0)}>
             <div>
-                <Header />
+                <App />
             </div>
         </ConnectedRouter>
     </Provider>,
