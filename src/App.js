@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
-import './styles/index.css';
+// import './styles/index.css';
 import Profile from './containers/profile/Profile';
 
 class App extends Component {
