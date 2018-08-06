@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import { addStyle } from 'react-bootstrap/lib/utils/bootstrapUtils';
 import Button from 'react-bootstrap/lib/Button';
-import './index.css';
+// import './index.css';
 import App from './App';
 import store, { history } from './store';
 
