@@ -2,7 +2,7 @@ import { handleActions } from 'redux-actions';
 import { PROFILE_LOAD_SUCCESS } from '../../store/actionTypes';
 
 const initialState = {
-    dataUser: [],
+    dataProfile: [],
 };
 
 const actions = {
