@@ -3,5 +3,4 @@ export const preventSubmit = e => {
 };
 
 export const validateForm = () => {
-    alert('Hello');
 };
