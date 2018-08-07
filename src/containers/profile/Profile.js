@@ -27,7 +27,7 @@ const mapStateToProps = state => ({
     profile: state.profile.dataProfile,
 });
 
-const mapDispatchToProps = {
+const mapDispatchToProps = {    
     loadProfile,
 };
 
