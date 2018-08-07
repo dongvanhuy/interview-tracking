@@ -6,7 +6,8 @@ import 'rxjs';
 import rootReducer from '../reducers';
 import rootEpic from '../epics';
 import ajaxSetup from '../ajax';
-import ApiService, { ApiService2 } from '../services/apiService';
+import ApiService from '../services/apiService';
+
 
 export const history = createHistory();
 
@@ -18,7 +19,6 @@ const middleware = [
     createEpicMiddleware(rootEpic, {
         dependencies: {
             loadDataCandidateService: ApiService.loadDataCandidate,
-            checkUserService: ApiService2.checkUser,
         },
     }),
 ];
@@ -37,7 +37,11 @@ const composedEnhancers = compose(
     ...enhancers,
 );
 
-const store = createStore(rootReducer, initialState, composedEnhancers);
+const store = createStore(
+    rootReducer,
+    initialState,
+    composedEnhancers,
+);
 
 ajaxSetup(store);
 
