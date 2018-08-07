@@ -1,14 +1,14 @@
 import { handleActions } from 'redux-actions';
-import { PROFILE_LOAD_SUCCESS } from '../../store/actionTypes';
+import { LOGIN_SUCCESS } from '../../store/actionTypes';
 
 const initialState = {
-    dataUser: [],
+    dataLogin: [],
 };
 
 const actions = {
-    [PROFILE_LOAD_SUCCESS]: (state, { payload }) => ({
+    [LOGIN_SUCCESS]: (state, { payload }) => ({
         ...state,
-        dataProfile: payload.data,
+        dataLogin: payload.data,
     }),
 };
 
