@@ -11,5 +11,5 @@ export default class ApiService {
 }
 
 export class ApiService2 {
-    static loadDataCandidate = () => Observable.fromPromise(axios.get(`${API_HOST}/test`, {data: {}}));
+    static checkUser = () => Observable.fromPromise(axios.get(`${API_HOST2}/test`, {data: {}}));
 }
