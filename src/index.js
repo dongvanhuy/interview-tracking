@@ -3,18 +3,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
-import { addStyle } from 'react-bootstrap/lib/utils/bootstrapUtils';
-import Button from 'react-bootstrap/lib/Button';
-import './styles/index.css';
 import App from './App';
 import store, { history } from './store';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 require('es6-shim');
 
-export function init() {
-    addStyle(Button, 'yellow');
-}
 
 export default ReactDOM.render(
     <Provider store={store}>
@@ -27,4 +21,3 @@ export default ReactDOM.render(
     document.getElementById('root') || document.createElement('div'),
 );
 
-init();
