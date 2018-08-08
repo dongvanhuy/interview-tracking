@@ -1,6 +1,8 @@
 body {
   margin: 0;
   padding: 0;
+  font-size: 16px;
+  font-family: Arial;
   background: #f2f2f2 !important;
 }
 
@@ -15,7 +17,7 @@ header {
 .formLogin {
   position: absolute;
   top: 20%;
-  left: 35%;
+  left: 27%;
   &__container {
     width: 100%;
     display: flex;
@@ -26,28 +28,40 @@ header {
     background: #f2f2f2;
   }
   &__outer {
-    width: 390px;
+    width: 550px;
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
     padding: 30px 30px 33px 30px;
+
+    .formLogin__allComponents {
+      label {
+        padding-top: 14px;
+        font-size: 18px;
+        text-align: center !important;
+      }
+    }
+
+    .formLogin__form {
+      .formLogin__demo {
+        margin-left: 0px;
+      }
+    }
   }
   &__title {
     display: block;
     font-family: "Poppins", sans-serif;
     font-weight: bolder;
-    font-size: 30px;
+    font-size: 45px;
     color: #333333;
     line-height: 1.2;
     text-align: center;
-    padding-bottom: 10px;
+    padding-bottom: 40px;
     padding-top: 10px;
   }
   &__logo {
     padding-left: 80px;
-    margin-left: 25px;
-    // padding-bottom: 20px;
-    // padding-top: 10px;
+    margin-left: 22%;
     width: 200px;
     height: 120px;
     img {
@@ -56,9 +70,41 @@ header {
       border-radius: 50%;
     }
   }
-  &__form &__button {
-    margin-left: 85px;
+
+  &__allComponents {
+    input {
+      padding: 25px 15px;
+      font-size: 20px;
+    }
   }
+
+  &__demo {
+    margin-left: 0px;
+    button {
+      font-size: 20px;
+      padding: 22px 50px;
+      background: #ffed00;
+      color: #000000;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #ffed00;
+    }
+  }
+
+  &__span {
+    margin-top: 10px;
+    color: red;
+  }
+
+}
+
+.noBorder {
+  border-color: white;
+}
+
+.formLogin__email .redBorder{
+  border-color: red;
 }
 
 @media (max-width: 425px) {

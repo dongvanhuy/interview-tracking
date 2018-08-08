@@ -39,6 +39,7 @@
     "history": "^4.7.2",
     "i18next": "^10.2.1",
     "i18next-browser-languagedetector": "^2.1.0",
+    "lodash": "^4.17.10",
     "lodash.find": "^4.6.0",
     "lodash.get": "^4.4.2",
     "lodash.without": "^4.4.0",
