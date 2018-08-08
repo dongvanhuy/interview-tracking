@@ -8,9 +8,9 @@ import {
     ControlLabel,
     Button,
 } from 'react-bootstrap';
-import { preventSubmit } from '../../utils/Common';
 import { connect } from 'react-redux';
 import PropsTypes from 'prop-types';
+import { preventSubmit, validateForm } from '../../utils/Common';
 import { loginCheck } from './LoginActions';
 
 class Login extends Component {
@@ -45,7 +45,11 @@ class Login extends Component {
                   Email
                               </Col>
                               <Col lg={9}>
-                                  <FormControl type="email" placeholder="Your Email" required />
+                                  <FormControl
+                                      type="email"
+                                      placeholder="Your Email"
+                                      name="email"
+                                  />
                               </Col>
                           </FormGroup>
 
@@ -75,7 +79,10 @@ class Login extends Component {
                                       <Button
                                           bsStyle="success"
                                           type="submit"
-                                          onClick={e => preventSubmit(e)}
+                                          onClick={e => {
+                                              preventSubmit(e);
+                                              validateForm();
+                                          }}
                                       >
                       Log In
                                       </Button>
