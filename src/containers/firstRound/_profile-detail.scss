@@ -1,0 +1,30 @@
+.header{
+    background-color: black;
+    height: 150px;
+}
+
+.form--title {
+    margin: 0;
+    padding: 20px 0px;
+    background-color: black;
+    color: #ffed00 ;
+    text-align: center;
+}
+.form__h2--title{
+    /* display: inline-block; */
+    border-bottom: 2px solid #ffed00;
+}
+
+.radioGroup {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 0;
+    .radio {
+        flex: 1;
+        padding: 0;
+        margin: 0;
+        &+.radio {
+            margin-top: 0;
+        }
+    }
+}
