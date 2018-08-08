@@ -135,7 +135,7 @@ class Login extends Component {
 
                           <FormGroup className="formLogin__demo">
                               <Row>
-                                  <Col lg={4} xs={3} md={3} className="formLogin__button">
+                                  <Col lg={4} xs={4} md={4} className="formLogin__button">
                                       <Button
                                           type="submit"
                                           disabled={this.disableButton()}
@@ -146,7 +146,7 @@ class Login extends Component {
                                           <span>LOG IN</span>
                                       </Button>
                                   </Col>
-                                  <Col lg={6} xs={3} md={3}>
+                                  <Col lg={6} xs={6} md={6}>
                                       <a href="https://gpl.amer.csc.com">
                                           <Button>USING GLOBAL PASS</Button>
                                       </a>
