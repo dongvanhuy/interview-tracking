@@ -1,8 +1,10 @@
 import { handleActions } from 'redux-actions';
-import { PROFILE_LOAD_SUCCESS } from '../../store/actionTypes';
+import { PROFILE_LOAD_SUCCESS, VIEW_DETAIL_DATA, ADD_PROFILE } from '../../store/actionTypes';
 
 const initialState = {
-    dataUser: [],
+    dataProfile: [],
+    profileSelected: {},
+    addProfileDetail:{},
 };
 
 const actions = {
@@ -10,6 +12,21 @@ const actions = {
         ...state,
         dataProfile: payload.data,
     }),
+    [VIEW_DETAIL_DATA]: (state,  data) => {
+        console.log('>>>> data redu', data);
+        return ({
+            ...state,
+            profileSelected: data.payload,
+        });
+    },
+
+    [ADD_PROFILE]: (state) => {
+        console.log('>>>> data redu');
+        return ({
+            ...state,
+            addProfileDetail: '',
+        });
+    },
 };
 
 export default handleActions(actions, initialState);

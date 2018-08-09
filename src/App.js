@@ -5,7 +5,7 @@ import './styles/index.css';
 import Profile from './containers/profile/Profile';
 import Login from './containers/login/Login';
 import ErrorPage from './containers/common/ErrorPage';
-import FirstRound from './containers/firstRound/FirstRound';
+import ProfileDetails from './containers/profiledetails/ProfileDetails';
 
 class App extends Component {
     render() {
@@ -14,7 +14,7 @@ class App extends Component {
             <Switch>
                 <Route exact path="/" component={Login} />
                 <Route exact path="/profile" component={Profile} />
-                <Route exact path="/profile-detail" component={FirstRound} />
+                <Route exact path="/profile-detail" component={ProfileDetails} />
                 <Route component={ErrorPage} />
             </Switch>
             // </div>

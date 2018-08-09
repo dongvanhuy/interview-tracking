@@ -1,5 +1,8 @@
 @import "breakpoint";
 @import "errorPage";
-@import '../containers/firstRound/profile-detail';
+@import '../containers/profiledetails/profile-details';
+@import 'common';
 @import "../containers/common/errorPage";
 @import "../containers/login/loginPage";
+@import "../containers/profile/listcandidate";
+

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { FormGroup, FormControl, ControlLabel, Button, Grid, Row, Col, Radio, PageHeader } from 'react-bootstrap';
+import { FormGroup, FormControl, ControlLabel, Grid, Row, Col } from 'react-bootstrap';
+import { SecondRound } from './ProfileDetailsSecondRound';
 
 export class FirstRound extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -35,7 +35,6 @@ export class FirstRound extends Component {
             }
         }
     };
-
     handleChange = (e, childatrr) => {
         var value = e.target.value;
         var name = e.target.name;
@@ -47,23 +46,24 @@ export class FirstRound extends Component {
             state[name][childatrr] = value;
         }
         this.setState({ state: this.state });
-
+        // console.log(this.state);
     }
 
     render() {
         return (
-            <section className="firstRound">
-                <PageHeader className="form--title">
+            <section className="profiledetails">
+                <h1 className="profiledetails--title">
                     Candidate Assessment Summary Form
-                </PageHeader>
+                </h1>
                 <Grid>
                     <form action="">
                         <Row className="show-grid">
                             <Col xs={12} sm={6} md={6} lg={6}>
-                                <h2 className="form__h2--title">Candidate Info</h2>
+                                <h2 className="profiledetails__h2--title">Candidate Info</h2>
                                 <FormGroup>
                                     <ControlLabel>Candidate's Full Name</ControlLabel>
                                     <FormControl
+                                        required
                                         type="text"
                                         placeholder=""
                                         name="candidateName"
@@ -81,7 +81,7 @@ export class FirstRound extends Component {
                                 </FormGroup>
                                 <FormGroup>
                                     <ControlLabel>Recruiter</ControlLabel>
-                                    <FormControl componentClass="select" className="form--select"
+                                    <FormControl componentClass="select" className="profiledetails__select"
                                         onChange={(e) => this.handleChange(e)}
                                         name="recruiter"
                                         placeholder="Select"
@@ -93,7 +93,7 @@ export class FirstRound extends Component {
                                 </FormGroup>
                             </Col>
                             <Col xs={12} sm={6} md={6} lg={6}>
-                                <h2 className="form__h2--title">HR Interview</h2>
+                                <h2 className="profiledetails__h2--title">HR Interview</h2>
                                 <FormGroup>
                                     <ControlLabel>English Level</ControlLabel>
                                     <FormControl
@@ -112,7 +112,7 @@ export class FirstRound extends Component {
                                 </FormGroup>
                             </Col>
                         </Row>
-                        <h2 className="form__h2--title">1st Round</h2>
+                        <h2 className="profiledetails__h2--title">1st Round</h2>
                         <Row className="show-grid">
                             <Col xs={12} sm={9} md={9} lg={9}>
                                 <ControlLabel>Interviewer(s)'s name</ControlLabel>
@@ -120,6 +120,7 @@ export class FirstRound extends Component {
                                     <Col xs={12} sm={6} md={6} lg={6}>
                                         <FormGroup>
                                             <FormControl componentClass="select" placeholder="select"
+                                                className="profiledetails__select"
                                                 onChange={(e) => this.handleChange(e, "interviewer1")}
                                                 name="interviewersName"
                                             >
@@ -133,6 +134,7 @@ export class FirstRound extends Component {
                                     <Col xs={12} sm={6} md={6} lg={6}>
                                         <FormGroup>
                                             <FormControl componentClass="select" placeholder="select"
+                                                className="profiledetails__select"
                                                 onChange={(e) => this.handleChange(e, "interviewer2")}
                                                 name="interviewersName"
                                             >
@@ -157,21 +159,38 @@ export class FirstRound extends Component {
                                 </FormGroup>
                             </Col>
                         </Row>
-
-
                         <FormGroup>
                             <ControlLabel>Technical Competency</ControlLabel>
-                            <div className="radioGroup">
-                                <Radio onChange={(e) => this.handleChange(e, "level")} value="Limited" name="techcompetency" >Limited</Radio>
-                                <Radio onChange={(e) => this.handleChange(e, "level")} value="Basic" name="techcompetency" >Basic</Radio>
-                                <Radio onChange={(e) => this.handleChange(e, "level")} value="Acceptable" name="techcompetency" >Acceptable</Radio>
-                                <Radio onChange={(e) => this.handleChange(e, "level")} value="Advanced" name="techcompetency" >Advanced</Radio>
-                                <Radio onChange={(e) => this.handleChange(e, "level")} value="Exceptional" name="techcompetency" >Exceptional</Radio>
-
+                            <div className="profiledetails__radioGroup">
+                                <label className="profiledetails__radioGroup--item">Limited
+                                    <input type="radio" value="Limited" name="techcompetency"
+                                        onChange={(e) => this.handleChange(e, "level")} />
+                                    <span className="checkmark"></span>
+                                </label>
+                                <label className="profiledetails__radioGroup--item">Basic
+                                    <input type="radio" value="Basic" name="techcompetency"
+                                        onChange={(e) => this.handleChange(e, "level")} />
+                                    <span className="checkmark"></span>
+                                </label>
+                                <label className="profiledetails__radioGroup--item">Acceptable
+                                    <input type="radio" value="Acceptable" name="techcompetency"
+                                        onChange={(e) => this.handleChange(e, "level")} />
+                                    <span className="checkmark"></span>
+                                </label>
+                                <label className="profiledetails__radioGroup--item">Advanced
+                                    <input type="radio" value="Advanced" name="techcompetency"
+                                        onChange={(e) => this.handleChange(e, "level")} />
+                                    <span className="checkmark"></span>
+                                </label>
+                                <label className="profiledetails__radioGroup--item">Exceptional
+                                    <input type="radio" value="Exceptional" name="techcompetency"
+                                        onChange={(e) => this.handleChange(e, "level")} />
+                                    <span className="checkmark"></span>
+                                </label>
                             </div>
 
                             <FormGroup>
-                                <ControlLabel>Comment</ControlLabel>
+                                <span className="profiledetails__comments">Comment</span>
                                 <FormControl componentClass="textarea"
                                     name="techcompetency"
                                     onChange={(e) => (this.handleChange(e, "comment"))}
@@ -180,23 +199,43 @@ export class FirstRound extends Component {
                         </FormGroup>
                         <FormGroup>
                             <ControlLabel>Cutural Fit</ControlLabel>
-                            <div className="radioGroup">
-                                <Radio onChange={(e) => this.handleChange(e, "level")} className="radio" value="Limited" name="cuturalFit" >Limited</Radio>
-                                <Radio onChange={(e) => this.handleChange(e, "level")} className="radio" value="Basic" name="cuturalFit" >Basic</Radio>
-                                <Radio onChange={(e) => this.handleChange(e, "level")} className="radio" value="Acceptable" name="cuturalFit" >Acceptable</Radio>
-                                <Radio onChange={(e) => this.handleChange(e, "level")} className="radio" value="Advanced" name="cuturalFit" >Advanced</Radio>
-                                <Radio onChange={(e) => this.handleChange(e, "level")} className="radio" value="Exceptional" name="cuturalFit" >Exceptional</Radio>
+                            <div className="profiledetails__radioGroup">
+                                <label className="profiledetails__radioGroup--item">Limited
+                                    <input type="radio" value="Limited" name="cuturalFit"
+                                        onChange={(e) => this.handleChange(e, "level")} />
+                                    <span className="checkmark"></span>
+                                </label>
+                                <label className="profiledetails__radioGroup--item">Basic
+                                    <input type="radio" value="Basic" name="cuturalFit"
+                                        onChange={(e) => this.handleChange(e, "level")} />
+                                    <span className="checkmark"></span>
+                                </label>
+                                <label className="profiledetails__radioGroup--item">Acceptable
+                                    <input type="radio" value="Acceptable" name="cuturalFit"
+                                        onChange={(e) => this.handleChange(e, "level")} />
+                                    <span className="checkmark"></span>
+                                </label>
+                                <label className="profiledetails__radioGroup--item">Advanced
+                                    <input type="radio" value="Advanced" name="cuturalFit"
+                                        onChange={(e) => this.handleChange(e, "level")} />
+                                    <span className="checkmark"></span>
+                                </label>
+                                <label className="profiledetails__radioGroup--item">Exceptional
+                                    <input type="radio" value="Exceptional" name="cuturalFit"
+                                        onChange={(e) => this.handleChange(e, "level")} />
+                                    <span className="checkmark"></span>
+                                </label>
                             </div>
 
                             <FormGroup>
-                                <ControlLabel>Comment</ControlLabel>
+                                <span className="profiledetails__comments">Comment</span>
                                 <FormControl componentClass="textarea"
                                     name="cuturalFit"
                                     onChange={(e) => (this.handleChange(e, "comment"))}
                                 />
                             </FormGroup>
                         </FormGroup>
-                        <h4>Result</h4>
+                        <h3>Result</h3>
                         <Row>
                             <Col xs={12} sm={4} md={4} lg={4}>
                                 <FormGroup>
@@ -213,6 +252,7 @@ export class FirstRound extends Component {
                                 <FormGroup>
                                     <ControlLabel>Title</ControlLabel>
                                     <FormControl componentClass="select" placeholder="select"
+                                        className="profiledetails__select"
                                         name="result"
                                         onChange={(e) => (this.handleChange(e, "title"))}>
                                         <option defaultValue="Assoc Prof">Assoc Prof</option>
@@ -225,6 +265,7 @@ export class FirstRound extends Component {
                                 <FormGroup>
                                     <ControlLabel>1st Round Status</ControlLabel>
                                     <FormControl componentClass="select" placeholder="select"
+                                        className="profiledetails__select"
                                         name="result"
                                         onChange={(e) => (this.handleChange(e, "status"))}>>
                                         <option defaultValue="Passed">Passed</option>
@@ -235,13 +276,27 @@ export class FirstRound extends Component {
                             </Col>
                         </Row>
                         <FormGroup>
-                            <ControlLabel>Comment</ControlLabel>
+                            <span className="profiledetails__comments">Comment</span>
                             <FormControl componentClass="textarea"
                                 name="result"
                                 onChange={(e) => (this.handleChange(e, "comment"))}
                             />
                         </FormGroup>
-                        <Button type="submit">Submit</Button>
+                        <SecondRound></SecondRound>
+                        <FormGroup className="profiledetails__btn">
+                            <Row>
+                                <Col xs={12} sm={8} md={8} lg={8}>
+
+                                </Col>
+                                <Col xs={12} sm={2} md={2} lg={2}>
+                                    <button className="profiledetails__btn--cancel">CANCEL</button>
+                                </Col>
+                                <Col xs={12} sm={2} md={2} lg={2}>
+                                    <button className="profiledetails__btn--submit">SUBMIT</button>
+                                </Col>
+
+                            </Row>
+                        </FormGroup>
                     </form>
                 </Grid>
             </section >
