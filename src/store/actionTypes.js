@@ -4,3 +4,6 @@ export const PROFILE_LOAD_SUCCESS = 'PROFILE_LOAD_SUCCESS';
 export const LOGIN_CHECK = 'LOGIN_CHECK';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 
+export const VIEW_DETAIL_DATA = 'VIEW_DETAIL_DATA';
+
+export const ADD_PROFILE = 'ADD_PROFILE';
