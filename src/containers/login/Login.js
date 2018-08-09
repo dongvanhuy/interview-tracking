@@ -10,7 +10,7 @@ import {
 } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropsTypes from 'prop-types';
-import { preventSubmit, validateForm } from '../../utils/Common';
+import { isEmpty, validateEmail } from '../../utils/Common';
 import { loginCheck } from './LoginActions';
 
 class Login extends Component {
@@ -22,11 +22,62 @@ class Login extends Component {
       user: [],
   };
 
+  state = {
+      emailError: '',
+      passwordError: '',
+      email: '',
+      password: '',
+      border: 'true',
+  };
+
   componentWillMount() {
       this.props.loginCheck();
   }
 
+  onLogin(e) {
+      e.preventDefault();
+      this.checkValidate();
+  }
+
+  checkValidate() {
+      if (!validateEmail(this.state.email)) {
+          this.setState({
+              emailError: 'Email invalid',
+          });
+      } else {
+          this.setState({
+              emailError: '',
+          });
+      }
+  }
+
+  changeBorder = val => {
+      this.setState({ border: val });
+  };
+
+  handleChange(e) {
+      const { value, name } = e.target;
+      this.setState({
+          [name]: value,
+      });
+  }
+
+  disableButton() {
+      if (isEmpty(this.state)) {
+          return true;
+      } else if (isEmpty(this.state.email) || isEmpty(this.state.password)) {
+          //   this.changeBorder(true);
+          return true;
+      }
+      //   this.changeBorder(false);
+      return false;
+  }
+
   render() {
+      console.log('>>>>>>>>>>>>>>>>>>>>>>>>', this.state);  
+      const { emailError, passwordError } = this.state;
+      const border = isEmpty(emailError) ? 'noBorder' : 'redBorder';
+      console.log('>>>>> emailError', emailError, isEmpty(emailError), border);
       return (
           <section className="formLogin">
               <div className="formLogin__container">
@@ -39,58 +90,66 @@ class Login extends Component {
                               />
                           </div>
                           <span className="formLogin__title">Interview Tracking</span>
-
-                          <FormGroup controlId="formHorizontalEmail">
+                          <FormGroup
+                              controlId="formHorizontalEmail"
+                              className="formLogin__allComponents"
+                          >
                               <Col componentClass={ControlLabel} lg={3}>
-                  Email
+                                  <span>Email</span>
                               </Col>
-                              <Col lg={9}>
+                              <Col lg={9} className="formLogin__input formLogin__email">
                                   <FormControl
                                       type="email"
                                       placeholder="Your Email"
                                       name="email"
+                                      className={border}
+                                      onChange={e => {
+                                          this.handleChange(e);
+                                      }}
                                   />
+                                  <div className="formLogin__span">{emailError}</div>
                               </Col>
                           </FormGroup>
 
-                          <FormGroup controlId="formHorizontalPassword">
+                          <FormGroup
+                              controlId="formHorizontalPassword"
+                              className="formLogin__allComponents"
+                          >
                               <Col componentClass={ControlLabel} lg={3}>
-                  Password
+                                  <span>Password</span>
                               </Col>
                               <Col lg={9}>
                                   <FormControl
                                       type="password"
+                                      name="password"
                                       placeholder="Your Password"
                                       required
+                                      className={border}
+                                      onChange={e => {
+                                          this.handleChange(e);
+                                      }}
                                   />
+                                  <div className="formLogin__span">{passwordError}</div>
                               </Col>
                           </FormGroup>
 
-                          <FormGroup>
+                          <FormGroup className="formLogin__demo">
                               <Row>
-                                  <Col
-                                      lgOffset={1}
-                                      lg={3}
-                                      xsOffset={1}
-                                      xs={3}
-                                      md={3}
-                                      className="formLogin__button"
-                                  >
+                                  <Col lg={4} xs={4} md={4} className="formLogin__button">
                                       <Button
-                                          bsStyle="success"
                                           type="submit"
+                                          disabled={this.disableButton()}
                                           onClick={e => {
-                                              preventSubmit(e);
-                                              validateForm();
+                                              this.onLogin(e);
                                           }}
                                       >
-                      Log In
+                                          <span>LOG IN</span>
                                       </Button>
                                   </Col>
-                                  <Col>
-                                      <Button bsStyle="success" type="submit">
-                      Login using Global Pass
-                                      </Button>
+                                  <Col lg={6} xs={6} md={6}>
+                                      <a href="https://gpl.amer.csc.com">
+                                          <Button>USING GLOBAL PASS</Button>
+                                      </a>
                                   </Col>
                               </Row>
                           </FormGroup>
