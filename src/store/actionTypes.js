@@ -1,6 +1,7 @@
 export const PROFILE_LOAD = 'PROFILE_LOAD';
 export const PROFILE_LOAD_SUCCESS = 'PROFILE_LOAD_SUCCESS';
 
+
 export const LOGIN_CHECK = 'LOGIN_CHECK';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 

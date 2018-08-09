@@ -9,11 +9,30 @@
   height: 120px;
   background: #FFFFFF;  
 }
+.logo {
+  background-image: url("../logodxc.png") no-repeat; 
+ 
+  img {
+    width: 100%;
+    height: 100%; 
+    padding-top: 40px;
+    float: left;
+  
+  }
+}
 
+.timestamp {
+  border: 1px solid #000000;
+  height: 120px;
+  padding-top: 20px;
+  text-align: center;
+}
 
 .View-project {
   padding-top: 15px;
-  float: right; }
+  float: right; 
+}
+
 .list
 {
   background: #FFFFFF;
@@ -49,16 +68,7 @@
   
 }
 
-.logo {
-  background-image: url("../logodxc.png") no-repeat; 
- 
-  img {
-    height: 100px; 
-    padding-top: 20px;
-    float: left;
-  
-  }
-}
+
 
 .btn-list-cadidate{
   .button-add {
