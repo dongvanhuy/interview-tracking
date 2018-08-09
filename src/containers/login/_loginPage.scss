@@ -1,8 +1,5 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-size: 16px;
-  font-family: Arial;
+  display: block;
   background: #f2f2f2 !important;
 }
 
@@ -15,9 +12,7 @@ header {
 }
 
 .formLogin {
-  position: absolute;
-  top: 20%;
-  left: 27%;
+  margin-top: 10%;
   &__container {
     width: 100%;
     display: flex;
@@ -33,7 +28,6 @@ header {
     border-radius: 10px;
     overflow: hidden;
     padding: 30px 30px 33px 30px;
-
     .formLogin__allComponents {
       label {
         padding-top: 14px;
@@ -41,7 +35,6 @@ header {
         text-align: center !important;
       }
     }
-
     .formLogin__form {
       .formLogin__demo {
         margin-left: 0px;
@@ -60,8 +53,6 @@ header {
     padding-top: 10px;
   }
   &__logo {
-    padding-left: 80px;
-    margin-left: 22%;
     width: 200px;
     height: 120px;
     img {
@@ -70,16 +61,15 @@ header {
       border-radius: 50%;
     }
   }
-
   &__allComponents {
     input {
       padding: 25px 15px;
       font-size: 20px;
     }
   }
-
   &__demo {
     margin-left: 0px;
+    text-align: center;
     button {
       font-size: 20px;
       padding: 22px 50px;
@@ -91,30 +81,16 @@ header {
       background: #ffed00;
     }
   }
-
   &__span {
     margin-top: 10px;
     color: red;
   }
-
 }
 
 .noBorder {
   border-color: white;
 }
 
-.formLogin__email .redBorder{
+.formLogin__email .redBorder {
   border-color: red;
-}
-
-@media (max-width: 425px) {
-  .formLogin {
-    left: 0%;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-  .formLogin {
-    left: 12%;
-  }
 }
