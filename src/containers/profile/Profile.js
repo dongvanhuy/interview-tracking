@@ -20,11 +20,6 @@ export class Profile extends Component {
         profile: [],
     }
 
-    state = {
-        startDate: moment()
-    };
-    
-    
     componentWillMount() {
         this.props.loadProfile();
     }
@@ -40,7 +35,10 @@ export class Profile extends Component {
         this.props.push("/profile-detail");
     }
 
-   
+    state = {
+        startDate: moment()
+    };
+    
 
     render() {
         const selectedDate = this.state.startDate.format('dddd, MMMM Do YYYY');
