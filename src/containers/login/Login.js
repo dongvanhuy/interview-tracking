@@ -70,13 +70,13 @@ export class Login extends Component {
       console.log('>>>>>>>>>>>>>>>>>>>>>>>>', this.state);
       const { emailError, passwordError } = this.state;
       const border = isEmpty(emailError) ? 'noBorder' : 'redBorder';
-      console.log('>>>>> emailError', emailError, isEmpty(emailError), border);
+      //   console.log('>>>>> emailError', emailError, isEmpty(emailError), border);
       return (
           <section className="formLogin">
               <div className="formLogin__container">
                   <div className="formLogin__outer">
                       <Form className="formLogin__form" horizontal>
-                          <Col className="formLogin__logo" lg={6} xs={6} md={6} xsOffset={3}>
+                          <Col className="formLogin__logo">
                               <img
                                   src="https://2.pik.vn/20187334c225-cd80-410f-8a74-bcfb325ec38f.png"
                                   alt="Error 404"
