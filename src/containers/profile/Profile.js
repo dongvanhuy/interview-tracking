@@ -4,7 +4,7 @@ import PropsTypes from 'prop-types';
 import { loadProfile, viewDetailData, addProfile } from './ProfileAction';
 import { Table, Grid, Row, ControlLabel, ButtonToolbar, Button, Col } from 'react-bootstrap';
 import { push } from 'react-router-redux';
-
+import moment from 'moment';
 
 
 
@@ -30,19 +30,30 @@ export class Profile extends Component {
         this.props.push("/profile-detail");
     }
 
-    timestamplist = () => {
-        const timestamp = Date.now();
-        return new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(timestamp);
-    }
-
-
     addProfileDetail = () => {
         this.props.addProfile();
         this.props.push("/profile-detail");
     }
 
+    state = {
+        startDate: moment()
+    };
+    
+
     render() {
-      
+        const selectedDate = this.state.startDate.format('dddd, MMMM Do YYYY');
+
+        const rows = this.props.profile.map((item, index) =>
+            <tr key ={index} onClick={() => this.viewDetail(item)} >
+                <td></td>
+                <td>{selectedDate}</td>
+                <td>{item.name}</td>
+                <td>{item.age}</td>
+                <td>{item.skill}</td>
+                <td>{item.status}</td>
+
+            </tr>
+        );
         return (
             <section className="ListCandidatePage">
                 <div className="header">
@@ -56,7 +67,7 @@ export class Profile extends Component {
 
                             <Col lg={6}>
                                 <div className="timestamp">
-                                    {this.timestamplist()}
+                                   
                                 </div>
                             </Col>
 
@@ -89,17 +100,7 @@ export class Profile extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.props.profile.map((item) =>
-                                            <tr onClick={() => this.viewDetail(item)}>
-                                                <td></td>
-                                                <td>{this.timestamplist()}</td>
-                                                <td>{item.name}</td>
-                                                <td>{item.age}</td>
-                                                <td>{item.skill}</td>
-                                                <td>{item.status}</td>
-
-                                            </tr>
-                                        )}
+                                        {rows}
                                     </tbody>
 
                                 </Table>
