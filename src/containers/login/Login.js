@@ -9,7 +9,7 @@ import {
     Button,
 } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { push } from 'react-router-redux';
 import PropsTypes from 'prop-types';
 import { isEmpty, validateEmail } from '../../utils/Common';
 import { loginCheck } from './LoginActions';
@@ -78,7 +78,7 @@ export class Login extends Component {
 
   render() {
       if (this.state.success === true) {
-          return <Redirect to="/profile" />;
+          this.props.push('/profile');
       }
       const { emailError, passwordError } = this.state;
       const border = isEmpty(emailError) ? 'noBorder' : 'redBorder';
@@ -166,6 +166,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     loginCheck,
+    push,
 };
 
 export default connect(

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropsTypes from 'prop-types';
-import { loadProfile, viewDetailData, addProfile } from './ProfileAction';
 import { Table, Grid, Row, ControlLabel, ButtonToolbar, Button, Col } from 'react-bootstrap';
+import { loadProfile, viewDetailData, addProfile } from './ProfileAction';
 
 
 export class Profile extends Component {
@@ -44,9 +44,7 @@ export class Profile extends Component {
                             </Col>
 
                             <Col lg={6}>
-                                <div className="timestamp">
-
-                                </div>
+                                <div className="timestamp" />
                             </Col>
 
                             <Col lg={3}>
@@ -79,16 +77,15 @@ export class Profile extends Component {
                                     </thead>
                                     <tbody>
                                         {this.props.profile.map((item) =>
-                                            <tr onClick={() => this.viewDetail(item)}>
-                                                <td></td>
-                                                <td></td>
+                                            (<tr onClick={() => this.viewDetail(item)}>
+                                                <td />
+                                                <td />
                                                 <td>{item.name}</td>
                                                 <td>{item.age}</td>
                                                 <td>{item.skill}</td>
                                                 <td>{item.status}</td>
 
-                                            </tr>
-                                        )}
+                                             </tr>))}
                                     </tbody>
 
                                 </Table>
