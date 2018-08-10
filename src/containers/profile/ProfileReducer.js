@@ -21,10 +21,10 @@ const actions = {
     },
 
     [ADD_PROFILE]: (state) => {
-        console.log('>>>> data redu');
+
         return ({
             ...state,
-            addProfileDetail: '',
+            profileSelected: null,
         });
     },
 };

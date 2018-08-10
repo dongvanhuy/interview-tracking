@@ -5,6 +5,8 @@ import { FormGroup, FormControl, ControlLabel, Grid, Row, Col, Button } from 're
 import { SecondRound } from './ProfileDetailsSecondRound';
 import { loadProfileDetails } from './ProfileDetailsAction';
 import $ from '../../../node_modules/jquery';
+import { loadProfileDetails } from './ProfileDetailsAction';
+import { SecondRound } from './ProfileDetailsSecondRound';
 
 export class FirstRound extends Component {
     static propsTypes = {
@@ -119,7 +121,7 @@ export class FirstRound extends Component {
                                     <FormControl
                                         componentClass="select"
                                         className="profiledetails__select"
-                                        onChange={this.handleChange}
+                                        onChange={(e) => this.handleChange(e)}
                                         name="recruiter"
                                         placeholder="Select"
                                     >
