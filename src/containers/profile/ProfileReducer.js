@@ -4,7 +4,7 @@ import { PROFILE_LOAD_SUCCESS, VIEW_DETAIL_DATA, ADD_PROFILE } from '../../store
 const initialState = {
     dataProfile: [],
     profileSelected: {},
-    addProfileDetail:{},
+    addProfileDetail: {},
 };
 
 const actions = {
@@ -12,7 +12,7 @@ const actions = {
         ...state,
         dataProfile: payload.data,
     }),
-    [VIEW_DETAIL_DATA]: (state,  data) => {
+    [VIEW_DETAIL_DATA]: (state, data) => {
         console.log('>>>> data redu', data);
         return ({
             ...state,
