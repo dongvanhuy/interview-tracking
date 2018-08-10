@@ -9,6 +9,7 @@ import {
     Button,
 } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import PropsTypes from 'prop-types';
 import { isEmpty, validateEmail } from '../../utils/Common';
 import { loginCheck } from './LoginActions';
@@ -27,6 +28,7 @@ export class Login extends Component {
       passwordError: '',
       email: '',
       password: '',
+      success: false,
   };
 
   componentWillMount() {
@@ -35,7 +37,16 @@ export class Login extends Component {
 
   onLogin(e) {
       e.preventDefault();
-      this.checkValidate();
+      const result = this.checkValidate();
+      console.log(result);
+      if (
+          this.state.email === 'admin@admin.com' &&
+      this.state.password === 'admin'
+      ) {
+          this.setState({
+              success: true,
+          });
+      }
   }
 
   checkValidate() {
@@ -43,11 +54,12 @@ export class Login extends Component {
           this.setState({
               emailError: 'Email invalid',
           });
-      } else {
-          this.setState({
-              emailError: '',
-          });
+          return true;
       }
+      this.setState({
+          emailError: '',
+      });
+      return false;
   }
 
   handleChange(e) {
@@ -67,10 +79,12 @@ export class Login extends Component {
   }
 
   render() {
-      console.log('>>>>>>>>>>>>>>>>>>>>>>>>', this.state);
+      console.log(this.state);
+      if (this.state.success === true) {
+          this.props.push('/profile');
+      }
       const { emailError, passwordError } = this.state;
       const border = isEmpty(emailError) ? 'noBorder' : 'redBorder';
-      //   console.log('>>>>> emailError', emailError, isEmpty(emailError), border);
       return (
           <section className="formLogin">
               <div className="formLogin__container">
@@ -155,6 +169,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     loginCheck,
+    push,
 };
 
 export default connect(
