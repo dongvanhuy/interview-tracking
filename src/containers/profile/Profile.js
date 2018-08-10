@@ -25,7 +25,7 @@ export class Profile extends Component {
         console.log('>>> onClick');
     }
 
-    addProfileDetail = () =>{
+    addProfileDetail = () => {
         console.log('>>>> data ');
         this.props.addProfile();
     }
@@ -62,49 +62,49 @@ export class Profile extends Component {
                 </div>
 
                 <div className="list">
-                <Grid>
-                    <Row className="show-grid">
-                        <Col lg={12}>
-                            <ControlLabel>Today</ControlLabel>
-                            <Table striped bordered condensed hover className="list-cadidate-table">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Time</th>
-                                        <th>Name</th>
-                                        <th>Age</th>
-                                        <th>skill</th>
-                                        <th>status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {this.props.profile.map((item) =>
-                                        <tr onClick={() => this.viewDetail(item)}>
-                                            <td></td>
-                                            <td></td>
-                                            <td>{item.name}</td>
-                                            <td>{item.age}</td>
-                                            <td>{item.skill}</td>
-                                            <td>{item.status}</td>
-
+                    <Grid>
+                        <Row className="show-grid">
+                            <Col lg={12}>
+                                <ControlLabel>Today</ControlLabel>
+                                <Table striped bordered condensed hover className="list-cadidate-table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Time</th>
+                                            <th>Name</th>
+                                            <th>Age</th>
+                                            <th>skill</th>
+                                            <th>status</th>
                                         </tr>
-                                    )}
-                                </tbody>
+                                    </thead>
+                                    <tbody>
+                                        {this.props.profile.map((item) =>
+                                            <tr onClick={() => this.viewDetail(item)}>
+                                                <td></td>
+                                                <td></td>
+                                                <td>{item.name}</td>
+                                                <td>{item.age}</td>
+                                                <td>{item.skill}</td>
+                                                <td>{item.status}</td>
 
-                            </Table>
-                        </Col>
-                    </Row>
-                </Grid>
+                                            </tr>
+                                        )}
+                                    </tbody>
 
-                <Grid>
-                    <Row className="show-grid">
-                        <Col md={4} xsOffset={2}>
-                            <ButtonToolbar className="btn-list-cadidate">
-                                <Button className="button-add" onClick={() => this.addProfileDetail()}>ADD</Button>
-                            </ButtonToolbar>
-                        </Col>
-                    </Row>
-                </Grid>
+                                </Table>
+                            </Col>
+                        </Row>
+                    </Grid>
+
+                    <Grid>
+                        <Row className="show-grid">
+                            <Col md={4} xsOffset={2}>
+                                <ButtonToolbar className="btn-list-cadidate">
+                                    <Button className="button-add" onClick={() => this.addProfileDetail()}>ADD</Button>
+                                </ButtonToolbar>
+                            </Col>
+                        </Row>
+                    </Grid>
                 </div>
             </section>
         );
