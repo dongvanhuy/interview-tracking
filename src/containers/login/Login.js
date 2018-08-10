@@ -13,7 +13,7 @@ import PropsTypes from 'prop-types';
 import { isEmpty, validateEmail } from '../../utils/Common';
 import { loginCheck } from './LoginActions';
 
-class Login extends Component {
+export class Login extends Component {
   static propsTypes = {
       user: PropsTypes.arrayOf(PropsTypes.object),
   };
@@ -27,7 +27,6 @@ class Login extends Component {
       passwordError: '',
       email: '',
       password: '',
-      border: 'true',
   };
 
   componentWillMount() {
@@ -51,10 +50,6 @@ class Login extends Component {
       }
   }
 
-  changeBorder = val => {
-      this.setState({ border: val });
-  };
-
   handleChange(e) {
       const { value, name } = e.target;
       this.setState({
@@ -66,29 +61,27 @@ class Login extends Component {
       if (isEmpty(this.state)) {
           return true;
       } else if (isEmpty(this.state.email) || isEmpty(this.state.password)) {
-          //   this.changeBorder(true);
           return true;
       }
-      //   this.changeBorder(false);
       return false;
   }
 
   render() {
-      console.log('>>>>>>>>>>>>>>>>>>>>>>>>', this.state);  
+      console.log('>>>>>>>>>>>>>>>>>>>>>>>>', this.state);
       const { emailError, passwordError } = this.state;
       const border = isEmpty(emailError) ? 'noBorder' : 'redBorder';
-      console.log('>>>>> emailError', emailError, isEmpty(emailError), border);
+      //   console.log('>>>>> emailError', emailError, isEmpty(emailError), border);
       return (
           <section className="formLogin">
               <div className="formLogin__container">
                   <div className="formLogin__outer">
                       <Form className="formLogin__form" horizontal>
-                          <div className="formLogin__logo">
+                          <Col className="formLogin__logo">
                               <img
                                   src="https://2.pik.vn/20187334c225-cd80-410f-8a74-bcfb325ec38f.png"
                                   alt="Error 404"
                               />
-                          </div>
+                          </Col>
                           <span className="formLogin__title">Interview Tracking</span>
                           <FormGroup
                               controlId="formHorizontalEmail"
@@ -135,7 +128,7 @@ class Login extends Component {
 
                           <FormGroup className="formLogin__demo">
                               <Row>
-                                  <Col lg={4} xs={4} md={4} className="formLogin__button">
+                                  <Col lg={12} xs={12} md={12} className="formLogin__button">
                                       <Button
                                           type="submit"
                                           disabled={this.disableButton()}
@@ -145,11 +138,6 @@ class Login extends Component {
                                       >
                                           <span>LOG IN</span>
                                       </Button>
-                                  </Col>
-                                  <Col lg={6} xs={6} md={6}>
-                                      <a href="https://gpl.amer.csc.com">
-                                          <Button>USING GLOBAL PASS</Button>
-                                      </a>
                                   </Col>
                               </Row>
                           </FormGroup>

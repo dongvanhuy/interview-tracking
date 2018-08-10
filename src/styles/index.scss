@@ -1,8 +1,7 @@
-@import "breakpoint";
-@import "errorPage";
-@import '../containers/profileDetails/profile-details';
+@import 'breakpoint';
+@import 'variable';
 @import 'common';
-@import "../containers/common/errorPage";
-@import "../containers/login/loginPage";
-@import "../containers/profile/listcandidate";
-
+@import 'errorPage';
+@import '../containers/profileDetails/profile-details';
+@import '../containers/common/errorPage';
+@import '../containers/login/loginPage';
