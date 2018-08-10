@@ -3,6 +3,12 @@ import { connect } from 'react-redux';
 import PropsTypes from 'prop-types';
 import { loadProfile, viewDetailData, addProfile } from './ProfileAction';
 import { Table, Grid, Row, ControlLabel, ButtonToolbar, Button, Col } from 'react-bootstrap';
+import { push } from 'react-router-redux';
+import moment from 'moment';
+
+
+
+
 
 
 export class Profile extends Component {
@@ -20,18 +26,34 @@ export class Profile extends Component {
 
     viewDetail = (data) => {
         // alert(name);
-        console.log('>>>> data ', data);
         this.props.viewDetailData(data);
-        console.log('>>> onClick');
+        this.props.push("/profile-detail");
     }
 
     addProfileDetail = () => {
-        console.log('>>>> data ');
         this.props.addProfile();
+        this.props.push("/profile-detail");
     }
 
+    state = {
+        startDate: moment()
+    };
+    
 
     render() {
+        const selectedDate = this.state.startDate.format('dddd, MMMM Do YYYY');
+
+        const rows = this.props.profile.map((item, index) =>
+            <tr key ={index} onClick={() => this.viewDetail(item)} >
+                <td></td>
+                <td>{selectedDate}</td>
+                <td>{item.name}</td>
+                <td>{item.age}</td>
+                <td>{item.skill}</td>
+                <td>{item.status}</td>
+
+            </tr>
+        );
         return (
             <section className="ListCandidatePage">
                 <div className="header">
@@ -45,7 +67,7 @@ export class Profile extends Component {
 
                             <Col lg={6}>
                                 <div className="timestamp">
-
+                                   
                                 </div>
                             </Col>
 
@@ -78,17 +100,7 @@ export class Profile extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.props.profile.map((item) =>
-                                            <tr onClick={() => this.viewDetail(item)}>
-                                                <td></td>
-                                                <td></td>
-                                                <td>{item.name}</td>
-                                                <td>{item.age}</td>
-                                                <td>{item.skill}</td>
-                                                <td>{item.status}</td>
-
-                                            </tr>
-                                        )}
+                                        {rows}
                                     </tbody>
 
                                 </Table>
@@ -119,6 +131,7 @@ const mapDispatchToProps = {
     loadProfile,
     viewDetailData,
     addProfile,
+    push,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
