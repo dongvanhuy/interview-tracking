@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropsTypes from 'prop-types';
-import { loadProfile, viewDetailData, addProfile } from './ProfileAction';
-import { Table, Grid, Row, ControlLabel, ButtonToolbar, Button, Col } from 'react-bootstrap';
+import {
+    Table,
+    Grid,
+    Row,
+    ControlLabel,
+    ButtonToolbar,
+    Button,
+    Col,
+} from 'react-bootstrap';
 import { push } from 'react-router-redux';
 import moment from 'moment';
-
-
-
-
-
+import { loadProfile, viewDetailData, addProfile } from './ProfileAction';
 
 export class Profile extends Component {
     static propsTypes = {
@@ -130,5 +133,7 @@ const mapDispatchToProps = {
     push,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
-
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(Profile);
