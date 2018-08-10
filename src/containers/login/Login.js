@@ -38,14 +38,17 @@ export class Login extends Component {
   onLogin(e) {
       e.preventDefault();
       const result = this.checkValidate();
-      console.log(result);
-      if (
-          this.state.email === 'admin@admin.com' &&
-      this.state.password === 'admin'
-      ) {
-          this.setState({
-              success: true,
-          });
+      if (result) {
+          if (
+              this.state.email === 'admin@admin.com' &&
+        this.state.password === 'admin'
+          ) {
+              this.setState({
+                  success: true,
+              });
+          } else {
+              console.log('Sai email hoac mat khau');
+          }
       }
   }
 
@@ -54,12 +57,12 @@ export class Login extends Component {
           this.setState({
               emailError: 'Email invalid',
           });
-          return true;
+          return false;
       }
       this.setState({
           emailError: '',
       });
-      return false;
+      return true;
   }
 
   handleChange(e) {
