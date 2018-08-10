@@ -1,26 +1,31 @@
+$color-white: #FFF;
+$color-gray: #8F8E8C;
+$color-lightpink: rgb(228, 146, 162);
+$color-lightgreen: #90EE90;
+
 .logo {
   h1 {
     font-size: 200px;
-    color: #8f8e8c;
+    color: $color-gray;
     text-align: center;
     margin-bottom: 1px;
-    text-shadow: 1px 1px 6px #fff;
+    text-shadow: 1px 1px 6px $color-white;
   }
 
   p {
-    color: rgb(228, 146, 162);
+    color: $color-lightpink;
     font-size: 20px;
     margin-top: 1px;
     text-align: center;
   }
 
   p span {
-    color: lightgreen;
+    color: $color-lightgreen;
   }
 
   .sub a {
-    color: white;
-    background: #8f8e8c;
+    color: $color-white;
+    background: $color-gray;
     text-decoration: none;
     padding: 7px 120px;
     font-size: 13px;
