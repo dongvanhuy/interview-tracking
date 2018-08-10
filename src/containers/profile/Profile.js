@@ -59,19 +59,13 @@ export class Profile extends Component {
                 <div className="header">
                     <Grid>
                         <Row>
-                            <Col lg={3}>
+                            <Col lg={6}>
                                 <div className="logo">
                                     <img src="https://2.pik.vn/20185720ab30-1dc9-44f2-a487-4e276fbd29f5.png" alt="1111" />
                                 </div>
                             </Col>
 
                             <Col lg={6}>
-                                <div className="timestamp">
-                                   
-                                </div>
-                            </Col>
-
-                            <Col lg={3}>
                                 <div className="View-project">
                                     <a href="" className="icon" title="User Profile">
                                         <i className="fa fa-user" />
