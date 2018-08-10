@@ -1,13 +1,22 @@
 $color_dxcYellow : #ffed00;
 $font_DXCBold : font_GTWalsheimProBold;
 $font_DXCRegular : font_GTWalsheimProRegular;
-
+.error-message{
+    border: 2px solid #D0011B !important;
+}
 .profiledetails {
     font-family: $font_DXCBold;
+    // #profiledetails__model--success{
+    //     visibility: hidden;
+    // }
+    textarea.form-control {
+        resize: none;
+    }
     .form-control{
-        background-color: #F5F5F5;
+        background-color: white;
         font-family: $font_DXCRegular;
         border: rgb(230, 230, 230) 2px solid;
+        padding: 4px 12px;
     }
     .form-control:focus{
         border: #000 2px solid;
@@ -39,10 +48,11 @@ $font_DXCRegular : font_GTWalsheimProRegular;
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
+            font-family: $font_DXCRegular;  
             input {
                 position: absolute;
                 opacity: 0;
-                cursor: pointer;     
+                cursor: pointer;    
             }
             .checkmark {
                 position: absolute;
