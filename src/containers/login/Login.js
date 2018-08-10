@@ -37,7 +37,8 @@ export class Login extends Component {
 
   onLogin(e) {
       e.preventDefault();
-      this.checkValidate();
+      const result = this.checkValidate();
+      console.log(result);
       if (
           this.state.email === 'admin@admin.com' &&
       this.state.password === 'admin'
@@ -53,11 +54,12 @@ export class Login extends Component {
           this.setState({
               emailError: 'Email invalid',
           });
-      } else {
-          this.setState({
-              emailError: '',
-          });
+          return true;
       }
+      this.setState({
+          emailError: '',
+      });
+      return false;
   }
 
   handleChange(e) {
@@ -77,6 +79,7 @@ export class Login extends Component {
   }
 
   render() {
+      console.log(this.state);
       if (this.state.success === true) {
           this.props.push('/profile');
       }
