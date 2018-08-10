@@ -5,7 +5,7 @@ import './styles/index.css';
 import Profile from './containers/profile/Profile';
 import Login from './containers/login/Login';
 import ErrorPage from './containers/common/ErrorPage';
-import ProfileDetails from './containers/profiledetails/ProfileDetails';
+import ProfileDetails from './containers/profileDetails/ProfileDetails';
 
 class App extends Component {
     render() {

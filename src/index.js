@@ -13,11 +13,9 @@ require('es6-shim');
 export default ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history} onUpdate={() => window.scrollTo(0, 0)}>
-            <div>
-                <App />
-            </div>
+            <App />
         </ConnectedRouter>
     </Provider>,
-    document.getElementById('root') || document.createElement('div'),
+    document.getElementsByClassName('root')[0] || document.createElement('div'),
 );
 

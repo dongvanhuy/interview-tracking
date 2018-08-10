@@ -1,24 +1,14 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-size: 16px;
-  font-family: Arial;
-  background: #f2f2f2 !important;
-}
-
-header {
-  height: 150px;
-  img {
-    width: 100%;
-    height: 100%;
-  }
-}
-
 .formLogin {
   position: absolute;
-  top: 20%;
-  left: 27%;
+  height: 100%;
+  display: block;
+  width: 100%;
   &__container {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -33,15 +23,16 @@ header {
     border-radius: 10px;
     overflow: hidden;
     padding: 30px 30px 33px 30px;
-
     .formLogin__allComponents {
       label {
-        padding-top: 14px;
-        font-size: 18px;
-        text-align: center !important;
+        padding-top: 13px;
+        font-size: 17px;
+        text-align: start;
+        @include tablet {
+          font-size: 20px;
+        }
       }
     }
-
     .formLogin__form {
       .formLogin__demo {
         margin-left: 0px;
@@ -52,37 +43,48 @@ header {
     display: block;
     font-family: "Poppins", sans-serif;
     font-weight: bolder;
-    font-size: 45px;
+    font-size: 26px;
     color: #333333;
     line-height: 1.2;
     text-align: center;
-    padding-bottom: 40px;
+    padding-bottom: 10px;
     padding-top: 10px;
+    @include desktop {
+      font-size: 45px;
+    }
   }
   &__logo {
-    padding-left: 80px;
-    margin-left: 22%;
-    width: 200px;
-    height: 120px;
+    width: 95px;
+    margin: 0 auto;
+    padding-bottom: 5px;
+    @include tablet {
+      width: 140px;
+    }
+    @include desktop {
+      width: 150px;
+    }
     img {
       width: 100%;
       height: 100%;
       border-radius: 50%;
     }
   }
-
   &__allComponents {
     input {
-      padding: 25px 15px;
-      font-size: 20px;
+      padding: 20px 10px;
+      font-size: 17px;
+      @include tablet {
+        font-size: 20px;
+        padding: 25px 15px;
+      }
     }
   }
-
   &__demo {
     margin-left: 0px;
+    text-align: center;
     button {
       font-size: 20px;
-      padding: 22px 50px;
+      padding: 10px 35px;
       background: #ffed00;
       color: #000000;
       font-weight: bold;
@@ -91,30 +93,22 @@ header {
       background: #ffed00;
     }
   }
-
   &__span {
     margin-top: 10px;
     color: red;
   }
 
+  &__form {
+    .formLogin__allComponents {
+      margin-bottom: 0;
+    }
+  }
 }
 
 .noBorder {
   border-color: white;
 }
 
-.formLogin__email .redBorder{
+.formLogin__email .redBorder {
   border-color: red;
-}
-
-@media (max-width: 425px) {
-  .formLogin {
-    left: 0%;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-  .formLogin {
-    left: 12%;
-  }
 }
