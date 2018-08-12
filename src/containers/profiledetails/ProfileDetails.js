@@ -1,40 +1,15 @@
-import React, { Component } from 'react';
-import { FormGroup, FormControl, ControlLabel, Grid, Row, Col, Modal, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropsTypes from 'prop-types';
-import $ from '../../../node_modules/jquery';
-import { loadProfileDetails } from './ProfileDetailsAction';
+import React, { Component } from 'react';
+import { FormGroup, FormControl, ControlLabel, Grid, Row, Col, Button } from 'react-bootstrap';
 import { SecondRound } from './ProfileDetailsSecondRound';
+import { loadProfileDetails } from './ProfileDetailsAction';
+import $ from '../../../node_modules/jquery';
 
-class SuccessModal extends React.Component {
-    render() {
-        return (
-            <Modal
-                id="profiledetails__model--success"
-                {...this.props}
-                bsSize="large"
-                aria-labelledby="contained-modal-title-lg"
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-lg"> Update/ Add SUCCESS</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <h4>Update/ Add data success</h4>
-                    <p>
-                        Update/ Add data success
-                    </p>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button onClick={this.props.onHide}>OK</Button>
-                </Modal.Footer>
-            </Modal>
-        );
-    }
-}
 
 export class FirstRound extends Component {
     static propsTypes = {
-        profileDetails: PropsTypes.arrayOf(PropsTypes.object),
+        profileDetails: PropsTypes.arrayOf(PropsTypes.object), // object + render
     }
     static defaultProps = {
         profileDetails: [],
@@ -61,20 +36,24 @@ export class FirstRound extends Component {
             resultcomment_round1: '',
         };
     }
+
+    componentWillMount() {
+        this.props.loadProfileDetails();
+    }
+
     handleChange = (e) => {
-        const value = e.target.value;
-        const name = e.target.name;
-        const state = this.state;
-        state[name] = value;
+        const { value, name } = e.target;
+        this.state[name] = value;
         this.setState({ state: this.state });
         if (name === 'candidateName' && value === '') {
             $("input[name='candidateName']").addClass('error-message');
         } else if (name === 'candidateName') {
             $("input[name='candidateName']").removeClass('error-message');
         }
+        console.log(e.target.value);
         console.log(this.state);
     }
-    submitForm = (e) => {
+    submitForm = e => {
         const candidateName = $("input[name='candidateName']");
         if (candidateName.val() === '') {
             candidateName.addClass('error-message');
@@ -83,14 +62,15 @@ export class FirstRound extends Component {
         }
         if (candidateName.val() !== '') {
             $('#profiledetails__model--success').css('visibility', 'visible');
-            this.setState({ lgShow: true });
+            // this.setState({lgShow: true});
         } else {
             // update and go to profile page
         }
+        return true; // huhuhu
     }
     testAPI(id) { // use id from profile page to load Profile Details
         const data = this.props.profileDetails;
-        for (let i = 0; i < data.length; i++) {
+        for (let i = 0; i < data.length; i += 1) {
             if (parseInt(data[i].id, 10) === id) {
                 $("input[name='candidateName']").val(data[i].candidatename);
                 $("input[name='position']").val(data[i].position);
@@ -102,9 +82,6 @@ export class FirstRound extends Component {
                 break;
             }
         }
-    }
-    componentWillMount() {
-        this.props.loadProfileDetails();
     }
     render() {
         // let { lgClose } = this.state;
@@ -386,7 +363,7 @@ export class FirstRound extends Component {
                                         className="profiledetails__select"
                                         name="resultstatus_round1"
                                         onChange={(e) => (this.handleChange(e))}
-                                    >>
+                                    >
                                         <option value="">Select</option>
                                         <option defaultValue="Passed">Passed</option>
                                         <option defaultValue="KIV">KIV</option>
