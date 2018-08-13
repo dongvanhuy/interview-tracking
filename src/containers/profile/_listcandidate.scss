@@ -8,6 +8,7 @@
   border-bottom: 1px solid  #000000;
   height: 65px;
   background: #FFFFFF;  
+
   @include tablet {
     height: 85px;
   }
@@ -20,7 +21,7 @@
   background-image: url("../logodxc.png") no-repeat; 
   height:50px;
   width: 100%;
-  padding-top: 12px;
+  padding-top: 15px;
 
   @include tablet{
   height:60px;
@@ -107,4 +108,4 @@
   }
 
   
-}
+  }
