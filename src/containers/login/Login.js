@@ -29,6 +29,7 @@ export class Login extends Component {
       email: '',
       password: '',
       success: false,
+      checkError: '',
   };
 
   componentWillMount() {
@@ -48,6 +49,9 @@ export class Login extends Component {
               });
           } else {
               console.log('Sai email hoac mat khau');
+              this.setState({
+                  checkError: 'Email or Password is incorrect !!!',
+              });
           }
       }
   }
@@ -56,6 +60,7 @@ export class Login extends Component {
       if (!validateEmail(this.state.email)) {
           this.setState({
               emailError: 'Email invalid',
+              checkError: '',
           });
           return false;
       }
@@ -86,7 +91,7 @@ export class Login extends Component {
       if (this.state.success === true) {
           this.props.push('/profile');
       }
-      const { emailError, passwordError } = this.state;
+      const { emailError, passwordError, checkError } = this.state;
       const border = isEmpty(emailError) ? 'noBorder' : 'redBorder';
       return (
           <section className="formLogin">
@@ -100,10 +105,14 @@ export class Login extends Component {
                               />
                           </Col>
                           <span className="formLogin__title">Interview Tracking</span>
+
                           <FormGroup
                               controlId="formHorizontalEmail"
                               className="formLogin__allComponents"
                           >
+                              <div className="formLogin__span formLogin__span--center">
+                                  <span>{checkError}</span>
+                              </div>
                               <Col componentClass={ControlLabel} lg={3}>
                                   <span>Email</span>
                               </Col>
