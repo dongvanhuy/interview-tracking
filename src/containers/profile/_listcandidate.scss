@@ -1,49 +1,40 @@
 .ListCandidatePage{
   font-family: 'font_GTWalsheimProBold';
-  font-weight: bold;
   font-size: 18px;
 }
 .header {
-  // background: silver;
   border-bottom: 1px solid  #000000;
   height: 65px;
   background: #FFFFFF;  
-
-  @include tablet {
-    height: 85px;
-  }
-
-  @include desktop {
-    height: 95px;
-  }
+    @include tablet {
+      height: 85px;
+    }
+    @include desktop {
+      height: 95px;
+    }
 }
 .logo {
   background-image: url("../logodxc.png") no-repeat; 
   height:50px;
   width: 100%;
-  padding-top: 15px;
-
-  @include tablet{
-  height:60px;
-  width: 50%;
-  padding-top: 20px;
-
-  }
-
-  @include desktop {
-  height:70px;
-  width: 50%;
-  padding-top: 20px;
-  }
+  padding-top: 15px;  
+    @include tablet{
+      height:60px;
+      width: 50%;
+      padding-top: 20px;
+    }
+    @include desktop {
+      height:70px;
+      width: 50%;
+      padding-top: 20px;
+    }
  
   img {
     height: 100%;
     width: 100%;
     float: left;
-  
   }
 }
-
 
 .View-project {
   padding-top: 15px;
@@ -54,16 +45,17 @@
 {
   background: #FFFFFF;
 }
+
 .table.list-cadidate-table { 
+  width: 100%;
+  height: 100%;
+  overflow-x:auto;
   thead {
     background: #000000;
     color: #FFED00; 
-    
-    
+  
     tr {
       height: 20px;
-      
-      
     }
   
     th {
@@ -74,6 +66,7 @@
   > tbody {
     > tr {
       height: 20px;
+      cursor: pointer;  
       > td {
         vertical-align: middle;
       }
@@ -82,31 +75,26 @@
   
   tbody :hover {
     background: #000000;
-    color: #FFED00; }
-  
+    color: #FFED00; 
+  } 
 }
 
-
-
 .btn-list-cadidate{
-  float: right;
+  padding-bottom: 20px;
   .button-add {
     background: #FFED00;
     color: #000000; 
-    width: 345px;
+    width: 100%;
     font-family: 'GT Walsheim';
     font-weight: bold;
     font-size: 18px;
     @include tablet{
-      width: 150px;
+      width: 100%;
     }
   }
 
   .button-add:hover {
     background: #000000 ;
     color:#FFED00; 
-    cursor: pointer;
   }
-
-  
-  }
+}

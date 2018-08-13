@@ -12,6 +12,7 @@ import {
 import { push } from 'react-router-redux';
 import uid from 'uuid';
 import { loadProfile, viewDetailData, addProfile } from './ProfileAction';
+import moment from 'moment';
 
 export class Profile extends Component {
     static propsTypes = {
@@ -21,6 +22,10 @@ export class Profile extends Component {
     static defaultProps = {
         profile: [],
     }
+
+    state = {
+        startDate: moment()
+    };
 
     componentWillMount() {
         this.props.loadProfile();
@@ -37,17 +42,21 @@ export class Profile extends Component {
         this.props.push('/profile-detail');
     }
 
+    // candidateTable = e => {
+    //     const 
+    // }
+
 
     render() {
-        // const selectedDate = this.state.startDate.format('dddd, MMMM Do YYYY');
+        const selectedDate = this.state.startDate.format('dddd, MMMM Do YYYY');
 
         const rows = this.props.profile.map((item, index) =>
             (
                 <tr key={uid()} onClick={() => this.viewDetail(item)}>
-                    <td>{index}</td>
+                    <td>{item.candidate_id}</td>
                     <td>{item.date_round1}</td>
                     <td>{item.candidate_fullname}</td>
-                    <td>{item.age}</td>
+                    <td>{item.recruiter}</td>
                     <td>{item.position_apply}</td>
                     <td>{item.round1_status}</td>
                 </tr>));
@@ -78,19 +87,22 @@ export class Profile extends Component {
                 <div className="list">
                     <Grid>
                         <Row className="show-grid">
-                            <Col lg={12}>
+                            <Col xs={12} sm={12} md={12} lg={12}>
                                 <div className="today">
-                                    <h2>Today</h2>
+                                    <h2>Today _ {selectedDate}</h2>
                                 </div>
-                                <Table striped bordered condensed hover className="list-cadidate-table">
+                            </Col>
+                    
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                                <Table striped bordered condensed hover responsive   className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
                                     <thead>
                                         <tr>
                                             <th>#</th>
                                             <th>Time</th>
                                             <th>Name</th>
-                                            <th>Age</th>
-                                            <th>skill</th>
-                                            <th>status</th>
+                                            <th>Recruiter</th>
+                                            <th>Skill</th>
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -99,16 +111,13 @@ export class Profile extends Component {
 
                                 </Table>
                             </Col>
-                        </Row>
-                    </Grid>
-
-                    <Grid>
-                        <Row className="show-grid">
-                            <Col md={12}>
-                                <ButtonToolbar className="btn-list-cadidate">
+                     
+                            <ButtonToolbar className="btn-list-cadidate">
+                                <Col xs={12} sm={3} md={3} lg={3}>
                                     <Button className="button-add" onClick={() => this.addProfileDetail()}>ADD</Button>
-                                </ButtonToolbar>
-                            </Col>
+                                </Col>
+                            </ButtonToolbar>
+                           
                         </Row>
                     </Grid>
                 </div>
