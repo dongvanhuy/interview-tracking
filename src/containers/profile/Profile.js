@@ -63,13 +63,14 @@ export class Profile extends Component {
                 <div className="header">
                     <Grid>
                         <Row>
-                            <Col lg={6}>
+                            <Col xs={6} sm={6} md={6} lg={6}>
                                 <div className="logo">
                                     <img src="https://2.pik.vn/20185720ab30-1dc9-44f2-a487-4e276fbd29f5.png" alt="1111" />
+                                    
                                 </div>
                             </Col>
 
-                            <Col lg={6}>
+                            <Col xs={6} sm={6} md={6} lg={6}>
                                 <div className="View-project">
                                     <a href="" className="icon" title="User Profile">
                                         <i className="fa fa-user" />
@@ -110,7 +111,7 @@ export class Profile extends Component {
 
                     <Grid>
                         <Row className="show-grid">
-                            <Col md={4} xsOffset={9}>
+                            <Col md={12}>
                                 <ButtonToolbar className="btn-list-cadidate">
                                     <Button className="button-add" onClick={() => this.addProfileDetail()}>ADD</Button>
                                 </ButtonToolbar>
