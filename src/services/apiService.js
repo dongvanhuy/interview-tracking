@@ -23,5 +23,16 @@ export default class ApiService {
 }
 
 export class ApiService2 {
-    static checkUser = () => Observable.fromPromise(axios.get(`${API_HOST2}/test`, {data: {}}));
+    static checkUser = () => Observable.fromPromise(axios.get(`${API_HOST2}/test`, { data: {} }));
+}
+
+export class ApiServiceProfileDetails {
+    static loadDataProfileDetails = () => Observable.fromPromise(
+        //`${API_HOSTPROFILEDETAILS}/api/interviewers`
+        axios.get('https://5b61807107412d00142ace28.mockapi.io/apiv1/interviewers', {
+            data: {},
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }))
 }

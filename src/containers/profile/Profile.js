@@ -5,7 +5,6 @@ import {
     Table,
     Grid,
     Row,
-    ControlLabel,
     ButtonToolbar,
     Button,
     Col,
@@ -50,7 +49,7 @@ export class Profile extends Component {
 
         const rows = this.props.profile.map((item, index) =>
             <tr key ={index} onClick={() => this.viewDetail(item)} >
-                <td></td>
+                <td>{index}</td>
                 <td>{selectedDate}</td>
                 <td>{item.name}</td>
                 <td>{item.age}</td>
@@ -86,7 +85,9 @@ export class Profile extends Component {
                     <Grid>
                         <Row className="show-grid">
                             <Col lg={12}>
-                                <ControlLabel>Today</ControlLabel>
+                                <div className="today">
+                                    <h2>Today</h2>
+                                </div>
                                 <Table striped bordered condensed hover className="list-cadidate-table">
                                     <thead>
                                         <tr>
@@ -109,7 +110,7 @@ export class Profile extends Component {
 
                     <Grid>
                         <Row className="show-grid">
-                            <Col md={4} xsOffset={2}>
+                            <Col md={4} xsOffset={9}>
                                 <ButtonToolbar className="btn-list-cadidate">
                                     <Button className="button-add" onClick={() => this.addProfileDetail()}>ADD</Button>
                                 </ButtonToolbar>
