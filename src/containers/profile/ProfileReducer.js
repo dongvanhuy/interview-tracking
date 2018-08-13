@@ -12,21 +12,16 @@ const actions = {
         ...state,
         dataProfile: payload.data,
     }),
-    [VIEW_DETAIL_DATA]: (state, data) => {
-        console.log('>>>> data redu', data);
-        return ({
-            ...state,
-            profileSelected: data.payload,
-        });
-    },
 
-    [ADD_PROFILE]: (state) => {
+    [VIEW_DETAIL_DATA]: (state, data) => ({
+        ...state,
+        profileSelected: data.payload,
+    }),
 
-        return ({
-            ...state,
-            profileSelected: null,
-        });
-    },
+    [ADD_PROFILE]: (state) => ({
+        ...state,
+        profileSelected: null,
+    }),
 };
 
 export default handleActions(actions, initialState);
