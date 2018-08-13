@@ -10,7 +10,7 @@ import {
     Col,
 } from 'react-bootstrap';
 import { push } from 'react-router-redux';
-import moment from 'moment';
+import uid from 'uuid';
 import { loadProfile, viewDetailData, addProfile } from './ProfileAction';
 
 export class Profile extends Component {
@@ -22,11 +22,6 @@ export class Profile extends Component {
         profile: [],
     }
 
-    state = {
-        startDate: moment()
-    };
-    
-    
     componentWillMount() {
         this.props.loadProfile();
     }
@@ -34,30 +29,28 @@ export class Profile extends Component {
     viewDetail = (data) => {
         // alert(name);
         this.props.viewDetailData(data);
-        this.props.push("/profile-detail");
+        this.props.push('/profile-detail');
     }
 
     addProfileDetail = () => {
         this.props.addProfile();
-        this.props.push("/profile-detail");
+        this.props.push('/profile-detail');
     }
 
-   
 
     render() {
-        const selectedDate = this.state.startDate.format('dddd, MMMM Do YYYY');
+        // const selectedDate = this.state.startDate.format('dddd, MMMM Do YYYY');
 
         const rows = this.props.profile.map((item, index) =>
-            <tr key ={index} onClick={() => this.viewDetail(item)} >
-                <td>{index}</td>
-                <td>{selectedDate}</td>
-                <td>{item.name}</td>
-                <td>{item.age}</td>
-                <td>{item.skill}</td>
-                <td>{item.status}</td>
-
-            </tr>
-        );
+            (
+                <tr key={uid()} onClick={() => this.viewDetail(item)}>
+                    <td>{index}</td>
+                    <td>{item.date_round1}</td>
+                    <td>{item.candidate_fullname}</td>
+                    <td>{item.age}</td>
+                    <td>{item.position_apply}</td>
+                    <td>{item.round1_status}</td>
+                </tr>));
         return (
             <section className="ListCandidatePage">
                 <div className="header">
