@@ -16,6 +16,7 @@ export class FirstRound extends Component {
     }
     constructor(props) {
         super(props);
+        // this.txtInput = React.createRef();
         this.state = {
             lgShow: false,
             candidateName: '',
@@ -46,9 +47,10 @@ export class FirstRound extends Component {
         this.state[name] = value;
         this.setState({ state: this.state });
         if (name === 'candidateName' && value === '') {
-            $("input[name='candidateName']").addClass('error-message');
+            // this.txtInput.current.focus;
+            // add Class
         } else if (name === 'candidateName') {
-            $("input[name='candidateName']").removeClass('error-message');
+            // remove class
         }
         console.log(e.target.value);
         console.log(this.state);
@@ -66,17 +68,13 @@ export class FirstRound extends Component {
         } else {
             // update and go to profile page
         }
-        return true; // huhuhu
+        return true; // don't work
     }
     testAPI(id) { // use id from profile page to load Profile Details
         const data = this.props.profileDetails;
         for (let i = 0; i < data.length; i += 1) {
             if (parseInt(data[i].id, 10) === id) {
-                $("input[name='candidateName']").val(data[i].candidatename);
-                $("input[name='position']").val(data[i].position);
-                $("input[name='recruiter']").val(data[i].recruiter);
-                $("input[name='englishlevel']").val(data[i].englishlevel);
-                $("input[name='englishlevelnote']").val(data[i].noteEnglishLevel);
+                // use react to query and set val
                 // set statename similar name API
                 // store state
                 break;
@@ -103,6 +101,7 @@ export class FirstRound extends Component {
                                         type="text"
                                         placeholder=""
                                         name="candidateName"
+                                        /* ref={this.txtInput} */
                                         onChange={(e) => this.handleChange(e)}
                                     />
                                 </FormGroup>
@@ -382,15 +381,8 @@ export class FirstRound extends Component {
                         </FormGroup>
                         <SecondRound />
                         <FormGroup className="profiledetails__btn">
-                            <Row>
-                                <Col xs={12} sm={8} md={8} lg={8} />
-                                <Col xs={12} sm={2} md={2} lg={2}>
-                                    <button className="profiledetails__btn--cancel">CANCEL</button>
-                                </Col>
-                                <Col xs={12} sm={2} md={2} lg={2}>
-                                    <button onClick={this.submitForm} className="profiledetails__btn--submit">SUBMIT</button>
-                                </Col>
-                            </Row>
+                            <button onClick={this.submitForm} className="profiledetails__btn--submit">SUBMIT</button>
+                            <button className="profiledetails__btn--cancel">CANCEL</button>
                         </FormGroup>
                     </form>
                 </Grid>
