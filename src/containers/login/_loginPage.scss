@@ -90,6 +90,10 @@
   &__span {
     margin-top: 10px;
     color: red;
+    font-size: 16px;
+    &--center {
+      text-align: center;
+    }
   }
 
   &__form {
