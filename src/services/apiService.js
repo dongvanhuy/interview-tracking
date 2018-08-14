@@ -23,17 +23,11 @@ export class ApiService2 {
 }
 
 export class ApiServiceProfileDetails {
-  static loadDataProfileDetails = () =>
-    Observable.fromPromise(
-      //`${API_HOSTPROFILEDETAILS}/api/interviewers`
-      axios.get(
-        "https://5b61807107412d00142ace28.mockapi.io/apiv1/interviewers",
-        {
-          data: {},
-          headers: {
-            "Content-Type": "application/json"
-          }
-        }
-      )
-    );
+  static loadDataProfileDetails = () => Observable.fromPromise(
+    axios.get(`${API_HOST}/api/interviewers`, {
+      data: {},
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }))
 }
