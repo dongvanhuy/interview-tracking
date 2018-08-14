@@ -29,6 +29,7 @@ export class Login extends Component {
       email: '',
       password: '',
       success: false,
+      checkError: '',
   };
 
   componentWillMount() {
@@ -38,14 +39,20 @@ export class Login extends Component {
   onLogin(e) {
       e.preventDefault();
       const result = this.checkValidate();
-      console.log(result);
-      if (
-          this.state.email === 'admin@admin.com' &&
-      this.state.password === 'admin'
-      ) {
-          this.setState({
-              success: true,
-          });
+      if (result) {
+          if (
+              this.state.email === 'admin@admin.com' &&
+        this.state.password === 'admin'
+          ) {
+              this.setState({
+                  success: true,
+              });
+          } else {
+              console.log('Sai email hoac mat khau');
+              this.setState({
+                  checkError: 'Email or Password is incorrect !!!',
+              });
+          }
       }
   }
 
@@ -53,13 +60,14 @@ export class Login extends Component {
       if (!validateEmail(this.state.email)) {
           this.setState({
               emailError: 'Email invalid',
+              checkError: '',
           });
-          return true;
+          return false;
       }
       this.setState({
           emailError: '',
       });
-      return false;
+      return true;
   }
 
   handleChange(e) {
@@ -83,7 +91,7 @@ export class Login extends Component {
       if (this.state.success === true) {
           this.props.push('/profile');
       }
-      const { emailError, passwordError } = this.state;
+      const { emailError, passwordError, checkError } = this.state;
       const border = isEmpty(emailError) ? 'noBorder' : 'redBorder';
       return (
           <section className="formLogin">
@@ -97,10 +105,14 @@ export class Login extends Component {
                               />
                           </Col>
                           <span className="formLogin__title">Interview Tracking</span>
+
                           <FormGroup
                               controlId="formHorizontalEmail"
                               className="formLogin__allComponents"
                           >
+                              <div className="formLogin__span formLogin__span--center">
+                                  <span>{checkError}</span>
+                              </div>
                               <Col componentClass={ControlLabel} lg={3}>
                                   <span>Email</span>
                               </Col>
