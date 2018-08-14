@@ -8,16 +8,16 @@
       "type": "image/png"
     },
     {
-      "src": "android-chrome-512x512.png",
+      "src": "./android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
-  "start_url": "./",
+  "start_url": "/",
   "display": "fullscreen",
-  "prefer_related_applications": true,
   "theme_color": "#000000",
   "background_color": "#ffffff",
+  "prefer_related_applications": true,
   "related_applications": [
     {
       "platform": "tracking",
