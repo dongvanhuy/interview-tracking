@@ -10,7 +10,7 @@ import {
 } from 'react-bootstrap';
 import { push } from 'react-router-redux';
 import uid from 'uuid';
-import { loadProfile, viewDetailData, addProfile } from './ProfileAction';
+import { loadProfile, viewDetailData, addProfile, getCandidateId} from './ProfileAction';
 import moment from 'moment';
 
 export class Profile extends Component {
@@ -25,6 +25,11 @@ export class Profile extends Component {
     state = {
         startDate: moment()
     };
+
+    loadgetCandidateId = (e) => {
+        this.props.getCandidateId(e);
+        console.log('>>>>>>');
+    }
 
     componentWillMount() {
         this.props.loadProfile();
@@ -41,17 +46,12 @@ export class Profile extends Component {
         this.props.push('/profile-detail');
     }
 
-    // candidateTable = e => {
-    //     const 
-    // }
-
-
     render() {
-        const selectedDate = this.state.startDate.format('dddd, MMMM Do YYYY, h:mm:ss a');
+        const selectedDate = this.state.startDate.format('LLL');
 
-        const rows = this.props.profile.map((item) =>
+        const rows = this.props.profile.map((item,e) =>
             (
-                <tr key={uid()} onClick={() => this.viewDetail(item)}>
+                <tr key={uid(e)} onClick={() => this.viewDetail(item,e)}>
                     <td>{item.candidate_id}</td>
                     <td>{item.date_round1}</td>
                     <td>{item.candidate_fullname}</td>
@@ -136,7 +136,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     loadProfile,
-
+    getCandidateId,
     viewDetailData,
     addProfile,
     push,
