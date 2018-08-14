@@ -39,11 +39,20 @@
 .View-project {
   padding-top: 15px;
   float: right; 
+  @include tablet{
+    padding-top: 20px;
+  }
+  @include desktop {
+    padding-top: 25px;
+  }
 }
 
 .list
 {
   background: #FFFFFF;
+  .today h2 {
+    font-size: 20px;
+  }
 }
 
 .table.list-cadidate-table { 
@@ -69,6 +78,8 @@
       cursor: pointer;  
       > td {
         vertical-align: middle;
+        font-size: 15px;
+        font-weight: 200;
       }
     }
   }
@@ -81,20 +92,28 @@
 
 .btn-list-cadidate{
   padding-bottom: 20px;
-  .button-add {
-    background: #FFED00;
-    color: #000000; 
-    width: 100%;
-    font-family: 'GT Walsheim';
-    font-weight: bold;
-    font-size: 18px;
-    @include tablet{
+  .btn-col {
+    @include tablet {
+    float: right;
+    }
+    @include desktop {
+    float: right;
+    }
+    .button-add {
+      background: #FFED00;
+      color: #000000; 
       width: 100%;
+      font-size: 18px;
+      @include tablet {
+        width: 100%;
+      }
+    }
+  
+    .button-add:hover {
+      background: #000000 ;
+      color:#FFED00; 
     }
   }
 
-  .button-add:hover {
-    background: #000000 ;
-    color:#FFED00; 
-  }
+ 
 }

@@ -5,7 +5,6 @@ import {
     Table,
     Grid,
     Row,
-    ButtonToolbar,
     Button,
     Col,
 } from 'react-bootstrap';
@@ -48,9 +47,9 @@ export class Profile extends Component {
 
 
     render() {
-        const selectedDate = this.state.startDate.format('dddd, MMMM Do YYYY');
+        const selectedDate = this.state.startDate.format('dddd, MMMM Do YYYY, h:mm:ss a');
 
-        const rows = this.props.profile.map((item, index) =>
+        const rows = this.props.profile.map((item) =>
             (
                 <tr key={uid()} onClick={() => this.viewDetail(item)}>
                     <td>{item.candidate_id}</td>
@@ -75,7 +74,7 @@ export class Profile extends Component {
                             <Col xs={6} sm={6} md={6} lg={6}>
                                 <div className="View-project">
                                     <a href="" className="icon" title="User Profile">
-                                        <i className="fa fa-user" />
+                                        <i className="fa fa-user fa-2x" />
                                     </a>
                                 </div>
                             </Col>
@@ -111,16 +110,21 @@ export class Profile extends Component {
 
                                 </Table>
                             </Col>
-                     
-                            <ButtonToolbar className="btn-list-cadidate">
-                                <Col xs={12} sm={3} md={3} lg={3}>
-                                    <Button className="button-add" onClick={() => this.addProfileDetail()}>ADD</Button>
-                                </Col>
-                            </ButtonToolbar>
-                           
                         </Row>
                     </Grid>
                 </div>
+
+                <div className="btn-list-cadidate">
+                    <Grid>
+                        <Row>
+                            <Col className ="btn-col" xs={12} sm={3} md={3} lg={3}>
+                                <Button className="button-add" onClick={() => this.addProfileDetail()}>ADD</Button>
+                            </Col>
+                        </Row>
+                    </Grid>
+                </div>
+                           
+                       
             </section>
         );
     }
@@ -132,6 +136,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     loadProfile,
+
     viewDetailData,
     addProfile,
     push,
