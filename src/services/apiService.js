@@ -5,7 +5,7 @@ import config from '../config';
 
 const API_HOST = config.apiService.host;
 const API_HOST2 = config.apiService2.host;
-// const API_HOSTPROFILEDETAILS = config.apiServiceProfileDetails.host;
+const API_HOSTPROFILEDETAILS = config.apiServiceProfileDetails.host;
 
 //
 // `${API_HOST}/interviewer`
@@ -29,7 +29,7 @@ export class ApiService2 {
 export class ApiServiceProfileDetails {
     static loadDataProfileDetails = () => Observable.fromPromise(
         //`${API_HOSTPROFILEDETAILS}/api/interviewers`
-        axios.get('https://5b61807107412d00142ace28.mockapi.io/apiv1/interviewers', {
+        axios.get(`${API_HOSTPROFILEDETAILS}/api/interviewers`, {
             data: {},
             headers: {
                 'Content-Type': 'application/json'
