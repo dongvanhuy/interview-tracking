@@ -8,10 +8,11 @@ import {
     Button,
     Col,
 } from 'react-bootstrap';
+import moment from 'moment';
 import { push } from 'react-router-redux';
 import uid from 'uuid';
 import { loadProfile, viewDetailData, addProfile, getCandidateId} from './ProfileAction';
-import moment from 'moment';
+
 
 export class Profile extends Component {
     static propsTypes = {
@@ -93,7 +94,7 @@ export class Profile extends Component {
                             </Col>
                     
                             <Col xs={12} sm={12} md={12} lg={12}>
-                                <Table striped bordered condensed hover responsive   className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
+                                <Table striped bordered condensed hover responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
                                     <thead>
                                         <tr>
                                             <th>#</th>
