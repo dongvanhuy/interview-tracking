@@ -1,10 +1,11 @@
 import { handleActions } from 'redux-actions';
-import { PROFILE_LOAD_SUCCESS, VIEW_DETAIL_DATA, ADD_PROFILE } from '../../store/actionTypes';
+import { PROFILE_LOAD_SUCCESS, VIEW_DETAIL_DATA, ADD_PROFILE, GET_CANDIDATE_ID } from '../../store/actionTypes';
 
 const initialState = {
     dataProfile: [],
     profileSelected: {},
     addProfileDetail: {},
+    getCandidateId: {},
 };
 
 const actions = {
@@ -22,6 +23,11 @@ const actions = {
         ...state,
         profileSelected: null,
     }),
+
+    [GET_CANDIDATE_ID]: (state, {payload}) => ({
+        ...state,
+        getCandidateId: payload,
+    })
 };
 
 export default handleActions(actions, initialState);
