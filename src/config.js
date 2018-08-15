@@ -1,7 +1,7 @@
 class Config {
     constructor() {
         this.apiService = {
-            host: 'http://dxc-interviewtracking-api.azurewebsites.net',
+            host: 'https://dxc-intervieweetracking-api.azurewebsites.net',
         };
 
         this.apiService2 = {

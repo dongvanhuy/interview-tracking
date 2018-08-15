@@ -5,13 +5,13 @@ import {
     Table,
     Grid,
     Row,
-    ButtonToolbar,
     Button,
     Col,
 } from 'react-bootstrap';
+import moment from 'moment';
 import { push } from 'react-router-redux';
 import uid from 'uuid';
-import { loadProfile, viewDetailData, addProfile } from './ProfileAction';
+import { loadProfile, viewDetailDataId, addProfile } from './ProfileAction';
 
 export class Profile extends Component {
     static propsTypes = {
@@ -22,12 +22,20 @@ export class Profile extends Component {
         profile: [],
     }
 
+    state = {
+        startDate: moment(),
+    };
+
     componentWillMount() {
         this.props.loadProfile();
     }
 
+    loadgetCandidateId = (e) => {
+        this.props.getCandidateId(e);
+        console.log('>>>>>>');
+    }
+
     viewDetail = (data) => {
-        // alert(name);
         this.props.viewDetailData(data);
         this.props.push('/profile-detail');
     }
@@ -37,17 +45,16 @@ export class Profile extends Component {
         this.props.push('/profile-detail');
     }
 
-
     render() {
-        // const selectedDate = this.state.startDate.format('dddd, MMMM Do YYYY');
+        const selectedDate = this.state.startDate.format('LLL');
 
-        const rows = this.props.profile.map((item, index) =>
+        const rows = this.props.profile.map((item) =>
             (
-                <tr key={uid()} onClick={() => this.viewDetail(item)}>
-                    <td>{index}</td>
+                <tr key={uid()} onClick={() => this.viewDetailId(item.candidate_id)}>
+                    <td>{item.candidate_id}</td>
                     <td>{item.date_round1}</td>
                     <td>{item.candidate_fullname}</td>
-                    <td>{item.age}</td>
+                    <td>{item.recruiter}</td>
                     <td>{item.position_apply}</td>
                     <td>{item.round1_status}</td>
                 </tr>));
@@ -56,16 +63,16 @@ export class Profile extends Component {
                 <div className="header">
                     <Grid>
                         <Row>
-                            <Col lg={6}>
+                            <Col xs={6} sm={6} md={6} lg={6}>
                                 <div className="logo">
                                     <img src="https://2.pik.vn/20185720ab30-1dc9-44f2-a487-4e276fbd29f5.png" alt="1111" />
                                 </div>
                             </Col>
 
-                            <Col lg={6}>
+                            <Col xs={6} sm={6} md={6} lg={6}>
                                 <div className="View-project">
                                     <a href="" className="icon" title="User Profile">
-                                        <i className="fa fa-user" />
+                                        <i className="fa fa-user fa-2x" />
                                     </a>
                                 </div>
                             </Col>
@@ -77,19 +84,22 @@ export class Profile extends Component {
                 <div className="list">
                     <Grid>
                         <Row className="show-grid">
-                            <Col lg={12}>
+                            <Col xs={12} sm={12} md={12} lg={12}>
                                 <div className="today">
-                                    <h2>Today</h2>
+                                    <h2>Today _ {selectedDate}</h2>
                                 </div>
-                                <Table striped bordered condensed hover className="list-cadidate-table">
+                            </Col>
+
+                            <Col xs={12} sm={12} md={12} lg={12}>
+                                <Table striped bordered condensed hover responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
                                     <thead>
                                         <tr>
                                             <th>#</th>
                                             <th>Time</th>
                                             <th>Name</th>
-                                            <th>Age</th>
-                                            <th>skill</th>
-                                            <th>status</th>
+                                            <th>Recruiter</th>
+                                            <th>Skill</th>
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -100,17 +110,19 @@ export class Profile extends Component {
                             </Col>
                         </Row>
                     </Grid>
+                </div>
 
+                <div className="btn-list-cadidate">
                     <Grid>
-                        <Row className="show-grid">
-                            <Col md={4} xsOffset={9}>
-                                <ButtonToolbar className="btn-list-cadidate">
-                                    <Button className="button-add" onClick={() => this.addProfileDetail()}>ADD</Button>
-                                </ButtonToolbar>
+                        <Row>
+                            <Col className="btn-col" xs={12} sm={3} md={3} lg={3}>
+                                <Button className="button-add" onClick={() => this.addProfileDetail()}>ADD</Button>
                             </Col>
                         </Row>
                     </Grid>
                 </div>
+
+
             </section>
         );
     }
@@ -122,7 +134,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     loadProfile,
-    viewDetailData,
+    viewDetailDataId,
     addProfile,
     push,
 };

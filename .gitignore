@@ -27,3 +27,6 @@
 src/__snapshots__/index.test.js.snap
 .idea/
 package-lock.json
+firebase.json
+.firebaserc
+.firebase
