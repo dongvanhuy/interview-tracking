@@ -44,8 +44,9 @@ export class FirstRound extends Component {
 
     handleChange = (e) => {
         const { value, name } = e.target;
-        this.state[name] = value;
-        this.setState({ state: this.state });
+        const stateInit = this.state;
+        stateInit[name] = value;
+        this.setState({ ...stateInit });
         if (name === 'candidateName' && value === '') {
             // this.txtInput.current.focus;
             // add Class

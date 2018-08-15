@@ -25,8 +25,9 @@ export class SecondRound extends Component {
     }
     handleChange = (e) => {
         const { value, name } = e.target;
-        this.state[name] = value;
-        this.setState({ state: this.state });
+        const stateInit = this.state;
+        stateInit[name] = value;
+        this.setState({ ...stateInit });
         console.log(name, value);
     }
 
