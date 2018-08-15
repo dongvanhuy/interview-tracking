@@ -13,7 +13,6 @@ import { push } from 'react-router-redux';
 import uid from 'uuid';
 import { loadProfile, viewDetailDataId, addProfile } from './ProfileAction';
 
-
 export class Profile extends Component {
     static propsTypes = {
         profile: PropsTypes.arrayOf(PropsTypes.object),
@@ -29,6 +28,11 @@ export class Profile extends Component {
 
     componentWillMount() {
         this.props.loadProfile();
+    }
+
+    loadgetCandidateId = (e) => {
+        this.props.getCandidateId(e);
+        console.log('>>>>>>');
     }
 
     viewDetail = (data) => {
