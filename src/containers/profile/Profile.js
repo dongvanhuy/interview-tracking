@@ -11,7 +11,7 @@ import {
 import { push } from 'react-router-redux';
 import moment from 'moment';
 import uid from 'uuid';
-import { loadProfile, viewDetailData, addProfile } from './ProfileAction';
+import { loadProfile, viewDetailData, addProfile, getCandidateId } from './ProfileAction';
 
 export class Profile extends Component {
     static propsTypes = {
@@ -26,13 +26,13 @@ export class Profile extends Component {
         startDate: moment(),
     };
 
+    componentWillMount() {
+        this.props.loadProfile();
+    }
+
     loadgetCandidateId = (e) => {
         this.props.getCandidateId(e);
         console.log('>>>>>>');
-    }
-
-    componentWillMount() {
-        this.props.loadProfile();
     }
 
     viewDetail = (data) => {
@@ -48,9 +48,9 @@ export class Profile extends Component {
     render() {
         const selectedDate = this.state.startDate.format('LLL');
 
-        const rows = this.props.profile.map((item,e) =>
+        const rows = this.props.profile.map((item, e) =>
             (
-                <tr key={uid(e)} onClick={() => this.viewDetail(item,e)}>
+                <tr key={uid(e)} onClick={() => this.viewDetail(item, e)}>
                     <td>{item.candidate_id}</td>
                     <td>{item.date_round1}</td>
                     <td>{item.candidate_fullname}</td>
