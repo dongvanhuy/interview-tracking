@@ -3,8 +3,8 @@ import { PROFILE_LOAD_SUCCESS, VIEW_DETAIL_DATA_ID, ADD_PROFILE, PROFILE_LOAD_SU
 
 const initialState = {
     dataProfile: [],
-    dataProfileThisWeek:[],
-    dataProfileThisMonth:[],
+    dataProfileThisWeek: [],
+    dataProfileThisMonth: [],
     profileSelectedId: {},
     addProfileDetail: {},
 };

@@ -13,7 +13,6 @@ import { push } from 'react-router-redux';
 import uid from 'uuid';
 import { loadProfile, viewDetailDataId, addProfile, loadProfileThisWeek, loadProfileThisMonth } from './ProfileAction';
 
-
 export class Profile extends Component {
     static propsTypes = {
         profile: PropsTypes.arrayOf(PropsTypes.object),
@@ -36,7 +35,6 @@ export class Profile extends Component {
         this.props.loadProfileThisWeek();
         this.props.loadProfileThisMonth();
     }
-    
 
     viewDetailId = (data) => {
         this.props.viewDetailDataId(data);
@@ -53,59 +51,38 @@ export class Profile extends Component {
         const rows = this.props.profile.map((item, index) =>
             (
                 <tr key={uid()} onClick={() => this.viewDetailId(item.candidate_id)}>
-                    <td>{index+1}</td>
+                    <td>{index + 1}</td>
                     <td>{item.date_round1}</td>
                     <td>{item.candidate_fullname}</td>
                     <td>{item.recruiter}</td>
                     <td>{item.position_apply}</td>
                     <td>{item.round1_status}</td>
                 </tr>));
-        
+
         const rowsthisweek = this.props.profilethisweek.map((item, index) =>
             (
                 <tr key={uid()} onClick={() => this.viewDetailId(item.candidate_id)}>
-                    <td>{index+1}</td>
+                    <td>{index + 1}</td>
                     <td>{item.date_round1}</td>
                     <td>{item.candidate_fullname}</td>
                     <td>{item.recruiter}</td>
                     <td>{item.position_apply}</td>
                     <td>{item.round1_status}</td>
                 </tr>));
-        
+
         const rowsthismonth = this.props.profilethismonth.map((item, index) =>
-        (
-            <tr key={uid()} onClick={() => this.viewDetailId(item.candidate_id)}>
-                <td>{index+1}</td>
-                <td>{item.date_round1}</td>
-                <td>{item.candidate_fullname}</td>
-                <td>{item.recruiter}</td>
-                <td>{item.position_apply}</td>
-                <td>{item.round1_status}</td>
-            </tr>));
+            (
+                <tr key={uid()} onClick={() => this.viewDetailId(item.candidate_id)}>
+                    <td>{index + 1}</td>
+                    <td>{item.date_round1}</td>
+                    <td>{item.candidate_fullname}</td>
+                    <td>{item.recruiter}</td>
+                    <td>{item.position_apply}</td>
+                    <td>{item.round1_status}</td>
+                </tr>));
 
         return (
-            <section className="ListCandidatePage">
-                <div className="header">
-                    <Grid>
-                        <Row>
-                            <Col xs={6} sm={6} md={6} lg={6}>
-                                <div className="logo">
-                                    <img src="https://2.pik.vn/20185720ab30-1dc9-44f2-a487-4e276fbd29f5.png" alt="1111" />
-                                </div>
-                            </Col>
-
-                            <Col xs={6} sm={6} md={6} lg={6}>
-                                <div className="View-project">
-                                    <a href="" className="icon" title="User Profile">
-                                        <i className="fa fa-user fa-2x" />
-                                    </a>
-                                </div>
-                            </Col>
-                        </Row>
-                    </Grid>
-
-                </div>
-
+            <section className="list-candidate-page">
                 <div className="list">
                     <Grid>
                         <Row className="show-grid">

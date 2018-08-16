@@ -48,7 +48,7 @@ export class ApiService2 {
 
 export class ApiServiceProfileDetails {
   static loadDataProfileDetails = () => Observable.fromPromise(
-    axios.get(`${API_HOST}/api/interviewers`, {
+    axios.get(`${API_HOST}/api/interviewees`, {
       data: {},
       headers: {
         'Content-Type': 'application/json'
