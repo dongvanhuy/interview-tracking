@@ -11,18 +11,20 @@ import {
 import moment from 'moment';
 import { push } from 'react-router-redux';
 import uid from 'uuid';
-import { loadProfile, viewDetailDataId, addProfile, loadProfileThisWeek } from './ProfileAction';
+import { loadProfile, viewDetailDataId, addProfile, loadProfileThisWeek, loadProfileThisMonth } from './ProfileAction';
 
 
 export class Profile extends Component {
     static propsTypes = {
         profile: PropsTypes.arrayOf(PropsTypes.object),
         profilethisweek: PropsTypes.arrayOf(PropsTypes.object),
+        profilethismonth: PropsTypes.arrayOf(PropsTypes.object),
     }
 
     static defaultProps = {
         profile: [],
         profilethisweek: [],
+        profilethismonth: [],
     }
 
     state = {
@@ -32,6 +34,7 @@ export class Profile extends Component {
     componentWillMount() {
         this.props.loadProfile();
         this.props.loadProfileThisWeek();
+        this.props.loadProfileThisMonth();
     }
     
 
@@ -68,6 +71,17 @@ export class Profile extends Component {
                     <td>{item.position_apply}</td>
                     <td>{item.round1_status}</td>
                 </tr>));
+        
+        const rowsthismonth = this.props.profilethismonth.map((item, index) =>
+        (
+            <tr key={uid()} onClick={() => this.viewDetailId(item.candidate_id)}>
+                <td>{index+1}</td>
+                <td>{item.date_round1}</td>
+                <td>{item.candidate_fullname}</td>
+                <td>{item.recruiter}</td>
+                <td>{item.position_apply}</td>
+                <td>{item.round1_status}</td>
+            </tr>));
 
         return (
             <section className="ListCandidatePage">
@@ -161,7 +175,7 @@ export class Profile extends Component {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {rows}
+                                            {rowsthismonth}
                                         </tbody>
                                     </Table>
                                 </Col>
@@ -189,11 +203,13 @@ export class Profile extends Component {
 const mapStateToProps = state => ({
     profile: state.profile.dataProfile,
     profilethisweek: state.profile.dataProfileThisWeek,
+    profilethismonth: state.profile.dataProfileThisMonth,
 });
 
 const mapDispatchToProps = {
     loadProfile,
     loadProfileThisWeek,
+    loadProfileThisMonth,
     viewDetailDataId,
     addProfile,
     push,

@@ -29,6 +29,18 @@ export class ApiServiceThisWeek {
     );
 }
 
+export class ApiServiceThisMonth {
+  static loadDataProfileThisMonth = () =>
+    Observable.fromPromise(
+      axios.get(`${API_HOST}/api/interviewees/thismonth`, {
+        data: {},
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+    );
+}
+
 export class ApiService2 {
   static checkUser = () =>
     Observable.fromPromise(axios.get(`${API_HOST2}/test`, { data: {} }));

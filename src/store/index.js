@@ -6,7 +6,7 @@ import 'rxjs';
 import rootReducer from '../reducers';
 import rootEpic from '../epics';
 import ajaxSetup from '../ajax';
-import ApiService, { ApiService2, ApiServiceProfileDetails, ApiServiceThisWeek } from '../services/apiService';
+import ApiService, { ApiService2, ApiServiceProfileDetails, ApiServiceThisWeek, ApiServiceThisMonth } from '../services/apiService';
 
 export const history = createHistory();
 
@@ -21,6 +21,7 @@ const middleware = [
             checkUserService: ApiService2.checkUser,
             loadProfileDetailsService: ApiServiceProfileDetails.loadDataProfileDetails,
             loadDataProfileThisWeekService: ApiServiceThisWeek.loadDataProfileThisWeek,
+            loadDataProfileThisMonthService: ApiServiceThisMonth.loadDataProfileThisMonth,
         },
     }),
 ];
