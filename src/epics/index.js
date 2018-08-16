@@ -1,10 +1,13 @@
 import { combineEpics } from 'redux-observable';
-import loadProfileEpic from '../containers/profile/ProfileEpic';
+import { loadProfileEpic, loadProfileThisWeekEpic, loadProfileThisMonthEpic } from '../containers/profile/ProfileEpic';
 import loadLoginEpic from '../containers/login/LoginEpic';
 import loadProfileDetailsEpic from '../containers/profileDetails/ProfileDetailsEpic';
 
+
 const epics = [
     loadProfileEpic,
+    loadProfileThisWeekEpic,
+    loadProfileThisMonthEpic,
     loadLoginEpic,
     loadProfileDetailsEpic,
 ];

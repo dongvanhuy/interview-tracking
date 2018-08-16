@@ -1,14 +1,14 @@
 .profiledetails {
+    font-family: 'GTWalsheimProBold';
     .error-message{
         border: 1px solid #D0011B !important;
     }
-    font-family: $font_DXCBold;
     textarea.form-control {
         resize: none;
     }
     .form-control{
         background-color: white;
-        font-family: $font_DXCRegular;
+        font-family: 'GTWalsheimProRegular';
         border: rgb(230, 230, 230) 1px solid;
         padding: 4px 12px;
     }
@@ -22,11 +22,11 @@
         margin: 0;
         padding: 20px 0px;
         background-color: black;
-        color: $color_dxcYellow ;
+        color: $color-yellow ;
         text-align: center;   
     }
     &__h2--title {
-        border-bottom: 1px solid $color_dxcYellow;
+        border-bottom: 1px solid $color-yellow;
     }
     &__radioGroup {
         display: flex;
@@ -41,7 +41,7 @@
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
-            font-family: $font_DXCRegular;
+            font-family: 'GTWalsheimProRegular';
             font-weight: unset;
             input {
                 position: absolute;
@@ -109,7 +109,7 @@
     }
     &__comments{
         margin: 10px 0px;
-        font-family: $font_DXCRegular;
+        font-family: 'GTWalsheimProRegular';
     }
 }
 

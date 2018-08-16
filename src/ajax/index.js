@@ -28,7 +28,7 @@ function response(res) {
  * Setup ajax interceptors
  * @param {Store} reduxStore A global redux store
  */
-export default function setup(reduxStore) {
+export default function setup() {
     return {
         request: axios.interceptors.request.use(request),
         response: axios.interceptors.response.use(response, responseError),

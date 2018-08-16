@@ -1,26 +1,25 @@
 @font-face {
-  font-family: font_GTWalsheimProBold;
-  src: url('../asset/font/GTWalsheimProBold.woff');
+  font-family: GTWalsheimProBold;
+  src: url('../assets/fonts/GTWalsheimProBold.woff');
 }
 @font-face {
-  font-family: font_GTWalsheimProRegular;
-  src: url('../asset/font/GTWalsheimProRegular.woff');
+  font-family: GTWalsheimProRegular;
+  src: url('../assets/fonts/GTWalsheimProRegular.woff');
 }
 @font-face {
-  font-family: font_ProximaNova-Bold;
-  src: url('../asset/font/ProximaNova-Bold.otf');
+  font-family: ProximaNova-Bold;
+  src: url('../assets/fonts/ProximaNova-Bold.otf');
 }
 @font-face {
-  font-family: font_glyphicons-halflings-regular;
-  src: url('../asset/font/glyphicons-halflings-regular.woff2');
+  font-family: glyphicons-halflings-regular;
+  src: url('../assets/fonts/glyphicons-halflings-regular.woff2');
 }
 
 body {
-  display: block;
-  background: $body-color;
-  height: 100vh;
-  font-family: 'font_GTWalsheimProBold';
+  font-family: 'GTWalsheimProRegular', Arial, sans-serif;
   font-size: 16px;
+  background: $color-white;
+  height: 100vh;
 }
 
 .root {
@@ -30,4 +29,43 @@ body {
 .wrap {
   margin: 0 auto;
   width: 100%;
+}
+
+.interview-header {
+  padding: 20px 0;
+  border-bottom: 1px solid $color-black;
+  background-color: $color-white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__logo {
+    display: flex;
+    flex: 1 1;
+    align-items: center;
+
+    img {
+      width: 100px;
+      height: 100%;
+    }
+  }
+
+  &__title {
+    font-family: 'GTWalsheimProBold', Arial, sans-serif; 
+    font-size: 30px;
+    margin-left: 20px;
+  }
+}
+
+main {
+  margin-top: 110px;
 }

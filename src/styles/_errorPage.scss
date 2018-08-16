@@ -1,8 +1,3 @@
-$color-white: #FFF;
-$color-gray: #8F8E8C;
-$color-lightpink: rgb(228, 146, 162);
-$color-lightgreen: #90EE90;
-
 .logo {
   h1 {
     font-size: 200px;
@@ -31,6 +26,6 @@ $color-lightgreen: #90EE90;
     font-size: 13px;
     font-family: arial, serif;
     font-weight: bold;
-    border-radius: 0.1em;
+    border-radius: .1em;
   }
 }
