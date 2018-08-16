@@ -1,4 +1,4 @@
 src/registerServiceWorker.js
 src/services/apiService.js
 src/__snapshots__
-build/service-worker.js
+build/*.js
