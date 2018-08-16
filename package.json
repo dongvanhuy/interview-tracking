@@ -7,7 +7,7 @@
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start": "react-scripts start",
     "start-dev": "npm-run-all -p watch-css start",
-    "build": "react-scripts build && sw-precache --config=sw-precache-config.js",
+    "build": "react-scripts build",
     "lint": "eslint ./src/**/*.js ./src/*.js",
     "lint-sass": "sass-lint -c .sass-lint.yml -v -q",
     "lint-js": "eslint ./src/**/*.js ./src/*.js",
