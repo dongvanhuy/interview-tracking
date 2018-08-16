@@ -8,7 +8,19 @@ const API_HOST2 = config.apiService2.host;
 export default class ApiService {
   static loadDataCandidate = () =>
     Observable.fromPromise(
-      axios.get(`${API_HOST}/api/interviewers`, {
+      axios.get(`${API_HOST}/api/interviewees/today`, {
+        data: {},
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+    );
+}
+
+export class ApiServiceThisWeek {
+  static loadDataProfileThisWeek = () =>
+    Observable.fromPromise(
+      axios.get(`${API_HOST}/api/interviewees/thisweek`, {
         data: {},
         headers: {
           "Content-Type": "application/json"

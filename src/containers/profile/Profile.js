@@ -11,16 +11,18 @@ import {
 import moment from 'moment';
 import { push } from 'react-router-redux';
 import uid from 'uuid';
-import { loadProfile, viewDetailDataId, addProfile } from './ProfileAction';
+import { loadProfile, viewDetailDataId, addProfile, loadProfileThisWeek } from './ProfileAction';
 
 
 export class Profile extends Component {
     static propsTypes = {
         profile: PropsTypes.arrayOf(PropsTypes.object),
+        profilethisweek: PropsTypes.arrayOf(PropsTypes.object),
     }
 
     static defaultProps = {
         profile: [],
+        profilethisweek: [],
     }
 
     state = {
@@ -29,11 +31,12 @@ export class Profile extends Component {
 
     componentWillMount() {
         this.props.loadProfile();
+        this.props.loadProfileThisWeek();
     }
+    
 
-    viewDetail = (data) => {
-        this.props.viewDetailData(data);
-        this.props.push('/profile-detail');
+    viewDetailId = (data) => {
+        this.props.viewDetailDataId(data);
     }
 
     addProfileDetail = () => {
@@ -44,16 +47,28 @@ export class Profile extends Component {
     render() {
         const selectedDate = this.state.startDate.format('LLL');
 
-        const rows = this.props.profile.map((item) =>
+        const rows = this.props.profile.map((item, index) =>
             (
                 <tr key={uid()} onClick={() => this.viewDetailId(item.candidate_id)}>
-                    <td>{item.candidate_id}</td>
+                    <td>{index+1}</td>
                     <td>{item.date_round1}</td>
                     <td>{item.candidate_fullname}</td>
                     <td>{item.recruiter}</td>
                     <td>{item.position_apply}</td>
                     <td>{item.round1_status}</td>
                 </tr>));
+        
+        const rowsthisweek = this.props.profilethisweek.map((item, index) =>
+            (
+                <tr key={uid()} onClick={() => this.viewDetailId(item.candidate_id)}>
+                    <td>{index+1}</td>
+                    <td>{item.date_round1}</td>
+                    <td>{item.candidate_fullname}</td>
+                    <td>{item.recruiter}</td>
+                    <td>{item.position_apply}</td>
+                    <td>{item.round1_status}</td>
+                </tr>));
+
         return (
             <section className="ListCandidatePage">
                 <div className="header">
@@ -80,30 +95,77 @@ export class Profile extends Component {
                 <div className="list">
                     <Grid>
                         <Row className="show-grid">
-                            <Col xs={12} sm={12} md={12} lg={12}>
-                                <div className="today">
-                                    <h2>Today _ {selectedDate}</h2>
-                                </div>
-                            </Col>
+                            <div className="list-table">
+                                <Col xs={12} sm={12} md={12} lg={12}>
+                                    <h2>To Day _ {selectedDate}</h2>
+                                </Col>
 
-                            <Col xs={12} sm={12} md={12} lg={12}>
-                                <Table striped bordered condensed hover responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Time</th>
-                                            <th>Name</th>
-                                            <th>Recruiter</th>
-                                            <th>Skill</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {rows}
-                                    </tbody>
+                                <Col xs={12} sm={12} md={12} lg={12}>
+                                    <Table striped bordered condensed hover responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Time</th>
+                                                <th>Name</th>
+                                                <th>Recruiter</th>
+                                                <th>Skill</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {rows}
+                                        </tbody>
+                                    </Table>
+                                </Col>
+                            </div>
 
-                                </Table>
-                            </Col>
+                            <div className="list-table">
+                                <Col xs={12} sm={12} md={12} lg={12}>
+                                    <h2>This Week</h2>
+                                </Col>
+
+                                <Col xs={12} sm={12} md={12} lg={12}>
+                                    <Table striped bordered condensed hover responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Time</th>
+                                                <th>Name</th>
+                                                <th>Recruiter</th>
+                                                <th>Skill</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {rowsthisweek}
+                                        </tbody>
+                                    </Table>
+                                </Col>
+                            </div>
+
+                            <div className="list-table">
+                                <Col xs={12} sm={12} md={12} lg={12}>
+                                    <h2>This Month</h2>
+                                </Col>
+
+                                <Col xs={12} sm={12} md={12} lg={12}>
+                                    <Table striped bordered condensed hover responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Time</th>
+                                                <th>Name</th>
+                                                <th>Recruiter</th>
+                                                <th>Skill</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {rows}
+                                        </tbody>
+                                    </Table>
+                                </Col>
+                            </div>
                         </Row>
                     </Grid>
                 </div>
@@ -126,10 +188,12 @@ export class Profile extends Component {
 
 const mapStateToProps = state => ({
     profile: state.profile.dataProfile,
+    profilethisweek: state.profile.dataProfileThisWeek,
 });
 
 const mapDispatchToProps = {
     loadProfile,
+    loadProfileThisWeek,
     viewDetailDataId,
     addProfile,
     push,
