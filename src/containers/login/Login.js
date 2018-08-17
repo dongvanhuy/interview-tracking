@@ -15,164 +15,164 @@ import { isEmpty, validateEmail } from '../../utils/Common';
 import { loginCheck } from './LoginActions';
 
 export class Login extends Component {
-  static propsTypes = {
-      user: PropsTypes.arrayOf(PropsTypes.object),
-  };
+    static propsTypes = {
+        user: PropsTypes.arrayOf(PropsTypes.object),
+    };
 
-  static defaultProps = {
-      user: [],
-  };
+    static defaultProps = {
+        user: [],
+    };
 
-  state = {
-      emailError: '',
-      passwordError: '',
-      email: '',
-      password: '',
-      success: false,
-      checkError: '',
-  };
+    state = {
+        emailError: '',
+        passwordError: '',
+        email: '',
+        password: '',
+        success: false,
+        checkError: '',
+    };
 
-  componentWillMount() {
-      this.props.loginCheck();
-  }
+    componentWillMount() {
+        this.props.loginCheck();
+    }
 
-  onLogin(e) {
-      e.preventDefault();
-      const result = this.checkValidate();
-      if (result) {
-          if (
-              this.state.email === 'admin@admin.com' &&
-        this.state.password === 'admin'
-          ) {
-              this.setState({
-                  success: true,
-              });
-          } else {
-              console.log('Sai email hoac mat khau');
-              this.setState({
-                  checkError: 'Email or Password is incorrect !!!',
-              });
-          }
-      }
-  }
+    onLogin(e) {
+        e.preventDefault();
+        const result = this.checkValidate();
+        if (result) {
+            if (
+                this.state.email === 'admin@admin.com' &&
+                this.state.password === 'admin'
+            ) {
+                this.setState({
+                    success: true,
+                });
+            } else {
+                console.log('Sai email hoac mat khau');
+                this.setState({
+                    checkError: 'Email or Password is incorrect !!!',
+                });
+            }
+        }
+    }
 
-  checkValidate() {
-      if (!validateEmail(this.state.email)) {
-          this.setState({
-              emailError: 'Email invalid',
-              checkError: '',
-          });
-          return false;
-      }
-      this.setState({
-          emailError: '',
-      });
-      return true;
-  }
+    checkValidate() {
+        if (!validateEmail(this.state.email)) {
+            this.setState({
+                emailError: 'Email invalid',
+                checkError: '',
+            });
+            return false;
+        }
+        this.setState({
+            emailError: '',
+        });
+        return true;
+    }
 
-  handleChange(e) {
-      const { value, name } = e.target;
-      this.setState({
-          [name]: value,
-      });
-  }
+    handleChange(e) {
+        const { value, name } = e.target;
+        this.setState({
+            [name]: value,
+        });
+    }
 
-  disableButton() {
-      if (isEmpty(this.state)) {
-          return true;
-      } else if (isEmpty(this.state.email) || isEmpty(this.state.password)) {
-          return true;
-      }
-      return false;
-  }
+    disableButton() {
+        if (isEmpty(this.state)) {
+            return true;
+        } else if (isEmpty(this.state.email) || isEmpty(this.state.password)) {
+            return true;
+        }
+        return false;
+    }
 
-  render() {
-      console.log(this.state);
-      if (this.state.success === true) {
-          this.props.push('/profile');
-      }
-      const { emailError, passwordError, checkError } = this.state;
-      const border = isEmpty(emailError) ? 'noBorder' : 'redBorder';
-      return (
-          <section className="formLogin">
-              <div className="formLogin__container">
-                  <div className="formLogin__outer">
-                      <Form className="formLogin__form" horizontal>
-                          <Col className="formLogin__logo">
-                              <img
-                                  src="https://2.pik.vn/20187334c225-cd80-410f-8a74-bcfb325ec38f.png"
-                                  alt="Error 404"
-                              />
-                          </Col>
-                          <span className="formLogin__title">Interview Tracking</span>
+    render() {
+        console.log(this.state);
+        if (this.state.success === true) {
+            this.props.push('/profile');
+        }
+        const { emailError, passwordError, checkError } = this.state;
+        const border = isEmpty(emailError) ? 'noBorder' : 'redBorder';
+        return (
+            <section className="formLogin">
+                <div className="formLogin__container">
+                    <div className="formLogin__outer">
+                        <Form className="formLogin__form" horizontal>
+                            <Col className="formLogin__logo">
+                                <img
+                                    src="https://2.pik.vn/20187334c225-cd80-410f-8a74-bcfb325ec38f.png"
+                                    alt="Error 404"
+                                />
+                            </Col>
+                            <span className="formLogin__title">Interview Tracking</span>
 
-                          <FormGroup
-                              controlId="formHorizontalEmail"
-                              className="formLogin__allComponents"
-                          >
-                              <div className="formLogin__span formLogin__span--center">
-                                  <span>{checkError}</span>
-                              </div>
-                              <Col componentClass={ControlLabel} lg={3}>
-                                  <span>Email</span>
-                              </Col>
-                              <Col lg={9} className="formLogin__input formLogin__email">
-                                  <FormControl
-                                      type="email"
-                                      placeholder="Your Email"
-                                      name="email"
-                                      className={border}
-                                      onChange={e => {
-                                          this.handleChange(e);
-                                      }}
-                                  />
-                                  <div className="formLogin__span">{emailError}</div>
-                              </Col>
-                          </FormGroup>
+                            <FormGroup
+                                controlId="formHorizontalEmail"
+                                className="formLogin__allComponents"
+                            >
+                                <div className="formLogin__span formLogin__span--center">
+                                    <span>{checkError}</span>
+                                </div>
+                                <Col componentClass={ControlLabel} lg={3}>
+                                    <span>Email</span>
+                                </Col>
+                                <Col lg={9} className="formLogin__input formLogin__email">
+                                    <FormControl
+                                        type="email"
+                                        placeholder="Your Email"
+                                        name="email"
+                                        className={border}
+                                        onChange={e => {
+                                            this.handleChange(e);
+                                        }}
+                                    />
+                                    <div className="formLogin__span">{emailError}</div>
+                                </Col>
+                            </FormGroup>
 
-                          <FormGroup
-                              controlId="formHorizontalPassword"
-                              className="formLogin__allComponents"
-                          >
-                              <Col componentClass={ControlLabel} lg={3}>
-                                  <span>Password</span>
-                              </Col>
-                              <Col lg={9}>
-                                  <FormControl
-                                      type="password"
-                                      name="password"
-                                      placeholder="Your Password"
-                                      required
-                                      className={border}
-                                      onChange={e => {
-                                          this.handleChange(e);
-                                      }}
-                                  />
-                                  <div className="formLogin__span">{passwordError}</div>
-                              </Col>
-                          </FormGroup>
+                            <FormGroup
+                                controlId="formHorizontalPassword"
+                                className="formLogin__allComponents"
+                            >
+                                <Col componentClass={ControlLabel} lg={3}>
+                                    <span>Password</span>
+                                </Col>
+                                <Col lg={9}>
+                                    <FormControl
+                                        type="password"
+                                        name="password"
+                                        placeholder="Your Password"
+                                        required
+                                        className={border}
+                                        onChange={e => {
+                                            this.handleChange(e);
+                                        }}
+                                    />
+                                    <div className="formLogin__span">{passwordError}</div>
+                                </Col>
+                            </FormGroup>
 
-                          <FormGroup className="formLogin__demo">
-                              <Row>
-                                  <Col lg={12} xs={12} md={12} className="formLogin__button">
-                                      <Button
-                                          type="submit"
-                                          disabled={this.disableButton()}
-                                          onClick={e => {
-                                              this.onLogin(e);
-                                          }}
-                                      >
-                                          <span>LOG IN</span>
-                                      </Button>
-                                  </Col>
-                              </Row>
-                          </FormGroup>
-                      </Form>
-                  </div>
-              </div>
-          </section>
-      );
-  }
+                            <FormGroup className="formLogin__demo">
+                                <Row>
+                                    <Col lg={12} xs={12} md={12} className="formLogin__button">
+                                        <Button
+                                            type="submit"
+                                            disabled={this.disableButton()}
+                                            onClick={e => {
+                                                this.onLogin(e);
+                                            }}
+                                        >
+                                            <span>LOG IN</span>
+                                        </Button>
+                                    </Col>
+                                </Row>
+                            </FormGroup>
+                        </Form>
+                    </div>
+                </div>
+            </section>
+        );
+    }
 }
 
 const mapStateToProps = state => ({
