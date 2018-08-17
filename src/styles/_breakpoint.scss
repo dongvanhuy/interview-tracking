@@ -1,5 +1,3 @@
-$screen-sm-min: 768px;
-$screen-md-min: 1024px;
 // Small devices (tablets, 768px and up)
 @mixin tablet {
   @media screen and (min-width: $screen-sm-min) {
