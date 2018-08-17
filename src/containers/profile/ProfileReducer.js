@@ -5,7 +5,7 @@ const initialState = {
     dataProfile: [],
     dataProfileThisWeek: [],
     dataProfileThisMonth: [],
-    profileSelectedId: {},
+    profileSelectedId: 1,
     addProfileDetail: {},
 };
 

@@ -39,7 +39,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 onChange={(e) => this.props.handleChange(e)}
                             >
                                 <option value="">Select</option>
-                                <option value="Duyen Tran1">Duyen Tran</option>
+                                <option value="Duyen Tran">Duyen Tran</option>
                                 <option value="Vy Phan">Vy Phan</option>
                                 <option value="Nhu Huynh">Nhu Huynh</option>
                             </FormControl>
@@ -84,10 +84,10 @@ export class ProfileDetailsFirstRound extends Component {
                                         name="jury_round1_01"
                                         value={this.props.jury_round1_01}
                                     >
-                                        <option defaultValue="">Select</option>
-                                        <option defaultValue="Huy Dong">Huy Dong</option>
-                                        <option defaultValue="Huy Chung">Huy Chung</option>
-                                        <option defaultValue="Trang Nguyen">Trang Nguyen</option>
+                                        <option value="">Select</option>
+                                        <option value="1">Huy Dong</option>
+                                        <option value="Huy Chung">Huy Chung</option>
+                                        <option value="Trang Nguyen">Trang Nguyen</option>
                                     </FormControl>
                                 </FormGroup>
 
@@ -102,10 +102,10 @@ export class ProfileDetailsFirstRound extends Component {
                                         name="jury_round1_02"
                                         value={this.props.jury_round1_02}
                                     >
-                                        <option defaultValue="">Select</option>
-                                        <option defaultValue="Huy Dong">Huy Dong</option>
-                                        <option defaultValue="Huy Chung">Huy Chung</option>
-                                        <option defaultValue="Trang Nguyen">Trang Nguyen</option>
+                                        <option value="">Select</option>
+                                        <option value="Huy Dong">Huy Dong</option>
+                                        <option value="2">Huy Chung</option>
+                                        <option value="Trang Nguyen">Trang Nguyen</option>
                                     </FormControl>
                                 </FormGroup>
 
@@ -270,9 +270,9 @@ export class ProfileDetailsFirstRound extends Component {
                                 onChange={(e) => this.props.handleChange(e)}
                             >
                                 <option value="">Select</option>
-                                <option defaultValue="Assoc Prof">Assoc Prof</option>
-                                <option defaultValue="Prof">Prof</option>
-                                <option defaultValue="Snr Prof">Snr Prof</option>
+                                <option value="Assoc Prof">Assoc Prof</option>
+                                <option value="Prof">Prof</option>
+                                <option value="Snr Prof">Snr Prof</option>
                             </FormControl>
                         </FormGroup>
                     </Col>
@@ -288,9 +288,9 @@ export class ProfileDetailsFirstRound extends Component {
                                 onChange={(e) => this.props.handleChange(e)}
                             >
                                 <option value="">Select</option>
-                                <option defaultValue="Passed">Passed</option>
-                                <option defaultValue="KIV">KIV</option>
-                                <option defaultValue="Fail">Fail</option>
+                                <option value="Passed">Passed</option>
+                                <option value="KIV">KIV</option>
+                                <option value="Fail">Fail</option>
                             </FormControl>
                         </FormGroup>
                     </Col>

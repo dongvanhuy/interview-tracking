@@ -4,7 +4,6 @@ import config from "../config";
 
 const API_HOST = config.apiService.host;
 const API_HOST2 = config.apiService2.host;
-
 export default class ApiService {
   static loadDataCandidate = () =>
     Observable.fromPromise(
@@ -15,9 +14,7 @@ export default class ApiService {
         }
       })
     );
-}
 
-export class ApiServiceThisWeek {
   static loadDataProfileThisWeek = () =>
     Observable.fromPromise(
       axios.get(`${API_HOST}/api/interviewees/thisweek`, {
@@ -27,9 +24,7 @@ export class ApiServiceThisWeek {
         }
       })
     );
-}
 
-export class ApiServiceThisMonth {
   static loadDataProfileThisMonth = () =>
     Observable.fromPromise(
       axios.get(`${API_HOST}/api/interviewees/thismonth`, {
@@ -39,19 +34,21 @@ export class ApiServiceThisMonth {
         }
       })
     );
-}
 
-export class ApiService2 {
   static checkUser = () =>
     Observable.fromPromise(axios.get(`${API_HOST2}/test`, { data: {} }));
-}
 
-export class ApiServiceProfileDetails {
-  static loadDataProfileDetails = () => Observable.fromPromise(
-    axios.get(`${API_HOST}/api/interviewees/info/1`, {
+  static loadDataProfileDetails = (data) => Observable.fromPromise(
+    axios.get(`${API_HOST}/api/interviewees/info/${data}`, {
       data: {},
       headers: {
         'Content-Type': 'application/json'
       }
     }))
+
+  // static loadDataProfileDetails = (data) => Observable.fromPromise(
+  //   axios.put(`${API_HOST}/api/interviewees/info/`, data))
+
+  static pathDataProfileDetails = (data) => Observable.fromPromise(
+    axios.patch(`${API_HOST}/api/interviewees/mofidy/${data.candidate_id}`, data))
 }

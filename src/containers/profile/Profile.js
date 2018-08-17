@@ -38,11 +38,11 @@ export class Profile extends Component {
 
     viewDetailId = (data) => {
         this.props.viewDetailDataId(data);
+        this.props.push('/profile-detail');
     }
 
     addProfileDetail = () => {
         this.props.addProfile();
-        this.props.push('/profile-detail');
     }
 
     render() {

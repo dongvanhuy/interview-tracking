@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import PropsTypes from 'prop-types';
 import React, { Component } from 'react';
+import { push } from 'react-router-redux';
 import { FormGroup, Grid } from 'react-bootstrap';
-import { loadProfileDetails } from './ProfileDetailsAction';
+import { loadProfileDetails, pathProfileDetails } from './ProfileDetailsAction';
 import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
 import { ProfileDetailsSecondRound } from './ProfileDetailsSecondRound';
 
@@ -10,9 +11,11 @@ import { ProfileDetailsSecondRound } from './ProfileDetailsSecondRound';
 export class ProfileDetails extends Component {
     static propsTypes = {
         profileDetails: PropsTypes.objectOf(PropsTypes.object),
+        candidateId: PropsTypes.objectOf(PropsTypes.object),
     }
     static defaultProps = {
         profileDetails: [],
+        candidateId: 1000,
     }
     constructor(props) {
         super(props);
@@ -55,9 +58,17 @@ export class ProfileDetails extends Component {
         };
     }
     componentWillMount() {
-        this.props.loadProfileDetails();
+        console.log('id candidate >>', this.props.candidateId);
+        this.props.loadProfileDetails(this.props.candidateId);
+    }
+    componentDidMount() {
+        this.timetoLoad = setTimeout(
+            () => this.convertDataFromAPI(),
+            1000,
+        );
     }
     convertDataFromAPI() {
+        this.setState({ ...this.props.profileDetails[0] });
         const techcompetency = document.getElementsByName('tech_competency_round1');
         const cuturalFitLevelRound1 = document.getElementsByName('cultural_fit_round1');
         const techcompetency2 = document.getElementsByName('tech_competency_round2');
@@ -90,9 +101,10 @@ export class ProfileDetails extends Component {
         const candidateName = document.getElementsByName('candidate_fullname');
         if (value === '' && name === 'candidate_fullname') {
             candidateName[0].classList.add('error-message');
-        } else if ((this.state.candidate_fullname === '' || this.state.candidate_fullname === undefined) && name !== 'candidateName') {
+        } else if (this.state.candidate_fullname === '' && name === undefined) {
             candidateName[0].classList.add('error-message');
-        } else {
+        }
+        if (this.state.candidate_fullname !== '') {
             candidateName[0].classList.remove('error-message');
         }
         // if (candidateName.value !== '') {
@@ -119,24 +131,17 @@ export class ProfileDetails extends Component {
         const errorMessages = document.getElementsByClassName('error-message');
         if (errorMessages.length > 0) {
             errorMessages[0].focus();
-            return false;
+        } else if (this.props.candidateId !== null) {
+            this.props.pathProfileDetails(this.state);
+            this.props.push('/profile');
         }
-        // if ( === true) {
-        //     // update and go to profile page
-        // } else {
-        //     // return false
-        // }
-        return false;
-    }
-    testAPI = () => { // use id from profile page to load Profile Details
-        this.setState({ ...this.props.profileDetails[0] });
-        console.log('>>>>>>>>>>>>>', this.state);
+        // console.log(this.props.profileDetails);
+        // console.log(this.state);
+        // console.log(this.state === this.props.profileDtails ? 'ok' : 'no');
     }
     render() {
-        this.convertDataFromAPI();
         return (
             <section className="profiledetails">
-                <button onClick={this.testAPI}> Get API</button>
                 <Grid>
                     <h1 className="profiledetails--title">
                         Candidate Assessment Summary Form
@@ -154,10 +159,13 @@ export class ProfileDetails extends Component {
 }
 const mapStateToProps = state => ({
     profileDetails: state.profileDetails.dataProfileDetails,
+    candidateId: state.profile.profileSelectedId,
 });
 
 const mapDispatchToProps = {
     loadProfileDetails,
+    pathProfileDetails,
+    push, // ACTION GUI EPIC GUI API
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileDetails);
