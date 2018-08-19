@@ -15,9 +15,7 @@ export default class ApiService {
         }
       })
     );
-}
 
-export class ApiServiceThisWeek {
   static loadDataProfileThisWeek = () =>
     Observable.fromPromise(
       axios.get(`${API_HOST}/api/interviewees/thisweek`, {
@@ -27,9 +25,7 @@ export class ApiServiceThisWeek {
         }
       })
     );
-}
 
-export class ApiServiceThisMonth {
   static loadDataProfileThisMonth = () =>
     Observable.fromPromise(
       axios.get(`${API_HOST}/api/interviewees/thismonth`, {
@@ -39,19 +35,16 @@ export class ApiServiceThisMonth {
         }
       })
     );
-}
 
-export class ApiService2 {
   static checkUser = () =>
     Observable.fromPromise(axios.get(`${API_HOST2}/test`, { data: {} }));
+
+  static loadDataProfileDetails = () => Observable.fromPromise(
+      axios.get(`${API_HOST}/api/interviewees`, {
+        data: {},
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }))
 }
 
-export class ApiServiceProfileDetails {
-  static loadDataProfileDetails = () => Observable.fromPromise(
-    axios.get(`${API_HOST}/api/interviewees`, {
-      data: {},
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }))
-}
