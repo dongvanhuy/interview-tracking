@@ -5,13 +5,13 @@ module.exports = {
     runtimeCaching: [
         {
             // Match any same-origin request that contains 'api'.
-            urlPattern: new RegExp('https://dxc-intervieweetracking-api.azurewebsites.net/api/(.*)'),
+            urlPattern: new RegExp('https://dxc-interview-tracking-api.azurewebsites.net/api/(.*)'),
             // Apply a network-first strategy.
             handler: 'networkFirst',
         },
         {
             // Match any same-origin request that contains 'api'.
-            urlPattern: new RegExp('https://dxc-intervieweetracking-api.azurewebsites.net/api/(.*)'),
+            urlPattern: new RegExp('https://dxc-interview-tracking-api.azurewebsites.net/api/(.*)'),
             // Apply a network-first strategy.
             handler: 'staleWhileRevalidate',
             options: {
@@ -23,7 +23,7 @@ module.exports = {
         {
             // To match cross-origin requests, use a RegExp that matches
             // the start of the origin:
-            urlPattern: new RegExp('https://dxc-intervieweetracking-api.azurewebsites.net/api/(.*)'),
+            urlPattern: new RegExp('https://dxc-interview-tracking-api.azurewebsites.net/api/(.*)'),
             handler: 'cacheFirst',
             options: {
                 cacheableResponse: {
