@@ -2,6 +2,7 @@ module.exports = {
     globDirectory: 'build/',
     globPatterns: ['**/*.{json,png,html,js,css,svg,woff2,ttf,eot,woff,otf}'],
     swDest: 'build/service-worker.js',
+    navigateFallback: '/index.html',
     runtimeCaching: [
         {
             // Match any same-origin request that contains 'api'.
@@ -26,6 +27,11 @@ module.exports = {
             urlPattern: new RegExp('https://dxc-interview-tracking-api.azurewebsites.net/api/(.*)'),
             handler: 'cacheFirst',
             options: {
+                cacheName: 'my-api-cache',
+                expiration: {
+                    maxEntries: 50,
+                    maxAgeSeconds: 30 * 24 * 60 * 60,
+                },
                 cacheableResponse: {
                     statuses: [0, 200],
                 },
