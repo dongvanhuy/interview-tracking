@@ -3,7 +3,7 @@ import PropsTypes from 'prop-types';
 import React, { Component } from 'react';
 import { push } from 'react-router-redux';
 import { FormGroup, Grid } from 'react-bootstrap';
-import { loadProfileDetails, pathProfileDetails } from './ProfileDetailsAction';
+import { loadProfileDetails, patchProfileDetails } from './ProfileDetailsAction';
 import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
 import { ProfileDetailsSecondRound } from './ProfileDetailsSecondRound';
 
@@ -58,13 +58,14 @@ export class ProfileDetails extends Component {
         };
     }
     componentWillMount() {
-        console.log('id candidate >>', this.props.candidateId);
+        console.log('id candidate componentWillMount >>', this.props.candidateId);
         this.props.loadProfileDetails(this.props.candidateId);
     }
     componentDidMount() {
+        console.log('id candidate >> componentDidMount', this.props.candidateId);
         this.timetoLoad = setTimeout(
             () => this.convertDataFromAPI(),
-            1000,
+            3000,
         );
     }
     convertDataFromAPI() {
@@ -132,8 +133,8 @@ export class ProfileDetails extends Component {
         if (errorMessages.length > 0) {
             errorMessages[0].focus();
         } else if (this.props.candidateId !== null) {
-            this.props.pathProfileDetails(this.state);
-            this.props.push('/profile');
+            this.props.patchProfileDetails(this.state);
+            //this.props.push('/profile');
         }
         // console.log(this.props.profileDetails);
         // console.log(this.state);
@@ -164,7 +165,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     loadProfileDetails,
-    pathProfileDetails,
+    patchProfileDetails,
     push, // ACTION GUI EPIC GUI API
 };
 

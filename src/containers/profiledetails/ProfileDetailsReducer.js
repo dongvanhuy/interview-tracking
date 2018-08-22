@@ -1,9 +1,9 @@
 import { handleActions } from 'redux-actions';
-import { PROFILEDETAILS_LOAD_SUCCESS, PROFILEDETAILS_PATH } from '../../store/actionTypes';
+import { PROFILEDETAILS_LOAD_SUCCESS, PROFILEDETAILS_PATCH } from '../../store/actionTypes';
 
 const initialState = {
     dataProfileDetails: [],
-    dataProfilePath: [],
+    dataProfilePatch: [],
 };
 
 const actions = {
@@ -11,9 +11,9 @@ const actions = {
         ...state,
         dataProfileDetails: payload.data,
     }),
-    [PROFILEDETAILS_PATH]: (state, { payload }) => ({
+    [PROFILEDETAILS_PATCH]: (state, { payload }) => ({
         ...state,
-        dataProfilePath: payload,
+        dataProfilePatch: payload,
     }),
 };
 

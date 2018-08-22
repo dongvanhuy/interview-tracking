@@ -1,85 +1,144 @@
 import { connect } from 'react-redux';
 import PropsTypes from 'prop-types';
 import React, { Component } from 'react';
+import { push } from 'react-router-redux';
 import { FormGroup, Grid } from 'react-bootstrap';
-import { loadProfileDetails } from './ProfileDetailsAction';
+import { loadProfileDetails, patchProfileDetails } from './ProfileDetailsAction';
 import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
 import { ProfileDetailsSecondRound } from './ProfileDetailsSecondRound';
 
 
 export class ProfileInfo extends Component {
     static propsTypes = {
-        profileDetails: PropsTypes.arrayOf(PropsTypes.object),
+        profileDetails: PropsTypes.objectOf(PropsTypes.object),
+        candidateId: PropsTypes.objectOf(PropsTypes.object),
     }
     static defaultProps = {
         profileDetails: [],
+        candidateId: 1000,
     }
     constructor(props) {
         super(props);
+        this.checkValidateForm = this.checkValidateForm.bind(this);
         this.state = {
-            lgShow: false,
-            candidateName: '',
-            position: '',
+            // lgShow: false,
+            candidate_id: '',
+            candidate_fullname: '',
+            position_apply: '',
             recruiter: '',
-            englishlevel: '',
-            englishlevelnote: '',
-            interviewerRound1_01: '',
-            interviewerRound1_02: '',
+            eng_level: '',
+            eng_level_cmt: '',
+            jury_round1_01: '',
+            jury_round1_02: '',
             date_round1: '',
-            techcompetency_level_round1: '',
-            techcompetency_comment_round1: '',
-            cuturalFit_level_round1: '',
-            cuturalFitcomment_round1: '',
-            resultYPE_round1: '',
-            resulttitle_round1: '',
-            resultstatus_round1: '',
-            resultcomment_round1: '',
+            tech_competency_round1: '',
+            tech_competency_round1_cmt: '',
+            cultural_fit_round1: '',
+            cultural_fit_round1_cmt: '',
+            ype_round1: '',
+            title_round1: '',
+            round1_status: '',
+            cmt_result_round1: '',
+            jury_round2: '',
+            date_round2: '',
+            tech_competency_round2: '',
+            tech_competency_round2_cmt: '',
+            cultural_fit_round2: '',
+            cultural_fit_round2_cmt: '',
+            business_acument: '',
+            business_acument_cmt: '',
+            soft_skill: '',
+            soft_skill_cmt: '',
+            people_management: '',
+            people_management_cmt: '',
+            ype_round2: '',
+            title_round2: '',
+            round2_status: '',
+            cmt_result_round2: '',
         };
     }
-
     componentWillMount() {
-        this.props.loadProfileDetails();
+        console.log('id candidate componentWillMount >>', this.props.candidateId);
+        this.props.loadProfileDetails(this.props.candidateId);
     }
-
-    handleChange = e => {
-        const { value, name } = e.target;
-        const stateInit = this.state;
-        stateInit[name] = value;
-        this.setState({ ...stateInit });
-        if (name === 'candidateName' && value === '') {
-            // this.txtInput.current.focus;
-            // add Class
-        } else if (name === 'candidateName') {
-            // remove class
-        }
-        console.log(e.target.value);
-        console.log(this.state);
+    componentDidMount() {
+        console.log('id candidate >> componentDidMount', this.props.candidateId);
+        this.timetoLoad = setTimeout(
+            () => this.convertDataFromAPI(),
+            3000,
+        );
     }
-    submitForm = () => {
-        // const candidateName = $("input[name='candidateName']");
-        // if (candidateName.val() === '') {
-        //     candidateName.addClass('error-message');
-        //     candidateName.focus();
-        //     return e.preventDefault();
-        // }
-        // if (candidateName.val() !== '') {
-        //     $('#profiledetails__model--success').css('visibility', 'visible');
-        //     // this.setState({lgShow: true});
-        // } else {
-        //     // update and go to profile page
-        // }
-        // return true; // don't work
-    }
-    testAPI(id) { // use id from profile page to load Profile Details
-        const data = this.props.profileDetails;
-        for (let i = 0; i < data.length; i += 1) {
-            if (parseInt(data[i].id, 10) === id) {
-                // use react to query and set val
-                // set statename similar name API
-                // store state
-                break;
+    convertDataFromAPI() {
+        this.setState({ ...this.props.profileDetails[0] });
+        const techcompetency = document.getElementsByName('tech_competency_round1');
+        const cuturalFitLevelRound1 = document.getElementsByName('cultural_fit_round1');
+        const techcompetency2 = document.getElementsByName('tech_competency_round2');
+        const cuturalFitLevelRound2 = document.getElementsByName('cultural_fit_round2');
+        const businessAcumentlevel = document.getElementsByName('business_acument');
+        const softSkillslevel = document.getElementsByName('soft_skill');
+        const peopleManagementlevel = document.getElementsByName('people_management');
+        const arrayOfData = [techcompetency, cuturalFitLevelRound1,
+            techcompetency2, cuturalFitLevelRound2, businessAcumentlevel,
+            softSkillslevel, peopleManagementlevel];
+        const arrayOfTagsName = ['tech_competency_round1', 'cultural_fit_round1',
+            'tech_competency_round2', 'cultural_fit_round2', 'business_acument',
+            'soft_skill', 'people_management'];
+        for (let i = 0; i < arrayOfData.length; i += 1) {
+            const data = arrayOfData[i];
+            if (this.state[arrayOfTagsName[i]] === 'Limited') {
+                data[0].checked = true;
+            } else if (this.state[arrayOfTagsName[i]] === 'Basic') {
+                data[1].checked = true;
+            } else if (this.state[arrayOfTagsName[i]] === 'Acceptable') {
+                data[2].checked = true;
+            } else if (this.state[arrayOfTagsName[i]] === 'Advanced') {
+                data[3].checked = true;
+            } else if (this.state[arrayOfTagsName[i]] === 'Exceptional') {
+                data[4].checked = true;
             }
         }
+    }
+    checkValidateForm(name, value) {
+        const candidateName = document.getElementsByName('candidate_fullname');
+        if (value === '' && name === 'candidate_fullname') {
+            candidateName[0].classList.add('error-message');
+        } else if (this.state.candidate_fullname === '' && name === undefined) {
+            candidateName[0].classList.add('error-message');
+        }
+        if (this.state.candidate_fullname !== '') {
+            candidateName[0].classList.remove('error-message');
+        }
+        // if (candidateName.value !== '') {
+        //     // $('#profiledetails__model--success').css('visibility', 'visible');
+        //     // this.setState({lgShow: true})
+        // }
+    }
+    handleChange = (e, childAttr) => {
+        const { value, name } = e.target;
+        const stateInit = this.state;
+        if (childAttr === undefined) {
+            stateInit[name] = value;
+            this.setState({ ...stateInit });
+        } else {
+            stateInit[name] = childAttr;
+            this.setState({ ...stateInit });
+        }
+        console.log('>>>>>>>>>>>>>>>>>value', value);
+        console.log('>>>>>>>>>>>>>>>>>state', this.state);
+        this.checkValidateForm(name, value);
+    }
+    submitForm = () => {
+        this.checkValidateForm();
+        const errorMessages = document.getElementsByClassName('error-message');
+        if (errorMessages.length > 0) {
+            errorMessages[0].focus();
+        } else if (this.props.candidateId !== null) {
+            this.props.patchProfileDetails(this.state);
+            //this.props.push('/profile');
+        }
+        // console.log(this.props.profileDetails);
+        // console.log(this.state);
+        // console.log(this.state === this.props.profileDtails ? 'ok' : 'no');
     }
     render() {
         return (
@@ -88,8 +147,8 @@ export class ProfileInfo extends Component {
                     <h1 className="profiledetails--title">
                         Candidate Assessment Summary Form
                     </h1>
-                    <ProfileDetailsFirstRound handleChange={this.handleChange} />
-                    <ProfileDetailsSecondRound handleChange={this.handleChange} />
+                    <ProfileDetailsFirstRound handleChange={this.handleChange} {...this.state} />
+                    <ProfileDetailsSecondRound handleChange={this.handleChange} {...this.state} />
                     <FormGroup className="profiledetails__btn">
                         <button onClick={this.submitForm} className="profiledetails__btn--submit">SUBMIT</button>
                         <button className="profiledetails__btn--cancel">CANCEL</button>
@@ -101,10 +160,13 @@ export class ProfileInfo extends Component {
 }
 const mapStateToProps = state => ({
     profileDetails: state.profileDetails.dataProfileDetails,
+    candidateId: state.profile.profileSelectedId,
 });
 
 const mapDispatchToProps = {
     loadProfileDetails,
+    patchProfileDetails,
+    push, // ACTION GUI EPIC GUI API
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileInfo);

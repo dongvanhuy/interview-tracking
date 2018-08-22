@@ -1,5 +1,5 @@
 import { combineEpics } from 'redux-observable';
-import { PROFILEDETAILS_LOAD } from '../../store/actionTypes';
+import { PROFILEDETAILS_LOAD, PROFILEDETAILS_PATCH } from '../../store/actionTypes';
 import { loadProfileDetailsSuccess } from './ProfileDetailsAction';
 
 export const loadProfileDetailsEpic = (action$, store, { loadProfileDetailsService }) =>
@@ -10,11 +10,11 @@ export const loadProfileDetailsEpic = (action$, store, { loadProfileDetailsServi
                 .map(res => loadProfileDetailsSuccess(res))
                 .catch(err => console.log(err));
         });
-const pathProfileDetailsEpic = (action$, store, { pathProfileDetailsService }) =>
-    action$.ofType(PROFILEDETAILS_LOAD)
+export const pathProfileDetailsEpic = (action$, store, { patchProfileDetailsService }) =>
+    action$.ofType(PROFILEDETAILS_PATCH)
         .switchMap((action) => {
             const param = action.payload;
-            return pathProfileDetailsService(param)
+            return patchProfileDetailsService(param)
                 .map(res => loadProfileDetailsSuccess(res))
                 .catch(err => console.log(err));
         });
