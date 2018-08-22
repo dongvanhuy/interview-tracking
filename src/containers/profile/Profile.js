@@ -84,6 +84,7 @@ export class Profile extends Component {
         return (
             <section className="list-candidate-page">
                 <div className="list">
+                
                     <Grid>
                         <Row className="show-grid">
                             <div className="list-table">

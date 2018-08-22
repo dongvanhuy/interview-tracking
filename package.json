@@ -69,6 +69,7 @@
     "react-ga": "^2.5.0",
     "react-i18next": "^7.1.1",
     "react-loader-advanced": "^1.7.1",
+    "react-loader-spinner": "^2.1.0",
     "react-loading": "^2.0.3",
     "react-materialize": "^1.1.2",
     "react-moment": "^0.7.9",
