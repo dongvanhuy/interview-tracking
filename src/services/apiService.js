@@ -49,12 +49,15 @@ export default class ApiService {
   // static loadDataProfileDetails = (data) => Observable.fromPromise(
   //   axios.put(`${API_HOST}/api/interviewees/info/`, data))
 
-  static patchDataProfileDetails = (data) => Observable.fromPromise(
-    axios.patch(`${API_HOST}/api/interviewees/modify/${data.candidate_id}`, data, {
+  static pathDataProfileDetails = (data) => Observable.fromPromise(
+    axios.patch(`${API_HOST}/api/interviewees/mofidy/${data.candidate_id}`, data))
+
+  static loadDataProfileDetails = () => Observable.fromPromise(
+    axios.get(`${API_HOST}/api/interviewees`, {
       data: {},
       headers: {
         'Content-Type': 'application/json'
       }
-    })
-  )
+    }))
 }
+
