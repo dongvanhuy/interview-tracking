@@ -6,7 +6,7 @@ import 'rxjs';
 import rootReducer from '../reducers';
 import rootEpic from '../epics';
 import ajaxSetup from '../ajax';
-import ApiService, { ApiService2, ApiServiceProfileDetails, ApiServiceThisWeek, ApiServiceThisMonth } from '../services/apiService';
+import ApiService from '../services/apiService';
 
 export const history = createHistory();
 
@@ -18,10 +18,10 @@ const middleware = [
     createEpicMiddleware(rootEpic, {
         dependencies: {
             loadDataCandidateService: ApiService.loadDataCandidate,
-            checkUserService: ApiService2.checkUser,
-            loadProfileDetailsService: ApiServiceProfileDetails.loadDataProfileDetails,
-            loadDataProfileThisWeekService: ApiServiceThisWeek.loadDataProfileThisWeek,
-            loadDataProfileThisMonthService: ApiServiceThisMonth.loadDataProfileThisMonth,
+            checkUserService: ApiService.checkUser,
+            loadProfileDetailsService: ApiService.loadDataProfileDetails,
+            loadDataProfileThisWeekService: ApiService.loadDataProfileThisWeek,
+            loadDataProfileThisMonthService: ApiService.loadDataProfileThisMonth,
         },
     }),
 ];
