@@ -1,22 +1,13 @@
 import { connect } from 'react-redux';
-import PropsTypes from 'prop-types';
 import React, { Component } from 'react';
 import { push } from 'react-router-redux';
 import { FormGroup, Grid } from 'react-bootstrap';
-import { loadProfileDetails, patchProfileDetails } from './ProfileDetailsAction';
+import { postProfileDetails } from './ProfileDetailsAction';
 import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
 import { ProfileDetailsSecondRound } from './ProfileDetailsSecondRound';
 
 
 export class ProfileInfo extends Component {
-    static propsTypes = {
-        profileDetails: PropsTypes.objectOf(PropsTypes.object),
-        candidateId: PropsTypes.objectOf(PropsTypes.object),
-    }
-    static defaultProps = {
-        profileDetails: [],
-        candidateId: 1000,
-    }
     constructor(props) {
         super(props);
         this.checkValidateForm = this.checkValidateForm.bind(this);
@@ -57,47 +48,6 @@ export class ProfileInfo extends Component {
             cmt_result_round2: '',
         };
     }
-    componentWillMount() {
-        console.log('id candidate componentWillMount >>', this.props.candidateId);
-        this.props.loadProfileDetails(this.props.candidateId);
-    }
-    componentDidMount() {
-        console.log('id candidate >> componentDidMount', this.props.candidateId);
-        this.timetoLoad = setTimeout(
-            () => this.convertDataFromAPI(),
-            3000,
-        );
-    }
-    convertDataFromAPI() {
-        this.setState({ ...this.props.profileDetails[0] });
-        const techcompetency = document.getElementsByName('tech_competency_round1');
-        const cuturalFitLevelRound1 = document.getElementsByName('cultural_fit_round1');
-        const techcompetency2 = document.getElementsByName('tech_competency_round2');
-        const cuturalFitLevelRound2 = document.getElementsByName('cultural_fit_round2');
-        const businessAcumentlevel = document.getElementsByName('business_acument');
-        const softSkillslevel = document.getElementsByName('soft_skill');
-        const peopleManagementlevel = document.getElementsByName('people_management');
-        const arrayOfData = [techcompetency, cuturalFitLevelRound1,
-            techcompetency2, cuturalFitLevelRound2, businessAcumentlevel,
-            softSkillslevel, peopleManagementlevel];
-        const arrayOfTagsName = ['tech_competency_round1', 'cultural_fit_round1',
-            'tech_competency_round2', 'cultural_fit_round2', 'business_acument',
-            'soft_skill', 'people_management'];
-        for (let i = 0; i < arrayOfData.length; i += 1) {
-            const data = arrayOfData[i];
-            if (this.state[arrayOfTagsName[i]] === 'Limited') {
-                data[0].checked = true;
-            } else if (this.state[arrayOfTagsName[i]] === 'Basic') {
-                data[1].checked = true;
-            } else if (this.state[arrayOfTagsName[i]] === 'Acceptable') {
-                data[2].checked = true;
-            } else if (this.state[arrayOfTagsName[i]] === 'Advanced') {
-                data[3].checked = true;
-            } else if (this.state[arrayOfTagsName[i]] === 'Exceptional') {
-                data[4].checked = true;
-            }
-        }
-    }
     checkValidateForm(name, value) {
         const candidateName = document.getElementsByName('candidate_fullname');
         if (value === '' && name === 'candidate_fullname') {
@@ -108,10 +58,6 @@ export class ProfileInfo extends Component {
         if (this.state.candidate_fullname !== '') {
             candidateName[0].classList.remove('error-message');
         }
-        // if (candidateName.value !== '') {
-        //     // $('#profiledetails__model--success').css('visibility', 'visible');
-        //     // this.setState({lgShow: true})
-        // }
     }
     handleChange = (e, childAttr) => {
         const { value, name } = e.target;
@@ -132,13 +78,9 @@ export class ProfileInfo extends Component {
         const errorMessages = document.getElementsByClassName('error-message');
         if (errorMessages.length > 0) {
             errorMessages[0].focus();
-        } else if (this.props.candidateId !== null) {
-            this.props.patchProfileDetails(this.state);
-            //this.props.push('/profile');
+        } else {
+            this.props.postProfileDetails(this.state);
         }
-        // console.log(this.props.profileDetails);
-        // console.log(this.state);
-        // console.log(this.state === this.props.profileDtails ? 'ok' : 'no');
     }
     render() {
         return (
@@ -158,14 +100,12 @@ export class ProfileInfo extends Component {
         );
     }
 }
+
 const mapStateToProps = state => ({
     profileDetails: state.profileDetails.dataProfileDetails,
-    candidateId: state.profile.profileSelectedId,
 });
-
 const mapDispatchToProps = {
-    loadProfileDetails,
-    patchProfileDetails,
+    postProfileDetails,
     push, // ACTION GUI EPIC GUI API
 };
 

@@ -58,18 +58,17 @@ export class ProfileDetails extends Component {
         };
     }
     componentWillMount() {
-        console.log('id candidate componentWillMount >>', this.props.candidateId);
         this.props.loadProfileDetails(this.props.candidateId);
     }
-    componentDidMount() {
-        console.log('id candidate >> componentDidMount', this.props.candidateId);
-        this.timetoLoad = setTimeout(
-            () => this.convertDataFromAPI(),
-            3000,
-        );
+    componentWillReceiveProps(nextProps) {
+        if (!this.props.profileDetails[0] && nextProps.profileDetails[0]) {
+            console.log('>>>>>>>>>>>>>>>>>>2', 'componentWillReceiveProps');
+            this.setState({ ...nextProps.profileDetails[0] });
+            this.convertDataFromAPI();
+        }
     }
+
     convertDataFromAPI() {
-        this.setState({ ...this.props.profileDetails[0] });
         const techcompetency = document.getElementsByName('tech_competency_round1');
         const cuturalFitLevelRound1 = document.getElementsByName('cultural_fit_round1');
         const techcompetency2 = document.getElementsByName('tech_competency_round2');
@@ -134,7 +133,8 @@ export class ProfileDetails extends Component {
             errorMessages[0].focus();
         } else if (this.props.candidateId !== null) {
             this.props.patchProfileDetails(this.state);
-            //this.props.push('/profile');
+            // console.log(this.state.candidate_id);
+            // this.props.push('/profile');
         }
         // console.log(this.props.profileDetails);
         // console.log(this.state);

@@ -1,9 +1,10 @@
 import { handleActions } from 'redux-actions';
-import { PROFILEDETAILS_LOAD_SUCCESS, PROFILEDETAILS_PATCH } from '../../store/actionTypes';
+import { PROFILEDETAILS_LOAD_SUCCESS, PROFILEDETAILS_PATCH, PROFILEDETAILS_POST } from '../../store/actionTypes';
 
 const initialState = {
     dataProfileDetails: [],
     dataProfilePatch: [],
+    dataProfilePost: [],
 };
 
 const actions = {
@@ -14,6 +15,10 @@ const actions = {
     [PROFILEDETAILS_PATCH]: (state, { payload }) => ({
         ...state,
         dataProfilePatch: payload,
+    }),
+    [PROFILEDETAILS_POST]: (state, { payload }) => ({
+        ...state,
+        dataProfilePost: payload,
     }),
 };
 
