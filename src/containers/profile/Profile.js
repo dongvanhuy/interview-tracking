@@ -38,7 +38,7 @@ export class Profile extends Component {
 
     viewDetailId = (data) => {
         this.props.viewDetailDataId(data);
-        this.props.push('/profile-info');
+        this.props.push('/profile-details');
     }
 
     addProfileDetail = () => {
