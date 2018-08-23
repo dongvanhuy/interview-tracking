@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import logo from '../../../src/assets/images/dxcLogo.svg';
+import {DropdownButton, MenuItem} from 'react-bootstrap';
 
 
 export class Header extends Component {
@@ -16,7 +17,12 @@ export class Header extends Component {
                         <span className="interview-header__title">Interview Tracking</span>
                     </div>
                     <div className="interview-header__info">
-                        <i className="fa fa-user fa-2x" />
+                        <DropdownButton pullRight className="fa fa-user fa-2x">
+                            <MenuItem eventKey="1">Help</MenuItem>
+                            <MenuItem eventKey="2">Settings</MenuItem>
+                            <MenuItem divider />
+                            <MenuItem eventKey="3">Sign out</MenuItem>
+                        </DropdownButton>
                     </div>
                 </section>
             </header>
