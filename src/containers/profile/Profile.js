@@ -87,8 +87,12 @@ export class Profile extends Component {
                     <Grid>
                         <Row className="show-grid">
                             <div className="list-table">
-                                <Col xs={12} sm={12} md={12} lg={12}>
+                                <Col xs={6} sm={6} md={6} lg={6}>
                                     <h2>To Day _ {selectedDate}</h2>
+                                </Col>
+
+                                <Col className="btn-col-top" xs={5} sm={3} md={3} lg={3}>
+                                    <Button className="button-add" onClick={() => this.addProfileDetail()}>ADD</Button>
                                 </Col>
 
                                 <Col xs={12} sm={12} md={12} lg={12}>
@@ -164,7 +168,7 @@ export class Profile extends Component {
                 <div className="btn-list-cadidate">
                     <Grid>
                         <Row>
-                            <Col className="btn-col" xs={12} sm={3} md={3} lg={3}>
+                            <Col className="btn-col-bottom" xs={12} sm={3} md={3} lg={3}>
                                 <Button className="button-add" onClick={() => this.addProfileDetail()}>ADD</Button>
                             </Col>
                         </Row>

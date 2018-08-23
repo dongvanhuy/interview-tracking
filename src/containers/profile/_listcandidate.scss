@@ -49,8 +49,30 @@
 
 .list {
   background: $color-white;
-  .list-table h2 {
-    font-size: 20px;
+  .list-table {
+    h2 {
+      font-size: 20px;
+    }
+   
+    .btn-col-top {
+      padding-top: 20px;
+      padding-bottom: 20px;
+      float: right;
+      .button-add {
+        background: #FFED00;
+        color: #000000; 
+        width: 100%;
+        font-size: 18px;
+        @include tablet {
+          width: 100%;
+        }
+      }
+    
+      .button-add:hover {
+        background: #000000 ;
+        color:#FFED00; 
+      }
+    }
   }
 }
 
@@ -90,7 +112,7 @@
 
 .btn-list-cadidate{
   padding-bottom: 20px;
-  .btn-col {
+  .btn-col-bottom {
     @include tablet {
     float: right;
     }
