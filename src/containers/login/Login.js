@@ -9,8 +9,10 @@ import {
     Button,
 } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import { push } from 'react-router-redux';
 import PropsTypes from 'prop-types';
+import config from '../../config';
 import { isEmpty, validateEmail } from '../../utils/Common';
 import { loginCheck } from './LoginActions';
 
@@ -36,14 +38,24 @@ export class Login extends Component {
       this.props.loginCheck();
   }
 
-  onLogin(e) {
+  onLogin = (e) => {
       e.preventDefault();
-      const result = this.checkValidate();
-      if (result) {
-          if (
-              this.state.email === 'admin@admin.com' &&
-        this.state.password === 'admin'
-          ) {
+      if (!this.checkValidate()) {
+          return false;
+      }
+      //   const url = `${config.apiService.auth}`;
+      //   axios.post(url, {
+      //     saId: this.state.inputSAID,
+      //     password: this.state.password,
+      //     }).then(response => {
+      //         if (response.data.error) {
+      //             console.log('error');
+      //         } else {
+      //             this.props.push('/profile');
+      //         }
+      //     }).catch(err => err);
+      //     return null;
+        if ( this.state.email === 'admin@admin.com' && this.state.password === 'admin') {
               this.setState({
                   success: true,
               });
@@ -56,7 +68,7 @@ export class Login extends Component {
       }
   }
 
-  checkValidate() {
+  checkValidate = () => {
       if (!validateEmail(this.state.email)) {
           this.setState({
               emailError: 'Email invalid',
@@ -70,14 +82,14 @@ export class Login extends Component {
       return true;
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
       const { value, name } = e.target;
       this.setState({
           [name]: value,
       });
   }
 
-  disableButton() {
+  disableButton = () => {
       if (isEmpty(this.state)) {
           return true;
       } else if (isEmpty(this.state.email) || isEmpty(this.state.password)) {
@@ -87,7 +99,6 @@ export class Login extends Component {
   }
 
   render() {
-      console.log(this.state);
       if (this.state.success === true) {
           this.props.push('/profile');
       }
