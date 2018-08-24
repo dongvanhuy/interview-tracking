@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
+import { DropdownButton, MenuItem } from 'react-bootstrap';
 import logo from '../../../src/assets/images/dxcLogo.svg';
-import {DropdownButton, MenuItem} from 'react-bootstrap';
 
 
 export class Header extends Component {
