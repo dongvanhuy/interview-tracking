@@ -9,10 +9,8 @@ import {
     Button,
 } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import { push } from 'react-router-redux';
 import PropsTypes from 'prop-types';
-import config from '../../config';
 import { isEmpty, validateEmail } from '../../utils/Common';
 import { loginCheck } from './LoginActions';
 
@@ -43,29 +41,17 @@ export class Login extends Component {
       if (!this.checkValidate()) {
           return false;
       }
-      //   const url = `${config.apiService.auth}`;
-      //   axios.post(url, {
-      //     saId: this.state.inputSAID,
-      //     password: this.state.password,
-      //     }).then(response => {
-      //         if (response.data.error) {
-      //             console.log('error');
-      //         } else {
-      //             this.props.push('/profile');
-      //         }
-      //     }).catch(err => err);
-      //     return null;
-        if ( this.state.email === 'admin@admin.com' && this.state.password === 'admin') {
-              this.setState({
-                  success: true,
-              });
-          } else {
-              console.log('Sai email hoac mat khau');
-              this.setState({
-                  checkError: 'Email or Password is incorrect !!!',
-              });
-          }
+      if (this.state.email === 'admin@admin.com' && this.state.password === 'admin') {
+          this.setState({
+              success: true,
+          });
+      } else {
+          console.log('Sai email hoac mat khau');
+          this.setState({
+              checkError: 'Email or Password is incorrect !!!',
+          });
       }
+      return null;
   }
 
   checkValidate = () => {
