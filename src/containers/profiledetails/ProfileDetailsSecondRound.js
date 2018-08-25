@@ -5,7 +5,7 @@ export class ProfileDetailsSecondRound extends Component {
     render() {
         return (
             <form>
-                <h2 className="profiledetails__h2--title">2st Round</h2>
+                <h2 className="profile-details__title">2st Round</h2>
                 <Row className="show-grid">
                     <Col xs={12} sm={4} md={4} lg={4}>
                         <ControlLabel>Interviewer(s)'s name</ControlLabel>
@@ -13,7 +13,7 @@ export class ProfileDetailsSecondRound extends Component {
                             <FormControl
                                 componentClass="select"
                                 placeholder="select"
-                                className="profiledetails__select"
+                                className="profile-details__select"
                                 onChange={(e) => this.props.handleChange(e)}
                                 name="jury_round2"
                                 value={this.props.jury_round2}
@@ -39,8 +39,8 @@ export class ProfileDetailsSecondRound extends Component {
                 </Row>
                 <FormGroup>
                     <ControlLabel>Technical Competency</ControlLabel>
-                    <div className="profiledetails__radioGroup">
-                        <label className="profiledetails__radioGroup--item">Limited
+                    <div className="radio-group">
+                        <label className="radio-group__item">Limited
                             <input
                                 type="radio"
                                 name="tech_competency_round2"
@@ -49,7 +49,7 @@ export class ProfileDetailsSecondRound extends Component {
                             />
                             <span className="checkmark" />
                         </label>
-                        <label className="profiledetails__radioGroup--item">Basic
+                        <label className="radio-group__item">Basic
                             <input
                                 type="radio"
                                 name="tech_competency_round2"
@@ -58,7 +58,7 @@ export class ProfileDetailsSecondRound extends Component {
                             />
                             <span className="checkmark" />
                         </label>
-                        <label className="profiledetails__radioGroup--item">Acceptable
+                        <label className="radio-group__item">Acceptable
                             <input
                                 type="radio"
                                 name="tech_competency_round2"
@@ -67,7 +67,7 @@ export class ProfileDetailsSecondRound extends Component {
                             />
                             <span className="checkmark" />
                         </label>
-                        <label className="profiledetails__radioGroup--item">Advanced
+                        <label className="radio-group__item">Advanced
                             <input
                                 type="radio"
                                 name="tech_competency_round2"
@@ -76,7 +76,7 @@ export class ProfileDetailsSecondRound extends Component {
                             />
                             <span className="checkmark" />
                         </label>
-                        <label className="profiledetails__radioGroup--item">Exceptional
+                        <label className="radio-group__item">Exceptional
                             <input
                                 type="radio"
                                 name="tech_competency_round2"
@@ -88,7 +88,7 @@ export class ProfileDetailsSecondRound extends Component {
                     </div>
 
                     <FormGroup>
-                        <span className="profiledetails__comments">Comment:</span>
+                        <span className="profile-details__comments">Comment:</span>
                         <FormControl
                             componentClass="textarea"
                             name="tech_competency_round2_cmt"
@@ -100,8 +100,8 @@ export class ProfileDetailsSecondRound extends Component {
 
                 <FormGroup>
                     <ControlLabel>Cutural Fit</ControlLabel>
-                    <div className="profiledetails__radioGroup">
-                        <label className="profiledetails__radioGroup--item">Limited
+                    <div className="radio-group">
+                        <label className="radio-group__item">Limited
                             <input
                                 type="radio"
                                 value={this.props.cultural_fit_round2 || 'Limited'}
@@ -110,7 +110,7 @@ export class ProfileDetailsSecondRound extends Component {
                             />
                             <span className="checkmark" />
                         </label>
-                        <label className="profiledetails__radioGroup--item">Basic
+                        <label className="radio-group__item">Basic
                             <input
                                 type="radio"
                                 value={this.props.cultural_fit_round2 || 'Basic'}
@@ -119,7 +119,7 @@ export class ProfileDetailsSecondRound extends Component {
                             />
                             <span className="checkmark" />
                         </label>
-                        <label className="profiledetails__radioGroup--item">Acceptable
+                        <label className="radio-group__item">Acceptable
                             <input
                                 type="radio"
                                 value={this.props.cultural_fit_round2 || 'Acceptable'}
@@ -128,7 +128,7 @@ export class ProfileDetailsSecondRound extends Component {
                             />
                             <span className="checkmark" />
                         </label>
-                        <label className="profiledetails__radioGroup--item">Advanced
+                        <label className="radio-group__item">Advanced
                             <input
                                 type="radio"
                                 value={this.props.cultural_fit_round2 || 'Advanced'}
@@ -137,7 +137,7 @@ export class ProfileDetailsSecondRound extends Component {
                             />
                             <span className="checkmark" />
                         </label>
-                        <label className="profiledetails__radioGroup--item">Exceptional
+                        <label className="radio-group__item">Exceptional
                             <input
                                 type="radio"
                                 value={this.props.cultural_fit_round2 || 'Exceptional'}
@@ -148,7 +148,7 @@ export class ProfileDetailsSecondRound extends Component {
                         </label>
                     </div>
                     <FormGroup>
-                        <span className="profiledetails__comments">Comment:</span>
+                        <span className="profile-details__comments">Comment:</span>
                         <FormControl
                             componentClass="textarea"
                             name="cultural_fit_round2_cmt"
@@ -160,8 +160,8 @@ export class ProfileDetailsSecondRound extends Component {
 
                 <FormGroup>
                     <ControlLabel>Bussiness Acument</ControlLabel>
-                    <div className="profiledetails__radioGroup">
-                        <label className="profiledetails__radioGroup--item">Limited
+                    <div className="radio-group">
+                        <label className="radio-group__item">Limited
                             <input
                                 type="radio"
                                 value={this.props.business_acument || 'Limited'}
@@ -170,7 +170,7 @@ export class ProfileDetailsSecondRound extends Component {
                             />
                             <span className="checkmark" />
                         </label>
-                        <label className="profiledetails__radioGroup--item">Basic
+                        <label className="radio-group__item">Basic
                             <input
                                 type="radio"
                                 value={this.props.business_acument || 'Basic'}
@@ -179,7 +179,7 @@ export class ProfileDetailsSecondRound extends Component {
                             />
                             <span className="checkmark" />
                         </label>
-                        <label className="profiledetails__radioGroup--item">Acceptable
+                        <label className="radio-group__item">Acceptable
                             <input
                                 type="radio"
                                 value={this.props.business_acument || 'Acceptable'}
@@ -188,7 +188,7 @@ export class ProfileDetailsSecondRound extends Component {
                             />
                             <span className="checkmark" />
                         </label>
-                        <label className="profiledetails__radioGroup--item">Advanced
+                        <label className="radio-group__item">Advanced
                             <input
                                 type="radio"
                                 value={this.props.business_acument || 'Advanced'}
@@ -197,7 +197,7 @@ export class ProfileDetailsSecondRound extends Component {
                             />
                             <span className="checkmark" />
                         </label>
-                        <label className="profiledetails__radioGroup--item">Exceptional
+                        <label className="radio-group__item">Exceptional
                             <input
                                 type="radio"
                                 value={this.props.business_acument || 'Exceptional'}
@@ -208,7 +208,7 @@ export class ProfileDetailsSecondRound extends Component {
                         </label>
                     </div>
                     <FormGroup>
-                        <span className="profiledetails__comments">Comment:</span>
+                        <span className="profile-details__comments">Comment:</span>
                         <FormControl
                             componentClass="textarea"
                             name="business_acument_cmt"
@@ -220,8 +220,8 @@ export class ProfileDetailsSecondRound extends Component {
 
                 <FormGroup>
                     <ControlLabel>Soft skills</ControlLabel>
-                    <div className="profiledetails__radioGroup">
-                        <label className="profiledetails__radioGroup--item">Limited
+                    <div className="radio-Group">
+                        <label className="radio-group__item">Limited
                             <input
                                 type="radio"
                                 value={this.props.soft_skill || 'Limited'}
@@ -230,7 +230,7 @@ export class ProfileDetailsSecondRound extends Component {
                             />
                             <span className="checkmark" />
                         </label>
-                        <label className="profiledetails__radioGroup--item">Basic
+                        <label className="radio-group__item">Basic
                             <input
                                 type="radio"
                                 value={this.props.soft_skill || 'Basic'}
@@ -239,7 +239,7 @@ export class ProfileDetailsSecondRound extends Component {
                             />
                             <span className="checkmark" />
                         </label>
-                        <label className="profiledetails__radioGroup--item">Acceptable
+                        <label className="radio-group__item">Acceptable
                             <input
                                 type="radio"
                                 value={this.props.soft_skill || 'Acceptable'}
@@ -248,7 +248,7 @@ export class ProfileDetailsSecondRound extends Component {
                             />
                             <span className="checkmark" />
                         </label>
-                        <label className="profiledetails__radioGroup--item">Advanced
+                        <label className="radio-group__item">Advanced
                             <input
                                 type="radio"
                                 value={this.props.soft_skill || 'Advanced'}
@@ -257,7 +257,7 @@ export class ProfileDetailsSecondRound extends Component {
                             />
                             <span className="checkmark" />
                         </label>
-                        <label className="profiledetails__radioGroup--item">Exceptional
+                        <label className="radio-group__item">Exceptional
                             <input
                                 type="radio"
                                 value={this.props.soft_skill || 'Exceptional'}
@@ -268,7 +268,7 @@ export class ProfileDetailsSecondRound extends Component {
                         </label>
                     </div>
                     <FormGroup>
-                        <span className="profiledetails__comments">Comment:</span>
+                        <span className="profile-details__comments">Comment:</span>
                         <FormControl
                             componentClass="textarea"
                             name="soft_skill_cmt"
@@ -280,8 +280,8 @@ export class ProfileDetailsSecondRound extends Component {
 
                 <FormGroup>
                     <ControlLabel>People Management</ControlLabel>
-                    <div className="profiledetails__radioGroup">
-                        <label className="profiledetails__radioGroup--item">Limited
+                    <div className="radio-group">
+                        <label className="radio-group__item">Limited
                             <input
                                 type="radio"
                                 value={this.props.people_management || 'Limited'}
@@ -290,7 +290,7 @@ export class ProfileDetailsSecondRound extends Component {
                             />
                             <span className="checkmark" />
                         </label>
-                        <label className="profiledetails__radioGroup--item">Basic
+                        <label className="radio-group__item">Basic
                             <input
                                 type="radio"
                                 value={this.props.people_management || 'Basic'}
@@ -299,7 +299,7 @@ export class ProfileDetailsSecondRound extends Component {
                             />
                             <span className="checkmark" />
                         </label>
-                        <label className="profiledetails__radioGroup--item">Acceptable
+                        <label className="radio-group__item">Acceptable
                             <input
                                 type="radio"
                                 value={this.props.people_management || 'Acceptable'}
@@ -308,7 +308,7 @@ export class ProfileDetailsSecondRound extends Component {
                             />
                             <span className="checkmark" />
                         </label>
-                        <label className="profiledetails__radioGroup--item">Advanced
+                        <label className="radio-group__item">Advanced
                             <input
                                 type="radio"
                                 value={this.props.people_management || 'Advanced'}
@@ -317,7 +317,7 @@ export class ProfileDetailsSecondRound extends Component {
                             />
                             <span className="checkmark" />
                         </label>
-                        <label className="profiledetails__radioGroup--item">Exceptional
+                        <label className="radio-group__item">Exceptional
                             <input
                                 type="radio"
                                 value={this.props.people_management || 'Exceptional'}
@@ -328,7 +328,7 @@ export class ProfileDetailsSecondRound extends Component {
                         </label>
                     </div>
                     <FormGroup>
-                        <span className="profiledetails__comments">Comment:</span>
+                        <span className="profile-details__comments">Comment:</span>
                         <FormControl
                             componentClass="textarea"
                             name="people_management_cmt"
@@ -357,7 +357,7 @@ export class ProfileDetailsSecondRound extends Component {
                             <FormControl
                                 componentClass="select"
                                 placeholder="select"
-                                className="profiledetails__select"
+                                className="profile-details__select"
                                 name="title_round2"
                                 onChange={(e) => this.props.handleChange(e)}
                                 value={this.props.title_round2}
@@ -375,7 +375,7 @@ export class ProfileDetailsSecondRound extends Component {
                             <FormControl
                                 componentClass="select"
                                 placeholder="select"
-                                className="profiledetails__select"
+                                className="profile-details__select"
                                 name="round2_status"
                                 value={this.props.round2_status}
                                 onChange={(e) => this.props.handleChange(e)}
@@ -389,7 +389,7 @@ export class ProfileDetailsSecondRound extends Component {
                     </Col>
                 </Row>
                 <FormGroup>
-                    <span className="profiledetails__comments">Comment:</span>
+                    <span className="profile-details__comments">Comment:</span>
                     <FormControl
                         componentClass="textarea"
                         name="cmt_result_round2"

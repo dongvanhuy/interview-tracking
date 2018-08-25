@@ -47,7 +47,7 @@ export class Profile extends Component {
     }
 
     render() {
-        const selectedDate = this.state.startDate.format('LLL');
+        // const selectedDate = this.state.startDate.format('LLL');
 
         const rows = this.props.profile.map((item, index) =>
             (
@@ -58,6 +58,7 @@ export class Profile extends Component {
                     <td>{item.recruiter}</td>
                     <td>{item.position_apply}</td>
                     <td>{item.round1_status}</td>
+                    <td className="text-center"><button type="button" className="btn btn-default" onClick={() => this.viewDetailId(item.candidate_id)}><i className="fa fa-pencil" /> Edit</button></td>
                 </tr>));
 
         const rowsthisweek = this.props.profilethisweek.map((item, index) =>
@@ -69,6 +70,7 @@ export class Profile extends Component {
                     <td>{item.recruiter}</td>
                     <td>{item.position_apply}</td>
                     <td>{item.round1_status}</td>
+                    <td className="text-center"><button type="button" className="btn btn-default" onClick={() => this.viewDetailId(item.candidate_id)}><i className="fa fa-pencil" /> Edit</button></td>
                 </tr>));
 
         const rowsthismonth = this.props.profilethismonth.map((item, index) =>
@@ -80,6 +82,7 @@ export class Profile extends Component {
                     <td>{item.recruiter}</td>
                     <td>{item.position_apply}</td>
                     <td>{item.round1_status}</td>
+                    <td className="text-center"><button type="button" className="btn btn-default" onClick={() => this.viewDetailId(item.candidate_id)}><i className="fa fa-pencil" /> Edit</button></td>
                 </tr>));
 
         return (
@@ -89,7 +92,7 @@ export class Profile extends Component {
                         <Row className="show-grid">
                             <div className="list-table">
                                 <Col xs={6} sm={6} md={6} lg={6}>
-                                    <h2>To Day _ {selectedDate}</h2>
+                                    <h2>Today</h2>
                                 </Col>
 
                                 <Col className="btn-col-top" xs={5} sm={3} md={3} lg={3}>
@@ -106,6 +109,7 @@ export class Profile extends Component {
                                                 <th>Recruiter</th>
                                                 <th>Skill</th>
                                                 <th>Status</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -117,7 +121,7 @@ export class Profile extends Component {
 
                             <div className="list-table">
                                 <Col xs={12} sm={12} md={12} lg={12}>
-                                    <h2>This Week</h2>
+                                    <h2>This week</h2>
                                 </Col>
 
                                 <Col xs={12} sm={12} md={12} lg={12}>
@@ -130,6 +134,7 @@ export class Profile extends Component {
                                                 <th>Recruiter</th>
                                                 <th>Skill</th>
                                                 <th>Status</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -141,7 +146,7 @@ export class Profile extends Component {
 
                             <div className="list-table">
                                 <Col xs={12} sm={12} md={12} lg={12}>
-                                    <h2>This Month</h2>
+                                    <h2>This month</h2>
                                 </Col>
 
                                 <Col xs={12} sm={12} md={12} lg={12}>
@@ -154,6 +159,7 @@ export class Profile extends Component {
                                                 <th>Recruiter</th>
                                                 <th>Skill</th>
                                                 <th>Status</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>

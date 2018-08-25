@@ -32,6 +32,9 @@ body {
 }
 
 .interview-header {
+  display: flex;
+  align-items: center;
+  height: 100px;
   padding: 20px 0;
   border-bottom: 1px solid $color-black;
   background-color: $color-white;
@@ -46,23 +49,41 @@ body {
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
+    margin: 0;
+    width: 100%;
   }
 
   &__logo {
-    display: flex;
-    flex: 1 1;
-    align-items: center;
+    color: $color-black;
+
+    &:hover {
+      text-decoration: none;
+      color: $color-black;
+    }
 
     img {
-      width: 100px;
+      width: 24%;
       height: 100%;
+      @include tablet {
+        width: 100px;
+      }
+      
     }
   }
 
+  &__info {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+  }
+
   &__title {
-    font-family: 'GTWalsheimProBold', Arial, sans-serif; 
-    font-size: 30px;
+    font-family: 'GTWalsheimProBold', Arial, sans-serif;
+    font-size: 15px;
     margin-left: 20px;
+    @include tablet {
+      font-size: 30px;
+    }
   }
 }
 

@@ -62,7 +62,6 @@ export class ProfileDetails extends Component {
     }
     componentWillReceiveProps(nextProps) {
         if (!this.props.profileDetails[0] && nextProps.profileDetails[0]) {
-            console.log('>>>>>>>>>>>>>>>>>>2', 'componentWillReceiveProps');
             this.setState({ ...nextProps.profileDetails[0] });
             this.convertDataFromAPI();
         }
@@ -107,10 +106,6 @@ export class ProfileDetails extends Component {
         if (this.state.candidate_fullname !== '') {
             candidateName[0].classList.remove('error-message');
         }
-        // if (candidateName.value !== '') {
-        //     // $('#profiledetails__model--success').css('visibility', 'visible');
-        //     // this.setState({lgShow: true})
-        // }
     }
     handleChange = (e, childAttr) => {
         const { value, name } = e.target;
@@ -122,8 +117,6 @@ export class ProfileDetails extends Component {
             stateInit[name] = childAttr;
             this.setState({ ...stateInit });
         }
-        console.log('>>>>>>>>>>>>>>>>>value', value);
-        console.log('>>>>>>>>>>>>>>>>>state', this.state);
         this.checkValidateForm(name, value);
     }
     submitForm = () => {
@@ -133,25 +126,17 @@ export class ProfileDetails extends Component {
             errorMessages[0].focus();
         } else if (this.props.candidateId !== null) {
             this.props.patchProfileDetails(this.state);
-            // console.log(this.state.candidate_id);
-            // this.props.push('/profile');
         }
-        // console.log(this.props.profileDetails);
-        // console.log(this.state);
-        // console.log(this.state === this.props.profileDtails ? 'ok' : 'no');
     }
     render() {
         return (
-            <section className="profiledetails">
+            <section className="profile-details">
                 <Grid>
-                    <h1 className="profiledetails--title">
-                        Candidate Assessment Summary Form
-                    </h1>
                     <ProfileDetailsFirstRound handleChange={this.handleChange} {...this.state} />
                     <ProfileDetailsSecondRound handleChange={this.handleChange} {...this.state} />
-                    <FormGroup className="profiledetails__btn">
-                        <button onClick={this.submitForm} className="profiledetails__btn--submit">SUBMIT</button>
-                        <button className="profiledetails__btn--cancel">CANCEL</button>
+                    <FormGroup className="profile-details__btn">
+                        <button onClick={this.submitForm} className="profile-details__submit">SUBMIT</button>
+                        <button className="profile-details__cancel">CANCEL</button>
                     </FormGroup>
                 </Grid>
             </section>

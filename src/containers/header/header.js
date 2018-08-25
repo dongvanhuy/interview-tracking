@@ -12,10 +12,10 @@ export class Header extends Component {
         return (
             <header className="interview-header">
                 <section className="container interview-header__content">
-                    <div className="interview-header__logo">
+                    <a href="" className="interview-header__logo" onClick={() => this.props.push('/profile')}>
                         <img src={logo} alt="logo" />
                         <span className="interview-header__title">Interview Tracking</span>
-                    </div>
+                    </a>
                     <div className="interview-header__info">
                         <DropdownButton pullRight className="fa fa-user fa-2x">
                             <MenuItem eventKey="1">Help</MenuItem>
