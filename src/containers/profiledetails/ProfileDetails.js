@@ -119,7 +119,8 @@ export class ProfileDetails extends Component {
         }
         this.checkValidateForm(name, value);
     }
-    submitForm = () => {
+    submitForm = (e) => {
+        e.preventDefault();
         this.checkValidateForm();
         const errorMessages = document.getElementsByClassName('error-message');
         if (errorMessages.length > 0) {
@@ -130,16 +131,16 @@ export class ProfileDetails extends Component {
     }
     render() {
         return (
-            <section className="profile-details">
+            <form className="profile-details" onSubmit={(e) => this.submitForm(e)}>
                 <Grid>
                     <ProfileDetailsFirstRound handleChange={this.handleChange} {...this.state} />
                     <ProfileDetailsSecondRound handleChange={this.handleChange} {...this.state} />
                     <FormGroup className="profile-details__btn">
-                        <button onClick={this.submitForm} className="profile-details__submit">SUBMIT</button>
-                        <button className="profile-details__cancel">CANCEL</button>
+                        <button type="button" className="profile-details__cancel" onClick={() => this.props.push('/profile')}>Cancel</button>
+                        <button type="submit" className="profile-details__submit">Submit</button>
                     </FormGroup>
                 </Grid>
-            </section>
+            </form>
         );
     }
 }

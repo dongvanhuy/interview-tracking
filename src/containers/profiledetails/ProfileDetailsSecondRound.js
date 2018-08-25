@@ -4,7 +4,7 @@ import { FormGroup, FormControl, ControlLabel, Row, Col } from 'react-bootstrap'
 export class ProfileDetailsSecondRound extends Component {
     render() {
         return (
-            <form>
+            <React.Fragment>
                 <h2 className="profile-details__title">2st Round</h2>
                 <Row className="show-grid">
                     <Col xs={12} sm={4} md={4} lg={4}>
@@ -397,7 +397,7 @@ export class ProfileDetailsSecondRound extends Component {
                         value={this.props.cmt_result_round2}
                     />
                 </FormGroup>
-            </form>
+            </React.Fragment>
         );
     }
 }

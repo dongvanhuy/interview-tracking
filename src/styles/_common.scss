@@ -22,6 +22,12 @@ body {
   height: 100vh;
 }
 
+button {
+  &:active, &:focus {
+    outline: none;
+  }
+}
+
 .root {
   height: 100%;
 }
@@ -75,6 +81,11 @@ body {
     display: flex;
     flex: 1;
     justify-content: flex-end;
+    .user-name{
+      font-size: 20px;
+      padding: 5px;
+      border: none;
+    }
   }
 
   &__title {

@@ -69,11 +69,10 @@ export class ProfileInfo extends Component {
             stateInit[name] = childAttr;
             this.setState({ ...stateInit });
         }
-        console.log('>>>>>>>>>>>>>>>>>value', value);
-        console.log('>>>>>>>>>>>>>>>>>state', this.state);
         this.checkValidateForm(name, value);
     }
-    submitForm = () => {
+    submitForm = (e) => {
+        e.preventDefault();
         this.checkValidateForm();
         const errorMessages = document.getElementsByClassName('error-message');
         if (errorMessages.length > 0) {
@@ -84,19 +83,16 @@ export class ProfileInfo extends Component {
     }
     render() {
         return (
-            <section className="profiledetails">
+            <form className="profile-details" onSubmit={this.submitForm}>
                 <Grid>
-                    <h1 className="profiledetails--title">
-                        Candidate Assessment Summary Form
-                    </h1>
                     <ProfileDetailsFirstRound handleChange={this.handleChange} {...this.state} />
                     <ProfileDetailsSecondRound handleChange={this.handleChange} {...this.state} />
-                    <FormGroup className="profiledetails__btn">
-                        <button onClick={this.submitForm} className="profiledetails__btn--submit">SUBMIT</button>
-                        <button className="profiledetails__btn--cancel">CANCEL</button>
+                    <FormGroup className="profile-details__btn">
+                        <button type="button" className="profile-details__cancel" onClick={() => this.props.push('/profile')}>Cancel</button>
+                        <button type="submit" className="profile-details__submit">Add</button>
                     </FormGroup>
                 </Grid>
-            </section>
+            </form>
         );
     }
 }

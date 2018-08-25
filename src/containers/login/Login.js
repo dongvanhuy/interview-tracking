@@ -44,11 +44,12 @@ export class Login extends Component {
                 this.state.email === 'admin@admin.com' &&
                 this.state.password === 'admin'
             ) {
+                sessionStorage.setItem('userName', 'admin');
                 this.setState({
                     success: true,
                 });
             } else {
-                console.log('Sai email hoac mat khau');
+                sessionStorage.clear();
                 this.setState({
                     checkError: 'Email or Password is incorrect !!!',
                 });

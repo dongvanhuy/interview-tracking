@@ -2,11 +2,31 @@
 import React, { Component } from 'react';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
-import { DropdownButton, MenuItem } from 'react-bootstrap';
+import { DropdownButton, MenuItem, ButtonToolbar } from 'react-bootstrap';
 import logo from '../../../src/assets/images/dxcLogo.svg';
 
 
 export class Header extends Component {
+    buttonsInstance = () => {
+        const Buttons = ['Hi,'];
+        return <ButtonToolbar>{Buttons.map(this.renderDropdownButton)}</ButtonToolbar>;
+    }
+
+    renderDropdownButton = (title, i) => (
+        <DropdownButton
+            title={`${title} ${sessionStorage.getItem('userName')}`}
+            key={i}
+            id={`dropdown-basic-${i}`}
+            pullRight
+            className="user-name"
+        >
+            <MenuItem eventKey="1">Help</MenuItem>
+            <MenuItem eventKey="2">Settings</MenuItem>
+            <MenuItem divider />
+            <MenuItem eventKey="3">Sign out</MenuItem>
+        </DropdownButton>
+    );
+
     render() {
         if (this.props.currentRoute === '/') return null; // no display in login page
         return (
@@ -17,12 +37,7 @@ export class Header extends Component {
                         <span className="interview-header__title">Interview Tracking</span>
                     </a>
                     <div className="interview-header__info">
-                        <DropdownButton pullRight className="fa fa-user fa-2x">
-                            <MenuItem eventKey="1">Help</MenuItem>
-                            <MenuItem eventKey="2">Settings</MenuItem>
-                            <MenuItem divider />
-                            <MenuItem eventKey="3">Sign out</MenuItem>
-                        </DropdownButton>
+                        {this.buttonsInstance()}
                     </div>
                 </section>
             </header>

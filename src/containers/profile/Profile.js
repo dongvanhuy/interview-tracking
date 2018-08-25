@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropsTypes from 'prop-types';
+import FontAwesomeIcon from 'react-fontawesome';
 import {
     Table,
     Grid,
@@ -51,9 +52,9 @@ export class Profile extends Component {
 
         const rows = this.props.profile.map((item, index) =>
             (
-                <tr key={uid()} onClick={() => this.viewDetailId(item.candidate_id)}>
+                <tr key={uid()}>
                     <td>{index + 1}</td>
-                    <td>{item.date_round1}</td>
+                    <td>{moment(item.date_round1).format('DD-MM-YYYY')}</td>
                     <td>{item.candidate_fullname}</td>
                     <td>{item.recruiter}</td>
                     <td>{item.position_apply}</td>
@@ -63,9 +64,9 @@ export class Profile extends Component {
 
         const rowsthisweek = this.props.profilethisweek.map((item, index) =>
             (
-                <tr key={uid()} onClick={() => this.viewDetailId(item.candidate_id)}>
+                <tr key={uid()}>
                     <td>{index + 1}</td>
-                    <td>{item.date_round1}</td>
+                    <td>{moment(item.date_round1).format('DD-MM-YYYY')}</td>
                     <td>{item.candidate_fullname}</td>
                     <td>{item.recruiter}</td>
                     <td>{item.position_apply}</td>
@@ -75,9 +76,9 @@ export class Profile extends Component {
 
         const rowsthismonth = this.props.profilethismonth.map((item, index) =>
             (
-                <tr key={uid()} onClick={() => this.viewDetailId(item.candidate_id)}>
+                <tr key={uid()}>
                     <td>{index + 1}</td>
-                    <td>{item.date_round1}</td>
+                    <td>{moment(item.date_round1).format('DD-MM-YYYY')}</td>
                     <td>{item.candidate_fullname}</td>
                     <td>{item.recruiter}</td>
                     <td>{item.position_apply}</td>
@@ -92,13 +93,8 @@ export class Profile extends Component {
                         <Row className="show-grid">
                             <div className="list-table">
                                 <Col xs={6} sm={6} md={6} lg={6}>
-                                    <h2>Today</h2>
+                                    <h2 className="list-table__title">Today</h2>
                                 </Col>
-
-                                <Col className="btn-col-top" xs={5} sm={3} md={3} lg={3}>
-                                    <Button className="button-add" onClick={() => this.addProfileDetail()}>ADD</Button>
-                                </Col>
-
                                 <Col xs={12} sm={12} md={12} lg={12}>
                                     <Table striped bordered condensed hover responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
                                         <thead>
@@ -121,7 +117,7 @@ export class Profile extends Component {
 
                             <div className="list-table">
                                 <Col xs={12} sm={12} md={12} lg={12}>
-                                    <h2>This week</h2>
+                                    <h2 className="list-table__title">This week</h2>
                                 </Col>
 
                                 <Col xs={12} sm={12} md={12} lg={12}>
@@ -146,7 +142,7 @@ export class Profile extends Component {
 
                             <div className="list-table">
                                 <Col xs={12} sm={12} md={12} lg={12}>
-                                    <h2>This month</h2>
+                                    <h2 className="list-table__title">This month</h2>
                                 </Col>
 
                                 <Col xs={12} sm={12} md={12} lg={12}>
@@ -171,18 +167,11 @@ export class Profile extends Component {
                         </Row>
                     </Grid>
                 </div>
-
-                <div className="btn-list-cadidate">
-                    <Grid>
-                        <Row>
-                            <Col className="btn-col-bottom" xs={12} sm={3} md={3} lg={3}>
-                                <Button className="button-add" onClick={() => this.addProfileDetail()}>ADD</Button>
-                            </Col>
-                        </Row>
-                    </Grid>
-                </div>
-
-
+                <Button title="Add candidate" className="add-cadidate-btn" onClick={() => this.addProfileDetail()}><FontAwesomeIcon
+                    name="plus"
+                    size="2x"
+                />
+                </Button>
             </section>
         );
     }

@@ -66,6 +66,7 @@
     "react-dev-utils": "^3.0.2",
     "react-dom": "^16.2.0",
     "react-error-overlay": "^1.0.9",
+    "react-fontawesome": "^1.6.1",
     "react-ga": "^2.5.0",
     "react-i18next": "^7.1.1",
     "react-loader-advanced": "^1.7.1",

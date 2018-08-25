@@ -4,7 +4,7 @@ import { FormGroup, FormControl, ControlLabel, Row, Col } from 'react-bootstrap'
 export class ProfileDetailsFirstRound extends Component {
     render() {
         return (
-            <form>
+            <React.Fragment>
                 <Row className="show-grid">
                     <Col xs={12} sm={6} md={6} lg={6}>
                         <h2 className="profile-details__title">Candidate Info</h2>
@@ -304,7 +304,7 @@ export class ProfileDetailsFirstRound extends Component {
                         onChange={(e) => this.props.handleChange(e)}
                     />
                 </FormGroup>
-            </form>
+            </React.Fragment>
         );
     }
 }
