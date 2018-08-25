@@ -12,17 +12,18 @@ import {
 import moment from 'moment';
 import { push } from 'react-router-redux';
 import uid from 'uuid';
+import loading from '../../assets/images/loading.svg';
 import { loadProfile, viewDetailDataId, addProfile, loadProfileThisWeek, loadProfileThisMonth } from './ProfileAction';
 
 export class Profile extends Component {
     static propsTypes = {
-        profile: PropsTypes.arrayOf(PropsTypes.object),
+        profileToday: PropsTypes.arrayOf(PropsTypes.object),
         profilethisweek: PropsTypes.arrayOf(PropsTypes.object),
         profilethismonth: PropsTypes.arrayOf(PropsTypes.object),
     }
 
     static defaultProps = {
-        profile: [],
+        profileToday: [],
         profilethisweek: [],
         profilethismonth: [],
     }
@@ -43,6 +44,27 @@ export class Profile extends Component {
         });
     }
 
+    callLoading = () => (
+        <div className="loading-block">
+            <Table bordered responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Time</th>
+                        <th>Name</th>
+                        <th>Recruiter</th>
+                        <th>Skill</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </Table>
+            <div className="loading-block__spinner">
+                <img src={loading} alt="loading" />
+            </div>
+        </div>
+    )
+
     addProfileDetail = () => {
         this.props.addProfile();
         this.props.push('/profile-info');
@@ -50,8 +72,10 @@ export class Profile extends Component {
 
     render() {
         // const selectedDate = this.state.startDate.format('LLL');
+        const { profileToday, profilethisweek, profilethismonth } = this.props;
+        console.log('profileToday>>>', profileToday.length);
 
-        const rows = this.props.profile.map((item, index) =>
+        const rows = profileToday.map((item, index) =>
             (
                 <tr key={uid()}>
                     <td>{index + 1}</td>
@@ -63,7 +87,7 @@ export class Profile extends Component {
                     <td className="text-center"><button type="button" className="btn btn-default" onClick={() => this.viewDetailId(item.candidate_id)}><i className="fa fa-pencil" /> Edit</button></td>
                 </tr>));
 
-        const rowsthisweek = this.props.profilethisweek.map((item, index) =>
+        const rowsthisweek = profilethisweek.map((item, index) =>
             (
                 <tr key={uid()}>
                     <td>{index + 1}</td>
@@ -75,7 +99,7 @@ export class Profile extends Component {
                     <td className="text-center"><button type="button" className="btn btn-default" onClick={() => this.viewDetailId(item.candidate_id)}><i className="fa fa-pencil" /> Edit</button></td>
                 </tr>));
 
-        const rowsthismonth = this.props.profilethismonth.map((item, index) =>
+        const rowsthismonth = profilethismonth.map((item, index) =>
             (
                 <tr key={uid()}>
                     <td>{index + 1}</td>
@@ -97,22 +121,25 @@ export class Profile extends Component {
                                     <h2 className="list-table__title">Today</h2>
                                 </Col>
                                 <Col xs={12} sm={12} md={12} lg={12}>
-                                    <Table striped bordered condensed hover responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Time</th>
-                                                <th>Name</th>
-                                                <th>Recruiter</th>
-                                                <th>Skill</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {rows}
-                                        </tbody>
-                                    </Table>
+                                    { profileToday.length < 1 &&
+                                        this.callLoading()
+                                    }
+                                    { profileToday.length >= 1 &&
+                                        <Table striped bordered condensed hover responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Time</th>
+                                                    <th>Name</th>
+                                                    <th>Recruiter</th>
+                                                    <th>Skill</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>{ rows }</tbody>
+                                        </Table>
+                                    }
                                 </Col>
                             </div>
 
@@ -122,22 +149,27 @@ export class Profile extends Component {
                                 </Col>
 
                                 <Col xs={12} sm={12} md={12} lg={12}>
-                                    <Table striped bordered condensed hover responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Time</th>
-                                                <th>Name</th>
-                                                <th>Recruiter</th>
-                                                <th>Skill</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {rowsthisweek}
-                                        </tbody>
-                                    </Table>
+                                    { profilethisweek.length < 1 &&
+                                        this.callLoading()
+                                    }
+                                    { profilethisweek.length > 1 &&
+                                        <Table striped bordered condensed hover responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Time</th>
+                                                    <th>Name</th>
+                                                    <th>Recruiter</th>
+                                                    <th>Skill</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {rowsthisweek}
+                                            </tbody>
+                                        </Table>
+                                    }
                                 </Col>
                             </div>
 
@@ -147,22 +179,27 @@ export class Profile extends Component {
                                 </Col>
 
                                 <Col xs={12} sm={12} md={12} lg={12}>
-                                    <Table striped bordered condensed hover responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Time</th>
-                                                <th>Name</th>
-                                                <th>Recruiter</th>
-                                                <th>Skill</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {rowsthismonth}
-                                        </tbody>
-                                    </Table>
+                                    { profilethisweek.length < 1 &&
+                                        this.callLoading()
+                                    }
+                                    { profilethismonth.length > 1 &&
+                                        <Table striped bordered condensed hover responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Time</th>
+                                                    <th>Name</th>
+                                                    <th>Recruiter</th>
+                                                    <th>Skill</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {rowsthismonth}
+                                            </tbody>
+                                        </Table>
+                                    }
                                 </Col>
                             </div>
                         </Row>
@@ -179,7 +216,7 @@ export class Profile extends Component {
 }
 
 const mapStateToProps = state => ({
-    profile: state.profile.dataProfile,
+    profileToday: state.profile.dataProfile,
     profilethisweek: state.profile.dataProfileThisWeek,
     profilethismonth: state.profile.dataProfileThisMonth,
 });

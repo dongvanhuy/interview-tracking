@@ -6,6 +6,7 @@ import { FormGroup, Grid } from 'react-bootstrap';
 import { loadProfileDetails, patchProfileDetails } from './ProfileDetailsAction';
 import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
 import { ProfileDetailsSecondRound } from './ProfileDetailsSecondRound';
+import LoadingInProgress from '../common/loadingPage/loadingInProgress';
 
 
 export class ProfileDetails extends Component {
@@ -131,16 +132,19 @@ export class ProfileDetails extends Component {
     }
     render() {
         return (
-            <form className="profile-details" onSubmit={(e) => this.submitForm(e)}>
-                <Grid>
-                    <ProfileDetailsFirstRound handleChange={this.handleChange} {...this.state} />
-                    <ProfileDetailsSecondRound handleChange={this.handleChange} {...this.state} />
-                    <FormGroup className="profile-details__btn">
-                        <button type="button" className="profile-details__cancel" onClick={() => this.props.push('/profile')}>Cancel</button>
-                        <button type="submit" className="profile-details__submit">Submit</button>
-                    </FormGroup>
-                </Grid>
-            </form>
+            <React.Fragment>
+                <LoadingInProgress show={this.props.profileDetails.length < 1} />
+                <form className="profile-details" onSubmit={(e) => this.submitForm(e)}>
+                    <Grid>
+                        <ProfileDetailsFirstRound handleChange={this.handleChange} {...this.state} />
+                        <ProfileDetailsSecondRound handleChange={this.handleChange} {...this.state} />
+                        <FormGroup className="profile-details__btn">
+                            <button type="button" className="profile-details__cancel" onClick={() => this.props.push('/profile')}>Cancel</button>
+                            <button type="submit" className="profile-details__submit">Submit</button>
+                        </FormGroup>
+                    </Grid>
+                </form>
+            </React.Fragment>
         );
     }
 }
