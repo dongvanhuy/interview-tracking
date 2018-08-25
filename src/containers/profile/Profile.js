@@ -27,19 +27,20 @@ export class Profile extends Component {
         profilethismonth: [],
     }
 
-    state = {
-        startDate: moment(),
-    };
-
     componentWillMount() {
         this.props.loadProfile();
         this.props.loadProfileThisWeek();
         this.props.loadProfileThisMonth();
     }
 
-    viewDetailId = (data) => {
-        this.props.viewDetailDataId(data);
-        this.props.push('/profile-details');
+    viewDetailId = (id) => {
+        this.props.viewDetailDataId(id);
+        this.props.push({
+            pathname: '/profile-details',
+            state: {
+                candidateId: id,
+            },
+        });
     }
 
     addProfileDetail = () => {

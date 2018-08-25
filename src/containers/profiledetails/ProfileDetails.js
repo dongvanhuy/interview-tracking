@@ -146,7 +146,7 @@ export class ProfileDetails extends Component {
 }
 const mapStateToProps = state => ({
     profileDetails: state.profileDetails.dataProfileDetails,
-    candidateId: state.profile.profileSelectedId,
+    candidateId: state.router.location.state ? state.router.location.state.candidateId : state.profile.profileSelectedId,
 });
 
 const mapDispatchToProps = {
