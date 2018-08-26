@@ -28,6 +28,7 @@
       text-align: center;
       width: 100%;
       height: 100px;
+      background-color: $bg-gray;
     }
     img {
       width: 30px;
@@ -78,6 +79,7 @@
   width: 100%;
   height: 100%;
   overflow-x:auto;
+  margin-bottom: 0;
   thead {
     background-color: $color-black;
     color: $color-yellow;
