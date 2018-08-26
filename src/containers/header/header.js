@@ -4,6 +4,7 @@ import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { DropdownButton, MenuItem, ButtonToolbar } from 'react-bootstrap';
 import logo from '../../../src/assets/images/dxcLogo.svg';
+import { authContext } from '../../adalConfig';
 
 
 export class Header extends Component {
@@ -14,7 +15,7 @@ export class Header extends Component {
 
     renderDropdownButton = (title, i) => (
         <DropdownButton
-            title={`${title} ${sessionStorage.getItem('userName')}`}
+            title={`${title} ${sessionStorage.getItem('givenName')} ${sessionStorage.getItem('surname')}`}
             key={i}
             id={`dropdown-basic-${i}`}
             pullRight
@@ -23,7 +24,7 @@ export class Header extends Component {
             <MenuItem eventKey="1">Help</MenuItem>
             <MenuItem eventKey="2">Settings</MenuItem>
             <MenuItem divider />
-            <MenuItem eventKey="3">Sign out</MenuItem>
+            <MenuItem eventKey="3" onClick={() => authContext.logOut()}>Sign out</MenuItem>
         </DropdownButton>
     );
 

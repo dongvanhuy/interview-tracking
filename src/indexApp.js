@@ -1,16 +1,4 @@
-// import { runWithAdal } from 'react-adal';
-// import { authContext } from './adalConfig';
-
-// const DO_NOT_LOGIN = false;
-
-// runWithAdal(authContext, () => {
-//     sessionStorage.setItem('email', authContext._user.userName);
-//     sessionStorage.setItem('family_name', authContext._user.profile.family_name);
-//     sessionStorage.setItem('given_name', authContext._user.profile.given_name);
-//     // eslint-disable-next-line
-//     require('./indexApp.js');
-// }, DO_NOT_LOGIN);
-
+/* eslint-disable no-global-assign */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';

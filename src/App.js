@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import './styles/index.css';
-import Profile from './containers/profile/Profile';
-import Login from './containers/login/Login';
-// import ErrorPage from './containers/common/errorPage/ErrorPage';
-import ProfileDetails from './containers/profileDetails/ProfileDetails';
+
 import Header from '../src/containers/header/header';
-import ProfileInfo from './containers/profileDetails/ProfileInfo';
+import Login from '../src/containers/login/Login';
+import ProfileDetails from '../src/containers/profileDetails/ProfileDetails';
+import Profile from '../src/containers/profile/Profile';
+import ProfileInfo from '../src/containers/profileDetails/ProfileInfo';
+
 
 class App extends Component {
     render() {
@@ -19,6 +20,7 @@ class App extends Component {
                     <Route exact path="/profile" component={Profile} />
                     <Route exact path="/profile-details" component={ProfileDetails} />
                     <Route exact path="/profile-info" component={ProfileInfo} />
+                    <Redirect to="/" />
                 </Switch>
             </React.Fragment>
         );
