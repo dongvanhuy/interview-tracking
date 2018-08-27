@@ -70,10 +70,11 @@ export class Login extends Component {
                       <img src={logo} alt="logo" />
                       <h3>Interview Tracking</h3>
                   </div>
-                  <h3>Welcome to Interview Tracking</h3>
-                  <button type="button" onClick={e => this.login(e)}>
-            Sign in with global pass
-                  </button>
+                  <div className="login__content">
+                      <button type="button" onClick={e => this.login(e)}>Sign in with global pass
+                      </button>
+                  </div>
+                  <p className="login__footer">© 2018 DXC Technology Company. All rights reserved.</p>
               </div>
           </section>
       );
