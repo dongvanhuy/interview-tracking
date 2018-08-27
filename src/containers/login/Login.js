@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { updateLoginInfo } from './LoginActions';
 import { authContext } from '../../adalConfig';
+import logo from '../../../src/assets/images/dxcBlack.png';
 
 export class Login extends Component {
     constructor(props) {
@@ -65,10 +66,10 @@ export class Login extends Component {
       return (
           <section className="login">
               <div className="login__rightSide">
-                  <img
-                      src="https://eadadfs.csc.com/adfs/portal/logo/logo.png?id=25C9C3D1BC8E8D73BD1BD238EC711BB4E3B3A29452EE9FB7549E8E9A00C3DFCF"
-                      alt=""
-                  />
+                  <div className="login__header">
+                      <img src={logo} alt="logo" />
+                      <h3>Interview Tracking</h3>
+                  </div>
                   <h3>Welcome to Interview Tracking</h3>
                   <button type="button" onClick={e => this.login(e)}>
             Sign in with global pass
