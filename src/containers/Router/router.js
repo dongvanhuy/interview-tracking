@@ -6,25 +6,28 @@ import Login from '../login/Login';
 import Profile from '../profile/Profile';
 import ProfileInfo from '../profileDetails/ProfileInfo';
 import ProfileDetails from '../profileDetails/ProfileDetails';
-
+import Header from '../header/header';
 
 export class Routes extends Component {
     render() {
         console.log(this.props.loginStatus);
         let routes = (
             <Switch>
-                <Route exact path="/login" component={Login} />
-                <Redirect to="/login" />
+                <Route exact path="/" component={Login} />
+                <Redirect to="/" />
             </Switch>
         );
         if (this.props.loginStatus) {
             routes = (
-                <Switch>
-                    <Route exact path="/profile" component={Profile} />
-                    <Route exact path="/profile-details" component={ProfileDetails} />
-                    <Route exact path="/profile-info" component={ProfileInfo} />
-                    <Redirect to="/login" />
-                </Switch>
+                <React.Fragment>
+                    <Header />
+                    <Switch>
+                        <Route exact path="/profile" component={Profile} />
+                        <Route exact path="/profile-details" component={ProfileDetails} />
+                        <Route exact path="/profile-info" component={ProfileInfo} />
+                        <Redirect to="/profile" />
+                    </Switch>
+                </React.Fragment>
             );
         }
         return routes;
