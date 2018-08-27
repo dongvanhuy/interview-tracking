@@ -35,9 +35,6 @@ export default class ApiService {
       })
     );
 
-  static checkUser = () =>
-    Observable.fromPromise(axios.get(`${API_HOST2}/test`, { data: {} }));
-
   static loadDataProfileDetails = (data) => Observable.fromPromise(
     axios.get(`${API_HOST}/api/interviewees/info/${data}`, {
       data: {},

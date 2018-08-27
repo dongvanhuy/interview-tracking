@@ -73,7 +73,6 @@ export class Profile extends Component {
     render() {
         // const selectedDate = this.state.startDate.format('LLL');
         const { profileToday, profilethisweek, profilethismonth } = this.props;
-        console.log('profileToday>>>', profileToday.length);
 
         const rows = profileToday.map((item, index) =>
             (
