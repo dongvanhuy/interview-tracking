@@ -14,58 +14,69 @@ export class Login extends Component {
         this.loadUser();
     }
 
-    initState = {
-        email: '',
-        givenName: '',
-        surname: '',
-        loginSuccess: false,
-    };
+  initState = {
+      email: '',
+      givenName: '',
+      surname: '',
+      loginSuccess: false,
+  };
 
-    loadUser = () => {
-        const user = authContext.getCachedUser();
-        if (authContext.isCallback(window.location.hash)) {
-            // Handle redirect after token requests
-            authContext.handleWindowCallback();
-            const err = authContext.getLoginError();
-            if (err) {
-                // TODO: Handle errors signing in and getting tokens
-                console.log('error', `${err}`);
-            }
-        } else if (user) {
-            sessionStorage.setItem('surname', user.profile.family_name);
-            sessionStorage.setItem('givenName', user.profile.given_name);
-            this.setState({
-                email: user.profile.unique_name,
-                givenName: user.profile.given_name,
-                surname: user.profile.family_name,
-                loginSuccess: true,
-            }, () => { this.props.updateLoginInfo(this.state); });
-        } else {
-            sessionStorage.clear();
-            this.setState({ ...this.initState }, () => { this.props.updateLoginInfo(this.state); });
-        }
-    }
+  loadUser = () => {
+      const user = authContext.getCachedUser();
+      if (authContext.isCallback(window.location.hash)) {
+      // Handle redirect after token requests
+          authContext.handleWindowCallback();
+          const err = authContext.getLoginError();
+          if (err) {
+              // TODO: Handle errors signing in and getting tokens
+              console.log('error', `${err}`);
+          }
+      } else if (user) {
+          sessionStorage.setItem('surname', user.profile.family_name);
+          sessionStorage.setItem('givenName', user.profile.given_name);
+          this.setState(
+              {
+                  email: user.profile.unique_name,
+                  givenName: user.profile.given_name,
+                  surname: user.profile.family_name,
+                  loginSuccess: true,
+              },
+              () => {
+                  this.props.updateLoginInfo(this.state);
+              },
+          );
+      } else {
+          sessionStorage.clear();
+          this.setState({ ...this.initState }, () => {
+              this.props.updateLoginInfo(this.state);
+          });
+      }
+  };
 
-    login = (e) => {
-        e.preventDefault();
-        authContext.login();
-    }
+  login = e => {
+      e.preventDefault();
+      authContext.login();
+  };
 
-    render() {
-        if (this.props.loginStatus) {
-            this.props.push('/profile');
-        }
-        return (
-            <section className="login">
-                <button
-                    type="button"
-                    onClick={(e) => this.login(e)}
-                >
-                    Sign in with global pass
-                </button>
-            </section>
-        );
-    }
+  render() {
+      if (this.props.loginStatus) {
+          this.props.push('/profile');
+      }
+      return (
+          <section className="login">
+              <div className="login__rightSide">
+                  <img
+                      src="https://eadadfs.csc.com/adfs/portal/logo/logo.png?id=25C9C3D1BC8E8D73BD1BD238EC711BB4E3B3A29452EE9FB7549E8E9A00C3DFCF"
+                      alt=""
+                  />
+                  <h3>Welcome to Interview Tracking</h3>
+                  <button type="button" onClick={e => this.login(e)}>
+            Sign in with global pass
+                  </button>
+              </div>
+          </section>
+      );
+  }
 }
 
 const mapStateToProps = state => ({
