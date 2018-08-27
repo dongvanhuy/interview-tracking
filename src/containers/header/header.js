@@ -17,7 +17,7 @@ export class Header extends Component {
 
   renderDropdownButton = (title, i) => (
       <DropdownButton
-          title={`${title} ${sessionStorage.getItem('givenName',)} ${sessionStorage.getItem('surname')}`}
+          title={`${title} ${sessionStorage.getItem('givenName')} ${sessionStorage.getItem('surname')}`}
           key={i}
           id={`dropdown-basic-${i}`}
           pullRight
@@ -51,7 +51,4 @@ export class Header extends Component {
   }
 }
 
-export default connect(
-    null,
-    { push },
-)(Header);
+export default connect(null, { push })(Header);
