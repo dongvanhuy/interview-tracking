@@ -1,9 +1,13 @@
+$screen-mb-min: 320px;
 $screen-sm-min: 768px;
 $screen-md-min: 1024px;
 $color-black: #000;
-$color-yellow : #FFED00;
-$color-white: #FFF;
-$color-gray: #8F8E8C;
-$bg-gray: #DDD;
+$color-yellow: #ffed00;
+$color-yellow-hover: #b3a600;
+$color-white: #fff;
+$color-gray: #8f8e8c;
+$bg-gray: #ddd;
 $color-lightpink: rgb(228, 146, 162);
-$color-lightgreen: #90EE90;
+$color-lightgreen: #90ee90;
+$bg-loader: rgba(0, 0, 0, 0.7);
+$bg-url: "../assets/images/illustration.png";

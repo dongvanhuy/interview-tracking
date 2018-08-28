@@ -1,5 +1,5 @@
-.profiledetails {
-    margin-top: 110px;
+.profile-details {
+    margin-top: 100px;
     font-family: 'GTWalsheimProBold';
     .error-message{
         border: 1px solid #D0011B !important;
@@ -11,7 +11,7 @@
         background-color: white;
         font-family: 'GTWalsheimProRegular';
         border: rgb(230, 230, 230) 1px solid;
-        padding: 4px 12px;
+        padding: 5px;
     }
     .form-control:focus{
         border: 1px solid #ccc;
@@ -19,24 +19,53 @@
         -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px #ccc; 
         box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px #ccc; 
     }
-    &--title {
-        margin: 0;
-        padding: 20px 0px;
-        background-color: black;
-        color: $color-yellow ;
-        text-align: center;   
-    }
-    &__h2--title {
+    &__title {
         border-bottom: 1px solid $color-yellow;
+        font-size: 18px;
+        padding: 30px 0 5px;
+        margin: 0 0 10px;   
+        @include tablet {
+            font-size: 24px;
+        }
+
     }
-    &__radioGroup {
+    &__btn {
+        display: flex;
+        justify-content: flex-end;
+        font-size: 20px;
+        font-family: 'GTWalsheimProRegular';
+    }
+    &__cancel, &__submit {
+        border: #e6e6e6 1px solid;
+        border-radius: 4px;
+        @include tablet {
+            width: 20%;
+            margin: 10px;
+            padding: 16px 37px;
+        }
+    }
+    &__submit {
+        background-color: #ffed00;   
+    }
+    &__submit:active {
+        background-color: #ccbe00;
+    }
+    &__submit:focus, &__submit:hover {
+        background-color: #f2e100;
+    }
+    &__comments{
+        margin: 10px 0px;
+        font-family: 'GTWalsheimProRegular';
+    }
+
+    .radio-group {
         display: flex;
         flex-wrap: wrap;
-        margin: 5px 20px;
-        &--item {
-            flex: 1;
-            position: relative;
+        &__item {
+            width: 50%;
+            margin-bottom: 15px;
             padding-left: 30px;
+            position: relative;
             cursor: pointer;
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -44,6 +73,9 @@
             user-select: none;
             font-family: 'GTWalsheimProRegular';
             font-weight: unset;
+            @include tablet {
+                width: 20%;
+            }
             input {
                 position: absolute;
                 opacity: 0;
@@ -73,44 +105,15 @@
                 display: none;
             }
         }
-        &--item:hover input ~ .checkmark {
+        &__item:hover input ~ .checkmark {
             background-color: #ccc;
         }
-        &--item input:checked ~ .checkmark {
+        &__item input:checked ~ .checkmark {
             background-color: white;
         }
-        &--item input:checked ~ .checkmark:after {
+        &__item input:checked ~ .checkmark:after {
             display: block;
         }
-    }
-    &__btn{
-        &--cancel, &--submit {
-            font-weight: bold;
-            width: 100%;
-            padding: 11px 25px;
-            margin: 5px 0px;
-            border: #e6e6e6 1px solid;
-            border-radius: 4px;
-            @include tablet {
-                float: right;
-                width: 20%;
-                margin: 10px;
-                padding: 16px 37px;
-            }
-        }
-        &--submit {
-            background-color: #ffed00;   
-        }
-        &--submit:active {
-            background-color: #ccbe00;
-        }
-        &--submit:focus, &--submit:hover {
-            background-color: #f2e100;
-        }
-    }
-    &__comments{
-        margin: 10px 0px;
-        font-family: 'GTWalsheimProRegular';
     }
 }
 

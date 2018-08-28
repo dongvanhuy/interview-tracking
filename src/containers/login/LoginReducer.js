@@ -1,15 +1,20 @@
 import { handleActions } from 'redux-actions';
-import { LOGIN_SUCCESS } from '../../store/actionTypes';
+import { UPDATE_LOGIN_INFO } from '../../store/actionTypes';
 
 const initialState = {
-    dataLogin: [],
+    email: '',
+    givenName: '',
+    surname: '',
+    loginSuccess: false,
 };
 
 const actions = {
-    [LOGIN_SUCCESS]: (state, { payload }) => ({
-        ...state,
-        dataLogin: payload.data,
-    }),
+    [UPDATE_LOGIN_INFO]: (state, { payload }) => {
+        console.log(payload);
+        return {
+            ...payload,
+        };
+    },
 };
 
 export default handleActions(actions, initialState);

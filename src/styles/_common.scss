@@ -22,6 +22,12 @@ body {
   height: 100vh;
 }
 
+button {
+  &:active, &:focus {
+    outline: none;
+  }
+}
+
 .root {
   height: 100%;
 }
@@ -32,6 +38,9 @@ body {
 }
 
 .interview-header {
+  display: flex;
+  align-items: center;
+  height: 100px;
   padding: 20px 0;
   border-bottom: 1px solid $color-black;
   background-color: $color-white;
@@ -46,27 +55,82 @@ body {
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
+    margin: 0;
+    width: 100%;
   }
 
   &__logo {
-    display: flex;
-    flex: 1 1;
-    align-items: center;
+    color: $color-black;
+
+    &:hover {
+      text-decoration: none;
+      color: $color-black;
+    }
 
     img {
-      width: 100px;
+      width: 24%;
       height: 100%;
+      @include tablet {
+        width: 100px;
+      }
+      
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+
+    .user-name {
+      font-family: 'GTWalsheimProRegular', Arial, sans-serif;
+      font-size: 18px;
+      padding: 5px;
+      border: none;
     }
   }
 
   &__title {
-    font-family: 'GTWalsheimProBold', Arial, sans-serif; 
-    font-size: 30px;
+    font-family: 'GTWalsheimProBold', Arial, sans-serif;
+    font-size: 15px;
     margin-left: 20px;
+    @include tablet {
+      font-size: 30px;
+    }
   }
 }
 
 main {
-  margin-top: 110px;
   height: 100%;
+}
+
+.loading-in-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: $color-yellow;
+  background-color: $bg-loader;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  line-height: 19px;
+  text-align: center;
+
+  p {
+    margin-top: 30px;
+    margin-bottom: 0;
+  }
+
+  &__spinner {
+    font-size: 50px;
+  }
+
+  &__content {
+    width: 200px;
+  }
 }
