@@ -6,7 +6,7 @@ export const adalConfig = {
     endpoints: {
         api: 'fede1873-aa95-4256-b554-1aa5a89e26ef', // the same client id
     },
-    postLogoutRedirectUri: 'http://localhost:3000/',
+    postLogoutRedirectUri: 'https://dxc-interview-tracking-release.azurewebsites.net/',
     cacheLocation: 'localStorage',
 };
 
