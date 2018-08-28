@@ -1,6 +1,7 @@
 import { combineEpics } from 'redux-observable';
-import { PROFILEDETAILS_LOAD, PROFILEDETAILS_PATCH, PROFILEDETAILS_POST } from '../../store/actionTypes';
-import { loadProfileDetailsSuccess, patchProfileDetails, postProfileDetails } from './ProfileDetailsAction';
+import { Observable } from 'rxjs';
+import { PROFILEDETAILS_LOAD, PROFILEDETAILS_PATCH, PROFILEDETAILS_POST, PATCH_PROFILE_FAILED } from '../../store/actionTypes';
+import { loadProfileDetailsSuccess, patchProfileDetailsSuccess, postProfileDetails } from './ProfileDetailsAction';
 
 export const loadProfileDetailsEpic = (action$, store, { loadProfileDetailsService }) =>
     action$.ofType(PROFILEDETAILS_LOAD)
@@ -15,8 +16,8 @@ export const patchProfileDetailsEpic = (action$, store, { patchProfileDetailsSer
         .switchMap((action) => {
             const param = action.payload;
             return patchProfileDetailsService(param)
-                .map(res => patchProfileDetails(res))
-                .catch(err => console.log(err));
+                .map(res => patchProfileDetailsSuccess(res))
+                .catch(err => Observable.of({ type: PATCH_PROFILE_FAILED, payload: err }));
         });
 export const postProfileDetailsEpic = (action$, store, { postProfileDetailsService }) =>
     action$.ofType(PROFILEDETAILS_POST)

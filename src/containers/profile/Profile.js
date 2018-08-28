@@ -14,6 +14,7 @@ import { push } from 'react-router-redux';
 import uid from 'uuid';
 import loading from '../../assets/images/loading.svg';
 import { loadProfile, viewDetailDataId, addProfile, loadProfileThisWeek, loadProfileThisMonth } from './ProfileAction';
+import { resetModalSuccess } from '../profileDetails/ProfileDetailsAction';
 
 export class Profile extends Component {
     static propsTypes = {
@@ -36,6 +37,7 @@ export class Profile extends Component {
 
     viewDetailId = (id) => {
         this.props.viewDetailDataId(id);
+        this.props.resetModalSuccess();
         this.props.push({
             pathname: '/profile-details',
             state: {
@@ -227,6 +229,7 @@ const mapDispatchToProps = {
     viewDetailDataId,
     addProfile,
     push,
+    resetModalSuccess,
 };
 
 export default connect(

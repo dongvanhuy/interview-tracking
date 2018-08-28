@@ -3,10 +3,12 @@ import PropsTypes from 'prop-types';
 import React, { Component } from 'react';
 import { push } from 'react-router-redux';
 import { FormGroup, Grid } from 'react-bootstrap';
-import { loadProfileDetails, patchProfileDetails } from './ProfileDetailsAction';
+import { loadProfileDetails, patchProfileDetails, resetStateProfileDetail, resetModalSuccess } from './ProfileDetailsAction';
 import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
 import { ProfileDetailsSecondRound } from './ProfileDetailsSecondRound';
 import LoadingInProgress from '../common/loadingPage/loadingInProgress';
+
+import SuccessModal from '../common/modalSuccess/modalSuccess';
 
 
 export class ProfileDetails extends Component {
@@ -59,6 +61,7 @@ export class ProfileDetails extends Component {
         };
     }
     componentWillMount() {
+        this.props.resetStateProfileDetail();
         this.props.loadProfileDetails(this.props.candidateId);
     }
     componentWillReceiveProps(nextProps) {
@@ -133,7 +136,7 @@ export class ProfileDetails extends Component {
     render() {
         return (
             <React.Fragment>
-                <LoadingInProgress show={this.props.profileDetails.length < 1} />
+                <LoadingInProgress show={!this.props.profileDetails[0]} />
                 <form className="profile-details" onSubmit={(e) => this.submitForm(e)}>
                     <Grid>
                         <ProfileDetailsFirstRound handleChange={this.handleChange} {...this.state} />
@@ -144,12 +147,14 @@ export class ProfileDetails extends Component {
                         </FormGroup>
                     </Grid>
                 </form>
+                <SuccessModal show={this.props.show} handleClose={() => this.props.resetModalSuccess()} handleBackToList={() => this.props.push('/profile')} messages="You edited candidate successfull !" />
             </React.Fragment>
         );
     }
 }
 const mapStateToProps = state => ({
     profileDetails: state.profileDetails.dataProfileDetails,
+    show: state.profileDetails.updateSuccess,
     candidateId: state.router.location.state ? state.router.location.state.candidateId : state.profile.profileSelectedId,
 });
 
@@ -157,6 +162,8 @@ const mapDispatchToProps = {
     loadProfileDetails,
     patchProfileDetails,
     push, // ACTION GUI EPIC GUI API
+    resetStateProfileDetail,
+    resetModalSuccess,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileDetails);
