@@ -5,7 +5,7 @@ import { ConnectedRouter } from 'react-router-redux';
 import App from './App';
 import store, { history } from './store';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import { initializeFirebase } from './push-notification';
+import { initialize } from './push-notification';
 
 require('es6-shim');
 
@@ -18,4 +18,4 @@ export default ReactDOM.render(
     </Provider>,
     document.getElementsByClassName('root')[0] || document.createElement('div'),
 );
-initializeFirebase();
+initialize();
