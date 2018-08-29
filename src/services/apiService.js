@@ -3,7 +3,7 @@ import axios from "axios";
 import config from "../config";
 
 const API_HOST = config.apiService.host;
-const API_HOST2 = config.apiService2.host;
+// const API_HOST2 = config.apiService2.host;
 export default class ApiService {
   static loadDataCandidate = () =>
     Observable.fromPromise(

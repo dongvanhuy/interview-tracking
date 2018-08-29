@@ -75,36 +75,36 @@
   }
 }
 
-.table.list-cadidate-table {
-  width: 100%;
-  height: 100%;
+.list-cadidate-table {
+  // width: 100%;
+  // height: 100%;
   overflow-x:auto;
   margin-bottom: 0;
-  thead {
+  Thead {
     background-color: $color-black;
     color: $color-yellow;
   
-    tr {
-      height: 20px;
-    }
+    // Tr {
+    //   height: 20px;
+    // }
   
-    th {
+    // Th {
       text-align: center;
-    }
+    // }
   }
 
-  > tbody {
-    > tr {
-      height: 20px;
-      > td {
+  >Tbody {
+    > Tr {
+      // height: 20px;
+      > Td {
         vertical-align: middle;
-        font-size: 15px;
-        font-weight: 300;
+        // font-size: 15px;
+        // font-weight: 300;
       }
     }
   }
   
-  tbody :hover {
+  Tbody :hover {
     background-color: $bg-gray;
   }
 }
