@@ -1,7 +1,7 @@
 class Config {
     constructor() {
         this.apiService = {
-            host: 'https://dxc-interview-tracking-api.azurewebsites.net',
+            host: 'https://dxc-interview-tracking-api-release.azurewebsites.net/',
             auth: 'https://internet-banking.herokuapp.com',
         };
 
