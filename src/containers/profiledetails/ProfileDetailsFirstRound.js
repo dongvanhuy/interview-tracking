@@ -133,6 +133,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={this.props.tech_competency_round1 || 'Limited'}
                                 name="tech_competency_round1"
                                 onChange={(e) => this.props.handleChange(e, 'Limited')}
+                                checked={this.props.tech_competency_round1 === 'Limited'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -142,6 +143,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={this.props.tech_competency_round1 || 'Basic'}
                                 name="tech_competency_round1"
                                 onChange={(e) => this.props.handleChange(e, 'Basic')}
+                                checked={this.props.tech_competency_round1 === 'Basic'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -151,6 +153,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={this.props.tech_competency_round1 || 'Acceptable'}
                                 name="tech_competency_round1"
                                 onChange={(e) => this.props.handleChange(e, 'Acceptable')}
+                                checked={this.props.tech_competency_round1 === 'Acceptable'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -160,6 +163,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={this.props.tech_competency_round1 || 'Advanced'}
                                 onChange={(e) => this.props.handleChange(e, 'Advanced')}
                                 name="tech_competency_round1"
+                                checked={this.props.tech_competency_round1 === 'Advanced'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -169,6 +173,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={this.props.tech_competency_round1 || 'Exceptional'}
                                 onChange={(e) => this.props.handleChange(e, 'Exceptional')}
                                 name="tech_competency_round1"
+                                checked={this.props.tech_competency_round1 === 'Exceptional'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -193,6 +198,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={this.props.cultural_fit_round1 || 'Limited'}
                                 name="cultural_fit_round1"
                                 onChange={(e) => this.props.handleChange(e, 'Limited')}
+                                checked={this.props.cultural_fit_round1 === 'Limited'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -202,6 +208,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={this.props.cultural_fit_round1 || 'Basic'}
                                 name="cultural_fit_round1"
                                 onChange={(e) => this.props.handleChange(e, 'Basic')}
+                                checked={this.props.cultural_fit_round1 === 'Basic'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -211,6 +218,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={this.props.cultural_fit_round1 || 'Acceptable'}
                                 name="cultural_fit_round1"
                                 onChange={(e) => this.props.handleChange(e, 'Acceptable')}
+                                checked={this.props.cultural_fit_round1 === 'Acceptable'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -220,6 +228,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={this.props.cultural_fit_round1 || 'Advanced'}
                                 name="cultural_fit_round1"
                                 onChange={(e) => this.props.handleChange(e, 'Advanced')}
+                                checked={this.props.cultural_fit_round1 === 'Advanced'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -229,6 +238,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={this.props.cultural_fit_round1 || 'Exceptional'}
                                 name="cultural_fit_round1"
                                 onChange={(e) => this.props.handleChange(e, 'Exceptional')}
+                                checked={this.props.cultural_fit_round1 === 'Exceptional'}
                             />
                             <span className="checkmark" />
                         </label>

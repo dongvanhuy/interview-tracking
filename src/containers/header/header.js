@@ -3,52 +3,73 @@ import React, { Component } from 'react';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { DropdownButton, MenuItem, ButtonToolbar } from 'react-bootstrap';
+import { DropdownButton, MenuItem, ButtonToolbar, ListGroup, ListGroupItem } from 'react-bootstrap';
+import FontAwesomeIcon from 'react-fontawesome';
 import logo from '../../../src/assets/images/dxcLogo.svg';
 import { authContext } from '../../adalConfig';
 
 export class Header extends Component {
-  buttonsInstance = () => {
-      const Buttons = ['Hi,'];
-      return (
-          <ButtonToolbar>{Buttons.map(this.renderDropdownButton)}</ButtonToolbar>
-      );
-  };
+    constructor(props) {
+        super(props);
+        this.state = {
+            showMenu: false,
+        };
+    }
+    addActiveClass = () => {
+        const active = this.state.showMenu;
+        this.setState({ showMenu: !active });
+    };
 
-  renderDropdownButton = (title, i) => (
-      <DropdownButton
-          title={`${title} ${sessionStorage.getItem('givenName')} ${sessionStorage.getItem('surname')}`}
-          key={i}
-          id={`dropdown-basic-${i}`}
-          pullRight
-          className="user-name"
-      >
-          <MenuItem eventKey="1">Help</MenuItem>
-          <MenuItem eventKey="2">Settings</MenuItem>
-          <MenuItem divider />
-          <MenuItem eventKey="3" onClick={() => authContext.logOut()}>
-        Sign out
-          </MenuItem>
-      </DropdownButton>
-  );
+    buttonsInstance = () => {
+        const Buttons = ['Welcome,'];
+        return (
+            <ButtonToolbar>{Buttons.map(this.renderDropdownButton)}</ButtonToolbar>
+        );
+    };
 
-  render() {
-      return (
-          <header className="interview-header">
-              <section className="container interview-header__content">
-                  <Link
-                      to=""
-                      className="interview-header__logo"
-                      onClick={() => this.props.push('/profile')}
-                  >
-                      <img src={logo} alt="logo" />
-                      <span className="interview-header__title">Interview Tracking</span>
-                  </Link>
-                  <div className="interview-header__info">{this.buttonsInstance()}</div>
-              </section>
-          </header>
-      );
-  }
+    renderDropdownButton = (title, i) => (
+        <DropdownButton
+            title={`${title} ${sessionStorage.getItem('givenName')} ${sessionStorage.getItem('surname')}`}
+            key={i}
+            id={`dropdown-basic-${i}`}
+            pullRight
+            className="user-name"
+        >
+            <MenuItem eventKey="1" onClick={() => authContext.logOut()}>
+            Sign out
+            </MenuItem>
+        </DropdownButton>
+    );
+
+    render() {
+        return (
+            <header className="interview-header">
+                <section className="container interview-header__content">
+                    <Link
+                        to=""
+                        className="interview-header__logo"
+                        onClick={() => this.props.push('/profile')}
+                    >
+                        <img src={logo} alt="logo" />
+                        <span className="interview-header__title">Interview Tracking</span>
+                    </Link>
+                    <div className="interview-header__info hidden-xs">
+                        {this.buttonsInstance()}
+                    </div>
+                    <div className="interview-header__mobile hidden-sm hidden-lg">
+                        <FontAwesomeIcon name="bars" size="2x" onClick={() => this.addActiveClass()} />
+                        <ListGroup className={!this.state.showMenu && 'invisible'}>
+                            <ListGroupItem>Welcome, {`${sessionStorage.getItem('givenName')} ${sessionStorage.getItem('surname')}`}</ListGroupItem>
+                            <ListGroupItem onClick={() => authContext.logOut()}>Logout</ListGroupItem>
+                        </ListGroup>
+                    </div>
+                </section>
+            </header>
+        );
+    }
 }
 
-export default connect(null, { push })(Header);
+export default connect(
+    null,
+    { push },
+)(Header);
