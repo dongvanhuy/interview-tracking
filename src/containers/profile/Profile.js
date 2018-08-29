@@ -69,6 +69,7 @@ export class Profile extends Component {
 
     addProfileDetail = () => {
         this.props.addProfile();
+        this.props.resetModalSuccess();
         this.props.push('/profile-info');
     }
 

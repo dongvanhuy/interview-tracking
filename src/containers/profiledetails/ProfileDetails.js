@@ -67,39 +67,39 @@ export class ProfileDetails extends Component {
     componentWillReceiveProps(nextProps) {
         if (!this.props.profileDetails[0] && nextProps.profileDetails[0]) {
             this.setState({ ...nextProps.profileDetails[0] });
-            this.convertDataFromAPI();
+            // this.convertDataFromAPI();
         }
     }
 
-    convertDataFromAPI() {
-        const techcompetency = document.getElementsByName('tech_competency_round1');
-        const cuturalFitLevelRound1 = document.getElementsByName('cultural_fit_round1');
-        const techcompetency2 = document.getElementsByName('tech_competency_round2');
-        const cuturalFitLevelRound2 = document.getElementsByName('cultural_fit_round2');
-        const businessAcumentlevel = document.getElementsByName('business_acument');
-        const softSkillslevel = document.getElementsByName('soft_skill');
-        const peopleManagementlevel = document.getElementsByName('people_management');
-        const arrayOfData = [techcompetency, cuturalFitLevelRound1,
-            techcompetency2, cuturalFitLevelRound2, businessAcumentlevel,
-            softSkillslevel, peopleManagementlevel];
-        const arrayOfTagsName = ['tech_competency_round1', 'cultural_fit_round1',
-            'tech_competency_round2', 'cultural_fit_round2', 'business_acument',
-            'soft_skill', 'people_management'];
-        for (let i = 0; i < arrayOfData.length; i += 1) {
-            const data = arrayOfData[i];
-            if (this.state[arrayOfTagsName[i]] === 'Limited') {
-                data[0].checked = true;
-            } else if (this.state[arrayOfTagsName[i]] === 'Basic') {
-                data[1].checked = true;
-            } else if (this.state[arrayOfTagsName[i]] === 'Acceptable') {
-                data[2].checked = true;
-            } else if (this.state[arrayOfTagsName[i]] === 'Advanced') {
-                data[3].checked = true;
-            } else if (this.state[arrayOfTagsName[i]] === 'Exceptional') {
-                data[4].checked = true;
-            }
-        }
-    }
+    // convertDataFromAPI() {
+    //     const techcompetency = document.getElementsByName('tech_competency_round1');
+    //     const cuturalFitLevelRound1 = document.getElementsByName('cultural_fit_round1');
+    //     const techcompetency2 = document.getElementsByName('tech_competency_round2');
+    //     const cuturalFitLevelRound2 = document.getElementsByName('cultural_fit_round2');
+    //     const businessAcumentlevel = document.getElementsByName('business_acument');
+    //     const softSkillslevel = document.getElementsByName('soft_skill');
+    //     const peopleManagementlevel = document.getElementsByName('people_management');
+    //     const arrayOfData = [techcompetency, cuturalFitLevelRound1,
+    //         techcompetency2, cuturalFitLevelRound2, businessAcumentlevel,
+    //         softSkillslevel, peopleManagementlevel];
+    //     const arrayOfTagsName = ['tech_competency_round1', 'cultural_fit_round1',
+    //         'tech_competency_round2', 'cultural_fit_round2', 'business_acument',
+    //         'soft_skill', 'people_management'];
+    //     for (let i = 0; i < arrayOfData.length; i += 1) {
+    //         const data = arrayOfData[i];
+    //         if (this.state[arrayOfTagsName[i]] === 'Limited') {
+    //             data[0].checked = true;
+    //         } else if (this.state[arrayOfTagsName[i]] === 'Basic') {
+    //             data[1].checked = true;
+    //         } else if (this.state[arrayOfTagsName[i]] === 'Acceptable') {
+    //             data[2].checked = true;
+    //         } else if (this.state[arrayOfTagsName[i]] === 'Advanced') {
+    //             data[3].checked = true;
+    //         } else if (this.state[arrayOfTagsName[i]] === 'Exceptional') {
+    //             data[4].checked = true;
+    //         }
+    //     }
+    // }
     checkValidateForm(name, value) {
         const candidateName = document.getElementsByName('candidate_fullname');
         if (value === '' && name === 'candidate_fullname') {
