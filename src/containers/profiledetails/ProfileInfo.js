@@ -2,9 +2,10 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { push } from 'react-router-redux';
 import { FormGroup, Grid } from 'react-bootstrap';
-import { postProfileDetails } from './ProfileDetailsAction';
+import { postProfileDetails, resetModalSuccess } from './ProfileDetailsAction';
 import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
 import { ProfileDetailsSecondRound } from './ProfileDetailsSecondRound';
+import SuccessModal from '../common/modalSuccess/modalSuccess';
 
 
 export class ProfileInfo extends Component {
@@ -83,26 +84,31 @@ export class ProfileInfo extends Component {
     }
     render() {
         return (
-            <form className="profile-details" onSubmit={this.submitForm}>
-                <Grid>
-                    <ProfileDetailsFirstRound handleChange={this.handleChange} {...this.state} />
-                    <ProfileDetailsSecondRound handleChange={this.handleChange} {...this.state} />
-                    <FormGroup className="profile-details__btn">
-                        <button type="button" className="profile-details__cancel" onClick={() => this.props.push('/profile')}>Cancel</button>
-                        <button type="submit" className="profile-details__submit">Add</button>
-                    </FormGroup>
-                </Grid>
-            </form>
+            <React.Fragment>
+                <form className="profile-details" onSubmit={this.submitForm}>
+                    <Grid>
+                        <ProfileDetailsFirstRound handleChange={this.handleChange} {...this.state} />
+                        <ProfileDetailsSecondRound handleChange={this.handleChange} {...this.state} />
+                        <FormGroup className="profile-details__btn">
+                            <button type="button" className="profile-details__cancel" onClick={() => this.props.push('/profile')}>Cancel</button>
+                            <button type="submit" className="profile-details__submit">Add</button>
+                        </FormGroup>
+                    </Grid>
+                </form>
+                <SuccessModal show={this.props.show} handleClose={() => this.props.resetModalSuccess()} handleBackToList={() => this.props.push('/profile')} messages="You create candidate successfull !" />
+            </React.Fragment>
         );
     }
 }
 
 const mapStateToProps = state => ({
     profileDetails: state.profileDetails.dataProfileDetails,
+    show: state.profileDetails.updateSuccess,
 });
 const mapDispatchToProps = {
     postProfileDetails,
     push, // ACTION GUI EPIC GUI API
+    resetModalSuccess,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileInfo);
