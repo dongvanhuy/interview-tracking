@@ -13,7 +13,6 @@ export class ProfileInfo extends Component {
         super(props);
         this.checkValidateForm = this.checkValidateForm.bind(this);
         this.state = {
-            // lgShow: false,
             candidate_id: '',
             candidate_fullname: '',
             position_apply: '',

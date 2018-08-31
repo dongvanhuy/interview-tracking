@@ -6,7 +6,7 @@ const API_HOST = config.apiService.host;
 export default class ApiService {
   static loadDataCandidate = () =>
     Observable.fromPromise(
-      axios.get(`${API_HOST}/api/interviewees/today`, {
+      axios.get(`${API_HOST}/api/interviewees/today-roundone`, {
         data: {},
         headers: {
           "Content-Type": "application/json"
@@ -16,7 +16,7 @@ export default class ApiService {
 
   static loadDataProfileThisWeek = () =>
     Observable.fromPromise(
-      axios.get(`${API_HOST}/api/interviewees/thisweek`, {
+      axios.get(`${API_HOST}/api/interviewees/thisweek-roundone`, {
         data: {},
         headers: {
           "Content-Type": "application/json"
@@ -26,7 +26,7 @@ export default class ApiService {
 
   static loadDataProfileThisMonth = () =>
     Observable.fromPromise(
-      axios.get(`${API_HOST}/api/interviewees/thismonth`, {
+      axios.get(`${API_HOST}/api/interviewees/thismonth-roundone`, {
         data: {},
         headers: {
           "Content-Type": "application/json"

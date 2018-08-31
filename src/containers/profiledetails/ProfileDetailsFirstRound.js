@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FormGroup, FormControl, ControlLabel, Row, Col } from 'react-bootstrap';
+// import DateTimeField from 'react-bootstrap-datetimepicker';
 
 export class ProfileDetailsFirstRound extends Component {
     render() {
@@ -86,8 +87,8 @@ export class ProfileDetailsFirstRound extends Component {
                                     >
                                         <option value="">Select</option>
                                         <option value="1">Huy Dong</option>
-                                        <option value="Huy Chung">Huy Chung</option>
-                                        <option value="Trang Nguyen">Trang Nguyen</option>
+                                        <option value="2">Huy Chung</option>
+                                        <option value="3">Trang Nguyen</option>
                                     </FormControl>
                                 </FormGroup>
 
@@ -103,9 +104,9 @@ export class ProfileDetailsFirstRound extends Component {
                                         value={this.props.jury_round1_02}
                                     >
                                         <option value="">Select</option>
-                                        <option value="Huy Dong">Huy Dong</option>
+                                        <option value="1">Huy Dong</option>
                                         <option value="2">Huy Chung</option>
-                                        <option value="Trang Nguyen">Trang Nguyen</option>
+                                        <option value="3">Trang Nguyen</option>
                                     </FormControl>
                                 </FormGroup>
 
@@ -115,12 +116,14 @@ export class ProfileDetailsFirstRound extends Component {
                     <Col xs={12} sm={3} md={3} lg={3}>
                         <FormGroup>
                             <ControlLabel>Date</ControlLabel>
-                            <FormControl
+                            {/* <DateTimeField /> */}
+                            {/* <FormControl
                                 onChange={(e) => this.props.handleChange(e)}
                                 name="date_round1"
                                 value={this.props.date_round1}
-                                type="date"
-                            />
+                                type="datetime-local"
+                                placeholder="ok"
+                            /> */}
                         </FormGroup>
                     </Col>
                 </Row>
@@ -260,7 +263,7 @@ export class ProfileDetailsFirstRound extends Component {
                         <FormGroup>
                             <ControlLabel>YPE</ControlLabel>
                             <FormControl
-                                type="text"
+                                type="number"
                                 placeholder=""
                                 name="ype_round1"
                                 value={this.props.ype_round1}
