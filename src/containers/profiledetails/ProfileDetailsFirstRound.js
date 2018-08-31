@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
 import { FormGroup, FormControl, ControlLabel, Row, Col } from 'react-bootstrap';
-// import DateTimeField from 'react-bootstrap-datetimepicker';
+import Datetime from 'react-datetime';
+import FontAwesomeIcon from 'react-fontawesome';
+import moment from 'moment';
 
 export class ProfileDetailsFirstRound extends Component {
+    state = {
+        showTimeRoundOne: false,
+    }
+
+    showTimeOne = () => {
+        const show = this.state.showTimeRoundOne;
+        this.setState({ showTimeRoundOne: !show });
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -114,16 +125,22 @@ export class ProfileDetailsFirstRound extends Component {
                         </Row>
                     </Col>
                     <Col xs={12} sm={3} md={3} lg={3}>
-                        <FormGroup>
+                        <FormGroup className="date-time__one">
                             <ControlLabel>Date</ControlLabel>
-                            {/* <DateTimeField /> */}
-                            {/* <FormControl
-                                onChange={(e) => this.props.handleChange(e)}
-                                name="date_round1"
+                            <Datetime
+                                open={this.state.showTimeRoundOne}
                                 value={this.props.date_round1}
-                                type="datetime-local"
-                                placeholder="ok"
-                            /> */}
+                                dateFormat="DD-MM-YYY"
+                                timeFormat="hh:mm"
+                                defaultValue={new Date()}
+                                onChange={(e) => this.props.handleChange({ target: { value: moment(e).format('DD-MM-YYYY hh:mm'), name: 'date_round1' } })}
+                            />
+                            <FontAwesomeIcon
+                                name="calendar"
+                                size="2x"
+                                className="date-time__icon"
+                                onClick={() => this.showTimeOne()}
+                            />
                         </FormGroup>
                     </Col>
                 </Row>
