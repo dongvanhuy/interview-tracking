@@ -56,7 +56,7 @@ export class Profile extends Component {
                         <Th>Name</Th>
                         <Th>Recruiter</Th>
                         <Th>Skill</Th>
-                        <Th>Status</Th>
+                        <Th className="text-status">Status</Th>
                         <Th>Action</Th>
                     </Tr>
                 </Thead>
@@ -84,7 +84,7 @@ export class Profile extends Component {
                     <Td>{item.candidate_fullname}</Td>
                     <Td>{item.recruiter}</Td>
                     <Td>{item.position_apply}</Td>
-                    <Td>{item.round1_status}</Td>
+                    <Td className="text-status">{item.round1_status}</Td>
                     <Td className="text-center"><button type="button" className="btn btn-default" onClick={() => this.viewDetailId(item.candidate_id)}><i className="fa fa-pencil" /> Edit</button></Td>
                 </Tr>));
 
@@ -96,7 +96,7 @@ export class Profile extends Component {
                     <Td>{item.candidate_fullname}</Td>
                     <Td>{item.recruiter}</Td>
                     <Td>{item.position_apply}</Td>
-                    <Td>{item.round1_status}</Td>
+                    <Td className="text-status">{item.round1_status}</Td>
                     <Td className="text-center"><button type="button" className="btn btn-default" onClick={() => this.viewDetailId(item.candidate_id)}><i className="fa fa-pencil" /> Edit</button></Td>
                 </Tr>));
 
@@ -108,7 +108,7 @@ export class Profile extends Component {
                     <Td>{item.candidate_fullname}</Td>
                     <Td>{item.recruiter}</Td>
                     <Td>{item.position_apply}</Td>
-                    <Td>{item.round1_status}</Td>
+                    <Td className="text-status">{item.round1_status}</Td>
                     <Td className="text-center"><button type="button" className="btn btn-default" onClick={() => this.viewDetailId(item.candidate_id)}><i className="fa fa-pencil" /> Edit</button></Td>
                 </Tr>));
 
@@ -134,7 +134,7 @@ export class Profile extends Component {
                                                     <Th>Name</Th>
                                                     <Th>Recruiter</Th>
                                                     <Th>Skill</Th>
-                                                    <Th>Status</Th>
+                                                    <Th className="text-status">Status</Th>
                                                     <Th>Action</Th>
                                                 </Tr>
                                             </Thead>
