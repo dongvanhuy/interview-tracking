@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { push } from 'react-router-redux';
 import { FormGroup, Grid } from 'react-bootstrap';
+import moment from 'moment';
 import { postProfileDetails, resetModalSuccess } from './ProfileDetailsAction';
 import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
 import { ProfileDetailsSecondRound } from './ProfileDetailsSecondRound';
@@ -13,7 +14,6 @@ export class ProfileInfo extends Component {
         super(props);
         this.checkValidateForm = this.checkValidateForm.bind(this);
         this.state = {
-            // lgShow: false,
             candidate_id: '',
             candidate_fullname: '',
             position_apply: '',
@@ -65,7 +65,11 @@ export class ProfileInfo extends Component {
         const stateInit = this.state;
         if (childAttr === undefined) {
             stateInit[name] = value;
-            this.setState({ ...stateInit });
+            if (name === 'date_round1') stateInit.date_round1 = moment(value).format('DD-MM-YYYY hh:mm');
+            if (name === 'date_round2') stateInit.date_round2 = moment(value).format('DD-MM-YYYY hh:mm');
+            const dateRoundOne = moment(value).format('DD-MM-YYYY hh:mm');
+            const dateRoundTwo = moment(value).format('DD-MM-YYYY hh:mm');
+            this.setState({ ...stateInit, date_round1: dateRoundOne, date_round2: dateRoundTwo });
         } else {
             stateInit[name] = childAttr;
             this.setState({ ...stateInit });

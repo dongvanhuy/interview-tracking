@@ -1,7 +1,19 @@
 import React, { Component } from 'react';
 import { FormGroup, FormControl, ControlLabel, Row, Col } from 'react-bootstrap';
+import Datetime from 'react-datetime';
+import FontAwesomeIcon from 'react-fontawesome';
+import moment from 'moment';
 
 export class ProfileDetailsFirstRound extends Component {
+    state = {
+        showTimeRoundOne: false,
+    }
+
+    showTimeOne = () => {
+        const show = this.state.showTimeRoundOne;
+        this.setState({ showTimeRoundOne: !show });
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -86,8 +98,8 @@ export class ProfileDetailsFirstRound extends Component {
                                     >
                                         <option value="">Select</option>
                                         <option value="1">Huy Dong</option>
-                                        <option value="Huy Chung">Huy Chung</option>
-                                        <option value="Trang Nguyen">Trang Nguyen</option>
+                                        <option value="2">Huy Chung</option>
+                                        <option value="3">Trang Nguyen</option>
                                     </FormControl>
                                 </FormGroup>
 
@@ -103,9 +115,9 @@ export class ProfileDetailsFirstRound extends Component {
                                         value={this.props.jury_round1_02}
                                     >
                                         <option value="">Select</option>
-                                        <option value="Huy Dong">Huy Dong</option>
+                                        <option value="1">Huy Dong</option>
                                         <option value="2">Huy Chung</option>
-                                        <option value="Trang Nguyen">Trang Nguyen</option>
+                                        <option value="3">Trang Nguyen</option>
                                     </FormControl>
                                 </FormGroup>
 
@@ -113,13 +125,21 @@ export class ProfileDetailsFirstRound extends Component {
                         </Row>
                     </Col>
                     <Col xs={12} sm={3} md={3} lg={3}>
-                        <FormGroup>
+                        <FormGroup className="date-time__one">
                             <ControlLabel>Date</ControlLabel>
-                            <FormControl
-                                onChange={(e) => this.props.handleChange(e)}
-                                name="date_round1"
+                            <Datetime
+                                open={this.state.showTimeRoundOne}
                                 value={this.props.date_round1}
-                                type="date"
+                                dateFormat="DD-MM-YYY"
+                                timeFormat="hh:mm"
+                                defaultValue={new Date()}
+                                onChange={(e) => this.props.handleChange({ target: { value: moment(e).format('DD-MM-YYYY hh:mm'), name: 'date_round1' } })}
+                            />
+                            <FontAwesomeIcon
+                                name="calendar"
+                                size="2x"
+                                className="date-time__icon"
+                                onClick={() => this.showTimeOne()}
                             />
                         </FormGroup>
                     </Col>
@@ -260,7 +280,7 @@ export class ProfileDetailsFirstRound extends Component {
                         <FormGroup>
                             <ControlLabel>YPE</ControlLabel>
                             <FormControl
-                                type="text"
+                                type="number"
                                 placeholder=""
                                 name="ype_round1"
                                 value={this.props.ype_round1}
