@@ -67,9 +67,7 @@ export class ProfileInfo extends Component {
             stateInit[name] = value;
             if (name === 'date_round1') stateInit.date_round1 = moment(value).format('DD-MM-YYYY hh:mm');
             if (name === 'date_round2') stateInit.date_round2 = moment(value).format('DD-MM-YYYY hh:mm');
-            const dateRoundOne = moment(value).format('DD-MM-YYYY hh:mm');
-            const dateRoundTwo = moment(value).format('DD-MM-YYYY hh:mm');
-            this.setState({ ...stateInit, date_round1: dateRoundOne, date_round2: dateRoundTwo });
+            this.setState({ ...stateInit });
         } else {
             stateInit[name] = childAttr;
             this.setState({ ...stateInit });

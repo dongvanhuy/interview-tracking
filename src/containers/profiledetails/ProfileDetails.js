@@ -67,8 +67,6 @@ export class ProfileDetails extends Component {
             const dateRoundOne = moment(nextProps.profileDetails[0].date_round1).format('DD-MM-YYYY hh:mm');
             const dateRoundTwo = moment(nextProps.profileDetails[0].date_round2).format('DD-MM-YYYY hh:mm');
             this.setState({ ...nextProps.profileDetails[0], date_round1: dateRoundOne, date_round2: dateRoundTwo });
-            // this.setState({ date_round1: moment(nextProps.profileDetails[0].date_round1).format('MM-DD-YYYY') });
-            // console.log('no format', nextProps.profileDetails[0].date_round1);
         }
     }
     checkValidateForm(name, value) {
@@ -84,7 +82,6 @@ export class ProfileDetails extends Component {
     }
     handleChange = (e, childAttr) => {
         const { value, name } = e.target;
-        console.log('get value >>>', value);
         const stateInit = this.state;
         if (childAttr === undefined) {
             stateInit[name] = value;
@@ -94,7 +91,6 @@ export class ProfileDetails extends Component {
             this.setState({ ...stateInit });
         }
         this.checkValidateForm(name, value);
-        console.log(this.state);
     }
     submitForm = (e) => {
         e.preventDefault();
