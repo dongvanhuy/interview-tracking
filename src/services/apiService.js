@@ -27,7 +27,7 @@ export default class ApiService {
 
   static loadDataProfileThisMonth = () =>
     Observable.fromPromise(
-      axios.get(`${API_HOST}/api/interviewees/thismonth-roundone`, {
+      axios.get(`${API_HOST}/api/interviewees/listall-without-thismonth`, {
         data: {},
         headers: {
           "Content-Type": "application/json"
