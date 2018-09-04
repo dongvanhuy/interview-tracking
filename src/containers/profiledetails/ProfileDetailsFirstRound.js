@@ -132,7 +132,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={this.props.date_round1}
                                 dateFormat="DD-MM-YYY"
                                 timeFormat="hh:mm"
-                                defaultValue={new Date()}
+                                defaultValue="dd/mm/yyyy hh:mm"
                                 onChange={(e) => this.props.handleChange({ target: { value: moment(e).format('DD-MM-YYYY hh:mm'), name: 'date_round1' } })}
                             />
                             <FontAwesomeIcon
