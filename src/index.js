@@ -5,7 +5,8 @@ import { ConnectedRouter } from 'react-router-redux';
 import App from './App';
 import store, { history } from './store';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import { initialize } from './push-notification';
+import test from './serviceWorker';
+// import { initialize } from './push-notification';
 
 require('es6-shim');
 
@@ -18,4 +19,5 @@ export default ReactDOM.render(
     </Provider>,
     document.getElementsByClassName('root')[0] || document.createElement('div'),
 );
-initialize();
+// initialize();
+test;
