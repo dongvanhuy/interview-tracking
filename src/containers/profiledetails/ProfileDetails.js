@@ -2,14 +2,13 @@ import { connect } from 'react-redux';
 import PropsTypes from 'prop-types';
 import React, { Component } from 'react';
 import { push } from 'react-router-redux';
+import moment from 'moment';
 import { FormGroup, Grid } from 'react-bootstrap';
 import { loadProfileDetails, patchProfileDetails, resetStateProfileDetail, resetModalSuccess } from './ProfileDetailsAction';
 import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
 import { ProfileDetailsSecondRound } from './ProfileDetailsSecondRound';
 import LoadingInProgress from '../common/loadingPage/loadingInProgress';
-
 import SuccessModal from '../common/modalSuccess/modalSuccess';
-
 
 export class ProfileDetails extends Component {
     static propsTypes = {
@@ -24,7 +23,6 @@ export class ProfileDetails extends Component {
         super(props);
         this.checkValidateForm = this.checkValidateForm.bind(this);
         this.state = {
-            // lgShow: false,
             candidate_id: '',
             candidate_fullname: '',
             position_apply: '',
@@ -66,40 +64,11 @@ export class ProfileDetails extends Component {
     }
     componentWillReceiveProps(nextProps) {
         if (!this.props.profileDetails[0] && nextProps.profileDetails[0]) {
-            this.setState({ ...nextProps.profileDetails[0] });
-            // this.convertDataFromAPI();
+            const dateRoundOne = moment(nextProps.profileDetails[0].date_round1).format('DD-MM-YYYY hh:mm');
+            const dateRoundTwo = moment(nextProps.profileDetails[0].date_round2).format('DD-MM-YYYY hh:mm');
+            this.setState({ ...nextProps.profileDetails[0], date_round1: dateRoundOne, date_round2: dateRoundTwo });
         }
     }
-
-    // convertDataFromAPI() {
-    //     const techcompetency = document.getElementsByName('tech_competency_round1');
-    //     const cuturalFitLevelRound1 = document.getElementsByName('cultural_fit_round1');
-    //     const techcompetency2 = document.getElementsByName('tech_competency_round2');
-    //     const cuturalFitLevelRound2 = document.getElementsByName('cultural_fit_round2');
-    //     const businessAcumentlevel = document.getElementsByName('business_acument');
-    //     const softSkillslevel = document.getElementsByName('soft_skill');
-    //     const peopleManagementlevel = document.getElementsByName('people_management');
-    //     const arrayOfData = [techcompetency, cuturalFitLevelRound1,
-    //         techcompetency2, cuturalFitLevelRound2, businessAcumentlevel,
-    //         softSkillslevel, peopleManagementlevel];
-    //     const arrayOfTagsName = ['tech_competency_round1', 'cultural_fit_round1',
-    //         'tech_competency_round2', 'cultural_fit_round2', 'business_acument',
-    //         'soft_skill', 'people_management'];
-    //     for (let i = 0; i < arrayOfData.length; i += 1) {
-    //         const data = arrayOfData[i];
-    //         if (this.state[arrayOfTagsName[i]] === 'Limited') {
-    //             data[0].checked = true;
-    //         } else if (this.state[arrayOfTagsName[i]] === 'Basic') {
-    //             data[1].checked = true;
-    //         } else if (this.state[arrayOfTagsName[i]] === 'Acceptable') {
-    //             data[2].checked = true;
-    //         } else if (this.state[arrayOfTagsName[i]] === 'Advanced') {
-    //             data[3].checked = true;
-    //         } else if (this.state[arrayOfTagsName[i]] === 'Exceptional') {
-    //             data[4].checked = true;
-    //         }
-    //     }
-    // }
     checkValidateForm(name, value) {
         const candidateName = document.getElementsByName('candidate_fullname');
         if (value === '' && name === 'candidate_fullname') {
@@ -161,7 +130,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
     loadProfileDetails,
     patchProfileDetails,
-    push, // ACTION GUI EPIC GUI API
+    push,
     resetStateProfileDetail,
     resetModalSuccess,
 };
