@@ -23,5 +23,6 @@
       "platform": "tracking",
       "id": "com.dxc.techonology"
     }
-  ]
+  ],
+  "gcm_sender_id": "625437047446"
 }
