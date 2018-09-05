@@ -8,7 +8,6 @@
     "start": "react-scripts start",
     "start-dev": "npm-run-all -p watch-css start",
     "build": "react-scripts build && workbox generateSW workbox-config.js",
-    "build2": "react-scripts build",
     "all": "npm run build-css && npm run build",
     "lint": "eslint ./src/**/*.js ./src/*.js",
     "lint-sass": "sass-lint -c .sass-lint.yml -v -q",

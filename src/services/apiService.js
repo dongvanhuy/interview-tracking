@@ -50,11 +50,12 @@ export default class ApiService {
       }
     })
   static postDataProfileDetails = (data) => Observable.fromPromise(
-    axios.post(`${API_HOST}/api/interviewees/create`, data), {
+    axios.post(`${API_HOST}/api/interviewees/create`, data , {
       data: {},
       headers: {
         'Content-Type': 'application/json'
       }
     })
+  )
 }
 
