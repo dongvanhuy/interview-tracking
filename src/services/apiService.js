@@ -3,6 +3,7 @@ import axios from "axios";
 import config from "../config";
 
 const API_HOST = config.apiService.host;
+// const API_HOST2 = config.apiService2.host;
 export default class ApiService {
   static loadDataCandidate = () =>
     Observable.fromPromise(
@@ -34,6 +35,16 @@ export default class ApiService {
       })
     );
 
+    static loadDataProfileThisOther = () =>
+    Observable.fromPromise(
+      axios.get(`${API_HOST}/api/interviewees/listall-without-thismonth`, {
+        data: {},
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+    );
+
   static loadDataProfileDetails = (data) => Observable.fromPromise(
     axios.get(`${API_HOST}/api/interviewees/info/${data}`, {
       data: {},
@@ -50,12 +61,11 @@ export default class ApiService {
       }
     })
   static postDataProfileDetails = (data) => Observable.fromPromise(
-    axios.post(`${API_HOST}/api/interviewees/create`, data , {
+    axios.post(`${API_HOST}/api/interviewees/create`, data), {
       data: {},
       headers: {
         'Content-Type': 'application/json'
       }
     })
-  )
 }
 

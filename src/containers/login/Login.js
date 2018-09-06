@@ -30,7 +30,7 @@ export class Login extends Component {
           const err = authContext.getLoginError();
           if (err) {
               // TODO: Handle errors signing in and getting tokens
-              // console.log('error', `${err}`);
+              console.log('error', `${err}`);
           }
       } else if (user) {
           sessionStorage.setItem('surname', user.profile.family_name);

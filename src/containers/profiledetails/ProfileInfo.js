@@ -2,11 +2,9 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { push } from 'react-router-redux';
 import { FormGroup, Grid } from 'react-bootstrap';
-import moment from 'moment';
-import { postProfileDetails, resetModalSuccess } from './ProfileDetailsAction';
+import { postProfileDetails } from './ProfileDetailsAction';
 import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
 import { ProfileDetailsSecondRound } from './ProfileDetailsSecondRound';
-import SuccessModal from '../common/modalSuccess/modalSuccess';
 
 
 export class ProfileInfo extends Component {
@@ -14,6 +12,7 @@ export class ProfileInfo extends Component {
         super(props);
         this.checkValidateForm = this.checkValidateForm.bind(this);
         this.state = {
+            // lgShow: false,
             candidate_id: '',
             candidate_fullname: '',
             position_apply: '',
@@ -65,8 +64,6 @@ export class ProfileInfo extends Component {
         const stateInit = this.state;
         if (childAttr === undefined) {
             stateInit[name] = value;
-            if (name === 'date_round1') stateInit.date_round1 = moment(value).format('DD-MM-YYYY hh:mm');
-            if (name === 'date_round2') stateInit.date_round2 = moment(value).format('DD-MM-YYYY hh:mm');
             this.setState({ ...stateInit });
         } else {
             stateInit[name] = childAttr;
@@ -86,31 +83,26 @@ export class ProfileInfo extends Component {
     }
     render() {
         return (
-            <React.Fragment>
-                <form className="profile-details" onSubmit={this.submitForm}>
-                    <Grid>
-                        <ProfileDetailsFirstRound handleChange={this.handleChange} {...this.state} />
-                        <ProfileDetailsSecondRound handleChange={this.handleChange} {...this.state} />
-                        <FormGroup className="profile-details__btn">
-                            <button type="button" className="profile-details__cancel" onClick={() => this.props.push('/profile')}>Cancel</button>
-                            <button type="submit" className="profile-details__submit">Add</button>
-                        </FormGroup>
-                    </Grid>
-                </form>
-                <SuccessModal show={this.props.show} handleClose={() => this.props.resetModalSuccess()} handleBackToList={() => this.props.push('/profile')} messages="You create candidate successfull !" />
-            </React.Fragment>
+            <form className="profile-details" onSubmit={this.submitForm}>
+                <Grid>
+                    <ProfileDetailsFirstRound handleChange={this.handleChange} {...this.state} />
+                    <ProfileDetailsSecondRound handleChange={this.handleChange} {...this.state} />
+                    <FormGroup className="profile-details__btn">
+                        <button type="button" className="profile-details__cancel" onClick={() => this.props.push('/profile')}>Cancel</button>
+                        <button type="submit" className="profile-details__submit">Add</button>
+                    </FormGroup>
+                </Grid>
+            </form>
         );
     }
 }
 
 const mapStateToProps = state => ({
     profileDetails: state.profileDetails.dataProfileDetails,
-    show: state.profileDetails.updateSuccess,
 });
 const mapDispatchToProps = {
     postProfileDetails,
     push, // ACTION GUI EPIC GUI API
-    resetModalSuccess,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileInfo);

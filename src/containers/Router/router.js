@@ -10,6 +10,7 @@ import Header from '../header/header';
 
 export class Routes extends Component {
     render() {
+        console.log(this.props.loginStatus);
         let routes = (
             <Switch>
                 <Route exact path="/" component={Login} />

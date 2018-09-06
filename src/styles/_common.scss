@@ -17,12 +17,9 @@
 
 body {
   font-family: 'GTWalsheimProRegular', Arial, sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   background: $color-white;
   height: 100vh;
-  @include tablet {
-    font-size: 16px;
-  }
 }
 
 button {
@@ -51,7 +48,7 @@ button {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 999999;
+  z-index: 10;
 
   &__content {
     display: flex;
@@ -87,32 +84,15 @@ button {
 
     .user-name {
       font-family: 'GTWalsheimProRegular', Arial, sans-serif;
+      font-size: 18px;
       padding: 5px;
-      font-size: 15px;
-      &:hover, &:active {
-        background: #fff;
-        box-shadow: none;
-        color: darkgrey;
-      }
-    }
-  }
-
-  &__mobile {
-    position: relative;
-    .list-group {
-      position: absolute;
-      width: 200px;
-      top: 90%;
-      right: 0;
-      span.list-group-item {
-        text-align: center;
-      }
+      border: none;
     }
   }
 
   &__title {
     font-family: 'GTWalsheimProBold', Arial, sans-serif;
-    font-size: 18px;
+    font-size: 15px;
     margin-left: 20px;
     @include tablet {
       font-size: 30px;
@@ -152,45 +132,5 @@ main {
 
   &__content {
     width: 200px;
-  }
-}
-
-.success-modal {
-  .modal-content {
-    background-color: $color-green;
-  }
-
-  .modal-header {
-    
-    color: $color-white;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-  }
-
-  .modal-body {
-    background-color: $color-white;
-    min-height: 200px;
-  }
-
-  .modal-footer {
-    background-color: $color-white;
-  }
-
-  .modal-title {
-    line-height: 1;
-  }
-}
-
-.date-time {
-  &__one {
-    position: relative;
-  }
-
-  &__icon {
-    cursor: pointer;
-    position: absolute;
-    right: 5px;
-    top: 30px;
-    font-size: 24px;
   }
 }
