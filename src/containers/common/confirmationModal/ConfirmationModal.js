@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { Modal, Button } from 'react-bootstrap/lib';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
-export class SuccessModal extends Component {
+export default class ConfirmationModal extends Component {
     defaultProps = {
         show: false,
         messages: '',
         handleClose: () => {},
         handleBackToList: () => {},
+
     }
 
     propsTypes = {
@@ -18,23 +20,24 @@ export class SuccessModal extends Component {
         handleBackToList: PropTypes.func,
     }
 
+    notify = () => toast('Wow so easy !');
+
     render() {
         return (
             <Modal show={this.props.show} onHide={this.props.handleClose} className="success-modal">
                 <Modal.Header closeButton>
-                    <img className="icon" alt="" />
-                    <Modal.Title>Success</Modal.Title>
+                    <Modal.Title>Confirmation</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {this.props.messages}
+                    <h3>{this.props.messages}</h3>
+                    <p>{this.props.ps}</p>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={this.props.handleBackToList}>Back to list</Button>
-                    <Button onClick={this.props.handleClose}>Close</Button>
+                    <Button onClick={this.props.handleBackToList} className="success-modal__button-yellow">OK</Button>
+                    <Button onClick={this.props.handleClose}>CANCEL</Button>
                 </Modal.Footer>
             </Modal>
         );
     }
 }
 
-export default SuccessModal;
