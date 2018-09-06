@@ -1,6 +1,6 @@
 import { combineEpics } from 'redux-observable';
-import { PROFILE_LOAD, PROFILE_LOAD_THISWEEK, PROFILE_LOAD_THISMONTH } from '../../store/actionTypes';
-import { loadProfileSuccess, loadProfileThisWeekSuccess, loadProfileThisMonthSuccess } from './ProfileAction';
+import { PROFILE_LOAD, PROFILE_LOAD_THISWEEK, PROFILE_LOAD_THISMONTH, PROFILE_LOAD_THISOTHER } from '../../store/actionTypes';
+import { loadProfileSuccess, loadProfileThisWeekSuccess, loadProfileThisMonthSuccess, loadProfileThisOtherSuccess } from './ProfileAction';
 
 export const loadProfileEpic = (action$, store, { loadDataCandidateService }) =>
     action$.ofType(PROFILE_LOAD).switchMap(() =>
@@ -26,6 +26,16 @@ export const loadProfileThisMonthEpic = (
     action$.ofType(PROFILE_LOAD_THISMONTH).switchMap(() =>
         loadDataProfileThisMonthService()
             .map(res => loadProfileThisMonthSuccess(res))
+            .catch(err => console.log(err)));
+
+export const loadProfileThisOtherEpic = (
+    action$,
+    store,
+    { loadDataProfileThisOtherService },
+) =>
+    action$.ofType(PROFILE_LOAD_THISOTHER).switchMap(() =>
+        loadDataProfileThisOtherService()
+            .map(res => loadProfileThisOtherSuccess(res))
             .catch(err => console.log(err)));
 
 export default combineEpics(
