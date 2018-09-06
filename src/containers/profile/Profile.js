@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropsTypes from 'prop-types';
 import FontAwesomeIcon from 'react-fontawesome';
 import {
-    // Table,
     Grid,
     Row,
     Button,
