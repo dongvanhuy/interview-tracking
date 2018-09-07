@@ -1,25 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Button } from 'react-bootstrap/lib';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
 
 export default class ConfirmationModal extends Component {
   defaultProps = {
       show: false,
       messages: '',
       handleClose: () => {},
-      handleBackToList: () => {},
+      handleOK: () => {},
   };
 
   propsTypes = {
       show: PropTypes.bool,
       messages: PropTypes.string,
       handleClose: PropTypes.func,
-      handleBackToList: PropTypes.func,
+      handleOK: PropTypes.func,
   };
-
-  notify = () => { toast('Wow so easy !'); console.log('>>>>>>>>>> test'); };
 
   render() {
       return (
@@ -38,18 +34,15 @@ export default class ConfirmationModal extends Component {
                   </Modal.Body>
                   <Modal.Footer>
                       <Button
-                          onClick={() => {
-                              this.props.handleBackToList();
-                              this.notify();
-                          }}
+                          onClick={() => this.props.handleOK()}
                           className="success-modal__button-yellow"
                       >
-            OK
+              OK
                       </Button>
                       <Button onClick={this.props.handleClose}>CANCEL</Button>
+                      {/* <Button onClick={() => this.notify()}>CANCEL1</Button> */}
                   </Modal.Footer>
               </Modal>
-              <ToastContainer />
           </React.Fragment>
       );
   }

@@ -56,7 +56,7 @@ button {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 999999;
+  z-index: 99999;
 
   &__content {
     display: flex;
@@ -215,5 +215,27 @@ main {
     right: 5px;
     top: 30px;
     font-size: 24px;
+  }
+}
+
+.Toastify {
+  position: absolute;
+  top: 0;
+  z-index: 999999;
+}
+
+.loading-block-prof {
+  height: 100%;
+  background: lightgrey;
+  opacity: 0.6;
+  width: 100%;
+  position: fixed;
+  z-index: 999999;
+  top: 0;
+  &__spinner {
+    position: absolute;
+    text-align: center;
+    bottom: 50%;
+    left: 50%;
   }
 }
