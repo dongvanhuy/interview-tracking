@@ -84,7 +84,7 @@ export class Profile extends Component {
                 <tbody>
                     <tr>
                         <td colSpan="7" style={{ textAlign: 'center' }}>
-                      Today, No Candidate.
+                            Today, No Candidate.
                         </td>
                     </tr>
                 </tbody>
@@ -106,7 +106,7 @@ export class Profile extends Component {
             (
                 <tr key={uid()}>
                     <td>{index + 1}</td>
-                    <td>{moment(item.date_round1).format('DD-MM-YYYY')}</td>
+                    <td>{moment(item.date_meeting).format('DD-MM-YYYY')}</td>
                     <td>{item.candidate_fullname}</td>
                     <td>{item.recruiter}</td>
                     <td>{item.position_apply}</td>
@@ -118,7 +118,7 @@ export class Profile extends Component {
             (
                 <tr key={uid()}>
                     <td>{index + 1}</td>
-                    <td>{moment(item.date_round1).format('DD-MM-YYYY')}</td>
+                    <td>{moment(item.date_meeting).format('DD-MM-YYYY')}</td>
                     <td>{item.candidate_fullname}</td>
                     <td>{item.recruiter}</td>
                     <td>{item.position_apply}</td>
@@ -130,7 +130,7 @@ export class Profile extends Component {
             (
                 <tr key={uid()}>
                     <td>{index + 1}</td>
-                    <td>{moment(item.date_round1).format('DD-MM-YYYY')}</td>
+                    <td>{moment(item.date_meeting).format('DD-MM-YYYY')}</td>
                     <td>{item.candidate_fullname}</td>
                     <td>{item.recruiter}</td>
                     <td>{item.position_apply}</td>
@@ -148,10 +148,10 @@ export class Profile extends Component {
                                     <h2 className="list-table__title">Today</h2>
                                 </Col>
                                 <Col xs={12} sm={12} md={12} lg={12}>
-                                    { profileToday.length < 1 &&
+                                    {profileToday.length < 1 &&
                                         this.displayNoCandidate()
                                     }
-                                    { profileToday.length >= 1 &&
+                                    {profileToday.length >= 1 &&
                                         <Table striped bordered condensed hover responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
                                             <thead>
                                                 <tr>
@@ -164,7 +164,7 @@ export class Profile extends Component {
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>{ rows }</tbody>
+                                            <tbody>{rows}</tbody>
                                         </Table>
                                     }
                                 </Col>
@@ -176,10 +176,10 @@ export class Profile extends Component {
                                 </Col>
 
                                 <Col xs={12} sm={12} md={12} lg={12}>
-                                    { profilethisweek.length < 1 &&
+                                    {profilethisweek.length < 1 &&
                                         this.callLoading()
                                     }
-                                    { profilethisweek.length > 1 &&
+                                    {profilethisweek.length > 1 &&
                                         <Table striped bordered condensed hover responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
                                             <thead>
                                                 <tr>
@@ -206,10 +206,10 @@ export class Profile extends Component {
                                 </Col>
 
                                 <Col xs={12} sm={12} md={12} lg={12}>
-                                    { profilethisweek.length < 1 &&
+                                    {profilethisweek.length < 1 &&
                                         this.callLoading()
                                     }
-                                    { profilethismonth.length > 1 &&
+                                    {profilethismonth.length > 1 &&
                                         <Table striped bordered condensed hover responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
                                             <thead>
                                                 <tr>
