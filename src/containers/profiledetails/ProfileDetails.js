@@ -27,6 +27,7 @@ export class ProfileDetails extends Component {
             candidate_fullname: '',
             position_apply: '',
             recruiter: '',
+            date_meeting: '',
             eng_level: '',
             eng_level_cmt: '',
             jury_round1_01: '',
@@ -64,9 +65,12 @@ export class ProfileDetails extends Component {
     }
     componentWillReceiveProps(nextProps) {
         if (!this.props.profileDetails[0] && nextProps.profileDetails[0]) {
-            const dateRoundOne = moment(nextProps.profileDetails[0].date_round1).format('DD-MM-YYYY hh:mm');
-            const dateRoundTwo = moment(nextProps.profileDetails[0].date_round2).format('DD-MM-YYYY hh:mm');
-            this.setState({ ...nextProps.profileDetails[0], date_round1: dateRoundOne, date_round2: dateRoundTwo });
+            const dateRoundOne = moment(nextProps.profileDetails[0].date_round1, 'YYYY-MM-DD HH:ss');
+            const dateRoundTwo = moment(nextProps.profileDetails[0].date_round2, 'YYYY-MM-DD HH:ss');
+            const dateMeeting = moment(nextProps.profileDetails[0].date_meeting, 'YYYY-MM-DD HH:ss');
+            this.setState({
+                ...nextProps.profileDetails[0], date_round1: dateRoundOne, date_round2: dateRoundTwo, date_meeting: dateMeeting,
+            });
         }
     }
     checkValidateForm(name, value) {
@@ -99,6 +103,13 @@ export class ProfileDetails extends Component {
         if (errorMessages.length > 0) {
             errorMessages[0].focus();
         } else if (this.props.candidateId !== null) {
+            const convertDateMeetingHours = moment(this.state.date_meeting).add(7, 'hours');
+            const convertDateRoundOneHours = moment(this.state.date_round1).add(7, 'hours');
+            const convertDateRoundTwoHours = moment(this.state.date_round2).add(7, 'hours');
+            const stateInit = this.state;
+            stateInit.date_meeting = convertDateMeetingHours;
+            stateInit.date_round1 = convertDateRoundOneHours;
+            stateInit.date_round2 = convertDateRoundTwoHours;
             this.props.patchProfileDetails(this.state);
         }
     }

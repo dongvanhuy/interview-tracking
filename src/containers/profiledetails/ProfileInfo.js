@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { push } from 'react-router-redux';
-import { FormGroup, Grid } from 'react-bootstrap';
 import moment from 'moment';
+import { FormGroup, Grid } from 'react-bootstrap';
 import { postProfileDetails, resetModalSuccess } from './ProfileDetailsAction';
 import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
 import { ProfileDetailsSecondRound } from './ProfileDetailsSecondRound';
@@ -18,6 +18,7 @@ export class ProfileInfo extends Component {
             candidate_fullname: '',
             position_apply: '',
             recruiter: '',
+            date_meeting: '',
             eng_level: '',
             eng_level_cmt: '',
             jury_round1_01: '',
@@ -65,8 +66,6 @@ export class ProfileInfo extends Component {
         const stateInit = this.state;
         if (childAttr === undefined) {
             stateInit[name] = value;
-            if (name === 'date_round1') stateInit.date_round1 = moment(value).format('DD-MM-YYYY hh:mm');
-            if (name === 'date_round2') stateInit.date_round2 = moment(value).format('DD-MM-YYYY hh:mm');
             this.setState({ ...stateInit });
         } else {
             stateInit[name] = childAttr;
@@ -81,7 +80,14 @@ export class ProfileInfo extends Component {
         if (errorMessages.length > 0) {
             errorMessages[0].focus();
         } else {
-            this.props.postProfileDetails(this.state);
+            const convertDateMeetingHours = moment(this.state.date_meeting).add(7, 'hours');
+            const convertDateRoundOneHours = moment(this.state.date_round1).add(7, 'hours');
+            const convertDateRoundTwoHours = moment(this.state.date_round2).add(7, 'hours');
+            const stateInit = this.state;
+            stateInit.date_meeting = convertDateMeetingHours;
+            stateInit.date_round1 = convertDateRoundOneHours;
+            stateInit.date_round2 = convertDateRoundTwoHours;
+            this.props.postProfileDetails(stateInit);
         }
     }
     render() {
@@ -109,7 +115,7 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = {
     postProfileDetails,
-    push, // ACTION GUI EPIC GUI API
+    push,
     resetModalSuccess,
 };
 

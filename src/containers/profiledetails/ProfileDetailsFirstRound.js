@@ -7,11 +7,16 @@ import moment from 'moment';
 export class ProfileDetailsFirstRound extends Component {
     state = {
         showTimeRoundOne: false,
+        showTimeDateMeeting: false,
     }
 
     showTimeOne = () => {
         const show = this.state.showTimeRoundOne;
         this.setState({ showTimeRoundOne: !show });
+    }
+    showDateMeeting = () => {
+        const show = this.state.showTimeDateMeeting;
+        this.setState({ showTimeDateMeeting: !show });
     }
 
     render() {
@@ -38,6 +43,25 @@ export class ProfileDetailsFirstRound extends Component {
                                 name="position_apply"
                                 value={this.props.position_apply}
                                 onChange={(e) => this.props.handleChange(e)}
+                            />
+                        </FormGroup>
+                        <FormGroup className="date-time__one">
+                            <ControlLabel>Date Meeting</ControlLabel>
+                            <Datetime
+                                inputProps={{ disabled: true }}
+                                open={this.state.showTimeDateMeeting}
+                                value={this.props.date_meeting}
+                                dateFormat="DD-MM-YYYY"
+                                timeFormat="HH:mm"
+                                defaultValue="dd/mm/yyyy HH:mm"
+                                onChange={(e) => this.props.handleChange({ target: { value: moment(e, 'DD-MM-YYYY'), name: 'date_meeting' } })}
+                            />
+                            <FontAwesomeIcon
+                                name="calendar"
+                                size="2x"
+                                className="date-time__icon"
+                                onClick={() => this.showDateMeeting()
+                                }
                             />
                         </FormGroup>
                         <FormGroup>
@@ -128,18 +152,20 @@ export class ProfileDetailsFirstRound extends Component {
                         <FormGroup className="date-time__one">
                             <ControlLabel>Date</ControlLabel>
                             <Datetime
+                                inputProps={{ disabled: true }}
                                 open={this.state.showTimeRoundOne}
                                 value={this.props.date_round1}
-                                dateFormat="DD-MM-YYY"
-                                timeFormat="hh:mm"
-                                defaultValue="dd/mm/yyyy hh:mm"
-                                onChange={(e) => this.props.handleChange({ target: { value: moment(e).format('DD-MM-YYYY hh:mm'), name: 'date_round1' } })}
+                                dateFormat="DD-MM-YYYY"
+                                timeFormat="HH:mm"
+                                defaultValue="dd/mm/yyyy HH:mm"
+                                onChange={(e) => this.props.handleChange({ target: { value: moment(e, 'DD-MM-YYYY'), name: 'date_round1' } })}
                             />
                             <FontAwesomeIcon
                                 name="calendar"
                                 size="2x"
                                 className="date-time__icon"
-                                onClick={() => this.showTimeOne()}
+                                onClick={() => this.showTimeOne()
+                                }
                             />
                         </FormGroup>
                     </Col>

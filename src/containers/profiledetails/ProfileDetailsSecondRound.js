@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import { FormGroup, FormControl, ControlLabel, Row, Col } from 'react-bootstrap';
+import Datetime from 'react-datetime';
+import FontAwesomeIcon from 'react-fontawesome';
+import moment from 'moment';
 
 export class ProfileDetailsSecondRound extends Component {
+    state = {
+        showTimeRoundTwo: false,
+    }
+
+    showTimeTwo = () => {
+        const show = this.state.showTimeRoundOne;
+        this.setState({ showTimeRoundTwo: !show });
+    }
     render() {
         return (
             <React.Fragment>
@@ -26,13 +37,21 @@ export class ProfileDetailsSecondRound extends Component {
                         </FormGroup>
                     </Col>
                     <Col xs={12} sm={3} md={3} lg={3}>
-                        <FormGroup>
+                        <FormGroup className="date-time__two">
                             <ControlLabel>Date</ControlLabel>
-                            <FormControl
-                                onChange={(e) => this.props.handleChange(e)}
-                                name="date_round2"
-                                type="date"
+                            <Datetime
+                                open={this.state.showTimeRoundTwo}
                                 value={this.props.date_round2}
+                                dateFormat="DD-MM-YYYY"
+                                timeFormat="HH:mm"
+                                defaultValue="dd/mm/yyyy HH:mm"
+                                onChange={(e) => this.props.handleChange({ target: { value: moment(e, 'DD-MM-YYYY'), name: 'date_round2' } })}
+                            />
+                            <FontAwesomeIcon
+                                name="calendar"
+                                size="2x"
+                                className="date-time__icon"
+                                onClick={() => this.showTimeTwo()}
                             />
                         </FormGroup>
                     </Col>
