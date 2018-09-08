@@ -67,6 +67,31 @@ export class Profile extends Component {
         </div>
     )
 
+    displayNoCandidate = () => (
+        <div className="loading-block">
+            <Table bordered responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Time</th>
+                        <th>Name</th>
+                        <th>Recruiter</th>
+                        <th>Skill</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colSpan="7" style={{ textAlign: 'center' }}>
+                      Today, No Candidate.
+                        </td>
+                    </tr>
+                </tbody>
+            </Table>
+        </div>
+    )
+
     addProfileDetail = () => {
         this.props.addProfile();
         this.props.resetModalSuccess();
@@ -124,7 +149,7 @@ export class Profile extends Component {
                                 </Col>
                                 <Col xs={12} sm={12} md={12} lg={12}>
                                     { profileToday.length < 1 &&
-                                        this.callLoading()
+                                        this.displayNoCandidate()
                                     }
                                     { profileToday.length >= 1 &&
                                         <Table striped bordered condensed hover responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>

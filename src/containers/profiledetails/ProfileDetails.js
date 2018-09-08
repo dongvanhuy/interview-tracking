@@ -136,6 +136,7 @@ const mapStateToProps = state => ({
     profileDetails: state.profileDetails.dataProfileDetails,
     show: state.profileDetails.updateSuccess,
     candidateId: state.router.location.state ? state.router.location.state.candidateId : state.profile.profileSelectedId,
+    statusRes: state.profileDetails.dataProfileRes.status,
 });
 
 const mapDispatchToProps = {
