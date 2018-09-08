@@ -62,11 +62,10 @@ export class ProfileInfo extends Component {
         ) {
             this.setState({ loading: false });
             toast.success('ADD SUCCESSFULLY', {
-                autoClose: 1500,
+                autoClose: 2000,
                 hideProgressBar: true,
             });
         } else {
-            console.log('>>>>>>>>>>>>test loading');
             this.setState({ loading: true });
         }
     }
@@ -135,7 +134,6 @@ export class ProfileInfo extends Component {
   )
 
   render() {
-      console.log('>>>>>>>>>>>> state loading', this.state.loading);
       return (
           <React.Fragment>
               { this.state.loading && this.callLoading() }
