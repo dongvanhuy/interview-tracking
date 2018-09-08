@@ -44,7 +44,7 @@ export class Profile extends Component {
 
   viewDetailId = id => {
       this.props.viewDetailDataId(id);
-      this.props.resetModalSuccess();
+      //   this.props.resetModalSuccess();
       this.props.push({
           pathname: '/profile-details',
           state: {
@@ -82,39 +82,6 @@ export class Profile extends Component {
       </div>
   );
 
-  displayNoCandidate = () => (
-      <div className="loading-block">
-          <Table
-              bordered
-              responsive
-              className="list-cadidate-table"
-              xs={12}
-              sm={12}
-              md={12}
-              lg={12}
-          >
-              <thead>
-                  <tr>
-                      <th>#</th>
-                      <th>Time</th>
-                      <th>Name</th>
-                      <th>Recruiter</th>
-                      <th>Skill</th>
-                      <th>Status</th>
-                      <th>Action</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                      <td colSpan="7" style={{ textAlign: 'center' }}>
-              Today, No Candidate.
-                      </td>
-                  </tr>
-              </tbody>
-          </Table>
-      </div>
-  );
-
   addProfileDetail = () => {
       this.props.addProfile();
       this.props.resetModalSuccess();
@@ -122,10 +89,21 @@ export class Profile extends Component {
   };
 
   render() {
-      // const selectedDate = this.state.startDate.format('LLL');
       const {
-          profileToday, profilethisweek, profilethismonth, resCode,
+          profileToday,
+          profilethisweek,
+          profilethismonth,
+          resCode,
       } = this.props;
+      console.log('>>>>>>>>>> today', this.props.profileToday.length);
+
+      const rowsDefault = (
+          <tr key={uid()}>
+              <td colSpan={7} style={{ textAlign: 'center' }}>
+          Today, No Candidate.
+              </td>
+          </tr>
+      );
 
       const rows = profileToday.map((item, index) => (
           <tr key={uid()}>
@@ -197,7 +175,7 @@ export class Profile extends Component {
                                   <h2 className="list-table__title">Today</h2>
                               </Col>
                               <Col xs={12} sm={12} md={12} lg={12}>
-                                  {resCode.length !== 200 ? (
+                                  {resCode !== 200 ? (
                                       this.callLoading()
                                   ) : (
                                       <Table
@@ -223,7 +201,9 @@ export class Profile extends Component {
                                                   <th>Action</th>
                                               </tr>
                                           </thead>
-                                          <tbody>{rows}</tbody>
+                                          <tbody>
+                                              {profileToday.length < 1 ? rowsDefault : rows}
+                                          </tbody>
                                       </Table>
                                   )}
                               </Col>
@@ -235,8 +215,9 @@ export class Profile extends Component {
                               </Col>
 
                               <Col xs={12} sm={12} md={12} lg={12}>
-                                  {profilethisweek.length < 1 && this.callLoading()}
-                                  {profilethisweek.length > 1 && (
+                                  {resCode !== 200 ? (
+                                      this.callLoading()
+                                  ) : (
                                       <Table
                                           striped
                                           bordered
@@ -260,7 +241,11 @@ export class Profile extends Component {
                                                   <th>Action</th>
                                               </tr>
                                           </thead>
-                                          <tbody>{rowsthisweek}</tbody>
+                                          <tbody>
+                                              {profilethisweek.length < 1
+                                                  ? rowsDefault
+                                                  : rowsthisweek}
+                                          </tbody>
                                       </Table>
                                   )}
                               </Col>
@@ -272,8 +257,9 @@ export class Profile extends Component {
                               </Col>
 
                               <Col xs={12} sm={12} md={12} lg={12}>
-                                  {profilethisweek.length < 1 && this.callLoading()}
-                                  {profilethismonth.length > 1 && (
+                                  {resCode !== 200 ? (
+                                      this.callLoading()
+                                  ) : (
                                       <Table
                                           striped
                                           bordered
@@ -297,7 +283,11 @@ export class Profile extends Component {
                                                   <th>Action</th>
                                               </tr>
                                           </thead>
-                                          <tbody>{rowsthismonth}</tbody>
+                                          <tbody>
+                                              {profilethismonth.length < 1
+                                                  ? rowsDefault
+                                                  : rowsthismonth}
+                                          </tbody>
                                       </Table>
                                   )}
                               </Col>
