@@ -1,13 +1,15 @@
-import { connect } from 'react-redux';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import moment from 'moment';
 import { FormGroup, Grid } from 'react-bootstrap';
-import { postProfileDetails, resetModalSuccess } from './ProfileDetailsAction';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
+import { postProfileDetails } from './ProfileDetailsAction';
 import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
 import { ProfileDetailsSecondRound } from './ProfileDetailsSecondRound';
-import SuccessModal from '../common/modalSuccess/modalSuccess';
-
+import ConfirmationModal from '../common/confirmationModal/ConfirmationModal';
+import loading from '../../assets/images/loading.svg';
 
 export class ProfileInfo extends Component {
     constructor(props) {
@@ -48,8 +50,27 @@ export class ProfileInfo extends Component {
             title_round2: '',
             round2_status: '',
             cmt_result_round2: '',
+            showConfirmation: false,
+            loading: false,
         };
     }
+    componentWillReceiveProps(nextProps) {
+        if (
+            this.props.dataProfileRes !== nextProps.dataProfileRes &&
+      nextProps.dataProfileRes &&
+      nextProps.dataProfileRes.status === 200
+        ) {
+            this.setState({ loading: false });
+            toast.success('ADD SUCCESSFULLY', {
+                autoClose: 2000,
+                hideProgressBar: true,
+            });
+        } else {
+            this.setState({ loading: true });
+        }
+    }
+
+
     checkValidateForm(name, value) {
         const candidateName = document.getElementsByName('candidate_fullname');
         if (value === '' && name === 'candidate_fullname') {
@@ -90,20 +111,65 @@ export class ProfileInfo extends Component {
             this.props.postProfileDetails(stateInit);
         }
     }
+
+    handleOK = () => {
+        this.setState({
+            showConfirmation: false,
+        });
+        this.props.postProfileDetails(this.state);
+        this.setState({
+            loading: true,
+        });
+    };
+
+    callLoading = () => (
+        <div className="loading-block-prof">
+            <div className="loading-block-prof__spinner">
+                <img src={loading} alt="loading" />
+            </div>
+        </div>
+    )
+
     render() {
         return (
             <React.Fragment>
-                <form className="profile-details" onSubmit={this.submitForm}>
+                { this.state.loading && this.callLoading() }
+                <form className="profile-details">
                     <Grid>
-                        <ProfileDetailsFirstRound handleChange={this.handleChange} {...this.state} />
-                        <ProfileDetailsSecondRound handleChange={this.handleChange} {...this.state} />
+                        <ProfileDetailsFirstRound
+                            handleChange={this.handleChange}
+                            {...this.state}
+                        />
+                        <ProfileDetailsSecondRound
+                            handleChange={this.handleChange}
+                            {...this.state}
+                        />
                         <FormGroup className="profile-details__btn">
-                            <button type="button" className="profile-details__cancel" onClick={() => this.props.push('/profile')}>Cancel</button>
-                            <button type="submit" className="profile-details__submit">Add</button>
+                            <button
+                                type="button"
+                                className="profile-details__cancel"
+                                onClick={() => this.props.push('/profile')}
+                            >
+                Cancel
+                            </button>
+                            <button
+                                type="button"
+                                className="profile-details__submit"
+                                onClick={e => this.submitForm(e)}
+                            >
+                SAVE
+                            </button>
                         </FormGroup>
                     </Grid>
                 </form>
-                <SuccessModal show={this.props.show} handleClose={() => this.props.resetModalSuccess()} handleBackToList={() => this.props.push('/profile')} messages="You create candidate successfull !" />
+                <ConfirmationModal
+                    show={this.state.showConfirmation}
+                    handleClose={() => this.setState({ showConfirmation: false })}
+                    handleOK={() => this.handleOK()}
+                    messages="Are you sure to do this ?"
+                    ps="This action can't undo. Please determine clearly before clicking OK."
+                />
+                <ToastContainer />
             </React.Fragment>
         );
     }
@@ -112,11 +178,12 @@ export class ProfileInfo extends Component {
 const mapStateToProps = state => ({
     profileDetails: state.profileDetails.dataProfileDetails,
     show: state.profileDetails.updateSuccess,
+    dataProfileRes: state.profileDetails.dataProfileRes,
 });
+
 const mapDispatchToProps = {
     postProfileDetails,
     push,
-    resetModalSuccess,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileInfo);
