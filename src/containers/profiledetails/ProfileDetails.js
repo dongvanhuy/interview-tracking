@@ -101,61 +101,65 @@ export class ProfileDetails extends Component {
       }
       this.checkValidateForm(name, value);
   };
-  submitForm = e => {
-      e.preventDefault();
-      this.checkValidateForm();
-      const errorMessages = document.getElementsByClassName('error-message');
-      if (errorMessages.length > 0) {
-          errorMessages[0].focus();
-      } else if (this.props.candidateId !== null) {
-          this.props.patchProfileDetails(this.state);
-          this.setState({
-              showConfirmation: true,
-          });
-      }
-  };
-  render() {
-      return (
-          <React.Fragment>
-              <LoadingInProgress show={!this.props.profileDetails[0]} />
-              <form className="profile-details">
-                  <Grid>
-                      <ProfileDetailsFirstRound
-                          handleChange={this.handleChange}
-                          {...this.state}
-                      />
-                      <ProfileDetailsSecondRound
-                          handleChange={this.handleChange}
-                          {...this.state}
-                      />
-                      <FormGroup className="profile-details__btn">
-                          <button
-                              type="button"
-                              className="profile-details__cancel"
-                              onClick={() => this.props.push('/profile')}
-                          >
+submitForm = e => {
+    e.preventDefault();
+    this.checkValidateForm();
+    const errorMessages = document.getElementsByClassName('error-message');
+    if (errorMessages.length > 0) {
+        errorMessages[0].focus();
+    } else if (this.props.candidateId !== null) {
+        const convertDateMeetingHours = moment(this.state.date_meeting).add(7, 'hours');
+        const convertDateRoundOneHours = moment(this.state.date_round1).add(7, 'hours');
+        const convertDateRoundTwoHours = moment(this.state.date_round2).add(7, 'hours');
+        const stateInit = this.state;
+        stateInit.date_meeting = convertDateMeetingHours;
+        stateInit.date_round1 = convertDateRoundOneHours;
+        stateInit.date_round2 = convertDateRoundTwoHours;
+        this.props.patchProfileDetails(this.state);
+    }
+}
+render() {
+    return (
+        <React.Fragment>
+            <LoadingInProgress show={!this.props.profileDetails[0]} />
+            <form className="profile-details">
+                <Grid>
+                    <ProfileDetailsFirstRound
+                        handleChange={this.handleChange}
+                        {...this.state}
+                    />
+                    <ProfileDetailsSecondRound
+                        handleChange={this.handleChange}
+                        {...this.state}
+                    />
+                    <FormGroup className="profile-details__btn">
+                        <button
+                            type="button"
+                            className="profile-details__cancel"
+                            onClick={() => this.props.push('/profile')}
+                        >
                 Cancel
-                          </button>
-                          <button
-                              type="button"
-                              className="profile-details__submit"
-                              onClick={e => this.submitForm(e)}
-                          >
+                        </button>
+                        <button
+                            type="button"
+                            className="profile-details__submit"
+                            onClick={e => this.submitForm(e)}
+                        >
                 SAVE
-                          </button>
-                      </FormGroup>
-                  </Grid>
-              </form>
-              <ConfirmationModal
-                  show={this.state.showConfirmation}
-                  handleClose={() => this.setState({ showConfirmation: false })}
-                  handleBackToList={() => this.props.push('/profile')}
-                  messages="Are you sure to do this ?"
-                  ps="This action can't undo. Please determine clearly before clicking OK."
-              />
-          </React.Fragment>
-      );
-  }
+                        </button>
+                    </FormGroup>
+                </Grid>
+            </form>
+            <ConfirmationModal
+                show={this.state.showConfirmation}
+                handleClose={() => this.setState({ showConfirmation: false })}
+                handleBackToList={() => this.props.push('/profile')}
+                messages="Are you sure to do this ?"
+                ps="This action can't undo. Please determine clearly before clicking OK."
+            />
+        </React.Fragment>
+    );
+}
 }
 const mapStateToProps = state => ({
     profileDetails: state.profileDetails.dataProfileDetails,

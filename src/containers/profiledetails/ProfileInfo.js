@@ -1,8 +1,8 @@
-import { connect } from 'react-redux';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { FormGroup, Grid } from 'react-bootstrap';
 import moment from 'moment';
+import { FormGroup, Grid } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { postProfileDetails } from './ProfileDetailsAction';
@@ -20,6 +20,7 @@ export class ProfileInfo extends Component {
             candidate_fullname: '',
             position_apply: '',
             recruiter: '',
+            date_meeting: '',
             eng_level: '',
             eng_level_cmt: '',
             jury_round1_01: '',
@@ -53,7 +54,6 @@ export class ProfileInfo extends Component {
             loading: false,
         };
     }
-
     componentWillReceiveProps(nextProps) {
         if (
             this.props.dataProfileRes !== nextProps.dataProfileRes &&
@@ -70,112 +70,109 @@ export class ProfileInfo extends Component {
         }
     }
 
-  checkValidateForm = (name, value) => {
-      const candidateName = document.getElementsByName('candidate_fullname');
-      if (value === '' && name === 'candidate_fullname') {
-          candidateName[0].classList.add('error-message');
-      } else if (this.state.candidate_fullname === '' && name === undefined) {
-          candidateName[0].classList.add('error-message');
-      }
-      if (this.state.candidate_fullname !== '') {
-          candidateName[0].classList.remove('error-message');
-      }
-  };
 
-  handleChange = (e, childAttr) => {
-      const { value, name } = e.target;
-      const stateInit = this.state;
-      if (childAttr === undefined) {
-          stateInit[name] = value;
-          if (name === 'date_round1') {
-              stateInit.date_round1 = moment(value).format('DD-MM-YYYY hh:mm');
-          }
-          if (name === 'date_round2') {
-              stateInit.date_round2 = moment(value).format('DD-MM-YYYY hh:mm');
-          }
-          this.setState({ ...stateInit });
-      } else {
-          stateInit[name] = childAttr;
-          this.setState({ ...stateInit });
-      }
-      this.checkValidateForm(name, value);
-  };
+    checkValidateForm(name, value) {
+        const candidateName = document.getElementsByName('candidate_fullname');
+        if (value === '' && name === 'candidate_fullname') {
+            candidateName[0].classList.add('error-message');
+        } else if (this.state.candidate_fullname === '' && name === undefined) {
+            candidateName[0].classList.add('error-message');
+        }
+        if (this.state.candidate_fullname !== '') {
+            candidateName[0].classList.remove('error-message');
+        }
+    }
+    handleChange = (e, childAttr) => {
+        const { value, name } = e.target;
+        const stateInit = this.state;
+        if (childAttr === undefined) {
+            stateInit[name] = value;
+            this.setState({ ...stateInit });
+        } else {
+            stateInit[name] = childAttr;
+            this.setState({ ...stateInit });
+        }
+        this.checkValidateForm(name, value);
+    }
+    submitForm = (e) => {
+        e.preventDefault();
+        this.checkValidateForm();
+        const errorMessages = document.getElementsByClassName('error-message');
+        if (errorMessages.length > 0) {
+            errorMessages[0].focus();
+        } else {
+            const convertDateMeetingHours = moment(this.state.date_meeting).add(7, 'hours');
+            const convertDateRoundOneHours = moment(this.state.date_round1).add(7, 'hours');
+            const convertDateRoundTwoHours = moment(this.state.date_round2).add(7, 'hours');
+            const stateInit = this.state;
+            stateInit.date_meeting = convertDateMeetingHours;
+            stateInit.date_round1 = convertDateRoundOneHours;
+            stateInit.date_round2 = convertDateRoundTwoHours;
+            this.props.postProfileDetails(stateInit);
+        }
+    }
 
-  submitForm = e => {
-      e.preventDefault();
-      this.checkValidateForm();
-      const errorMessages = document.getElementsByClassName('error-message');
-      if (errorMessages.length > 0) {
-          errorMessages[0].focus();
-      } else {
-      //   this.props.postProfileDetails(this.state);
-          this.setState({
-              showConfirmation: true,
-          });
-      }
-  };
+    handleOK = () => {
+        this.setState({
+            showConfirmation: false,
+        });
+        this.props.postProfileDetails(this.state);
+        this.setState({
+            loading: true,
+        });
+    };
 
-  handleOK = () => {
-      this.setState({
-          showConfirmation: false,
-      });
-      this.props.postProfileDetails(this.state);
-      this.setState({
-          loading: true,
-      });
-  };
+    callLoading = () => (
+        <div className="loading-block-prof">
+            <div className="loading-block-prof__spinner">
+                <img src={loading} alt="loading" />
+            </div>
+        </div>
+    )
 
-  callLoading = () => (
-      <div className="loading-block-prof">
-          <div className="loading-block-prof__spinner">
-              <img src={loading} alt="loading" />
-          </div>
-      </div>
-  )
-
-  render() {
-      return (
-          <React.Fragment>
-              { this.state.loading && this.callLoading() }
-              <form className="profile-details">
-                  <Grid>
-                      <ProfileDetailsFirstRound
-                          handleChange={this.handleChange}
-                          {...this.state}
-                      />
-                      <ProfileDetailsSecondRound
-                          handleChange={this.handleChange}
-                          {...this.state}
-                      />
-                      <FormGroup className="profile-details__btn">
-                          <button
-                              type="button"
-                              className="profile-details__cancel"
-                              onClick={() => this.props.push('/profile')}
-                          >
+    render() {
+        return (
+            <React.Fragment>
+                { this.state.loading && this.callLoading() }
+                <form className="profile-details">
+                    <Grid>
+                        <ProfileDetailsFirstRound
+                            handleChange={this.handleChange}
+                            {...this.state}
+                        />
+                        <ProfileDetailsSecondRound
+                            handleChange={this.handleChange}
+                            {...this.state}
+                        />
+                        <FormGroup className="profile-details__btn">
+                            <button
+                                type="button"
+                                className="profile-details__cancel"
+                                onClick={() => this.props.push('/profile')}
+                            >
                 Cancel
-                          </button>
-                          <button
-                              type="button"
-                              className="profile-details__submit"
-                              onClick={e => this.submitForm(e)}
-                          >
+                            </button>
+                            <button
+                                type="button"
+                                className="profile-details__submit"
+                                onClick={e => this.submitForm(e)}
+                            >
                 SAVE
-                          </button>
-                      </FormGroup>
-                  </Grid>
-              </form>
-              <ConfirmationModal
-                  show={this.state.showConfirmation}
-                  handleClose={() => this.setState({ showConfirmation: false })}
-                  handleOK={() => this.handleOK()}
-                  messages="Are you sure to do this ?"
-                  ps="This action can't undo. Please determine clearly before clicking OK."
-              />
-              <ToastContainer />
-          </React.Fragment>
-      );
-  }
+                            </button>
+                        </FormGroup>
+                    </Grid>
+                </form>
+                <ConfirmationModal
+                    show={this.state.showConfirmation}
+                    handleClose={() => this.setState({ showConfirmation: false })}
+                    handleOK={() => this.handleOK()}
+                    messages="Are you sure to do this ?"
+                    ps="This action can't undo. Please determine clearly before clicking OK."
+                />
+                <ToastContainer />
+            </React.Fragment>
+        );
+    }
 }
 
 const mapStateToProps = state => ({
@@ -183,12 +180,10 @@ const mapStateToProps = state => ({
     show: state.profileDetails.updateSuccess,
     dataProfileRes: state.profileDetails.dataProfileRes,
 });
+
 const mapDispatchToProps = {
     postProfileDetails,
-    push, // ACTION GUI EPIC GUI API
+    push,
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(ProfileInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileInfo);
