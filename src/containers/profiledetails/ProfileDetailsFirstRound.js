@@ -50,11 +50,12 @@ export class ProfileDetailsFirstRound extends Component {
                             <Datetime
                                 inputProps={{ disabled: true }}
                                 open={this.state.showTimeDateMeeting}
-                                value={this.props.date_meeting}
+                                value={moment.utc(this.props.date_meeting).format('DD-MM-YYYY HH:mm')}
                                 dateFormat="DD-MM-YYYY"
                                 timeFormat="HH:mm"
-                                defaultValue="dd/mm/yyyy HH:mm"
-                                onChange={(e) => this.props.handleChange({ target: { value: moment(e, 'DD-MM-YYYY'), name: 'date_meeting' } })}
+                                utc
+                                defaultValue="DD-MM-YYYY HH:mm"
+                                onChange={(e) => this.props.handleChange({ target: { value: e, name: 'date_meeting' } })}
                             />
                             <FontAwesomeIcon
                                 name="calendar"

@@ -96,7 +96,7 @@ export class Profile extends Component {
           (
               <Tr key={uid()}>
                   <Td>{index + 1}</Td>
-                  <Td>{moment(item.date_round1).format('DD-MM-YYYY')}</Td>
+                  <Td>{moment.utc(item.date_meeting).format('DD-MM-YYYY HH:mm')}</Td>
                   <Td>{item.candidate_fullname}</Td>
                   <Td>{item.recruiter}</Td>
                   <Td>{item.position_apply}</Td>
@@ -108,7 +108,7 @@ export class Profile extends Component {
           (
               <Tr key={uid()}>
                   <Td>{index + 1}</Td>
-                  <Td>{moment(item.date_meeting).format('DD-MM-YYYY')}</Td>
+                  <Td>{moment.utc(item.date_meeting).format('DD-MM-YYYY HH:mm')}</Td>
                   <Td>{item.candidate_fullname}</Td>
                   <Td>{item.recruiter}</Td>
                   <Td>{item.position_apply}</Td>
@@ -120,7 +120,7 @@ export class Profile extends Component {
           (
               <Tr key={uid()}>
                   <Td>{index + 1}</Td>
-                  <Td>{moment(item.date_meeting).format('DD-MM-YYYY')}</Td>
+                  <Td>{moment.utc(item.date_meeting).format('DD-MM-YYYY HH:mm')}</Td>
                   <Td>{item.candidate_fullname}</Td>
                   <Td>{item.recruiter}</Td>
                   <Td>{item.position_apply}</Td>
@@ -132,7 +132,7 @@ export class Profile extends Component {
           (
               <Tr key={uid()}>
                   <Td>{index + 1}</Td>
-                  <Td>{moment(item.date_meeting).format('DD-MM-YYYY')}</Td>
+                  <Td>{moment.utc(item.date_meeting).format('DD-MM-YYYY HH:mm')}</Td>
                   <Td>{item.candidate_fullname}</Td>
                   <Td>{item.recruiter}</Td>
                   <Td>{item.position_apply}</Td>
