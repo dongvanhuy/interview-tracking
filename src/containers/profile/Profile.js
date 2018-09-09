@@ -15,7 +15,6 @@ import { push } from 'react-router-redux';
 import uid from 'uuid';
 import loading from '../../assets/images/loading.svg';
 import { loadProfile, viewDetailDataId, addProfile, loadProfileThisWeek, loadProfileThisMonth, loadProfileThisOther } from './ProfileAction';
-import { resetModalSuccess } from '../profileDetails/ProfileDetailsAction';
 
 export class Profile extends Component {
     static propsTypes = {
