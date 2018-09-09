@@ -8,12 +8,14 @@ const initialState = {
     dataProfileThisOther: [],
     profileSelectedId: null,
     addProfileDetail: {},
+    statusCode: {},
 };
 
 const actions = {
     [PROFILE_LOAD_SUCCESS]: (state, { payload }) => ({
         ...state,
         dataProfile: payload.data,
+        statusCode: payload.status,
     }),
 
     [PROFILE_LOAD_SUCCESS_THISWEEK]: (state, { payload }) => ({
