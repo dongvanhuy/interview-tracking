@@ -288,6 +288,7 @@ const mapDispatchToProps = {
     loadProfile,
     loadProfileThisWeek,
     loadProfileThisMonth,
+    loadProfileThisOther,
     viewDetailDataId,
     addProfile,
     push,
