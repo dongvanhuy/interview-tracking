@@ -63,6 +63,7 @@ export class ProfileInfo extends Component {
             this.setState({ loading: false });
             toast.success('ADD SUCCESSFULLY', {
                 autoClose: 2000,
+                position: 'top-center',
                 hideProgressBar: true,
             });
         } else {
