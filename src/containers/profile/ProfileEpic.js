@@ -42,4 +42,5 @@ export default combineEpics(
     loadProfileEpic,
     loadProfileThisWeekEpic,
     loadProfileThisMonthEpic,
+    loadProfileThisOtherEpic,
 );
