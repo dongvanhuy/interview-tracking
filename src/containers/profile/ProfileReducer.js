@@ -1,5 +1,15 @@
 import { handleActions } from 'redux-actions';
-import { PROFILE_LOAD_SUCCESS, VIEW_DETAIL_DATA_ID, ADD_PROFILE, PROFILE_LOAD_SUCCESS_THISWEEK, PROFILE_LOAD_SUCCESS_THISMONTH, PROFILE_LOAD_SUCCESS_THISOTHER } from '../../store/actionTypes';
+import {
+    VIEW_DETAIL_DATA_ID,
+    PROFILE_LOAD_SUCCESS,
+    PROFILE_LOAD_FAIL,
+    PROFILE_THISWEEK_LOAD_SUCCESS,
+    PROFILE_THISWEEK_LOAD_FAIL,
+    PROFILE_THISMONTH_LOAD_SUCCESS,
+    PROFILE_THISMONTH_LOAD_FAIL,
+    PROFILE_THISOTHER_LOAD_SUCCESS,
+    PROFILE_THISOTHER_LOAD_FAIL,
+} from '../../store/actionTypes';
 
 const initialState = {
     dataProfile: [],
@@ -7,7 +17,6 @@ const initialState = {
     dataProfileThisMonth: [],
     dataProfileThisOther: [],
     profileSelectedId: null,
-    addProfileDetail: {},
     statusCode: {},
 };
 
@@ -18,30 +27,44 @@ const actions = {
         statusCode: payload.status,
     }),
 
-    [PROFILE_LOAD_SUCCESS_THISWEEK]: (state, { payload }) => ({
+    [PROFILE_LOAD_FAIL]: (state, { payload }) => ({
+        ...state,
+        statusCode: payload,
+    }),
+
+    [PROFILE_THISWEEK_LOAD_SUCCESS]: (state, { payload }) => ({
         ...state,
         dataProfileThisWeek: payload.data,
     }),
 
-    [PROFILE_LOAD_SUCCESS_THISMONTH]: (state, { payload }) => ({
+    [PROFILE_THISWEEK_LOAD_FAIL]: (state, { payload }) => ({
+        ...state,
+        statusCode: payload,
+    }),
+
+    [PROFILE_THISMONTH_LOAD_SUCCESS]: (state, { payload }) => ({
         ...state,
         dataProfileThisMonth: payload.data,
     }),
 
-    [PROFILE_LOAD_SUCCESS_THISOTHER]: (state, { payload }) => ({
+    [PROFILE_THISMONTH_LOAD_FAIL]: (state, { payload }) => ({
+        ...state,
+        statusCode: payload,
+    }),
+
+    [PROFILE_THISOTHER_LOAD_SUCCESS]: (state, { payload }) => ({
         ...state,
         dataProfileThisOther: payload.data,
     }),
 
+    [PROFILE_THISOTHER_LOAD_FAIL]: (state, { payload }) => ({
+        ...state,
+        statusCode: payload,
+    }),
 
     [VIEW_DETAIL_DATA_ID]: (state, { payload }) => ({
         ...state,
         profileSelectedId: payload,
-    }),
-
-    [ADD_PROFILE]: (state) => ({
-        ...state,
-        profileSelected: null,
     }),
 };
 

@@ -14,7 +14,7 @@ import moment from 'moment';
 import { push } from 'react-router-redux';
 import uid from 'uuid';
 import loading from '../../assets/images/loading.svg';
-import { loadProfile, viewDetailDataId, addProfile, loadProfileThisWeek, loadProfileThisMonth, loadProfileThisOther } from './ProfileAction';
+import { loadProfile, viewDetailDataId, loadProfileThisWeek, loadProfileThisMonth, loadProfileThisOther } from './ProfileAction';
 
 export class Profile extends Component {
     static propsTypes = {
@@ -71,8 +71,6 @@ export class Profile extends Component {
     )
 
   addProfileDetail = () => {
-      this.props.addProfile();
-      //   this.props.resetModalSuccess();
       this.props.push('/profile-info');
   };
 
@@ -290,7 +288,6 @@ const mapDispatchToProps = {
     loadProfileThisMonth,
     loadProfileThisOther,
     viewDetailDataId,
-    addProfile,
     push,
 };
 
