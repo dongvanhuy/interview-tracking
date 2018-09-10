@@ -1,37 +1,29 @@
 @font-face {
   font-family: GTWalsheimProBold;
-  src: url("../assets/fonts/GTWalsheimProBold.woff");
+  src: url('../assets/fonts/GTWalsheimProBold.woff');
 }
 @font-face {
   font-family: GTWalsheimProRegular;
-  src: url("../assets/fonts/GTWalsheimProRegular.woff");
+  src: url('../assets/fonts/GTWalsheimProRegular.woff');
 }
 @font-face {
   font-family: ProximaNova-Bold;
-  src: url("../assets/fonts/ProximaNova-Bold.otf");
+  src: url('../assets/fonts/ProximaNova-Bold.otf');
 }
 @font-face {
   font-family: glyphicons-halflings-regular;
-  src: url("../assets/fonts/glyphicons-halflings-regular.woff2");
-}
-
-@mixin button-yellow() {
-  background-color: $color-yellow;
+  src: url('../assets/fonts/glyphicons-halflings-regular.woff2');
 }
 
 body {
-  font-family: "GTWalsheimProRegular", Arial, sans-serif;
-  font-size: 20px;
+  font-family: 'GTWalsheimProRegular', Arial, sans-serif;
+  font-size: 16px;
   background: $color-white;
   height: 100vh;
-  @include tablet {
-    font-size: 16px;
-  }
 }
 
 button {
-  &:active,
-  &:focus {
+  &:active, &:focus {
     outline: none;
   }
 }
@@ -56,7 +48,7 @@ button {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 99999;
+  z-index: 10;
 
   &__content {
     display: flex;
@@ -81,6 +73,7 @@ button {
       @include tablet {
         width: 100px;
       }
+      
     }
   }
 
@@ -90,34 +83,16 @@ button {
     justify-content: flex-end;
 
     .user-name {
-      font-family: "GTWalsheimProRegular", Arial, sans-serif;
+      font-family: 'GTWalsheimProRegular', Arial, sans-serif;
+      font-size: 18px;
       padding: 5px;
-      font-size: 15px;
-      &:hover,
-      &:active {
-        background: #fff;
-        box-shadow: none;
-        color: darkgrey;
-      }
-    }
-  }
-
-  &__mobile {
-    position: relative;
-    .list-group {
-      position: absolute;
-      width: 200px;
-      top: 90%;
-      right: 0;
-      span.list-group-item {
-        text-align: center;
-      }
+      border: none;
     }
   }
 
   &__title {
-    font-family: "GTWalsheimProBold", Arial, sans-serif;
-    font-size: 18px;
+    font-family: 'GTWalsheimProBold', Arial, sans-serif;
+    font-size: 15px;
     margin-left: 20px;
     @include tablet {
       font-size: 30px;
@@ -157,94 +132,5 @@ main {
 
   &__content {
     width: 200px;
-  }
-}
-
-.success-modal {
-  .modal-content {
-    background-color: $color-green;
-  }
-
-  .modal-header {
-    color: $color-white;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-  }
-
-  .modal-body {
-    background-color: $color-white;
-    min-height: 200px;
-  }
-
-  .modal-footer {
-    background-color: $color-white;
-    .success-modal__button-yellow {
-      @include button-yellow;
-      padding-left: 30px;
-      padding-right: 30px;
-    }
-  }
-
-  .modal-title {
-    line-height: 1;
-  }
-
-  .modal-dialog {
-    top: 25%;
-  }
-
-  h3 {
-    text-align: center;
-  }
-
-  p {
-    font-size: 17px;
-    position: absolute;
-    bottom: 0;
-  }
-}
-
-.date-time {
-  &__one, &__two {
-    position: relative;
-  }
-
-  &__icon {
-    cursor: pointer;
-    position: absolute;
-    right: 5px;
-    top: 30px;
-    font-size: 24px;
-  }
-}
-
-.Toastify {
-  position: absolute;
-  top: 0;
-  z-index: 999999;
-  &__toast-container {
-    padding: 0px !important;
-    width: 100% !important;
-    text-align: center;
-    &--top-right {
-      top: 17% !important;
-      right: 0em !important;
-    }
-  }
-}
-
-.loading-block-prof {
-  height: 100%;
-  background: lightgrey;
-  opacity: 0.6;
-  width: 100%;
-  position: fixed;
-  z-index: 999999;
-  top: 0;
-  &__spinner {
-    position: absolute;
-    text-align: center;
-    bottom: 50%;
-    left: 50%;
   }
 }

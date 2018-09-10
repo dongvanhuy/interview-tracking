@@ -1,18 +1,7 @@
 import React, { Component } from 'react';
 import { FormGroup, FormControl, ControlLabel, Row, Col } from 'react-bootstrap';
-import Datetime from 'react-datetime';
-import FontAwesomeIcon from 'react-fontawesome';
-import moment from 'moment';
 
 export class ProfileDetailsSecondRound extends Component {
-    state = {
-        showTimeRoundTwo: false,
-    }
-
-    showTimeTwo = () => {
-        const show = this.state.showTimeRoundOne;
-        this.setState({ showTimeRoundTwo: !show });
-    }
     render() {
         return (
             <React.Fragment>
@@ -30,28 +19,20 @@ export class ProfileDetailsSecondRound extends Component {
                                 value={this.props.jury_round2}
                             >
                                 <option value="">Select</option>
-                                <option value="1">Huy Dong</option>
-                                <option value="2">Huy Chung</option>
+                                <option value="Huy Dong">Huy Dong</option>
+                                <option value="Huy Chung">Huy Chung</option>
                                 <option value="3">Trang Nguyen</option>
                             </FormControl>
                         </FormGroup>
                     </Col>
                     <Col xs={12} sm={3} md={3} lg={3}>
-                        <FormGroup className="date-time__two">
+                        <FormGroup>
                             <ControlLabel>Date</ControlLabel>
-                            <Datetime
-                                open={this.state.showTimeRoundTwo}
+                            <FormControl
+                                onChange={(e) => this.props.handleChange(e)}
+                                name="date_round2"
+                                type="date"
                                 value={this.props.date_round2}
-                                dateFormat="DD-MM-YYYY"
-                                timeFormat="HH:mm"
-                                defaultValue="dd/mm/yyyy HH:mm"
-                                onChange={(e) => this.props.handleChange({ target: { value: moment(e, 'DD-MM-YYYY'), name: 'date_round2' } })}
-                            />
-                            <FontAwesomeIcon
-                                name="calendar"
-                                size="2x"
-                                className="date-time__icon"
-                                onClick={() => this.showTimeTwo()}
                             />
                         </FormGroup>
                     </Col>
@@ -65,7 +46,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 name="tech_competency_round2"
                                 value={this.props.tech_competency_round2 || 'Limited'}
                                 onChange={(e) => this.props.handleChange(e, 'Limited')}
-                                checked={this.props.tech_competency_round2 === 'Limited'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -75,7 +55,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 name="tech_competency_round2"
                                 value={this.props.tech_competency_round2 || 'Basic'}
                                 onChange={(e) => this.props.handleChange(e, 'Basic')}
-                                checked={this.props.tech_competency_round2 === 'Basic'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -85,7 +64,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 name="tech_competency_round2"
                                 value={this.props.tech_competency_round2 || 'Acceptable'}
                                 onChange={(e) => this.props.handleChange(e, 'Acceptable')}
-                                checked={this.props.tech_competency_round2 === 'Acceptable'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -95,7 +73,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 name="tech_competency_round2"
                                 value={this.props.tech_competency_round2 || 'Advanced'}
                                 onChange={(e) => this.props.handleChange(e, 'Advanced')}
-                                checked={this.props.tech_competency_round2 === 'Advanced'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -105,7 +82,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 name="tech_competency_round2"
                                 value={this.props.tech_competency_round2 || 'Exceptional'}
                                 onChange={(e) => this.props.handleChange(e, 'Exceptional')}
-                                checked={this.props.tech_competency_round2 === 'Exceptional'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -131,7 +107,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 value={this.props.cultural_fit_round2 || 'Limited'}
                                 name="cultural_fit_round2"
                                 onChange={(e) => this.props.handleChange(e, 'Limited')}
-                                checked={this.props.cultural_fit_round2 === 'Limited'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -141,7 +116,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 value={this.props.cultural_fit_round2 || 'Basic'}
                                 name="cultural_fit_round2"
                                 onChange={(e) => this.props.handleChange(e, 'Basic')}
-                                checked={this.props.cultural_fit_round2 === 'Basic'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -151,7 +125,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 value={this.props.cultural_fit_round2 || 'Acceptable'}
                                 name="cultural_fit_round2"
                                 onChange={(e) => this.props.handleChange(e, 'Acceptable')}
-                                checked={this.props.cultural_fit_round2 === 'Acceptable'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -161,7 +134,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 value={this.props.cultural_fit_round2 || 'Advanced'}
                                 name="cultural_fit_round2"
                                 onChange={(e) => this.props.handleChange(e, 'Advanced')}
-                                checked={this.props.cultural_fit_round2 === 'Advanced'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -171,7 +143,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 value={this.props.cultural_fit_round2 || 'Exceptional'}
                                 name="cultural_fit_round2"
                                 onChange={(e) => this.props.handleChange(e, 'Exceptional')}
-                                checked={this.props.tech_competency_round2 === 'Exceptional'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -196,7 +167,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 value={this.props.business_acument || 'Limited'}
                                 name="business_acument"
                                 onChange={(e) => this.props.handleChange(e, 'Limited')}
-                                checked={this.props.business_acument === 'Limited'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -206,7 +176,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 value={this.props.business_acument || 'Basic'}
                                 name="business_acument"
                                 onChange={(e) => this.props.handleChange(e, 'Basic')}
-                                checked={this.props.business_acument === 'Basic'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -216,7 +185,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 value={this.props.business_acument || 'Acceptable'}
                                 name="business_acument"
                                 onChange={(e) => this.props.handleChange(e, 'Acceptable')}
-                                checked={this.props.business_acument === 'Acceptable'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -226,7 +194,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 value={this.props.business_acument || 'Advanced'}
                                 name="business_acument"
                                 onChange={(e) => this.props.handleChange(e, 'Advanced')}
-                                checked={this.props.business_acument === 'Advanced'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -236,7 +203,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 value={this.props.business_acument || 'Exceptional'}
                                 name="business_acument"
                                 onChange={(e) => this.props.handleChange(e, 'Exceptional')}
-                                checked={this.props.business_acument === 'Exceptional'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -261,7 +227,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 value={this.props.soft_skill || 'Limited'}
                                 name="soft_skill"
                                 onChange={(e) => this.props.handleChange(e, 'Limited')}
-                                checked={this.props.soft_skill === 'Limited'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -271,7 +236,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 value={this.props.soft_skill || 'Basic'}
                                 name="soft_skill"
                                 onChange={(e) => this.props.handleChange(e, 'Basic')}
-                                checked={this.props.soft_skill === 'Basic'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -281,7 +245,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 value={this.props.soft_skill || 'Acceptable'}
                                 name="soft_skill"
                                 onChange={(e) => this.props.handleChange(e, 'Acceptable')}
-                                checked={this.props.soft_skill === 'Acceptable'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -291,7 +254,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 value={this.props.soft_skill || 'Advanced'}
                                 name="soft_skill"
                                 onChange={(e) => this.props.handleChange(e, 'Advanced')}
-                                checked={this.props.soft_skill === 'Advanced'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -301,7 +263,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 value={this.props.soft_skill || 'Exceptional'}
                                 name="soft_skill"
                                 onChange={(e) => this.props.handleChange(e, 'Exceptional')}
-                                checked={this.props.soft_skill === 'Exceptional'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -326,7 +287,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 value={this.props.people_management || 'Limited'}
                                 name="people_management"
                                 onChange={(e) => this.props.handleChange(e, 'Limited')}
-                                checked={this.props.people_management === 'Limited'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -336,7 +296,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 value={this.props.people_management || 'Basic'}
                                 name="people_management"
                                 onChange={(e) => this.props.handleChange(e, 'Basic')}
-                                checked={this.props.people_management === 'Basic'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -346,7 +305,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 value={this.props.people_management || 'Acceptable'}
                                 name="people_management"
                                 onChange={(e) => this.props.handleChange(e, 'Acceptable')}
-                                checked={this.props.people_management === 'Acceptable'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -356,7 +314,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 value={this.props.people_management || 'Advanced'}
                                 name="people_management"
                                 onChange={(e) => this.props.handleChange(e, 'Advanced')}
-                                checked={this.props.people_management === 'Advanced'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -366,7 +323,6 @@ export class ProfileDetailsSecondRound extends Component {
                                 value={this.props.people_management || 'Exceptional'}
                                 name="people_management"
                                 onChange={(e) => this.props.handleChange(e, 'Exceptional')}
-                                checked={this.props.people_management === 'Exceptional'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -387,7 +343,7 @@ export class ProfileDetailsSecondRound extends Component {
                         <FormGroup>
                             <ControlLabel>YPE</ControlLabel>
                             <FormControl
-                                type="number"
+                                type="text"
                                 placeholder=""
                                 name="ype_round2"
                                 onChange={(e) => this.props.handleChange(e)}

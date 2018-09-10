@@ -1,26 +1,22 @@
-import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import React, { Component } from 'react';
 import { push } from 'react-router-redux';
-import moment from 'moment';
 import { FormGroup, Grid } from 'react-bootstrap';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
 import { postProfileDetails } from './ProfileDetailsAction';
 import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
 import { ProfileDetailsSecondRound } from './ProfileDetailsSecondRound';
-import ConfirmationModal from '../common/confirmationModal/ConfirmationModal';
-import loading from '../../assets/images/loading.svg';
+
 
 export class ProfileInfo extends Component {
     constructor(props) {
         super(props);
         this.checkValidateForm = this.checkValidateForm.bind(this);
         this.state = {
+            // lgShow: false,
             candidate_id: '',
             candidate_fullname: '',
             position_apply: '',
             recruiter: '',
-            date_meeting: '',
             eng_level: '',
             eng_level_cmt: '',
             jury_round1_01: '',
@@ -50,27 +46,8 @@ export class ProfileInfo extends Component {
             title_round2: '',
             round2_status: '',
             cmt_result_round2: '',
-            showConfirmation: false,
-            loading: false,
         };
     }
-    componentWillReceiveProps(nextProps) {
-        if (
-            this.props.dataProfileRes !== nextProps.dataProfileRes &&
-      nextProps.dataProfileRes &&
-      nextProps.dataProfileRes.status === 200
-        ) {
-            this.setState({ loading: false });
-            toast.success('ADD SUCCESSFULLY', {
-                autoClose: 2000,
-                hideProgressBar: true,
-            });
-        } else {
-            this.setState({ loading: true });
-        }
-    }
-
-
     checkValidateForm(name, value) {
         const candidateName = document.getElementsByName('candidate_fullname');
         if (value === '' && name === 'candidate_fullname') {
@@ -101,89 +78,31 @@ export class ProfileInfo extends Component {
         if (errorMessages.length > 0) {
             errorMessages[0].focus();
         } else {
-            const convertDateMeetingHours = moment(this.state.date_meeting).add(7, 'hours');
-            const convertDateRoundOneHours = moment(this.state.date_round1).add(7, 'hours');
-            const convertDateRoundTwoHours = moment(this.state.date_round2).add(7, 'hours');
-            const stateInit = this.state;
-            stateInit.date_meeting = convertDateMeetingHours;
-            stateInit.date_round1 = convertDateRoundOneHours;
-            stateInit.date_round2 = convertDateRoundTwoHours;
-            this.props.postProfileDetails(stateInit);
+            this.props.postProfileDetails(this.state);
         }
     }
-
-    handleOK = () => {
-        this.setState({
-            showConfirmation: false,
-        });
-        this.props.postProfileDetails(this.state);
-        this.setState({
-            loading: true,
-        });
-    };
-
-    callLoading = () => (
-        <div className="loading-block-prof">
-            <div className="loading-block-prof__spinner">
-                <img src={loading} alt="loading" />
-            </div>
-        </div>
-    )
-
     render() {
         return (
-            <React.Fragment>
-                { this.state.loading && this.callLoading() }
-                <form className="profile-details">
-                    <Grid>
-                        <ProfileDetailsFirstRound
-                            handleChange={this.handleChange}
-                            {...this.state}
-                        />
-                        <ProfileDetailsSecondRound
-                            handleChange={this.handleChange}
-                            {...this.state}
-                        />
-                        <FormGroup className="profile-details__btn">
-                            <button
-                                type="button"
-                                className="profile-details__cancel"
-                                onClick={() => this.props.push('/profile')}
-                            >
-                Cancel
-                            </button>
-                            <button
-                                type="button"
-                                className="profile-details__submit"
-                                onClick={e => this.submitForm(e)}
-                            >
-                SAVE
-                            </button>
-                        </FormGroup>
-                    </Grid>
-                </form>
-                <ConfirmationModal
-                    show={this.state.showConfirmation}
-                    handleClose={() => this.setState({ showConfirmation: false })}
-                    handleOK={() => this.handleOK()}
-                    messages="Are you sure to do this ?"
-                    ps="This action can't undo. Please determine clearly before clicking OK."
-                />
-                <ToastContainer />
-            </React.Fragment>
+            <form className="profile-details" onSubmit={this.submitForm}>
+                <Grid>
+                    <ProfileDetailsFirstRound handleChange={this.handleChange} {...this.state} />
+                    <ProfileDetailsSecondRound handleChange={this.handleChange} {...this.state} />
+                    <FormGroup className="profile-details__btn">
+                        <button type="button" className="profile-details__cancel" onClick={() => this.props.push('/profile')}>Cancel</button>
+                        <button type="submit" className="profile-details__submit">Add</button>
+                    </FormGroup>
+                </Grid>
+            </form>
         );
     }
 }
 
 const mapStateToProps = state => ({
     profileDetails: state.profileDetails.dataProfileDetails,
-    show: state.profileDetails.updateSuccess,
-    dataProfileRes: state.profileDetails.dataProfileRes,
 });
-
 const mapDispatchToProps = {
     postProfileDetails,
-    push,
+    push, // ACTION GUI EPIC GUI API
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileInfo);

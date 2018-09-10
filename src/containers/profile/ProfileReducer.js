@@ -33,7 +33,6 @@ const actions = {
         dataProfileThisOther: payload.data,
     }),
 
-
     [VIEW_DETAIL_DATA_ID]: (state, { payload }) => ({
         ...state,
         profileSelectedId: payload,

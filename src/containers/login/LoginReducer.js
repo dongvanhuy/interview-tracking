@@ -10,6 +10,7 @@ const initialState = {
 
 const actions = {
     [UPDATE_LOGIN_INFO]: (state, { payload }) => {
+        console.log(payload);
         return {
             ...payload,
         };

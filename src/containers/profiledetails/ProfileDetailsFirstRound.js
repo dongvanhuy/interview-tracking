@@ -1,24 +1,7 @@
 import React, { Component } from 'react';
 import { FormGroup, FormControl, ControlLabel, Row, Col } from 'react-bootstrap';
-import Datetime from 'react-datetime';
-import FontAwesomeIcon from 'react-fontawesome';
-import moment from 'moment';
 
 export class ProfileDetailsFirstRound extends Component {
-    state = {
-        showTimeRoundOne: false,
-        showTimeDateMeeting: false,
-    }
-
-    showTimeOne = () => {
-        const show = this.state.showTimeRoundOne;
-        this.setState({ showTimeRoundOne: !show });
-    }
-    showDateMeeting = () => {
-        const show = this.state.showTimeDateMeeting;
-        this.setState({ showTimeDateMeeting: !show });
-    }
-
     render() {
         return (
             <React.Fragment>
@@ -43,26 +26,6 @@ export class ProfileDetailsFirstRound extends Component {
                                 name="position_apply"
                                 value={this.props.position_apply}
                                 onChange={(e) => this.props.handleChange(e)}
-                            />
-                        </FormGroup>
-                        <FormGroup className="date-time__one">
-                            <ControlLabel>Date Meeting</ControlLabel>
-                            <Datetime
-                                inputProps={{ disabled: true }}
-                                open={this.state.showTimeDateMeeting}
-                                value={moment.utc(this.props.date_meeting).format('DD-MM-YYYY HH:mm')}
-                                dateFormat="DD-MM-YYYY"
-                                timeFormat="HH:mm"
-                                utc
-                                defaultValue="DD-MM-YYYY HH:mm"
-                                onChange={(e) => this.props.handleChange({ target: { value: e, name: 'date_meeting' } })}
-                            />
-                            <FontAwesomeIcon
-                                name="calendar"
-                                size="2x"
-                                className="date-time__icon"
-                                onClick={() => this.showDateMeeting()
-                                }
                             />
                         </FormGroup>
                         <FormGroup>
@@ -123,8 +86,8 @@ export class ProfileDetailsFirstRound extends Component {
                                     >
                                         <option value="">Select</option>
                                         <option value="1">Huy Dong</option>
-                                        <option value="2">Huy Chung</option>
-                                        <option value="3">Trang Nguyen</option>
+                                        <option value="Huy Chung">Huy Chung</option>
+                                        <option value="Trang Nguyen">Trang Nguyen</option>
                                     </FormControl>
                                 </FormGroup>
 
@@ -140,9 +103,9 @@ export class ProfileDetailsFirstRound extends Component {
                                         value={this.props.jury_round1_02}
                                     >
                                         <option value="">Select</option>
-                                        <option value="1">Huy Dong</option>
+                                        <option value="Huy Dong">Huy Dong</option>
                                         <option value="2">Huy Chung</option>
-                                        <option value="3">Trang Nguyen</option>
+                                        <option value="Trang Nguyen">Trang Nguyen</option>
                                     </FormControl>
                                 </FormGroup>
 
@@ -150,23 +113,13 @@ export class ProfileDetailsFirstRound extends Component {
                         </Row>
                     </Col>
                     <Col xs={12} sm={3} md={3} lg={3}>
-                        <FormGroup className="date-time__one">
+                        <FormGroup>
                             <ControlLabel>Date</ControlLabel>
-                            <Datetime
-                                inputProps={{ disabled: true }}
-                                open={this.state.showTimeRoundOne}
+                            <FormControl
+                                onChange={(e) => this.props.handleChange(e)}
+                                name="date_round1"
                                 value={this.props.date_round1}
-                                dateFormat="DD-MM-YYYY"
-                                timeFormat="HH:mm"
-                                defaultValue="dd/mm/yyyy HH:mm"
-                                onChange={(e) => this.props.handleChange({ target: { value: moment(e, 'DD-MM-YYYY'), name: 'date_round1' } })}
-                            />
-                            <FontAwesomeIcon
-                                name="calendar"
-                                size="2x"
-                                className="date-time__icon"
-                                onClick={() => this.showTimeOne()
-                                }
+                                type="date"
                             />
                         </FormGroup>
                     </Col>
@@ -180,7 +133,6 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={this.props.tech_competency_round1 || 'Limited'}
                                 name="tech_competency_round1"
                                 onChange={(e) => this.props.handleChange(e, 'Limited')}
-                                checked={this.props.tech_competency_round1 === 'Limited'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -190,7 +142,6 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={this.props.tech_competency_round1 || 'Basic'}
                                 name="tech_competency_round1"
                                 onChange={(e) => this.props.handleChange(e, 'Basic')}
-                                checked={this.props.tech_competency_round1 === 'Basic'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -200,7 +151,6 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={this.props.tech_competency_round1 || 'Acceptable'}
                                 name="tech_competency_round1"
                                 onChange={(e) => this.props.handleChange(e, 'Acceptable')}
-                                checked={this.props.tech_competency_round1 === 'Acceptable'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -210,7 +160,6 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={this.props.tech_competency_round1 || 'Advanced'}
                                 onChange={(e) => this.props.handleChange(e, 'Advanced')}
                                 name="tech_competency_round1"
-                                checked={this.props.tech_competency_round1 === 'Advanced'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -220,7 +169,6 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={this.props.tech_competency_round1 || 'Exceptional'}
                                 onChange={(e) => this.props.handleChange(e, 'Exceptional')}
                                 name="tech_competency_round1"
-                                checked={this.props.tech_competency_round1 === 'Exceptional'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -245,7 +193,6 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={this.props.cultural_fit_round1 || 'Limited'}
                                 name="cultural_fit_round1"
                                 onChange={(e) => this.props.handleChange(e, 'Limited')}
-                                checked={this.props.cultural_fit_round1 === 'Limited'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -255,7 +202,6 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={this.props.cultural_fit_round1 || 'Basic'}
                                 name="cultural_fit_round1"
                                 onChange={(e) => this.props.handleChange(e, 'Basic')}
-                                checked={this.props.cultural_fit_round1 === 'Basic'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -265,7 +211,6 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={this.props.cultural_fit_round1 || 'Acceptable'}
                                 name="cultural_fit_round1"
                                 onChange={(e) => this.props.handleChange(e, 'Acceptable')}
-                                checked={this.props.cultural_fit_round1 === 'Acceptable'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -275,7 +220,6 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={this.props.cultural_fit_round1 || 'Advanced'}
                                 name="cultural_fit_round1"
                                 onChange={(e) => this.props.handleChange(e, 'Advanced')}
-                                checked={this.props.cultural_fit_round1 === 'Advanced'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -285,7 +229,6 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={this.props.cultural_fit_round1 || 'Exceptional'}
                                 name="cultural_fit_round1"
                                 onChange={(e) => this.props.handleChange(e, 'Exceptional')}
-                                checked={this.props.cultural_fit_round1 === 'Exceptional'}
                             />
                             <span className="checkmark" />
                         </label>
@@ -307,7 +250,7 @@ export class ProfileDetailsFirstRound extends Component {
                         <FormGroup>
                             <ControlLabel>YPE</ControlLabel>
                             <FormControl
-                                type="number"
+                                type="text"
                                 placeholder=""
                                 name="ype_round1"
                                 value={this.props.ype_round1}
