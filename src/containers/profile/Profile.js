@@ -196,7 +196,7 @@ export class Profile extends Component {
                                                   ? rowsDefault
                                                   : rowsthisweek}
                                           </Tbody>
-                                      </Table>)};
+                                      </Table>)}
                               </Col>
                           </div>
 
