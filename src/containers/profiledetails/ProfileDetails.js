@@ -32,6 +32,7 @@ export class ProfileDetails extends Component {
           candidate_id: '',
           candidate_fullname: '',
           position_apply: '',
+          date_meeting: '',
           recruiter: '',
           eng_level: '',
           eng_level_cmt: '',

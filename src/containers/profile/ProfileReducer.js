@@ -18,13 +18,15 @@ const initialState = {
     dataProfileThisOther: [],
     profileSelectedId: null,
     statusCode: {},
+    isLoad: true,
 };
 
 const actions = {
     [PROFILE_LOAD_SUCCESS]: (state, { payload }) => ({
         ...state,
-        dataProfile: payload.data,
+        dataProfile: [],
         statusCode: payload.status,
+        isLoad: false,
     }),
 
     [PROFILE_LOAD_FAIL]: (state, { payload }) => ({
