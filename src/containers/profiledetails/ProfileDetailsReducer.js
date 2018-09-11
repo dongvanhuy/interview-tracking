@@ -2,10 +2,10 @@ import { handleActions } from 'redux-actions';
 import {
     PROFILE_DETAILS_LOAD_SUCCESS,
     PROFILE_DETAILS_LOAD_FAIL,
-    PROFILE_DETAILS_PATCH_SUCCESS,
-    PROFILE_DETAILS_PATCH_FAIL,
-    PROFILE_DETAILS_POST_SUCCESS,
-    PROFILE_DETAILS_POST_FAIL,
+    PROFILE_DETAILS_UPDATE_SUCCESS,
+    PROFILE_DETAILS_UPDATE_FAIL,
+    PROFILE_DETAILS_CREATE_SUCCESS,
+    PROFILE_DETAILS_CREATE_FAIL,
     RESET_PROFILE_DETAILS_DATA,
     CLOSE_MODAL_SUCCESS,
 } from '../../store/actionTypes';
@@ -30,24 +30,24 @@ const actions = {
         statusCode: payload,
     }),
 
-    [PROFILE_DETAILS_PATCH_SUCCESS]: (state, { payload }) => ({
+    [PROFILE_DETAILS_UPDATE_SUCCESS]: (state, { payload }) => ({
         ...state,
         dataProfilePatch: payload,
         updateSuccess: true,
     }),
 
-    [PROFILE_DETAILS_PATCH_FAIL]: (state, { payload }) => ({
+    [PROFILE_DETAILS_UPDATE_FAIL]: (state, { payload }) => ({
         ...state,
         statusCode: payload,
     }),
 
-    [PROFILE_DETAILS_POST_SUCCESS]: (state, { payload }) => ({
+    [PROFILE_DETAILS_CREATE_SUCCESS]: (state, { payload }) => ({
         ...state,
         dataProfileRes: payload,
         updateSuccess: true,
     }),
 
-    [PROFILE_DETAILS_POST_FAIL]: (state, { payload }) => ({
+    [PROFILE_DETAILS_CREATE_FAIL]: (state, { payload }) => ({
         ...state,
         statusCode: payload,
     }),

@@ -3,12 +3,12 @@ import {
     PROFILE_DETAILS_LOAD,
     PROFILE_DETAILS_LOAD_SUCCESS,
     PROFILE_DETAILS_LOAD_FAIL,
-    PROFILE_DETAILS_PATCH,
-    PROFILE_DETAILS_PATCH_SUCCESS,
-    PROFILE_DETAILS_PATCH_FAIL,
-    PROFILE_DETAILS_POST,
-    PROFILE_DETAILS_POST_SUCCESS,
-    PROFILE_DETAILS_POST_FAIL,
+    PROFILE_DETAILS_UPDATE,
+    PROFILE_DETAILS_UPDATE_SUCCESS,
+    PROFILE_DETAILS_UPDATE_FAIL,
+    PROFILE_DETAILS_CREATE,
+    PROFILE_DETAILS_CREATE_SUCCESS,
+    PROFILE_DETAILS_CREATE_FAIL,
     RESET_PROFILE_DETAILS_DATA,
     CLOSE_MODAL_SUCCESS,
 } from '../../store/actionTypes';
@@ -17,13 +17,13 @@ export const loadProfileDetails = createAction(PROFILE_DETAILS_LOAD);
 export const loadProfileDetailsSuccess = createAction(PROFILE_DETAILS_LOAD_SUCCESS);
 export const loadProfileDetailsFail = createAction(PROFILE_DETAILS_LOAD_FAIL);
 
-export const patchProfileDetails = createAction(PROFILE_DETAILS_PATCH);
-export const patchProfileDetailsSuccess = createAction(PROFILE_DETAILS_PATCH_SUCCESS);
-export const patchProfileDetailsFail = createAction(PROFILE_DETAILS_PATCH_FAIL);
+export const updateProfileDetails = createAction(PROFILE_DETAILS_UPDATE);
+export const updateProfileDetailsSuccess = createAction(PROFILE_DETAILS_UPDATE_SUCCESS);
+export const updateProfileDetailsFail = createAction(PROFILE_DETAILS_UPDATE_FAIL);
 
-export const postProfileDetails = createAction(PROFILE_DETAILS_POST);
-export const postProfileDetailsSuccess = createAction(PROFILE_DETAILS_POST_SUCCESS);
-export const postProfileDetailsFail = createAction(PROFILE_DETAILS_POST_FAIL);
+export const createProfileDetails = createAction(PROFILE_DETAILS_CREATE);
+export const createProfileDetailsSuccess = createAction(PROFILE_DETAILS_CREATE_SUCCESS);
+export const createProfileDetailsFail = createAction(PROFILE_DETAILS_CREATE_FAIL);
 
 export const resetStateProfileDetail = createAction(RESET_PROFILE_DETAILS_DATA);
 

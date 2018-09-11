@@ -8,7 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import {
     loadProfileDetails,
-    patchProfileDetails,
+    updateProfileDetails,
     resetStateProfileDetail,
 } from './ProfileDetailsAction';
 import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
@@ -79,8 +79,6 @@ export class ProfileDetails extends Component {
               date_round2: dateRoundTwo,
           });
       }
-      console.log('>>>>>>>>>>> res init', this.props.dataProfileRes.status);
-      console.log('>>>>>>>>>>> res', nextProps.dataProfileRes.status);
       //       if (
       //           this.props.dataProfileRes !== nextProps.dataProfileRes &&
       //   nextProps.dataProfileRes &&
@@ -131,7 +129,7 @@ export class ProfileDetails extends Component {
               stateInit.date_meeting = moment(this.state.date_meeting).format('DD-MM-YYYY HH:mm');
           }
           this.setState({ ...stateInit }, () => {
-              this.props.patchProfileDetails(this.state);
+              this.props.updateProfileDetails(this.state);
           });
       }
   };
@@ -191,7 +189,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     loadProfileDetails,
-    patchProfileDetails,
+    updateProfileDetails,
     push,
     resetStateProfileDetail,
 };

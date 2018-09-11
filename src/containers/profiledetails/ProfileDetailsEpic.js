@@ -2,15 +2,15 @@ import { combineEpics } from 'redux-observable';
 import { Observable } from 'rxjs';
 import {
     PROFILE_DETAILS_LOAD,
-    PROFILE_DETAILS_PATCH,
-    PROFILE_DETAILS_POST,
-    PROFILE_DETAILS_PATCH_FAIL,
+    PROFILE_DETAILS_UPDATE,
+    PROFILE_DETAILS_CREATE,
+    PROFILE_DETAILS_UPDATE_FAIL,
 } from '../../store/actionTypes';
 import {
     loadProfileDetailsSuccess,
     loadProfileDetailsFail,
-    patchProfileDetailsSuccess,
-    postProfileDetailsSuccess,
+    updateProfileDetailsSuccess,
+    createProfileDetailsSuccess,
 } from './ProfileDetailsAction';
 
 export const loadProfileDetailsEpic = (
@@ -25,34 +25,34 @@ export const loadProfileDetailsEpic = (
             .catch(err => loadProfileDetailsFail(err));
     });
 
-export const patchProfileDetailsEpic = (
+export const updateProfileDetailsEpic = (
     action$,
     store,
-    { patchProfileDetailsService },
+    { updateProfileDetailsService },
 ) =>
-    action$.ofType(PROFILE_DETAILS_PATCH).switchMap(action => {
+    action$.ofType(PROFILE_DETAILS_UPDATE).switchMap(action => {
         const param = action.payload;
-        return patchProfileDetailsService(param)
-            .map(res => patchProfileDetailsSuccess(res))
+        return updateProfileDetailsService(param)
+            .map(res => updateProfileDetailsSuccess(res))
             .catch(err =>
-                Observable.of({ type: PROFILE_DETAILS_PATCH_FAIL, payload: err }));
+                Observable.of({ type: PROFILE_DETAILS_UPDATE_FAIL, payload: err }));
     });
 
-export const postProfileDetailsEpic = (
+export const createProfileDetailsEpic = (
     action$,
     store,
-    { postProfileDetailsService },
+    { createProfileDetailsService },
 ) =>
-    action$.ofType(PROFILE_DETAILS_POST).switchMap(action => {
+    action$.ofType(PROFILE_DETAILS_CREATE).switchMap(action => {
         const param = action.payload;
-        return postProfileDetailsService(param)
+        return createProfileDetailsService(param)
             .map(res => res.data)
-            .map(postProfileDetailsSuccess)
+            .map(createProfileDetailsSuccess)
             .catch(err => console.log(err));
     });
 
 export default combineEpics(
     loadProfileDetailsEpic,
-    patchProfileDetailsEpic,
-    postProfileDetailsEpic,
+    updateProfileDetailsEpic,
+    createProfileDetailsEpic,
 );
