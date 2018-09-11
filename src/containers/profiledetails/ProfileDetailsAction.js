@@ -1,22 +1,29 @@
 import { createAction } from 'redux-actions';
 import {
-    PROFILEDETAILS_LOAD,
-    PROFILEDETAILS_LOAD_SUCCESS,
-    PROFILE_DETAILS_PATCH_SUCCESS,
+    PROFILE_DETAILS_LOAD,
+    PROFILE_DETAILS_LOAD_SUCCESS,
+    PROFILE_DETAILS_LOAD_FAIL,
+    PROFILE_DETAILS_UPDATE,
+    PROFILE_DETAILS_UPDATE_SUCCESS,
+    PROFILE_DETAILS_UPDATE_FAIL,
+    PROFILE_DETAILS_CREATE,
+    PROFILE_DETAILS_CREATE_SUCCESS,
+    PROFILE_DETAILS_CREATE_FAIL,
     RESET_PROFILE_DETAILS_DATA,
-    PROFILEDETAILS_POST,
-    PROFILEDETAILS_PATCH,
     CLOSE_MODAL_SUCCESS,
-    PROFILEDETAILS_POST_SUCCESS,
 } from '../../store/actionTypes';
 
-export const loadProfileDetails = createAction(PROFILEDETAILS_LOAD);
-export const loadProfileDetailsSuccess = createAction(PROFILEDETAILS_LOAD_SUCCESS);
+export const loadProfileDetails = createAction(PROFILE_DETAILS_LOAD);
+export const loadProfileDetailsSuccess = createAction(PROFILE_DETAILS_LOAD_SUCCESS);
+export const loadProfileDetailsFail = createAction(PROFILE_DETAILS_LOAD_FAIL);
 
-export const patchProfileDetailsSuccess = createAction(PROFILE_DETAILS_PATCH_SUCCESS);
-export const patchProfileDetails = createAction(PROFILEDETAILS_PATCH);
-export const postProfileDetails = createAction(PROFILEDETAILS_POST);
-export const postProfileDetailsSuccess = createAction(PROFILEDETAILS_POST_SUCCESS);
+export const updateProfileDetails = createAction(PROFILE_DETAILS_UPDATE);
+export const updateProfileDetailsSuccess = createAction(PROFILE_DETAILS_UPDATE_SUCCESS);
+export const updateProfileDetailsFail = createAction(PROFILE_DETAILS_UPDATE_FAIL);
+
+export const createProfileDetails = createAction(PROFILE_DETAILS_CREATE);
+export const createProfileDetailsSuccess = createAction(PROFILE_DETAILS_CREATE_SUCCESS);
+export const createProfileDetailsFail = createAction(PROFILE_DETAILS_CREATE_FAIL);
 
 export const resetStateProfileDetail = createAction(RESET_PROFILE_DETAILS_DATA);
 

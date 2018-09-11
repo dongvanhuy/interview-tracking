@@ -1,14 +1,34 @@
 import { createAction } from 'redux-actions';
-import { PROFILE_LOAD, PROFILE_LOAD_SUCCESS, VIEW_DETAIL_DATA_ID, ADD_PROFILE, PROFILE_LOAD_THISWEEK, PROFILE_LOAD_SUCCESS_THISWEEK, PROFILE_LOAD_THISMONTH, PROFILE_LOAD_SUCCESS_THISMONTH, PROFILE_LOAD_THISOTHER, PROFILE_LOAD_SUCCESS_THISOTHER } from '../../store/actionTypes';
-
+import {
+    PROFILE_LOAD,
+    PROFILE_LOAD_SUCCESS,
+    PROFILE_LOAD_FAIL,
+    VIEW_DETAIL_DATA_ID,
+    PROFILE_THISWEEK_LOAD,
+    PROFILE_THISWEEK_LOAD_SUCCESS,
+    PROFILE_THISWEEK_LOAD_FAIL,
+    PROFILE_THISMONTH_LOAD,
+    PROFILE_THISMONTH_LOAD_SUCCESS,
+    PROFILE_THISMONTH_LOAD_FAIL,
+    PROFILE_THISOTHER_LOAD,
+    PROFILE_THISOTHER_LOAD_SUCCESS,
+    PROFILE_THISOTHER_LOAD_FAIL,
+} from '../../store/actionTypes';
 
 export const loadProfile = createAction(PROFILE_LOAD);
 export const loadProfileSuccess = createAction(PROFILE_LOAD_SUCCESS);
-export const loadProfileThisWeek = createAction(PROFILE_LOAD_THISWEEK);
-export const loadProfileThisWeekSuccess = createAction(PROFILE_LOAD_SUCCESS_THISWEEK);
-export const loadProfileThisMonth = createAction(PROFILE_LOAD_THISMONTH);
-export const loadProfileThisMonthSuccess = createAction(PROFILE_LOAD_SUCCESS_THISMONTH);
+export const loadProfileFail = createAction(PROFILE_LOAD_FAIL);
+
+export const loadProfileThisWeek = createAction(PROFILE_THISWEEK_LOAD);
+export const loadProfileThisWeekSuccess = createAction(PROFILE_THISWEEK_LOAD_SUCCESS);
+export const loadProfileThisWeekFail = createAction(PROFILE_THISWEEK_LOAD_FAIL);
+
+export const loadProfileThisMonth = createAction(PROFILE_THISMONTH_LOAD);
+export const loadProfileThisMonthSuccess = createAction(PROFILE_THISMONTH_LOAD_SUCCESS);
+export const loadProfileThisMonthFail = createAction(PROFILE_THISMONTH_LOAD_FAIL);
+
 export const viewDetailDataId = createAction(VIEW_DETAIL_DATA_ID);
-export const addProfile = createAction(ADD_PROFILE);
-export const loadProfileThisOther = createAction(PROFILE_LOAD_THISOTHER);
-export const loadProfileThisOtherSuccess = createAction(PROFILE_LOAD_SUCCESS_THISOTHER);
+
+export const loadProfileThisOther = createAction(PROFILE_THISOTHER_LOAD);
+export const loadProfileThisOtherSuccess = createAction(PROFILE_THISOTHER_LOAD_SUCCESS);
+export const loadProfileThisOtherFail = createAction(PROFILE_THISOTHER_LOAD_FAIL);

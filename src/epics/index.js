@@ -1,6 +1,6 @@
 import { combineEpics } from 'redux-observable';
 import { loadProfileEpic, loadProfileThisWeekEpic, loadProfileThisMonthEpic, loadProfileThisOtherEpic } from '../containers/profile/ProfileEpic';
-import { loadProfileDetailsEpic, patchProfileDetailsEpic, postProfileDetailsEpic } from '../containers/profileDetails/ProfileDetailsEpic';
+import { loadProfileDetailsEpic, updateProfileDetailsEpic, createProfileDetailsEpic } from '../containers/profileDetails/ProfileDetailsEpic';
 
 
 const epics = [
@@ -9,8 +9,8 @@ const epics = [
     loadProfileThisMonthEpic,
     loadProfileThisOtherEpic,
     loadProfileDetailsEpic,
-    patchProfileDetailsEpic,
-    postProfileDetailsEpic,
+    updateProfileDetailsEpic,
+    createProfileDetailsEpic,
 ];
 
 const rootEpic = combineEpics(...epics);

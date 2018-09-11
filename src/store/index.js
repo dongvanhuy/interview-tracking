@@ -23,8 +23,8 @@ const middleware = [
             loadDataProfileThisWeekService: ApiService.loadDataProfileThisWeek,
             loadDataProfileThisMonthService: ApiService.loadDataProfileThisMonth,
             loadDataProfileThisOtherService: ApiService.loadDataProfileThisOther,
-            patchProfileDetailsService: ApiService.patchDataProfileDetails,
-            postProfileDetailsService: ApiService.postDataProfileDetails,
+            updateProfileDetailsService: ApiService.patchDataProfileDetails,
+            createProfileDetailsService: ApiService.postDataProfileDetails,
         },
     }),
 ];

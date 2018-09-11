@@ -4,9 +4,11 @@ import React, { Component } from 'react';
 import { push } from 'react-router-redux';
 import moment from 'moment';
 import { FormGroup, Grid } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 import {
     loadProfileDetails,
-    patchProfileDetails,
+    updateProfileDetails,
     resetStateProfileDetail,
 } from './ProfileDetailsAction';
 import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
@@ -77,6 +79,20 @@ export class ProfileDetails extends Component {
               date_round2: dateRoundTwo,
           });
       }
+      //       if (
+      //           this.props.dataProfileRes !== nextProps.dataProfileRes &&
+      //   nextProps.dataProfileRes &&
+      //   nextProps.dataProfileRes.status === 200
+      //       ) {
+      //           this.setState({ loading: false });
+      //           toast.success('ADD SUCCESSFULLY', {
+      //               autoClose: 2000,
+      //               position: 'top-center',
+      //               hideProgressBar: true,
+      //           });
+      //       } else {
+      //           this.setState({ loading: true });
+      //       }
   }
   checkValidateForm(name, value) {
       const candidateName = document.getElementsByName('candidate_fullname');
@@ -101,64 +117,65 @@ export class ProfileDetails extends Component {
       }
       this.checkValidateForm(name, value);
   };
-submitForm = e => {
-    e.preventDefault();
-    this.checkValidateForm();
-    const errorMessages = document.getElementsByClassName('error-message');
-    if (errorMessages.length > 0) {
-        errorMessages[0].focus();
-    } else if (this.props.candidateId !== null) {
-        const stateInit = this.state;
-        if (this.state.date_meeting) {
-            stateInit.date_meeting = moment(this.state.date_meeting).format('DD-MM-YYYY HH:mm');
-        }
-        this.setState({ ...stateInit }, () => {
-            this.props.patchProfileDetails(this.state);
-        });
-    }
-}
-render() {
-    return (
-        <React.Fragment>
-            <LoadingInProgress show={!this.props.profileDetails[0]} />
-            <form className="profile-details">
-                <Grid>
-                    <ProfileDetailsFirstRound
-                        handleChange={this.handleChange}
-                        {...this.state}
-                    />
-                    <ProfileDetailsSecondRound
-                        handleChange={this.handleChange}
-                        {...this.state}
-                    />
-                    <FormGroup className="profile-details__btn">
-                        <button
-                            type="button"
-                            className="profile-details__cancel"
-                            onClick={() => this.props.push('/profile')}
-                        >
+  submitForm = e => {
+      e.preventDefault();
+      this.checkValidateForm();
+      const errorMessages = document.getElementsByClassName('error-message');
+      if (errorMessages.length > 0) {
+          errorMessages[0].focus();
+      } else if (this.props.candidateId !== null) {
+          const stateInit = this.state;
+          if (this.state.date_meeting) {
+              stateInit.date_meeting = moment(this.state.date_meeting).format('DD-MM-YYYY HH:mm');
+          }
+          this.setState({ ...stateInit }, () => {
+              this.props.updateProfileDetails(this.state);
+          });
+      }
+  };
+  render() {
+      return (
+          <React.Fragment>
+              <LoadingInProgress show={!this.props.profileDetails[0]} />
+              <form className="profile-details">
+                  <Grid>
+                      <ProfileDetailsFirstRound
+                          handleChange={this.handleChange}
+                          {...this.state}
+                      />
+                      <ProfileDetailsSecondRound
+                          handleChange={this.handleChange}
+                          {...this.state}
+                      />
+                      <FormGroup className="profile-details__btn">
+                          <button
+                              type="button"
+                              className="profile-details__cancel"
+                              onClick={() => this.props.push('/profile')}
+                          >
                 Cancel
-                        </button>
-                        <button
-                            type="button"
-                            className="profile-details__submit"
-                            onClick={e => this.submitForm(e)}
-                        >
+                          </button>
+                          <button
+                              type="button"
+                              className="profile-details__submit"
+                              onClick={e => this.submitForm(e)}
+                          >
                 SAVE
-                        </button>
-                    </FormGroup>
-                </Grid>
-            </form>
-            <ConfirmationModal
-                show={this.state.showConfirmation}
-                handleClose={() => this.setState({ showConfirmation: false })}
-                handleBackToList={() => this.props.push('/profile')}
-                messages="Are you sure to do this ?"
-                ps="This action can't undo. Please determine clearly before clicking OK."
-            />
-        </React.Fragment>
-    );
-}
+                          </button>
+                      </FormGroup>
+                  </Grid>
+              </form>
+              <ConfirmationModal
+                  show={this.state.showConfirmation}
+                  handleClose={() => this.setState({ showConfirmation: false })}
+                  handleBackToList={() => this.props.push('/profile')}
+                  messages="Are you sure to do this ?"
+                  ps="This action can't undo. Please determine clearly before clicking OK."
+              />
+              <ToastContainer />
+          </React.Fragment>
+      );
+  }
 }
 const mapStateToProps = state => ({
     profileDetails: state.profileDetails.dataProfileDetails,
@@ -166,12 +183,13 @@ const mapStateToProps = state => ({
     candidateId: state.router.location.state
         ? state.router.location.state.candidateId
         : state.profile.profileSelectedId,
-    statusRes: state.profileDetails.dataProfileRes.status,
+    dataProfileRes: state.profileDetails.dataProfileRes,
+    status: state.profileDetails.statusCode.status,
 });
 
 const mapDispatchToProps = {
     loadProfileDetails,
-    patchProfileDetails,
+    updateProfileDetails,
     push,
     resetStateProfileDetail,
 };
