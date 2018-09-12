@@ -18,7 +18,7 @@ const initialState = {
     dataProfileThisOther: [],
     profileSelectedId: null,
     statusCode: {},
-    isLoad: true,
+    isLoading: true,
 };
 
 const actions = {
@@ -26,7 +26,7 @@ const actions = {
         ...state,
         dataProfile: [],
         statusCode: payload.status,
-        isLoad: false,
+        isLoading: false,
     }),
 
     [PROFILE_LOAD_FAIL]: (state, { payload }) => ({

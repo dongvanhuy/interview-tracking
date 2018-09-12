@@ -148,7 +148,7 @@ export class Profile extends Component {
                                   <h2 className="list-table__title">Today</h2>
                               </Col>
                               <Col xs={12} sm={12} md={12} lg={12}>
-                                  {this.props.isLoad ? (
+                                  {this.props.isLoading ? (
                                       this.callLoading()
                                   ) : (
                                       <Table striped bordered condensed hover responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
@@ -176,7 +176,7 @@ export class Profile extends Component {
                                   <h2 className="list-table__title">This week</h2>
                               </Col>
                               <Col xs={12} sm={12} md={12} lg={12}>
-                                  { this.props.isLoad ? (
+                                  { this.props.isLoading ? (
                                       this.callLoading()
                                   ) : (
                                       <Table striped bordered condensed hover responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
@@ -206,7 +206,7 @@ export class Profile extends Component {
                               </Col>
 
                               <Col xs={12} sm={12} md={12} lg={12}>
-                                  { this.props.isLoad ? (
+                                  { this.props.isLoading ? (
                                       this.callLoading()
                                   ) : (
                                       <Table striped bordered condensed hover responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
@@ -280,7 +280,7 @@ const mapStateToProps = state => ({
     resCode: state.profile.statusCode,
     profilethisother: state.profile.dataProfileThisOther,
     loadProfileThisOther,
-    isLoad: state.profile.isLoad,
+    isLoading: state.profile.isLoading,
 });
 
 const mapDispatchToProps = {
