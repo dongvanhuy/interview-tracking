@@ -2,6 +2,7 @@ import { handleActions } from 'redux-actions';
 import {
     VIEW_DETAIL_DATA_ID,
     PROFILE_LOAD_SUCCESS,
+    PROFILE_LOAD,
     PROFILE_LOAD_FAIL,
     PROFILE_THISWEEK_LOAD_SUCCESS,
     PROFILE_THISWEEK_LOAD_FAIL,
@@ -17,51 +18,73 @@ const initialState = {
     dataProfileThisMonth: [],
     dataProfileThisOther: [],
     profileSelectedId: null,
-    statusCode: {},
-    isLoading: true,
+    statusCode: [],
+    isLoadingToday: false,
+    isLoadingWeek: false,
+    isLoadingMonth: false,
+    isLoadingOther: false,
+    loadDataFailed: false,
 };
 
 const actions = {
+    [PROFILE_LOAD]: state => ({
+        ...state,
+        isLoadingToday: true,
+        isLoadingWeek: true,
+        isLoadingMonth: true,
+        isLoadingOther: true,
+    }),
+
     [PROFILE_LOAD_SUCCESS]: (state, { payload }) => ({
         ...state,
         dataProfile: [],
-        statusCode: payload.status,
-        isLoading: false,
+        isLoadingToday: false,
     }),
 
     [PROFILE_LOAD_FAIL]: (state, { payload }) => ({
         ...state,
-        statusCode: payload,
+        isLoadingToday: false,
+        statusCode: [...state.statusCode, payload.status],
+        loadDataFailed: true,
     }),
 
     [PROFILE_THISWEEK_LOAD_SUCCESS]: (state, { payload }) => ({
         ...state,
+        isLoadingWeek: false,
         dataProfileThisWeek: payload.data,
     }),
 
     [PROFILE_THISWEEK_LOAD_FAIL]: (state, { payload }) => ({
         ...state,
-        statusCode: payload,
+        isLoadingWeek: false,
+        statusCode: [...state.statusCode, payload.status],
+        loadDataFailed: true,
     }),
 
     [PROFILE_THISMONTH_LOAD_SUCCESS]: (state, { payload }) => ({
         ...state,
+        isLoadingMonth: false,
         dataProfileThisMonth: payload.data,
     }),
 
     [PROFILE_THISMONTH_LOAD_FAIL]: (state, { payload }) => ({
         ...state,
-        statusCode: payload,
+        isLoadingMonth: false,
+        statusCode: [...state.statusCode, payload.status],
+        loadDataFailed: true,
     }),
 
     [PROFILE_THISOTHER_LOAD_SUCCESS]: (state, { payload }) => ({
         ...state,
+        isLoadingOther: false,
         dataProfileThisOther: payload.data,
     }),
 
     [PROFILE_THISOTHER_LOAD_FAIL]: (state, { payload }) => ({
         ...state,
-        statusCode: payload,
+        isLoadingOther: false,
+        statusCode: [...state.statusCode, payload.status],
+        loadDataFailed: true,
     }),
 
     [VIEW_DETAIL_DATA_ID]: (state, { payload }) => ({

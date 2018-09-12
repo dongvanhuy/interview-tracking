@@ -2,45 +2,64 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropsTypes from 'prop-types';
 import FontAwesomeIcon from 'react-fontawesome';
-import {
-    Grid,
-    Row,
-    Button,
-    Col,
-} from 'react-bootstrap';
+import { Grid, Row, Button, Col } from 'react-bootstrap';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import moment from 'moment';
 import { push } from 'react-router-redux';
 import uid from 'uuid';
 import loading from '../../assets/images/loading.svg';
-import { loadProfile, viewDetailDataId, loadProfileThisWeek, loadProfileThisMonth, loadProfileThisOther } from './ProfileAction';
+import {
+    loadProfile,
+    viewDetailDataId,
+    loadProfileThisWeek,
+    loadProfileThisMonth,
+    loadProfileThisOther,
+} from './ProfileAction';
+import WarningModal from '../common/warningModal/WarningModal';
 
 export class Profile extends Component {
-    static propsTypes = {
-        profileToday: PropsTypes.arrayOf(PropsTypes.object),
-        profilethisweek: PropsTypes.arrayOf(PropsTypes.object),
-        profilethismonth: PropsTypes.arrayOf(PropsTypes.object),
-        profilethisother: PropsTypes.arrayOf(PropsTypes.object),
-    }
+  static propsTypes = {
+      profileToday: PropsTypes.arrayOf(PropsTypes.object),
+      profilethisweek: PropsTypes.arrayOf(PropsTypes.object),
+      profilethismonth: PropsTypes.arrayOf(PropsTypes.object),
+      profilethisother: PropsTypes.arrayOf(PropsTypes.object),
+  };
 
-    static defaultProps = {
-        profileToday: [],
-        profilethisweek: [],
-        profilethismonth: [],
-        profilethisother: [],
-    }
+  static defaultProps = {
+      profileToday: [],
+      profilethisweek: [],
+      profilethismonth: [],
+      profilethisother: [],
+  };
 
-    componentWillMount() {
-        this.props.loadProfile();
-        this.props.loadProfileThisWeek();
-        this.props.loadProfileThisMonth();
-        this.props.loadProfileThisOther();
-    }
+  constructor(props) {
+      super(props);
+      this.state = {
+          isOpen: false,
+      };
+  }
+
+  componentWillMount() {
+      this.props.loadProfile();
+      this.props.loadProfileThisWeek();
+      this.props.loadProfileThisMonth();
+      this.props.loadProfileThisOther();
+  }
+
+  componentWillReceiveProps(nextProps) {
+      console.log('>>>>>>>>>>> initiate', this.props.loadDataFailed);
+      console.log('>>>>>>>>>>> changed', nextProps.loadDataFailed);
+      if (this.props.loadDataFailed !== nextProps.loadDataFailed) {
+          console.log('>>>> load faild', this.state.isOpen);
+          this.setState({
+              isOpen: true,
+          });
+      }
+  }
 
   viewDetailId = id => {
       this.props.viewDetailDataId(id);
-      //   this.props.resetModalSuccess();
       this.props.push({
           pathname: '/profile-details',
           state: {
@@ -49,26 +68,36 @@ export class Profile extends Component {
       });
   };
 
-    callLoading = () => (
-        <div className="loading-block">
-            <Table bordered responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
-                <Thead>
-                    <Tr>
-                        <Th>#</Th>
-                        <Th>Time</Th>
-                        <Th>Name</Th>
-                        <Th>Recruiter</Th>
-                        <Th>Skill</Th>
-                        <Th className="text-status">Status</Th>
-                        <Th>Action</Th>
-                    </Tr>
-                </Thead>
-            </Table>
-            <div className="loading-block__spinner">
-                <img src={loading} alt="loading" />
-            </div>
-        </div>
-    )
+  callLoading = () => (
+      <div className="loading-block">
+          <Table
+              bordered
+              responsive
+              className="list-cadidate-table"
+              xs={12}
+              sm={12}
+              md={12}
+              lg={12}
+          >
+              <Thead>
+                  <Tr>
+                      <Th>#</Th>
+                      <Th>Time</Th>
+                      <Th>Name</Th>
+                      <Th>Recruiter</Th>
+                      <Th>Skill</Th>
+                      <Th className="text-status">Status</Th>
+                      <Th>Action</Th>
+                  </Tr>
+              </Thead>
+          </Table>
+          <div className="loading-block__spinner">
+              <img src={loading} alt="loading" />
+          </div>
+      </div>
+  );
+
+  turnOff=() => this.setState({ isOpen: false });
 
   addProfileDetail = () => {
       this.props.push('/profile-info');
@@ -80,63 +109,98 @@ export class Profile extends Component {
           profilethisweek,
           profilethismonth,
           profilethisother,
-          resCode,
+          isLoadingToday,
+          isLoadingWeek,
+          isLoadingMonth,
+          isLoadingOther,
       } = this.props;
       const rowsDefault = (
           <tr key={uid()}>
               <td colSpan={7} style={{ textAlign: 'center' }}>
-        Today, No Candidate.
+          Today, No Candidate.
               </td>
           </tr>
       );
 
-      const rows = profileToday.map((item, index) =>
-          (
-              <Tr key={uid()}>
-                  <Td>{index + 1}</Td>
-                  <Td>{moment.utc(item.date_meeting).format('DD-MM-YYYY HH:mm')}</Td>
-                  <Td>{item.candidate_fullname}</Td>
-                  <Td>{item.recruiter}</Td>
-                  <Td>{item.position_apply}</Td>
-                  <Td className="text-status">{item.round1_status}</Td>
-                  <Td className="text-center"><button type="button" className="btn btn-default" onClick={() => this.viewDetailId(item.candidate_id)}><i className="fa fa-pencil" /> Edit</button></Td>
-              </Tr>));
+      const rows = profileToday.map((item, index) => (
+          <Tr key={uid()}>
+              <Td>{index + 1}</Td>
+              <Td>{moment.utc(item.date_meeting).format('DD-MM-YYYY HH:mm')}</Td>
+              <Td>{item.candidate_fullname}</Td>
+              <Td>{item.recruiter}</Td>
+              <Td>{item.position_apply}</Td>
+              <Td className="text-status">{item.round1_status}</Td>
+              <Td className="text-center">
+                  <button
+                      type="button"
+                      className="btn btn-default"
+                      onClick={() => this.viewDetailId(item.candidate_id)}
+                  >
+                      <i className="fa fa-pencil" /> Edit
+                  </button>
+              </Td>
+          </Tr>
+      ));
 
-      const rowsthisweek = profilethisweek.map((item, index) =>
-          (
-              <Tr key={uid()}>
-                  <Td>{index + 1}</Td>
-                  <Td>{moment.utc(item.date_meeting).format('DD-MM-YYYY HH:mm')}</Td>
-                  <Td>{item.candidate_fullname}</Td>
-                  <Td>{item.recruiter}</Td>
-                  <Td>{item.position_apply}</Td>
-                  <Td className="text-status">{item.round1_status}</Td>
-                  <Td className="text-center"><button type="button" className="btn btn-default" onClick={() => this.viewDetailId(item.candidate_id)}><i className="fa fa-pencil" /> Edit</button></Td>
-              </Tr>));
+      const rowsthisweek = profilethisweek.map((item, index) => (
+          <Tr key={uid()}>
+              <Td>{index + 1}</Td>
+              <Td>{moment.utc(item.date_meeting).format('DD-MM-YYYY HH:mm')}</Td>
+              <Td>{item.candidate_fullname}</Td>
+              <Td>{item.recruiter}</Td>
+              <Td>{item.position_apply}</Td>
+              <Td className="text-status">{item.round1_status}</Td>
+              <Td className="text-center">
+                  <button
+                      type="button"
+                      className="btn btn-default"
+                      onClick={() => this.viewDetailId(item.candidate_id)}
+                  >
+                      <i className="fa fa-pencil" /> Edit
+                  </button>
+              </Td>
+          </Tr>
+      ));
 
-      const rowsthismonth = profilethismonth.map((item, index) =>
-          (
-              <Tr key={uid()}>
-                  <Td>{index + 1}</Td>
-                  <Td>{moment.utc(item.date_meeting).format('DD-MM-YYYY HH:mm')}</Td>
-                  <Td>{item.candidate_fullname}</Td>
-                  <Td>{item.recruiter}</Td>
-                  <Td>{item.position_apply}</Td>
-                  <Td className="text-status">{item.round1_status}</Td>
-                  <Td className="text-center"><button type="button" className="btn btn-default" onClick={() => this.viewDetailId(item.candidate_id)}><i className="fa fa-pencil" /> Edit</button></Td>
-              </Tr>));
+      const rowsthismonth = profilethismonth.map((item, index) => (
+          <Tr key={uid()}>
+              <Td>{index + 1}</Td>
+              <Td>{moment.utc(item.date_meeting).format('DD-MM-YYYY HH:mm')}</Td>
+              <Td>{item.candidate_fullname}</Td>
+              <Td>{item.recruiter}</Td>
+              <Td>{item.position_apply}</Td>
+              <Td className="text-status">{item.round1_status}</Td>
+              <Td className="text-center">
+                  <button
+                      type="button"
+                      className="btn btn-default"
+                      onClick={() => this.viewDetailId(item.candidate_id)}
+                  >
+                      <i className="fa fa-pencil" /> Edit
+                  </button>
+              </Td>
+          </Tr>
+      ));
 
-      const rowsthisother = profilethisother.map((item, index) =>
-          (
-              <Tr key={uid()}>
-                  <Td>{index + 1}</Td>
-                  <Td>{moment.utc(item.date_meeting).format('DD-MM-YYYY HH:mm')}</Td>
-                  <Td>{item.candidate_fullname}</Td>
-                  <Td>{item.recruiter}</Td>
-                  <Td>{item.position_apply}</Td>
-                  <Td className="text-status">{item.round1_status}</Td>
-                  <Td className="text-center"><button type="button" className="btn btn-default" onClick={() => this.viewDetailId(item.candidate_id)}><i className="fa fa-pencil" /> Edit</button></Td>
-              </Tr>));
+      const rowsthisother = profilethisother.map((item, index) => (
+          <Tr key={uid()}>
+              <Td>{index + 1}</Td>
+              <Td>{moment.utc(item.date_meeting).format('DD-MM-YYYY HH:mm')}</Td>
+              <Td>{item.candidate_fullname}</Td>
+              <Td>{item.recruiter}</Td>
+              <Td>{item.position_apply}</Td>
+              <Td className="text-status">{item.round1_status}</Td>
+              <Td className="text-center">
+                  <button
+                      type="button"
+                      className="btn btn-default"
+                      onClick={() => this.viewDetailId(item.candidate_id)}
+                  >
+                      <i className="fa fa-pencil" /> Edit
+                  </button>
+              </Td>
+          </Tr>
+      ));
 
       return (
           <section className="list-candidate-page">
@@ -148,10 +212,16 @@ export class Profile extends Component {
                                   <h2 className="list-table__title">Today</h2>
                               </Col>
                               <Col xs={12} sm={12} md={12} lg={12}>
-                                  {this.props.isLoading ? (
+                                  {isLoadingToday ? (
                                       this.callLoading()
                                   ) : (
-                                      <Table striped bordered condensed hover responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
+                                      <Table
+                                          className="list-cadidate-table"
+                                          xs={12}
+                                          sm={12}
+                                          md={12}
+                                          lg={12}
+                                      >
                                           <Thead>
                                               <Tr>
                                                   <Th>#</Th>
@@ -176,10 +246,16 @@ export class Profile extends Component {
                                   <h2 className="list-table__title">This week</h2>
                               </Col>
                               <Col xs={12} sm={12} md={12} lg={12}>
-                                  { this.props.isLoading ? (
+                                  {isLoadingWeek ? (
                                       this.callLoading()
                                   ) : (
-                                      <Table striped bordered condensed hover responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
+                                      <Table
+                                          className="list-cadidate-table"
+                                          xs={12}
+                                          sm={12}
+                                          md={12}
+                                          lg={12}
+                                      >
                                           <Thead>
                                               <Tr>
                                                   <Th>#</Th>
@@ -196,7 +272,8 @@ export class Profile extends Component {
                                                   ? rowsDefault
                                                   : rowsthisweek}
                                           </Tbody>
-                                      </Table>)}
+                                      </Table>
+                                  )}
                               </Col>
                           </div>
 
@@ -206,10 +283,16 @@ export class Profile extends Component {
                               </Col>
 
                               <Col xs={12} sm={12} md={12} lg={12}>
-                                  { this.props.isLoading ? (
+                                  {isLoadingMonth ? (
                                       this.callLoading()
                                   ) : (
-                                      <Table striped bordered condensed hover responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
+                                      <Table
+                                          className="list-cadidate-table"
+                                          xs={12}
+                                          sm={12}
+                                          md={12}
+                                          lg={12}
+                                      >
                                           <Thead>
                                               <Tr>
                                                   <Th>#</Th>
@@ -237,37 +320,52 @@ export class Profile extends Component {
                               </Col>
 
                               <Col xs={12} sm={12} md={12} lg={12}>
-                                  { profilethisother.length < 1 &&
-                                        this.callLoading()
-                                  }
-                                  { profilethisother.length > 1 &&
-                                        <Table striped bordered condensed hover responsive className="list-cadidate-table" xs={12} sm={12} md={12} lg={12}>
-                                            <Thead>
-                                                <Tr>
-                                                    <Th>#</Th>
-                                                    <Th>Time</Th>
-                                                    <Th>Name</Th>
-                                                    <Th>Recruiter</Th>
-                                                    <Th>Skill</Th>
-                                                    <Th>Status</Th>
-                                                    <Th>Action</Th>
-                                                </Tr>
-                                            </Thead>
-                                            <Tbody>
-                                                {rowsthisother}
-                                            </Tbody>
-                                        </Table>
-                                  }
+                                  {isLoadingOther ? (
+                                      this.callLoading()
+                                  ) : (
+                                      <Table
+                                          className="list-cadidate-table"
+                                          xs={12}
+                                          sm={12}
+                                          md={12}
+                                          lg={12}
+                                      >
+                                          <Thead>
+                                              <Tr>
+                                                  <Th>#</Th>
+                                                  <Th>Time</Th>
+                                                  <Th>Name</Th>
+                                                  <Th>Recruiter</Th>
+                                                  <Th>Skill</Th>
+                                                  <Th>Status</Th>
+                                                  <Th>Action</Th>
+                                              </Tr>
+                                          </Thead>
+                                          <Tbody>
+                                              {profilethisother.length < 1
+                                                  ? rowsDefault
+                                                  : rowsthisother}
+                                          </Tbody>
+                                      </Table>
+                                  )}
                               </Col>
                           </div>
                       </Row>
                   </Grid>
               </div>
-              <Button title="Add candidate" className="add-cadidate-btn" onClick={() => this.addProfileDetail()}><FontAwesomeIcon
-                  name="plus"
-                  size="2x"
-              />
+              <Button
+                  title="Add candidate"
+                  className="add-cadidate-btn"
+                  onClick={() => this.addProfileDetail()}
+              >
+                  <FontAwesomeIcon name="plus" size="2x" />
               </Button>
+              <WarningModal
+                  show={this.state.isOpen}
+                  handleClose={() => this.turnOff()}
+                  handleOK={() => this.turnOff()}
+                  paragraph="Server is died."
+              />;
           </section>
       );
   }
@@ -277,10 +375,13 @@ const mapStateToProps = state => ({
     profileToday: state.profile.dataProfile,
     profilethisweek: state.profile.dataProfileThisWeek,
     profilethismonth: state.profile.dataProfileThisMonth,
-    resCode: state.profile.statusCode,
     profilethisother: state.profile.dataProfileThisOther,
     loadProfileThisOther,
-    isLoading: state.profile.isLoading,
+    isLoadingToday: state.profile.isLoadingToday,
+    isLoadingWeek: state.profile.isLoadingWeek,
+    isLoadingMonth: state.profile.isLoadingMonth,
+    isLoadingOther: state.profile.isLoadingOther,
+    loadDataFailed: state.profile.loadDataFailed,
 });
 
 const mapDispatchToProps = {

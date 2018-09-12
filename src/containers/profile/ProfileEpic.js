@@ -20,6 +20,7 @@ export const loadProfileEpic = (action$, store, { loadDataCandidateService }) =>
     action$.ofType(PROFILE_LOAD).switchMap(() =>
         loadDataCandidateService()
             .map(res => loadProfileSuccess(res))
+            // .map(res => loadProfileFail(res))
             .catch(err => loadProfileFail(err)));
 
 export const loadProfileThisWeekEpic = (
