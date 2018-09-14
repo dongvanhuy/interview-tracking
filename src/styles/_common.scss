@@ -162,7 +162,7 @@ main {
 
 .success-modal {
   .modal-content {
-    background-color: $color-green;
+    background-color: $color-gray;
   }
 
   .modal-header {
@@ -173,7 +173,9 @@ main {
 
   .modal-body {
     background-color: $color-white;
-    min-height: 200px;
+    h4{
+      margin: 0%;
+    }
   }
 
   .modal-footer {
@@ -193,15 +195,6 @@ main {
     top: 25%;
   }
 
-  h3 {
-    text-align: center;
-  }
-
-  p {
-    font-size: 17px;
-    position: absolute;
-    bottom: 0;
-  }
 }
 
 .date-time {

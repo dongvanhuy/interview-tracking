@@ -29,7 +29,7 @@ export default class ConfirmationModal extends Component {
                       <Modal.Title>Confirmation</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                      <h3>{this.props.messages}</h3>
+                      <h4>{this.props.messages}</h4>
                       <p>{this.props.ps}</p>
                   </Modal.Body>
                   <Modal.Footer>
