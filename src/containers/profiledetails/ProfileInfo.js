@@ -4,7 +4,7 @@ import { push } from 'react-router-redux';
 import { FormGroup, Grid } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
-import { createProfileDetails } from './ProfileDetailsAction';
+import { createProfileDetails, resetStateProfileDetail } from './ProfileDetailsAction';
 import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
 import { ProfileDetailsSecondRound } from './ProfileDetailsSecondRound';
 import ConfirmationModal from '../common/confirmationModal/ConfirmationModal';
@@ -61,8 +61,9 @@ export class ProfileInfo extends Component {
       nextProps.dataProfileRes.status === 200
         ) {
             this.setState({ loading: false });
-            toast.success('ADD SUCCESSFULLY', {
-                autoClose: false,
+            toast('ADD SUCCESSFULLY', {
+                autoClose: 2000,
+                position: 'top-center',
                 hideProgressBar: true,
             });
         } else {
@@ -179,7 +180,8 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = {
     createProfileDetails,
-    push, // ACTION GUI EPIC GUI API
+    push,
+    resetStateProfileDetail,
 };
 
 export default connect(

@@ -173,9 +173,6 @@ main {
 
   .modal-body {
     background-color: $color-white;
-    h4{
-      margin: 0%;
-    }
   }
 
   .modal-footer {
@@ -220,13 +217,14 @@ main {
     padding: 0px;
     width: 100%;
     &--top-center {
-      top: 17%;
+      top: 22%;
       left: 0;
       margin-left: 0;
     }
   }
-  .Toastify &__toast--success {
+  .Toastify &__toast--default {
     background: #009999;
+    color:$color-white;
   }
 }
 
