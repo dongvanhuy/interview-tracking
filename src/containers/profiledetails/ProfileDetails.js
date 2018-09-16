@@ -32,6 +32,7 @@ export class ProfileDetails extends Component {
           candidate_id: '',
           candidate_fullname: '',
           position_apply: '',
+          date_meeting: '',
           recruiter: '',
           eng_level: '',
           eng_level_cmt: '',
@@ -71,8 +72,8 @@ export class ProfileDetails extends Component {
   }
   componentWillReceiveProps(nextProps) {
       if (!this.props.profileDetails[0] && nextProps.profileDetails[0]) {
-          const dateRoundOne = moment(nextProps.profileDetails[0].date_round1).format('DD-MM-YYYY HH:mm');
-          const dateRoundTwo = moment(nextProps.profileDetails[0].date_round2).format('DD-MM-YYYY HH:mm');
+          const dateRoundOne = moment(nextProps.profileDetails[0].date_round1).toISOString();
+          const dateRoundTwo = moment(nextProps.profileDetails[0].date_round2).toISOString();
           this.setState({
               ...nextProps.profileDetails[0],
               date_round1: dateRoundOne,
@@ -126,7 +127,7 @@ export class ProfileDetails extends Component {
       } else if (this.props.candidateId !== null) {
           const stateInit = this.state;
           if (this.state.date_meeting) {
-              stateInit.date_meeting = moment(this.state.date_meeting).format('DD-MM-YYYY HH:mm');
+              stateInit.date_meeting = moment(this.state.date_meeting).toISOString();
           }
           this.setState({ ...stateInit }, () => {
               this.props.updateProfileDetails(this.state);
