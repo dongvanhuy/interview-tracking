@@ -13,8 +13,7 @@ import loading from '../../assets/images/loading.svg';
 export class ProfileInfo extends Component {
     constructor(props) {
         super(props);
-        this.checkValidateForm = this.checkValidateForm.bind(this);
-        this.state = {
+        this.initState = {
             candidate_id: '',
             candidate_fullname: '',
             position_apply: '',
@@ -52,6 +51,8 @@ export class ProfileInfo extends Component {
             showConfirmation: false,
             loading: false,
         };
+        this.state = this.initState;
+        this.checkValidateForm = this.checkValidateForm.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -103,7 +104,6 @@ export class ProfileInfo extends Component {
       if (errorMessages.length > 0) {
           errorMessages[0].focus();
       } else {
-      //   this.props.createProfileDetails(this.state);
           this.setState({
               showConfirmation: true,
           });
@@ -115,6 +115,7 @@ export class ProfileInfo extends Component {
           showConfirmation: false,
       });
       this.props.createProfileDetails(this.state);
+      this.setState = this.initState;
       this.setState({
           loading: true,
       });
