@@ -42,11 +42,12 @@ export class ProfileDetailsSecondRound extends Component {
                             <Datetime
                                 inputProps={{ disabled: true }}
                                 open={this.state.showTimeRoundTwo}
-                                value={this.props.date_round2}
+                                value={moment.utc(this.props.date_round2).format('DD-MM-YYYY HH:mm')}
                                 dateFormat="DD-MM-YYYY"
                                 timeFormat="HH:mm"
-                                defaultValue="dd/mm/yyyy HH:mm"
-                                onChange={(e) => this.props.handleChange({ target: { value: moment(e, 'DD-MM-YYYY'), name: 'date_round2' } })}
+                                utc
+                                defaultValue="DD-MM-YYYY HH:mm"
+                                onChange={(e) => this.props.handleChange({ target: { value: e, name: 'date_round2' } })}
                             />
                             <FontAwesomeIcon
                                 name="calendar"

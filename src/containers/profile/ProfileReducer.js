@@ -37,7 +37,7 @@ const actions = {
 
     [PROFILE_LOAD_SUCCESS]: (state, { payload }) => ({
         ...state,
-        dataProfile: [],
+        dataProfile: payload.data,
         isLoadingToday: false,
     }),
 
