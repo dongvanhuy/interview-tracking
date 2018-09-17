@@ -162,7 +162,7 @@ main {
 
 .success-modal {
   .modal-content {
-    background-color: $color-green;
+    background-color: $color-gray;
   }
 
   .modal-header {
@@ -173,7 +173,6 @@ main {
 
   .modal-body {
     background-color: $color-white;
-    min-height: 200px;
   }
 
   .modal-footer {
@@ -193,15 +192,6 @@ main {
     top: 25%;
   }
 
-  h3 {
-    text-align: center;
-  }
-
-  p {
-    font-size: 17px;
-    position: absolute;
-    bottom: 0;
-  }
 }
 
 .date-time {
@@ -227,13 +217,14 @@ main {
     padding: 0px;
     width: 100%;
     &--top-center {
-      top: 17%;
+      top: 22%;
       left: 0;
       margin-left: 0;
     }
   }
-  .Toastify &__toast--success {
+  .Toastify &__toast--default {
     background: #009999;
+    color:$color-white;
   }
 }
 

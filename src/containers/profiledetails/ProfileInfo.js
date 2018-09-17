@@ -4,7 +4,7 @@ import { push } from 'react-router-redux';
 import { FormGroup, Grid } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
-import { createProfileDetails } from './ProfileDetailsAction';
+import { createProfileDetails, resetStateProfileDetail } from './ProfileDetailsAction';
 import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
 import { ProfileDetailsSecondRound } from './ProfileDetailsSecondRound';
 import ConfirmationModal from '../common/confirmationModal/ConfirmationModal';
@@ -13,45 +13,8 @@ import loading from '../../assets/images/loading.svg';
 export class ProfileInfo extends Component {
     constructor(props) {
         super(props);
+        this.state = this.initState;
         this.checkValidateForm = this.checkValidateForm.bind(this);
-        this.state = {
-            candidate_id: '',
-            candidate_fullname: '',
-            position_apply: '',
-            recruiter: '',
-            date_meeting: '',
-            eng_level: '',
-            eng_level_cmt: '',
-            jury_round1_01: '',
-            jury_round1_02: '',
-            date_round1: '',
-            tech_competency_round1: '',
-            tech_competency_round1_cmt: '',
-            cultural_fit_round1: '',
-            cultural_fit_round1_cmt: '',
-            ype_round1: '',
-            title_round1: '',
-            round1_status: '',
-            cmt_result_round1: '',
-            jury_round2: '',
-            date_round2: '',
-            tech_competency_round2: '',
-            tech_competency_round2_cmt: '',
-            cultural_fit_round2: '',
-            cultural_fit_round2_cmt: '',
-            business_acument: '',
-            business_acument_cmt: '',
-            soft_skill: '',
-            soft_skill_cmt: '',
-            people_management: '',
-            people_management_cmt: '',
-            ype_round2: '',
-            title_round2: '',
-            round2_status: '',
-            cmt_result_round2: '',
-            showConfirmation: false,
-            loading: false,
-        };
     }
 
     componentWillReceiveProps(nextProps) {
@@ -60,14 +23,60 @@ export class ProfileInfo extends Component {
       nextProps.dataProfileRes &&
       nextProps.dataProfileRes.status === 200
         ) {
-            this.setState({ loading: false });
-            toast.success('ADD SUCCESSFULLY', {
+            this.resetForm();
+            toast('ADD SUCCESSFULLY', {
                 autoClose: 2000,
+                position: 'top-center',
                 hideProgressBar: true,
             });
         } else {
             this.setState({ loading: true });
         }
+    }
+
+    initState = {
+        candidate_id: '',
+        candidate_fullname: '',
+        position_apply: '',
+        recruiter: '',
+        date_meeting: '',
+        eng_level: '',
+        eng_level_cmt: '',
+        jury_round1_01: '',
+        jury_round1_02: '',
+        date_round1: '',
+        tech_competency_round1: '',
+        tech_competency_round1_cmt: '',
+        cultural_fit_round1: '',
+        cultural_fit_round1_cmt: '',
+        ype_round1: '',
+        title_round1: '',
+        round1_status: '',
+        cmt_result_round1: '',
+        jury_round2: '',
+        date_round2: '',
+        tech_competency_round2: '',
+        tech_competency_round2_cmt: '',
+        cultural_fit_round2: '',
+        cultural_fit_round2_cmt: '',
+        business_acument: '',
+        business_acument_cmt: '',
+        soft_skill: '',
+        soft_skill_cmt: '',
+        people_management: '',
+        people_management_cmt: '',
+        ype_round2: '',
+        title_round2: '',
+        round2_status: '',
+        cmt_result_round2: '',
+        showConfirmation: false,
+        loading: false,
+    };
+
+    resetForm = () => {
+        this.setState({ ...this.initState }, () => {
+            this.setState({ candidate_fullname: '' });
+        });
     }
 
   checkValidateForm = (name, value) => {
@@ -102,7 +111,6 @@ export class ProfileInfo extends Component {
       if (errorMessages.length > 0) {
           errorMessages[0].focus();
       } else {
-      //   this.props.createProfileDetails(this.state);
           this.setState({
               showConfirmation: true,
           });
@@ -179,7 +187,8 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = {
     createProfileDetails,
-    push, // ACTION GUI EPIC GUI API
+    push,
+    resetStateProfileDetail,
 };
 
 export default connect(

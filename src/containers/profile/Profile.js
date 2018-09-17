@@ -68,8 +68,6 @@ export class Profile extends Component {
   callLoading = () => (
       <div className="loading-block">
           <Table
-              bordered
-              responsive
               className="list-cadidate-table"
               xs={12}
               sm={12}
