@@ -86,11 +86,7 @@ export class ProfileDetails extends Component {
               date_round2: dateRoundTwo,
           });
       }
-      if (
-          this.props.dataProfileRes !== nextProps.dataProfileRes &&
-      nextProps.dataProfileRes &&
-      nextProps.dataProfileRes.status === 200
-      ) {
+      if (this.props.updateSuccess !== nextProps.updateSuccess) {
           this.setState({ loading: false });
           toast('ADD SUCCESSFULLY', {
               autoClose: 2000,
@@ -154,7 +150,6 @@ export class ProfileDetails extends Component {
       });
   };
 
-
   callLoading = () => (
       <div className="loading-block-prof">
           <div className="loading-block-prof__spinner">
@@ -211,7 +206,7 @@ export class ProfileDetails extends Component {
 }
 const mapStateToProps = state => ({
     profileDetails: state.profileDetails.dataProfileDetails,
-    show: state.profileDetails.updateSuccess,
+    updateSuccess: state.profileDetails.updateSuccess,
     candidateId: state.router.location.state
         ? state.router.location.state.candidateId
         : state.profile.profileSelectedId,
