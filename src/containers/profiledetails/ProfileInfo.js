@@ -30,7 +30,7 @@ export class ProfileInfo extends Component {
         }
 
         // save data successfull
-        if (this.props.updateSuccess !== nextProps.updateSuccess && nextProps.updateSuccess) {
+        if (this.props.doSuccessfully !== nextProps.doSuccessfully && nextProps.doSuccessfully) {
             console.log('>>>> save data successfully');
             // book meeting room
             const params = {
@@ -214,7 +214,6 @@ const mapStateToProps = state => ({
     profileDetails: state.profileDetails.dataProfileDetails,
     doSuccessfully: state.profileDetails.doSuccessfully,
     dataProfileRes: state.profileDetails.dataProfileRes,
-    updateSuccess: state.profileDetails.updateSuccess,
 });
 const mapDispatchToProps = {
     createProfileDetails,
