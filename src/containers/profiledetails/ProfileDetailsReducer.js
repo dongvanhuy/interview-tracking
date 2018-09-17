@@ -12,10 +12,10 @@ import {
 
 const initialState = {
     dataProfileDetails: [],
-    dataProfilePatch: [],
+    dataProfileUpdate: {},
     dataProfilePost: [],
     dataProfileRes: {},
-    updateSuccess: false,
+    doSuccessfully: false,
     statusCode: {},
 };
 
@@ -32,8 +32,8 @@ const actions = {
 
     [PROFILE_DETAILS_UPDATE_SUCCESS]: (state, { payload }) => ({
         ...state,
-        dataProfilePatch: payload,
-        updateSuccess: true,
+        dataProfileUpdate: payload,
+        doSuccessfully: true,
     }),
 
     [PROFILE_DETAILS_UPDATE_FAIL]: (state, { payload }) => ({
@@ -44,7 +44,7 @@ const actions = {
     [PROFILE_DETAILS_CREATE_SUCCESS]: (state, { payload }) => ({
         ...state,
         dataProfileRes: payload,
-        updateSuccess: true,
+        doSuccessfully: true,
     }),
 
     [PROFILE_DETAILS_CREATE_FAIL]: (state, { payload }) => ({
@@ -54,7 +54,7 @@ const actions = {
 
     [CLOSE_MODAL_SUCCESS]: state => ({
         ...state,
-        updateSuccess: false,
+        doSuccessfully: false,
     }),
 
     [RESET_PROFILE_DETAILS_DATA]: state => ({
