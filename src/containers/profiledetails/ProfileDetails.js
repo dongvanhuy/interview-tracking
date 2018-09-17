@@ -23,11 +23,6 @@ export class ProfileDetails extends Component {
       candidateId: PropsTypes.objectOf(PropsTypes.object),
   };
 
-  static defaultProps = {
-      profileDetails: [],
-      candidateId: 1000,
-  };
-
   constructor(props) {
       super(props);
       this.checkValidateForm = this.checkValidateForm.bind(this);
@@ -108,16 +103,11 @@ export class ProfileDetails extends Component {
       }
   }
 
-  handleChange = (e, childAttr) => {
+  handleChange = (e) => {
       const { value, name } = e.target;
       const stateInit = this.state;
-      if (childAttr === undefined) {
-          stateInit[name] = value;
-          this.setState({ ...stateInit });
-      } else {
-          stateInit[name] = childAttr;
-          this.setState({ ...stateInit });
-      }
+      stateInit[name] = value;
+      this.setState({ ...stateInit });
       this.checkValidateForm(name, value);
   };
 
@@ -159,7 +149,6 @@ export class ProfileDetails extends Component {
   );
 
   render() {
-      console.log('>>>>>>>>>>> test', this.state.loading);
       return (
           <React.Fragment>
               <LoadingInProgress show={!this.props.profileDetails[0]} />

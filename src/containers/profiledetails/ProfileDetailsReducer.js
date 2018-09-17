@@ -16,7 +16,6 @@ const initialState = {
     dataProfilePost: [],
     dataProfileRes: {},
     doSuccessfully: false,
-    statusCode: {},
 };
 
 const actions = {
