@@ -5,12 +5,15 @@ import {
     PROFILE_DETAILS_UPDATE,
     PROFILE_DETAILS_CREATE,
     PROFILE_DETAILS_UPDATE_FAIL,
+    BOOK_MEETING_ROOM,
+    BOOK_MEETING_ROOM_FAILED,
 } from '../../store/actionTypes';
 import {
     loadProfileDetailsSuccess,
     loadProfileDetailsFail,
     updateProfileDetailsSuccess,
     createProfileDetailsSuccess,
+    bookMeetingRoomSuccess,
 } from './ProfileDetailsAction';
 
 export const loadProfileDetailsEpic = (
@@ -51,8 +54,29 @@ export const createProfileDetailsEpic = (
             .catch(err => console.log(err));
     });
 
+export const bookMeetingRoomEpic = (
+    action$,
+    store,
+    { bookMeetingRoomService },
+) =>
+    action$.ofType(BOOK_MEETING_ROOM).switchMap(action => {
+        const param = action.payload;
+        console.log('>>>>> param epic', param);
+        return bookMeetingRoomService(param)
+            .map(res => res.data)
+            .map(bookMeetingRoomSuccess)
+            .catch(err => console.log(err));
+    });
+
+// export const bookMeetingRoomEpic = (action$, store, { bookMeetingRoomService }) => action$.ofType(BOOK_MEETING_ROOM)
+//     .switchMap((action) => bookMeetingRoomService(action.payload)
+//         .map(res => res.data)
+//         .map(data => bookMeetingRoomSuccess(data))
+//         .catch(err => Observable.of({ type: BOOK_MEETING_ROOM_FAILED, payload: err.response })));
+
 export default combineEpics(
     loadProfileDetailsEpic,
     updateProfileDetailsEpic,
     createProfileDetailsEpic,
+    bookMeetingRoomEpic,
 );

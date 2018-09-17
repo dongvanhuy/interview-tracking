@@ -4,7 +4,7 @@ import { push } from 'react-router-redux';
 import { FormGroup, Grid } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
-import { createProfileDetails } from './ProfileDetailsAction';
+import { createProfileDetails, bookMeetingRoom } from './ProfileDetailsAction';
 import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
 import { ProfileDetailsSecondRound } from './ProfileDetailsSecondRound';
 import ConfirmationModal from '../common/confirmationModal/ConfirmationModal';
@@ -68,6 +68,38 @@ export class ProfileInfo extends Component {
         } else {
             this.setState({ loading: true });
         }
+
+        // save data successfull
+        if (this.props.updateSuccess !== nextProps.updateSuccess && nextProps.updateSuccess) {
+            console.log('>>>> save data successfully');
+            // book meeting room
+            const params = {
+                Subject: 'Interview',
+                Body: {
+                    ContentType: 'HTML',
+                    Content: 'I think it will meet our requirements!',
+                },
+                Start: {
+                    DateTime: '2018-09-17T18:00:00',
+                    TimeZone: 'Pacific Standard Time',
+                },
+                End: {
+                    DateTime: '2018-09-17T19:00:00',
+                    TimeZone: 'Pacific Standard Time',
+                },
+                Attendees: [
+                    {
+                        EmailAddress: {
+                            Address: 'trangthi.nguyen@hubcba.com',
+                            Name: 'Trang Nguyen',
+                        },
+                        Type: 'Required',
+                    },
+                ],
+            };
+            console.log('>>> params', params);
+            this.props.bookMeetingRoom(params);
+        }
     }
 
   checkValidateForm = (name, value) => {
@@ -107,6 +139,8 @@ export class ProfileInfo extends Component {
               showConfirmation: true,
           });
       }
+
+      //   this.onBookMeeting();
   };
 
   handleOK = () => {
@@ -176,10 +210,12 @@ const mapStateToProps = state => ({
     profileDetails: state.profileDetails.dataProfileDetails,
     show: state.profileDetails.updateSuccess,
     dataProfileRes: state.profileDetails.dataProfileRes,
+    updateSuccess: state.profileDetails.updateSuccess,
 });
 const mapDispatchToProps = {
     createProfileDetails,
     push, // ACTION GUI EPIC GUI API
+    bookMeetingRoom,
 };
 
 export default connect(

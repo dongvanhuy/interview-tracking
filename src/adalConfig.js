@@ -8,6 +8,7 @@ export const adalConfig = {
     },
     postLogoutRedirectUri: 'https://dxc-interview-tracking-release.azurewebsites.net/',
     cacheLocation: 'localStorage',
+    ResponseType: 'token',
 };
 
 export const authContext = new AuthenticationContext(adalConfig);
@@ -18,4 +19,7 @@ export const adalApiFetch = (fetch, url, options) =>
 export const withAdalLoginApi = withAdalLogin(
     authContext,
     adalConfig.endpoints.api,
+    // 'https://graph.microsoft.com',
 );
+
+export const getAccessToken = authContext.getCachedToken(adalConfig.endpoints.api);
