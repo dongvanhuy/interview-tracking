@@ -10,7 +10,7 @@ export class ProfileDetailsSecondRound extends Component {
     }
 
     showTimeTwo = () => {
-        const show = this.state.showTimeRoundOne;
+        const show = this.state.showTimeRoundTwo;
         this.setState({ showTimeRoundTwo: !show });
     }
     render() {
@@ -40,6 +40,7 @@ export class ProfileDetailsSecondRound extends Component {
                         <FormGroup className="date-time__two">
                             <ControlLabel>Date</ControlLabel>
                             <Datetime
+                                inputProps={{ disabled: true }}
                                 open={this.state.showTimeRoundTwo}
                                 value={this.props.date_round2}
                                 dateFormat="DD-MM-YYYY"
