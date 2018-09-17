@@ -26,7 +26,7 @@ export class ProfileDetailsFirstRound extends Component {
                     <Col xs={12} sm={6} md={6} lg={6}>
                         <h2 className="profile-details__title">Candidate Info</h2>
                         <FormGroup>
-                            <ControlLabel>Candidate's Full Name</ControlLabel>
+                            <ControlLabel>Candidate's Full Name(<span style={{ color: 'red' }}>*</span>) </ControlLabel>
                             <FormControl
                                 type="text"
                                 placeholder=""
@@ -46,7 +46,7 @@ export class ProfileDetailsFirstRound extends Component {
                             />
                         </FormGroup>
                         <FormGroup className="date-time__one">
-                            <ControlLabel>Date Meeting</ControlLabel>
+                            <ControlLabel>Date Meeting(<span style={{ color: 'red' }}>*</span>)</ControlLabel>
                             <Datetime
                                 inputProps={{ disabled: true }}
                                 open={this.state.showTimeDateMeeting} // ISO Date
@@ -109,7 +109,7 @@ export class ProfileDetailsFirstRound extends Component {
                 <h2 className="profile-details__title">1st Round</h2>
                 <Row className="show-grid">
                     <Col xs={12} sm={9} md={9} lg={9}>
-                        <ControlLabel>Interviewer(s)'s name</ControlLabel>
+                        <ControlLabel>Interviewer(s)'s name(<span style={{ color: 'red' }}>*</span>)    </ControlLabel>
                         <Row className="show-grid">
                             <Col xs={12} sm={6} md={6} lg={6}>
                                 <FormGroup>
