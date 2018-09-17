@@ -48,10 +48,7 @@ export class Profile extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-      console.log('>>>>>>>>>>> initiate', this.props.loadDataFailed);
-      console.log('>>>>>>>>>>> changed', nextProps.loadDataFailed);
       if (this.props.loadDataFailed !== nextProps.loadDataFailed) {
-          console.log('>>>> load faild', this.state.isOpen);
           this.setState({
               isOpen: true,
           });
@@ -71,8 +68,6 @@ export class Profile extends Component {
   callLoading = () => (
       <div className="loading-block">
           <Table
-              bordered
-              responsive
               className="list-cadidate-table"
               xs={12}
               sm={12}

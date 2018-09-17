@@ -49,7 +49,7 @@ export class ProfileDetailsFirstRound extends Component {
                             <ControlLabel>Date Meeting</ControlLabel>
                             <Datetime
                                 inputProps={{ disabled: true }}
-                                open={this.state.showTimeDateMeeting}
+                                open={this.state.showTimeDateMeeting} // ISO Date
                                 value={moment.utc(this.props.date_meeting).format('DD-MM-YYYY HH:mm')}
                                 dateFormat="DD-MM-YYYY"
                                 timeFormat="HH:mm"
@@ -155,11 +155,12 @@ export class ProfileDetailsFirstRound extends Component {
                             <Datetime
                                 inputProps={{ disabled: true }}
                                 open={this.state.showTimeRoundOne}
-                                value={this.props.date_round1}
+                                value={moment.utc(this.props.date_round1).format('DD-MM-YYYY HH:mm')}
                                 dateFormat="DD-MM-YYYY"
                                 timeFormat="HH:mm"
-                                defaultValue="dd/mm/yyyy HH:mm"
-                                onChange={(e) => this.props.handleChange({ target: { value: moment(e, 'DD-MM-YYYY'), name: 'date_round1' } })}
+                                utc
+                                defaultValue="DD-MM-YYYY HH:mm"
+                                onChange={(e) => this.props.handleChange({ target: { value: e, name: 'date_round1' } })}
                             />
                             <FontAwesomeIcon
                                 name="calendar"

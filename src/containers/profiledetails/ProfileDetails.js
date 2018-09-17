@@ -15,16 +15,19 @@ import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
 import { ProfileDetailsSecondRound } from './ProfileDetailsSecondRound';
 import LoadingInProgress from '../common/loadingPage/loadingInProgress';
 import ConfirmationModal from '../common/confirmationModal/ConfirmationModal';
+import loading from '../../assets/images/loading.svg';
 
 export class ProfileDetails extends Component {
   static propsTypes = {
       profileDetails: PropsTypes.objectOf(PropsTypes.object),
       candidateId: PropsTypes.objectOf(PropsTypes.object),
   };
+
   static defaultProps = {
       profileDetails: [],
       candidateId: 1000,
   };
+
   constructor(props) {
       super(props);
       this.checkValidateForm = this.checkValidateForm.bind(this);
@@ -64,37 +67,35 @@ export class ProfileDetails extends Component {
           round2_status: '',
           cmt_result_round2: '',
           showConfirmation: false,
+          loading: false,
       };
   }
+
   componentWillMount() {
       this.props.resetStateProfileDetail();
       this.props.loadProfileDetails(this.props.candidateId);
   }
+
   componentWillReceiveProps(nextProps) {
       if (!this.props.profileDetails[0] && nextProps.profileDetails[0]) {
-          const dateRoundOne = moment(nextProps.profileDetails[0].date_round1).format('DD-MM-YYYY HH:mm');
-          const dateRoundTwo = moment(nextProps.profileDetails[0].date_round2).format('DD-MM-YYYY HH:mm');
+          const dateRoundOne = moment(nextProps.profileDetails[0].date_round1).toISOString();
+          const dateRoundTwo = moment(nextProps.profileDetails[0].date_round2).toISOString();
           this.setState({
               ...nextProps.profileDetails[0],
               date_round1: dateRoundOne,
               date_round2: dateRoundTwo,
           });
       }
-      //       if (
-      //           this.props.dataProfileRes !== nextProps.dataProfileRes &&
-      //   nextProps.dataProfileRes &&
-      //   nextProps.dataProfileRes.status === 200
-      //       ) {
-      //           this.setState({ loading: false });
-      //           toast.success('ADD SUCCESSFULLY', {
-      //               autoClose: 2000,
-      //               position: 'top-center',
-      //               hideProgressBar: true,
-      //           });
-      //       } else {
-      //           this.setState({ loading: true });
-      //       }
+      if (this.props.doSuccessfully !== nextProps.doSuccessfully) {
+          this.setState({ loading: false });
+          toast('ADD SUCCESSFULLY', {
+              autoClose: 2000,
+              position: 'top-center',
+              hideProgressBar: true,
+          });
+      }
   }
+
   checkValidateForm(name, value) {
       const candidateName = document.getElementsByName('candidate_fullname');
       if (value === '' && name === 'candidate_fullname') {
@@ -106,6 +107,7 @@ export class ProfileDetails extends Component {
           candidateName[0].classList.remove('error-message');
       }
   }
+
   handleChange = (e, childAttr) => {
       const { value, name } = e.target;
       const stateInit = this.state;
@@ -118,6 +120,7 @@ export class ProfileDetails extends Component {
       }
       this.checkValidateForm(name, value);
   };
+
   submitForm = e => {
       e.preventDefault();
       this.checkValidateForm();
@@ -127,17 +130,40 @@ export class ProfileDetails extends Component {
       } else if (this.props.candidateId !== null) {
           const stateInit = this.state;
           if (this.state.date_meeting) {
-              stateInit.date_meeting = moment(this.state.date_meeting).format('DD-MM-YYYY HH:mm');
+              stateInit.date_meeting = moment(this.state.date_meeting).toISOString();
           }
           this.setState({ ...stateInit }, () => {
-              this.props.updateProfileDetails(this.state);
+              this.setState({
+                  showConfirmation: true,
+              });
           });
       }
   };
+
+  handleOK = () => {
+      this.setState({
+          showConfirmation: false,
+      });
+      this.props.updateProfileDetails(this.state);
+      this.setState({
+          loading: true,
+      });
+  };
+
+  callLoading = () => (
+      <div className="loading-block-prof">
+          <div className="loading-block-prof__spinner">
+              <img src={loading} alt="loading" />
+          </div>
+      </div>
+  );
+
   render() {
+      console.log('>>>>>>>>>>> test', this.state.loading);
       return (
           <React.Fragment>
               <LoadingInProgress show={!this.props.profileDetails[0]} />
+              {this.state.loading ? this.callLoading() : null}
               <form className="profile-details">
                   <Grid>
                       <ProfileDetailsFirstRound
@@ -169,7 +195,7 @@ export class ProfileDetails extends Component {
               <ConfirmationModal
                   show={this.state.showConfirmation}
                   handleClose={() => this.setState({ showConfirmation: false })}
-                  handleBackToList={() => this.props.push('/profile')}
+                  handleOK={() => this.handleOK()}
                   messages="Are you sure to do this ?"
                   ps="This action can't undo. Please determine clearly before clicking OK."
               />
@@ -180,12 +206,11 @@ export class ProfileDetails extends Component {
 }
 const mapStateToProps = state => ({
     profileDetails: state.profileDetails.dataProfileDetails,
-    show: state.profileDetails.updateSuccess,
+    doSuccessfully: state.profileDetails.doSuccessfully,
     candidateId: state.router.location.state
         ? state.router.location.state.candidateId
         : state.profile.profileSelectedId,
-    dataProfileRes: state.profileDetails.dataProfileRes,
-    status: state.profileDetails.statusCode.status,
+    dataProfileRes: state.profileDetails.dataProfileUpdate,
 });
 
 const mapDispatchToProps = {
