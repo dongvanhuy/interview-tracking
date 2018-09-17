@@ -12,7 +12,7 @@ import {
 
 const initialState = {
     dataProfileDetails: [],
-    dataProfilePatch: [],
+    dataProfileUpdate: {},
     dataProfilePost: [],
     dataProfileRes: {},
     updateSuccess: false,
@@ -32,7 +32,7 @@ const actions = {
 
     [PROFILE_DETAILS_UPDATE_SUCCESS]: (state, { payload }) => ({
         ...state,
-        dataProfilePatch: payload,
+        dataProfileUpdate: payload,
         updateSuccess: true,
     }),
 
