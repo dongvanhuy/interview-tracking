@@ -4,7 +4,10 @@ import { push } from 'react-router-redux';
 import { FormGroup, Grid } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
-import { createProfileDetails, resetStateProfileDetail } from './ProfileDetailsAction';
+import {
+    createProfileDetails,
+    resetStateProfileDetail,
+} from './ProfileDetailsAction';
 import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
 import { ProfileDetailsSecondRound } from './ProfileDetailsSecondRound';
 import ConfirmationModal from '../common/confirmationModal/ConfirmationModal';
@@ -30,50 +33,51 @@ export class ProfileInfo extends Component {
         }
     }
 
-    initState = {
-        candidate_id: '',
-        candidate_fullname: '',
-        position_apply: '',
-        recruiter: '',
-        date_meeting: '',
-        eng_level: '',
-        eng_level_cmt: '',
-        jury_round1_01: '',
-        jury_round1_02: '',
-        date_round1: '',
-        tech_competency_round1: '',
-        tech_competency_round1_cmt: '',
-        cultural_fit_round1: '',
-        cultural_fit_round1_cmt: '',
-        ype_round1: '',
-        title_round1: '',
-        round1_status: '',
-        cmt_result_round1: '',
-        jury_round2: '',
-        date_round2: '',
-        tech_competency_round2: '',
-        tech_competency_round2_cmt: '',
-        cultural_fit_round2: '',
-        cultural_fit_round2_cmt: '',
-        business_acument: '',
-        business_acument_cmt: '',
-        soft_skill: '',
-        soft_skill_cmt: '',
-        people_management: '',
-        people_management_cmt: '',
-        ype_round2: '',
-        title_round2: '',
-        round2_status: '',
-        cmt_result_round2: '',
-        showConfirmation: false,
-        loading: false,
-    };
+  initState = {
+      candidate_id: '',
+      candidate_fullname: '',
+      position_apply: '',
+      recruiter: '',
+      date_meeting: '',
+      eng_level: '',
+      eng_level_cmt: '',
+      jury_round1_01: '',
+      jury_round1_02: '',
+      date_round1: '',
+      tech_competency_round1: '',
+      tech_competency_round1_cmt: '',
+      cultural_fit_round1: '',
+      cultural_fit_round1_cmt: '',
+      ype_round1: '',
+      title_round1: '',
+      round1_status: '',
+      cmt_result_round1: '',
+      jury_round2: '',
+      date_round2: '',
+      tech_competency_round2: '',
+      tech_competency_round2_cmt: '',
+      cultural_fit_round2: '',
+      cultural_fit_round2_cmt: '',
+      business_acument: '',
+      business_acument_cmt: '',
+      soft_skill: '',
+      soft_skill_cmt: '',
+      people_management: '',
+      people_management_cmt: '',
+      ype_round2: '',
+      title_round2: '',
+      round2_status: '',
+      cmt_result_round2: '',
+      showConfirmation: false,
+      loading: false,
+      doEdit: false,
+  };
 
-    resetForm = () => {
-        this.setState({ ...this.initState }, () => {
-            this.setState({ candidate_fullname: '' });
-        });
-    }
+  resetForm = () => {
+      this.setState({ ...this.initState }, () => {
+          this.setState({ candidate_fullname: '' });
+      });
+  };
 
   checkValidateForm = (name, value) => {
       const candidateName = document.getElementsByName('candidate_fullname');
@@ -87,16 +91,11 @@ export class ProfileInfo extends Component {
       }
   };
 
-  handleChange = (e, childAttr) => {
+  handleChange = e => {
       const { value, name } = e.target;
       const stateInit = this.state;
-      if (childAttr === undefined) {
-          stateInit[name] = value;
-          this.setState({ ...stateInit });
-      } else {
-          stateInit[name] = childAttr;
-          this.setState({ ...stateInit });
-      }
+      stateInit[name] = value;
+      this.setState({ ...stateInit });
       this.checkValidateForm(name, value);
   };
 
