@@ -86,7 +86,7 @@ export class ProfileDetails extends Component {
               date_round2: dateRoundTwo,
           });
       }
-      if (this.props.updateSuccess !== nextProps.updateSuccess) {
+      if (this.props.doSuccessfully !== nextProps.doSuccessfully) {
           this.setState({ loading: false });
           toast('ADD SUCCESSFULLY', {
               autoClose: 2000,
@@ -206,7 +206,7 @@ export class ProfileDetails extends Component {
 }
 const mapStateToProps = state => ({
     profileDetails: state.profileDetails.dataProfileDetails,
-    updateSuccess: state.profileDetails.updateSuccess,
+    doSuccessfully: state.profileDetails.doSuccessfully,
     candidateId: state.router.location.state
         ? state.router.location.state.candidateId
         : state.profile.profileSelectedId,

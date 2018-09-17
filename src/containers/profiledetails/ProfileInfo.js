@@ -18,7 +18,7 @@ export class ProfileInfo extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.createSuccess !== nextProps.createSuccess) {
+        if (this.props.doSuccessfully !== nextProps.doSuccessfully) {
             this.resetForm();
             toast('ADD SUCCESSFULLY', {
                 autoClose: 2000,
@@ -178,7 +178,7 @@ export class ProfileInfo extends Component {
 
 const mapStateToProps = state => ({
     profileDetails: state.profileDetails.dataProfileDetails,
-    createSuccess: state.profileDetails.updateSuccess,
+    doSuccessfully: state.profileDetails.doSuccessfully,
     dataProfileRes: state.profileDetails.dataProfileRes,
 });
 const mapDispatchToProps = {
