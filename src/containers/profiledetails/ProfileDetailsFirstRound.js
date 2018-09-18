@@ -10,6 +10,10 @@ export class ProfileDetailsFirstRound extends Component {
         showTimeDateMeeting: false,
     }
 
+    componentDidMount() {
+        this.focus();
+    }
+
     showTimeOne = () => {
         const show = this.state.showTimeRoundOne;
         this.setState({ showTimeRoundOne: !show });
@@ -19,19 +23,22 @@ export class ProfileDetailsFirstRound extends Component {
         this.setState({ showTimeDateMeeting: !show });
     }
 
+    focus() {
+        this.textInput.focus();
+    }
+
     render() {
         const { errorMessages } = this.props;
-        console.log('>>>>>> errorMessages', errorMessages);
         return (
             <React.Fragment>
                 <Row className="show-grid">
                     <Col xs={12} sm={6} md={6} lg={6}>
                         <h2 className="profile-details__title">Candidate Info</h2>
                         <FormGroup>
-                            <ControlLabel>Candidate's Full Name(<span className="span--red">*</span>) </ControlLabel>
+                            <ControlLabel>Candidate's Full Name(<span className="span">*</span>) </ControlLabel>
                             <FormControl
-                                ref={(input) => { this.nameInput = input; }}
-                                autoFocus
+                                inputRef={ref => { this.textInput = ref; }}
+                                // autoFocus
                                 type="text"
                                 placeholder=""
                                 name="candidate_fullname"
@@ -51,7 +58,7 @@ export class ProfileDetailsFirstRound extends Component {
                             />
                         </FormGroup>
                         <FormGroup className="date-time__one">
-                            <ControlLabel>Date Meeting(<span className="span--red">*</span>)</ControlLabel>
+                            <ControlLabel>Date Meeting(<span className="span">*</span>)</ControlLabel>
                             <Datetime
                                 inputProps={{ disabled: true }}
                                 open={this.state.showTimeDateMeeting} // ISO Date
@@ -115,7 +122,7 @@ export class ProfileDetailsFirstRound extends Component {
                 <h2 className="profile-details__title">1st Round</h2>
                 <Row className="show-grid">
                     <Col xs={12} sm={9} md={9} lg={9}>
-                        <ControlLabel>Interviewer(s)'s name(<span className="span--red">*</span>)    </ControlLabel>
+                        <ControlLabel>Interviewer(s)'s name(<span className="span">*</span>)    </ControlLabel>
                         <Row className="show-grid">
                             <Col xs={12} sm={6} md={6} lg={6}>
                                 <FormGroup>

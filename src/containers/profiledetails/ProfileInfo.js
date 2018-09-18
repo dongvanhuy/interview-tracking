@@ -71,11 +71,13 @@ export class ProfileInfo extends Component {
       showConfirmation: false,
       loading: false,
       isChecking: false,
+      //   textInput,
       errorMessages: {
           errFullname: '',
           errDateMeeting: '',
           errInterviewer: '',
       },
+
   };
 
   resetForm = () => {
@@ -96,7 +98,6 @@ export class ProfileInfo extends Component {
       interviewer1 === '' && interviewer2 === '' ? errorMessages.errInterviewer = 'Choose an interviewer(s), pls.' : errorMessages.errInterviewer = '';
 
       this.setState({ ...errorMessages, isChecking: true });
-      console.log('>>>>>>>>>>> error', this.state.errorMessages);
   };
 
   handleChange = e => {
@@ -106,8 +107,8 @@ export class ProfileInfo extends Component {
       stateInit[name] = value;
       if (isChecking) {
           stateInit.candidate_fullname !== '' ? stateInit.errorMessages.errFullname = '' : stateInit.errorMessages.errFullname = 'Write in this field, pls.';
-          stateInit.date_meeting !== '' ? stateInit.errorMessages.errDateMeeting = '' : stateInit.errorMessages.errDateMeeting = 'Write in this field, pls.';
-          stateInit.jury_round1_01 !== '' || stateInit.jury_round1_02 !== '' ? stateInit.errorMessages.errInterviewer = '' : stateInit.errorMessages.errInterviewer = 'Write in this field, pls.';
+          stateInit.date_meeting !== '' ? stateInit.errorMessages.errDateMeeting = '' : stateInit.errorMessages.errDateMeeting = 'Choose a date, pls.';
+          stateInit.jury_round1_01 !== '' || stateInit.jury_round1_02 !== '' ? stateInit.errorMessages.errInterviewer = '' : stateInit.errorMessages.errInterviewer = 'Choose an interviewer(s), pls.';
       }
       this.setState({ ...stateInit });
   };
