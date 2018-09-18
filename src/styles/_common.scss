@@ -191,7 +191,6 @@ main {
   .modal-dialog {
     top: 25%;
   }
-
 }
 
 .date-time {
@@ -224,7 +223,7 @@ main {
   }
   .Toastify &__toast--default {
     background: #009999;
-    color:$color-white;
+    color: $color-white;
   }
 }
 
@@ -242,4 +241,9 @@ main {
     bottom: 50%;
     left: 50%;
   }
+}
+
+.error_msg,
+.span {
+  color: red;
 }
