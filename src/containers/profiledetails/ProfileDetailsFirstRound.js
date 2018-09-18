@@ -7,7 +7,8 @@ import moment from 'moment';
 export class ProfileDetailsFirstRound extends Component {
     state = {
         showTimeRoundOne: false,
-        showTimeDateMeeting: false,
+        showStartMeeting: false,
+        showEndMeeting: false,
     }
 
     componentDidMount() {
@@ -18,9 +19,13 @@ export class ProfileDetailsFirstRound extends Component {
         const show = this.state.showTimeRoundOne;
         this.setState({ showTimeRoundOne: !show });
     }
-    showDateMeeting = () => {
-        const show = this.state.showTimeDateMeeting;
-        this.setState({ showTimeDateMeeting: !show });
+    showStartMeeting = () => {
+        const show = this.state.showStartMeeting;
+        this.setState({ showStartMeeting: !show });
+    }
+    showEndMeeting = () => {
+        const show = this.state.showEndMeeting;
+        this.setState({ showEndMeeting: !show });
     }
 
     focus() {
@@ -58,10 +63,10 @@ export class ProfileDetailsFirstRound extends Component {
                             />
                         </FormGroup>
                         <FormGroup className="date-time__one">
-                            <ControlLabel>Date Meeting(<span className="span">*</span>)</ControlLabel>
+                            <ControlLabel>Start Meeting(<span className="span">*</span>)</ControlLabel>
                             <Datetime
                                 inputProps={{ disabled: true }}
-                                open={this.state.showTimeDateMeeting} // ISO Date
+                                open={this.state.showStartMeeting} // ISO Date
                                 value={moment.utc(this.props.date_meeting).format('DD-MM-YYYY HH:mm')}
                                 dateFormat="DD-MM-YYYY"
                                 timeFormat="HH:mm"
@@ -73,26 +78,31 @@ export class ProfileDetailsFirstRound extends Component {
                                 name="calendar"
                                 size="2x"
                                 className="date-time__icon"
-                                onClick={() => this.showDateMeeting()
+                                onClick={() => this.showStartMeeting()
                                 }
                             />
                             {errorMessages.errDateMeeting && <span className="error_msg">{errorMessages.errDateMeeting}</span>}
                         </FormGroup>
-                        <FormGroup>
-                            <ControlLabel>Recruiter</ControlLabel>
-                            <FormControl
-                                componentClass="select"
-                                className="profiledetails__select"
-                                name="recruiter"
-                                value={this.props.recruiter}
-                                placeholder="Select"
-                                onChange={(e) => this.props.handleChange(e)}
-                            >
-                                <option value="">Select</option>
-                                <option value="Duyen Tran">Duyen Tran</option>
-                                <option value="Vy Phan">Vy Phan</option>
-                                <option value="Nhu Huynh">Nhu Huynh</option>
-                            </FormControl>
+                        <FormGroup className="date-time__one">
+                            <ControlLabel>End Meeting(<span className="span">*</span>)</ControlLabel>
+                            <Datetime
+                                inputProps={{ disabled: true }}
+                                open={this.state.showEndMeeting} // ISO Date
+                                value={moment.utc(this.props.end_date_meeting).format('DD-MM-YYYY HH:mm')}
+                                dateFormat="DD-MM-YYYY"
+                                timeFormat="HH:mm"
+                                utc
+                                defaultValue="DD-MM-YYYY HH:mm"
+                                onChange={(e) => this.props.handleChange({ target: { value: e, name: 'end_date_meeting' } })}
+                            />
+                            <FontAwesomeIcon
+                                name="calendar"
+                                size="2x"
+                                className="date-time__icon"
+                                onClick={() => this.showEndMeeting()
+                                }
+                            />
+                            {errorMessages.errDateMeeting && <span className="error_msg">{errorMessages.errDateMeeting}</span>}
                         </FormGroup>
                     </Col>
                     <Col xs={12} sm={6} md={6} lg={6}>
@@ -116,6 +126,22 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={this.props.eng_level_cmt}
                                 onChange={(e) => this.props.handleChange(e)}
                             />
+                        </FormGroup>
+                        <FormGroup className="profile-details__recuiter">
+                            <ControlLabel>Recruiter</ControlLabel>
+                            <FormControl
+                                componentClass="select"
+                                className="profile-details__select"
+                                name="recruiter"
+                                value={this.props.recruiter}
+                                placeholder="Select"
+                                onChange={(e) => this.props.handleChange(e)}
+                            >
+                                <option value="">Select</option>
+                                <option value="Duyen Tran">Duyen Tran</option>
+                                <option value="Vy Phan">Vy Phan</option>
+                                <option value="Nhu Huynh">Nhu Huynh</option>
+                            </FormControl>
                         </FormGroup>
                     </Col>
                 </Row>
