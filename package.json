@@ -101,7 +101,8 @@
     "universal-cookie": "^2.1.2",
     "url-loader": "0.5.9",
     "uuid": "^3.1.0",
-    "whatwg-fetch": "2.0.3"
+    "whatwg-fetch": "2.0.3",
+    "workbox-cli": "^3.5.0"
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.14.1",
