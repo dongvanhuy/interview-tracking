@@ -20,20 +20,25 @@ export class ProfileDetailsFirstRound extends Component {
     }
 
     render() {
+        const { errorMessages } = this.props;
+        console.log('>>>>>> errorMessages', errorMessages);
         return (
             <React.Fragment>
                 <Row className="show-grid">
                     <Col xs={12} sm={6} md={6} lg={6}>
                         <h2 className="profile-details__title">Candidate Info</h2>
                         <FormGroup>
-                            <ControlLabel>Candidate's Full Name(<span style={{ color: 'red' }}>*</span>) </ControlLabel>
+                            <ControlLabel>Candidate's Full Name(<span className="span--red">*</span>) </ControlLabel>
                             <FormControl
+                                ref={(input) => { this.nameInput = input; }}
+                                autoFocus
                                 type="text"
                                 placeholder=""
                                 name="candidate_fullname"
                                 value={this.props.candidate_fullname}
                                 onChange={(e) => this.props.handleChange(e)}
                             />
+                            {errorMessages.errFullname && <span className="error_msg">{errorMessages.errFullname}</span>}
                         </FormGroup>
                         <FormGroup>
                             <ControlLabel>Position Interview</ControlLabel>
@@ -46,7 +51,7 @@ export class ProfileDetailsFirstRound extends Component {
                             />
                         </FormGroup>
                         <FormGroup className="date-time__one">
-                            <ControlLabel>Date Meeting(<span style={{ color: 'red' }}>*</span>)</ControlLabel>
+                            <ControlLabel>Date Meeting(<span className="span--red">*</span>)</ControlLabel>
                             <Datetime
                                 inputProps={{ disabled: true }}
                                 open={this.state.showTimeDateMeeting} // ISO Date
@@ -64,6 +69,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 onClick={() => this.showDateMeeting()
                                 }
                             />
+                            {errorMessages.errDateMeeting && <span className="error_msg">{errorMessages.errDateMeeting}</span>}
                         </FormGroup>
                         <FormGroup>
                             <ControlLabel>Recruiter</ControlLabel>
@@ -109,7 +115,7 @@ export class ProfileDetailsFirstRound extends Component {
                 <h2 className="profile-details__title">1st Round</h2>
                 <Row className="show-grid">
                     <Col xs={12} sm={9} md={9} lg={9}>
-                        <ControlLabel>Interviewer(s)'s name(<span style={{ color: 'red' }}>*</span>)    </ControlLabel>
+                        <ControlLabel>Interviewer(s)'s name(<span className="span--red">*</span>)    </ControlLabel>
                         <Row className="show-grid">
                             <Col xs={12} sm={6} md={6} lg={6}>
                                 <FormGroup>
@@ -127,7 +133,7 @@ export class ProfileDetailsFirstRound extends Component {
                                         <option value="3">Trang Nguyen</option>
                                     </FormControl>
                                 </FormGroup>
-
+                                {errorMessages.errInterviewer && <span className="error_msg">{errorMessages.errInterviewer}</span>}
                             </Col>
                             <Col xs={12} sm={6} md={6} lg={6}>
                                 <FormGroup>

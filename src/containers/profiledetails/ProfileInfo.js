@@ -70,6 +70,12 @@ export class ProfileInfo extends Component {
       cmt_result_round2: '',
       showConfirmation: false,
       loading: false,
+      isChecking: false,
+      errorMessages: {
+          errFullname: '',
+          errDateMeeting: '',
+          errInterviewer: '',
+      },
   };
 
   resetForm = () => {
@@ -78,36 +84,45 @@ export class ProfileInfo extends Component {
       });
   };
 
-  checkValidateForm = (name, value) => {
-      const candidateName = document.getElementsByName('candidate_fullname');
-      if (value === '' && name === 'candidate_fullname') {
-          candidateName[0].classList.add('error-message');
-      } else if (this.state.candidate_fullname === '' && name === undefined) {
-          candidateName[0].classList.add('error-message');
-      }
-      if (this.state.candidate_fullname !== '') {
-          candidateName[0].classList.remove('error-message');
-      }
+  checkValidateForm = () => {
+      const fullName = this.state.candidate_fullname;
+      const dateMeeting = this.state.date_meeting;
+      const interviewer1 = this.state.jury_round1_01;
+      const interviewer2 = this.state.jury_round1_02;
+      const { errorMessages } = this.state;
+
+      fullName === '' ? errorMessages.errFullname = 'Write in this field, pls.' : errorMessages.errFullname = '';
+      dateMeeting === '' ? errorMessages.errDateMeeting = 'Choose a date, pls.' : errorMessages.errDateMeeting = '';
+      interviewer1 === '' && interviewer2 === '' ? errorMessages.errInterviewer = 'Choose an interviewer(s), pls.' : errorMessages.errInterviewer = '';
+
+      this.setState({ ...errorMessages, isChecking: true });
+      console.log('>>>>>>>>>>> error', this.state.errorMessages);
   };
 
   handleChange = e => {
       const { value, name } = e.target;
       const stateInit = this.state;
+      const { isChecking } = this.state;
       stateInit[name] = value;
+      if (isChecking) {
+          stateInit.candidate_fullname !== '' ? stateInit.errorMessages.errFullname = '' : stateInit.errorMessages.errFullname = 'Write in this field, pls.';
+          stateInit.date_meeting !== '' ? stateInit.errorMessages.errDateMeeting = '' : stateInit.errorMessages.errDateMeeting = 'Write in this field, pls.';
+          stateInit.jury_round1_01 !== '' || stateInit.jury_round1_02 !== '' ? stateInit.errorMessages.errInterviewer = '' : stateInit.errorMessages.errInterviewer = 'Write in this field, pls.';
+      }
       this.setState({ ...stateInit });
-      this.checkValidateForm(name, value);
   };
 
   submitForm = e => {
       e.preventDefault();
       this.checkValidateForm();
-      const errorMessages = document.getElementsByClassName('error-message');
-      if (errorMessages.length > 0) {
-          errorMessages[0].focus();
-      } else {
+      const { errorMessages } = this.state;
+
+      if (errorMessages.errFullname === '' && errorMessages.errDateMeeting === '' && errorMessages.errInterviewer === '') {
           this.setState({
               showConfirmation: true,
           });
+      } else {
+          window.scrollTo(0, 0);
       }
   };
 
@@ -130,6 +145,7 @@ export class ProfileInfo extends Component {
   );
 
   render() {
+      console.log('>>>>>>>>>>> checking', this.state.isChecking);
       return (
           <React.Fragment>
               {this.state.loading && this.callLoading()}

@@ -63,6 +63,11 @@ export class ProfileDetails extends Component {
           cmt_result_round2: '',
           showConfirmation: false,
           loading: false,
+          errorMessages: {
+              errFullname: '',
+              errDateMeeting: '',
+              errInterviewer: '',
+          },
       };
   }
 
