@@ -10,6 +10,10 @@ export class ProfileDetailsFirstRound extends Component {
         showTimeDateMeeting: false,
     }
 
+    componentDidMount() {
+        this.focus();
+    }
+
     showTimeOne = () => {
         const show = this.state.showTimeRoundOne;
         this.setState({ showTimeRoundOne: !show });
@@ -17,6 +21,10 @@ export class ProfileDetailsFirstRound extends Component {
     showDateMeeting = () => {
         const show = this.state.showTimeDateMeeting;
         this.setState({ showTimeDateMeeting: !show });
+    }
+
+    focus() {
+        this.textInput.focus();
     }
 
     render() {
@@ -29,8 +37,8 @@ export class ProfileDetailsFirstRound extends Component {
                         <FormGroup>
                             <ControlLabel>Candidate's Full Name(<span className="span">*</span>) </ControlLabel>
                             <FormControl
-                                ref={this.setRef}
-                                autoFocus
+                                inputRef={ref => { this.textInput = ref; }}
+                                // autoFocus
                                 type="text"
                                 placeholder=""
                                 name="candidate_fullname"
