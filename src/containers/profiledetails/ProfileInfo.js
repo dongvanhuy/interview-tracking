@@ -96,7 +96,6 @@ export class ProfileInfo extends Component {
       interviewer1 === '' && interviewer2 === '' ? errorMessages.errInterviewer = 'Choose an interviewer(s), pls.' : errorMessages.errInterviewer = '';
 
       this.setState({ ...errorMessages, isChecking: true });
-      console.log('>>>>>>>>>>> error', this.state.errorMessages);
   };
 
   handleChange = e => {
