@@ -5,6 +5,12 @@ import FontAwesomeIcon from 'react-fontawesome';
 import moment from 'moment';
 
 export class ProfileDetailsFirstRound extends Component {
+    constructor(props) {
+        super(props);
+        this.startMeeting = React.createRef();
+        this.endMeeting = React.createRef();
+        this.dateRound1 = React.createRef();
+    }
     state = {
         showTimeRoundOne: false,
         showStartMeeting: false,
@@ -70,6 +76,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={moment.utc(this.props.start_time).format('DD-MM-YYYY HH:mm')}
                                 dateFormat="DD-MM-YYYY"
                                 timeFormat="HH:mm"
+                                ref={this.startMeeting}
                                 utc
                                 defaultValue="DD-MM-YYYY HH:mm"
                                 onChange={(e) => this.props.handleChange({ target: { value: e, name: 'start_time' } })}
@@ -78,6 +85,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 name="calendar"
                                 size="2x"
                                 className="date-time__icon"
+                                onClick={() => this.startMeeting.current.openCalendar()}
                             />
                             {errorMessages.errStartTimeMeeting && <span className="error_msg">{errorMessages.errStartTimeMeeting}</span>}
                         </FormGroup>
@@ -88,6 +96,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={moment.utc(this.props.end_time).format('DD-MM-YYYY HH:mm')}
                                 dateFormat="DD-MM-YYYY"
                                 timeFormat="HH:mm"
+                                ref={this.endMeeting}
                                 utc
                                 defaultValue="DD-MM-YYYY HH:mm"
                                 onChange={(e) => this.props.handleChange({ target: { value: e, name: 'end_time' } })}
@@ -96,6 +105,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 name="calendar"
                                 size="2x"
                                 className="date-time__icon"
+                                onClick={() => this.endMeeting.current.openCalendar()}
                             />
                             {errorMessages.errEndTimeMeeting && <span className="error_msg">{errorMessages.errEndTimeMeeting}</span>}
                         </FormGroup>
@@ -192,6 +202,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={moment.utc(this.props.date_round1).format('DD-MM-YYYY HH:mm')}
                                 dateFormat="DD-MM-YYYY"
                                 timeFormat="HH:mm"
+                                ref={this.dateRound1}
                                 utc
                                 defaultValue="DD-MM-YYYY HH:mm"
                                 onChange={(e) => this.props.handleChange({ target: { value: e, name: 'date_round1' } })}
@@ -200,7 +211,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 name="calendar"
                                 size="2x"
                                 className="date-time__icon"
-                                // onClick={() => this.showTimeOne()}
+                                onClick={() => this.dateRound1.current.openCalendar()}
                             />
                         </FormGroup>
                     </Col>
