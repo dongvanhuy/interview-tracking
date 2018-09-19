@@ -114,7 +114,7 @@ export class ProfileDetailsSecondRound extends Component {
                     </div>
 
                     <FormGroup>
-                        <span className="profile-details__comments">Comment:</span>
+                        <ControlLabel>Comment:</ControlLabel>
                         <FormControl
                             componentClass="textarea"
                             name="tech_competency_round2_cmt"
@@ -179,7 +179,7 @@ export class ProfileDetailsSecondRound extends Component {
                         </label>
                     </div>
                     <FormGroup>
-                        <span className="profile-details__comments">Comment:</span>
+                        <ControlLabel>Comment:</ControlLabel>
                         <FormControl
                             componentClass="textarea"
                             name="cultural_fit_round2_cmt"
@@ -244,7 +244,7 @@ export class ProfileDetailsSecondRound extends Component {
                         </label>
                     </div>
                     <FormGroup>
-                        <span className="profile-details__comments">Comment:</span>
+                        <ControlLabel>Comment:</ControlLabel>
                         <FormControl
                             componentClass="textarea"
                             name="business_acument_cmt"
@@ -309,7 +309,7 @@ export class ProfileDetailsSecondRound extends Component {
                         </label>
                     </div>
                     <FormGroup>
-                        <span className="profile-details__comments">Comment:</span>
+                        <ControlLabel>Comment:</ControlLabel>
                         <FormControl
                             componentClass="textarea"
                             name="soft_skill_cmt"
@@ -374,7 +374,7 @@ export class ProfileDetailsSecondRound extends Component {
                         </label>
                     </div>
                     <FormGroup>
-                        <span className="profile-details__comments">Comment:</span>
+                        <ControlLabel>Comment:</ControlLabel>
                         <FormControl
                             componentClass="textarea"
                             name="people_management_cmt"
@@ -383,7 +383,6 @@ export class ProfileDetailsSecondRound extends Component {
                         />
                     </FormGroup>
                 </FormGroup>
-                <h3>Result</h3>
                 <Row>
                     <Col xs={12} sm={4} md={4} lg={4}>
                         <FormGroup>
@@ -435,7 +434,7 @@ export class ProfileDetailsSecondRound extends Component {
                     </Col>
                 </Row>
                 <FormGroup>
-                    <span className="profile-details__comments">Comment:</span>
+                    <ControlLabel>Comment:</ControlLabel>
                     <FormControl
                         componentClass="textarea"
                         name="cmt_result_round2"

@@ -148,7 +148,7 @@ export class ProfileDetailsFirstRound extends Component {
                 <h2 className="profile-details__title">1st Round</h2>
                 <Row className="show-grid">
                     <Col xs={12} sm={9} md={9} lg={9}>
-                        <ControlLabel>Interviewer(s)'s name(<span className="span">*</span>)    </ControlLabel>
+                        <ControlLabel>Interviewer(s)'s name(<span className="span">*</span>)</ControlLabel>
                         <Row className="show-grid">
                             <Col xs={12} sm={6} md={6} lg={6}>
                                 <FormGroup>
@@ -184,7 +184,6 @@ export class ProfileDetailsFirstRound extends Component {
                                         <option value="3">Trang Nguyen</option>
                                     </FormControl>
                                 </FormGroup>
-
                             </Col>
                         </Row>
                     </Col>
@@ -267,7 +266,7 @@ export class ProfileDetailsFirstRound extends Component {
                     </div>
 
                     <FormGroup>
-                        <span className="profile-details__comments">Comment:</span>
+                        <ControlLabel>Comment:</ControlLabel>
                         <FormControl
                             componentClass="textarea"
                             name="tech_competency_round1_cmt"
@@ -332,7 +331,7 @@ export class ProfileDetailsFirstRound extends Component {
                     </div>
 
                     <FormGroup>
-                        <span className="profile-details__comments">Comment:</span>
+                        <ControlLabel>Comment:</ControlLabel>
                         <FormControl
                             componentClass="textarea"
                             name="cultural_fit_round1_cmt"
@@ -341,8 +340,7 @@ export class ProfileDetailsFirstRound extends Component {
                         />
                     </FormGroup>
                 </FormGroup>
-                <h3>Result</h3>
-                <Row>
+                <Row className="show-grid">
                     <Col xs={12} sm={4} md={4} lg={4}>
                         <FormGroup>
                             <ControlLabel>YPE</ControlLabel>
@@ -393,7 +391,7 @@ export class ProfileDetailsFirstRound extends Component {
                     </Col>
                 </Row>
                 <FormGroup>
-                    <span className="profile-details__comments">Comment:</span>
+                    <ControlLabel>Comment:</ControlLabel>
                     <FormControl
                         componentClass="textarea"
                         name="cmt_result_round1"
