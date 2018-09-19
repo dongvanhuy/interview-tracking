@@ -176,7 +176,7 @@ export class ProfileDetails extends Component {
                               className="profile-details__cancel"
                               onClick={() => this.props.push('/profile')}
                           >
-                Cancel
+                CANCEL
                           </button>
                           <button
                               type="button"
