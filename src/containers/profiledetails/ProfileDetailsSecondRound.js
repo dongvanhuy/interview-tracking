@@ -5,6 +5,11 @@ import FontAwesomeIcon from 'react-fontawesome';
 import moment from 'moment';
 
 export class ProfileDetailsSecondRound extends Component {
+    constructor(props) {
+        super(props);
+        this.dateRound2 = React.createRef();
+    }
+
     state = {
         showTimeRoundTwo: false,
     }
@@ -40,11 +45,12 @@ export class ProfileDetailsSecondRound extends Component {
                         <FormGroup className="date-time__two">
                             <ControlLabel>Date</ControlLabel>
                             <Datetime
-                                inputProps={{ disabled: true }}
-                                open={this.state.showTimeRoundTwo}
+                                inputProps={{ readOnly: true }}
+                                // open={this.state.showTimeRoundTwo}
                                 value={moment.utc(this.props.date_round2).format('DD-MM-YYYY HH:mm')}
                                 dateFormat="DD-MM-YYYY"
                                 timeFormat="HH:mm"
+                                ref={this.dateRound2}
                                 utc
                                 defaultValue="DD-MM-YYYY HH:mm"
                                 onChange={(e) => this.props.handleChange({ target: { value: e, name: 'date_round2' } })}
@@ -53,7 +59,7 @@ export class ProfileDetailsSecondRound extends Component {
                                 name="calendar"
                                 size="2x"
                                 className="date-time__icon"
-                                onClick={() => this.showTimeTwo()}
+                                onClick={() => this.dateRound2.current.openCalendar()}
                             />
                         </FormGroup>
                     </Col>
@@ -114,7 +120,7 @@ export class ProfileDetailsSecondRound extends Component {
                     </div>
 
                     <FormGroup>
-                        <span className="profile-details__comments">Comment:</span>
+                        <ControlLabel>Comment:</ControlLabel>
                         <FormControl
                             componentClass="textarea"
                             name="tech_competency_round2_cmt"
@@ -179,7 +185,7 @@ export class ProfileDetailsSecondRound extends Component {
                         </label>
                     </div>
                     <FormGroup>
-                        <span className="profile-details__comments">Comment:</span>
+                        <ControlLabel>Comment:</ControlLabel>
                         <FormControl
                             componentClass="textarea"
                             name="cultural_fit_round2_cmt"
@@ -244,7 +250,7 @@ export class ProfileDetailsSecondRound extends Component {
                         </label>
                     </div>
                     <FormGroup>
-                        <span className="profile-details__comments">Comment:</span>
+                        <ControlLabel>Comment:</ControlLabel>
                         <FormControl
                             componentClass="textarea"
                             name="business_acument_cmt"
@@ -309,7 +315,7 @@ export class ProfileDetailsSecondRound extends Component {
                         </label>
                     </div>
                     <FormGroup>
-                        <span className="profile-details__comments">Comment:</span>
+                        <ControlLabel>Comment:</ControlLabel>
                         <FormControl
                             componentClass="textarea"
                             name="soft_skill_cmt"
@@ -374,7 +380,7 @@ export class ProfileDetailsSecondRound extends Component {
                         </label>
                     </div>
                     <FormGroup>
-                        <span className="profile-details__comments">Comment:</span>
+                        <ControlLabel>Comment:</ControlLabel>
                         <FormControl
                             componentClass="textarea"
                             name="people_management_cmt"
@@ -383,7 +389,6 @@ export class ProfileDetailsSecondRound extends Component {
                         />
                     </FormGroup>
                 </FormGroup>
-                <h3>Result</h3>
                 <Row>
                     <Col xs={12} sm={4} md={4} lg={4}>
                         <FormGroup>
@@ -435,7 +440,7 @@ export class ProfileDetailsSecondRound extends Component {
                     </Col>
                 </Row>
                 <FormGroup>
-                    <span className="profile-details__comments">Comment:</span>
+                    <ControlLabel>Comment:</ControlLabel>
                     <FormControl
                         componentClass="textarea"
                         name="cmt_result_round2"

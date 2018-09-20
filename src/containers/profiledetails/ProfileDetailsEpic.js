@@ -1,10 +1,9 @@
 import { combineEpics } from 'redux-observable';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import {
     PROFILE_DETAILS_LOAD,
     PROFILE_DETAILS_UPDATE,
     PROFILE_DETAILS_CREATE,
-    PROFILE_DETAILS_UPDATE_FAIL,
     BOOK_MEETING_ROOM,
     BOOK_MEETING_ROOM_FAILED,
 } from '../../store/actionTypes';
@@ -12,6 +11,7 @@ import {
     loadProfileDetailsSuccess,
     loadProfileDetailsFail,
     updateProfileDetailsSuccess,
+    updateProfileDetailsFail,
     createProfileDetailsSuccess,
     bookMeetingRoomSuccess,
     createProfileDetailsFail,
@@ -38,8 +38,7 @@ export const updateProfileDetailsEpic = (
         const param = action.payload;
         return updateProfileDetailsService(param)
             .map(res => updateProfileDetailsSuccess(res))
-            .catch(err =>
-                Observable.of({ type: PROFILE_DETAILS_UPDATE_FAIL, payload: err }));
+            .catch(res => updateProfileDetailsFail(res));
     });
 
 export const createProfileDetailsEpic = (

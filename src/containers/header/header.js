@@ -51,12 +51,12 @@ export class Header extends Component {
                         onClick={() => this.props.push('/profile')}
                     >
                         <img src={logo} alt="logo" />
-                        <span className="interview-header__title">Interview Tracking</span>
+                        <h1 className="interview-header__title">Interview Tracking</h1>
                     </Link>
                     <div className="interview-header__info hidden-xs">
                         {this.buttonsInstance()}
                     </div>
-                    <div className="interview-header__mobile hidden-sm hidden-lg">
+                    <div className="interview-header__mobile hidden-sm hidden-md hidden-lg">
                         <FontAwesomeIcon name="bars" size="2x" onClick={() => this.addActiveClass()} />
                         <ListGroup className={!this.state.showMenu && 'invisible'}>
                             <ListGroupItem>Welcome, {`${sessionStorage.getItem('givenName')} ${sessionStorage.getItem('surname')}`}</ListGroupItem>

@@ -6,21 +6,23 @@
   }
   textarea.form-control {
     resize: none;
+    height: 112px;
   }
-  .form-group {
-    label {
-      font-size: 18px;
-      @include tablet {
-        font-size: 14px;
-      }
+  .control-label {
+    font-size: 16px;
+    @include tablet {
+      font-size: 14px;
     }
   }
   .form-control {
+    height: 40px;
+    box-shadow: none;
     font-size: 20px;
     background-color: white;
     font-family: "GTWalsheimProRegular";
-    border: rgb(230, 230, 230) 1px solid;
+    border: $border-color-gray 1px solid;
     padding: 5px;
+    cursor: pointer;
     @include tablet {
       font-size: 16px;
     }
@@ -51,7 +53,7 @@
   }
   &__btn {
     display: block;
-    font-size: 22px;
+    font-size: 20px;
     font-family: "GTWalsheimProRegular";
     @include tablet {
       display: flex;
@@ -148,5 +150,13 @@
   }
   &__recuiter {
     padding-top: 8px;
+  }
+  .borderInterviewer {
+    border-color: red;
+  }
+  .form-group {
+    .borderFullname {
+      border-color: red;
+    }
   }
 }

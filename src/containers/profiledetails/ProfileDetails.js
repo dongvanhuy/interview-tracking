@@ -30,7 +30,8 @@ export class ProfileDetails extends Component {
           candidate_id: '',
           candidate_fullname: '',
           position_apply: '',
-          date_meeting: '',
+          start_time: '',
+          end_time: '',
           recruiter: '',
           eng_level: '',
           eng_level_cmt: '',
@@ -124,8 +125,8 @@ export class ProfileDetails extends Component {
           errorMessages[0].focus();
       } else if (this.props.candidateId !== null) {
           const stateInit = this.state;
-          if (this.state.date_meeting) {
-              stateInit.date_meeting = moment(this.state.date_meeting).toISOString();
+          if (this.state.start_time) {
+              stateInit.start_time = moment(this.state.start_time).toISOString();
           }
           this.setState({ ...stateInit }, () => {
               this.setState({
@@ -154,6 +155,7 @@ export class ProfileDetails extends Component {
   );
 
   render() {
+      console.log('>>>>>>>>>>>', this.state);
       return (
           <React.Fragment>
               <LoadingInProgress show={!this.props.profileDetails[0]} />
@@ -174,7 +176,7 @@ export class ProfileDetails extends Component {
                               className="profile-details__cancel"
                               onClick={() => this.props.push('/profile')}
                           >
-                Cancel
+                CANCEL
                           </button>
                           <button
                               type="button"
