@@ -5,6 +5,11 @@ import FontAwesomeIcon from 'react-fontawesome';
 import moment from 'moment';
 
 export class ProfileDetailsSecondRound extends Component {
+    constructor(props) {
+        super(props);
+        this.dateRound2 = React.createRef();
+    }
+
     state = {
         showTimeRoundTwo: false,
     }
@@ -40,11 +45,12 @@ export class ProfileDetailsSecondRound extends Component {
                         <FormGroup className="date-time__two">
                             <ControlLabel>Date</ControlLabel>
                             <Datetime
-                                inputProps={{ disabled: true }}
-                                open={this.state.showTimeRoundTwo}
+                                inputProps={{ readOnly: true }}
+                                // open={this.state.showTimeRoundTwo}
                                 value={moment.utc(this.props.date_round2).format('DD-MM-YYYY HH:mm')}
                                 dateFormat="DD-MM-YYYY"
                                 timeFormat="HH:mm"
+                                ref={this.dateRound2}
                                 utc
                                 defaultValue="DD-MM-YYYY HH:mm"
                                 onChange={(e) => this.props.handleChange({ target: { value: e, name: 'date_round2' } })}
@@ -53,7 +59,7 @@ export class ProfileDetailsSecondRound extends Component {
                                 name="calendar"
                                 size="2x"
                                 className="date-time__icon"
-                                onClick={() => this.showTimeTwo()}
+                                onClick={() => this.dateRound2.current.openCalendar()}
                             />
                         </FormGroup>
                     </Col>

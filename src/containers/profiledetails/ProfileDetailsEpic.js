@@ -1,16 +1,16 @@
 import { combineEpics } from 'redux-observable';
-import { Observable } from 'rxjs';
 import {
     PROFILE_DETAILS_LOAD,
     PROFILE_DETAILS_UPDATE,
     PROFILE_DETAILS_CREATE,
-    PROFILE_DETAILS_UPDATE_FAIL,
 } from '../../store/actionTypes';
 import {
     loadProfileDetailsSuccess,
     loadProfileDetailsFail,
     updateProfileDetailsSuccess,
+    updateProfileDetailsFail,
     createProfileDetailsSuccess,
+    createProfileDetailsFail,
 } from './ProfileDetailsAction';
 
 export const loadProfileDetailsEpic = (
@@ -34,8 +34,7 @@ export const updateProfileDetailsEpic = (
         const param = action.payload;
         return updateProfileDetailsService(param)
             .map(res => updateProfileDetailsSuccess(res))
-            .catch(err =>
-                Observable.of({ type: PROFILE_DETAILS_UPDATE_FAIL, payload: err }));
+            .catch(res => updateProfileDetailsFail(res));
     });
 
 export const createProfileDetailsEpic = (
@@ -48,7 +47,7 @@ export const createProfileDetailsEpic = (
         return createProfileDetailsService(param)
             .map(res => res.data)
             .map(createProfileDetailsSuccess)
-            .catch(err => console.log(err));
+            .catch(err => createProfileDetailsFail(err.response));
     });
 
 export default combineEpics(

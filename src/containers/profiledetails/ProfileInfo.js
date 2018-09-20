@@ -22,14 +22,21 @@ export class ProfileInfo extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (this.props.doSuccessfully !== nextProps.doSuccessfully) {
-            this.resetForm();
-            toast('ADD SUCCESSFULLY', {
-                autoClose: 2000,
-                position: 'top-center',
-                hideProgressBar: true,
-            });
-        } else {
-            this.setState({ loading: true });
+            this.setState({ loading: false });
+            if (nextProps.doSuccessfully === true) {
+                this.resetForm();
+                toast('ADD SUCCESSFULLY', {
+                    autoClose: 2000,
+                    position: 'top-center',
+                    hideProgressBar: true,
+                });
+            } else {
+                toast('SERVER IS DIED', {
+                    autoClose: 2000,
+                    position: 'top-center',
+                    hideProgressBar: true,
+                });
+            }
         }
     }
 
@@ -38,7 +45,8 @@ export class ProfileInfo extends Component {
       candidate_fullname: '',
       position_apply: '',
       recruiter: '',
-      date_meeting: '',
+      start_time: '',
+      end_time: '',
       eng_level: '',
       eng_level_cmt: '',
       jury_round1_01: '',
@@ -71,10 +79,10 @@ export class ProfileInfo extends Component {
       showConfirmation: false,
       loading: false,
       isChecking: false,
-      //   textInput,
       errorMessages: {
           errFullname: '',
-          errDateMeeting: '',
+          errStartTimeMeeting: '',
+          errEndTimeMeeting: '',
           errInterviewer: '',
       },
 
@@ -88,13 +96,15 @@ export class ProfileInfo extends Component {
 
   checkValidateForm = () => {
       const fullName = this.state.candidate_fullname;
-      const dateMeeting = this.state.date_meeting;
+      const startTime = this.state.start_time;
+      const endTime = this.state.end_time;
       const interviewer1 = this.state.jury_round1_01;
       const interviewer2 = this.state.jury_round1_02;
       const { errorMessages } = this.state;
 
       fullName === '' ? errorMessages.errFullname = 'Write in this field, pls.' : errorMessages.errFullname = '';
-      dateMeeting === '' ? errorMessages.errDateMeeting = 'Choose a date, pls.' : errorMessages.errDateMeeting = '';
+      startTime === '' ? errorMessages.errStartTimeMeeting = 'Choose a start time, pls.' : errorMessages.errStartTimeMeeting = '';
+      endTime === '' ? errorMessages.errEndTimeMeeting = 'Choose a end time, pls.' : errorMessages.errEndTimeMeeting = '';
       interviewer1 === '' && interviewer2 === '' ? errorMessages.errInterviewer = 'Choose an interviewer(s), pls.' : errorMessages.errInterviewer = '';
 
       this.setState({ ...errorMessages, isChecking: true });
@@ -107,7 +117,8 @@ export class ProfileInfo extends Component {
       stateInit[name] = value;
       if (isChecking) {
           stateInit.candidate_fullname !== '' ? stateInit.errorMessages.errFullname = '' : stateInit.errorMessages.errFullname = 'Write in this field, pls.';
-          stateInit.date_meeting !== '' ? stateInit.errorMessages.errDateMeeting = '' : stateInit.errorMessages.errDateMeeting = 'Choose a date, pls.';
+          stateInit.start_time !== '' ? stateInit.errorMessages.errStartTimeMeeting = '' : stateInit.errorMessages.errStartTimeMeeting = 'Choose a start time, pls.';
+          stateInit.end_time !== '' ? stateInit.errorMessages.errEndTimeMeeting = '' : stateInit.errorMessages.errEndTimeMeeting = 'Choose a end time, pls.';
           stateInit.jury_round1_01 !== '' || stateInit.jury_round1_02 !== '' ? stateInit.errorMessages.errInterviewer = '' : stateInit.errorMessages.errInterviewer = 'Choose an interviewer(s), pls.';
       }
       this.setState({ ...stateInit });
@@ -118,7 +129,7 @@ export class ProfileInfo extends Component {
       this.checkValidateForm();
       const { errorMessages } = this.state;
 
-      if (errorMessages.errFullname === '' && errorMessages.errDateMeeting === '' && errorMessages.errInterviewer === '') {
+      if (errorMessages.errFullname === '' && errorMessages.errStartTimeMeeting === '' && errorMessages.errEndTimeMeeting === '' && errorMessages.errInterviewer === '') {
           this.setState({
               showConfirmation: true,
           });
@@ -146,7 +157,6 @@ export class ProfileInfo extends Component {
   );
 
   render() {
-      console.log('>>>>>>>>>>> checking', this.state.isChecking);
       return (
           <React.Fragment>
               {this.state.loading && this.callLoading()}
