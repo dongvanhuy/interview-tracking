@@ -206,6 +206,15 @@ main {
     // cursor: pointer;
   }
 
+  &__one{
+    .borderStartMeeting input{
+      border-color: red;
+    }
+    .borderEndMeeting input{
+      border-color: red;
+    }
+  }
+
   &__icon {
     cursor: pointer;
     position: absolute;
@@ -253,16 +262,4 @@ main {
 .error_msg,
 .span {
   color: red;
-}
-
-.profile-details .form-group .borderFullname{
-  border-color: red;
-}
-
-.date-time__one .borderStartMeeting input{
-  border-color: red;
-}
-
-.date-time__one .borderEndMeeting input{
-  border-color: red;
 }

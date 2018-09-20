@@ -163,7 +163,8 @@ export class ProfileDetailsFirstRound extends Component {
                                     <FormControl
                                         componentClass="select"
                                         placeholder="select"
-                                        className="profiledetails__select"
+                                        // className="profile-details__select"
+                                        className={this.props.errorMessages.errInterviewer ? 'borderInterviewer' : ''}
                                         onChange={(e) => this.props.handleChange(e)}
                                         name="jury_round1_01"
                                         value={this.props.jury_round1_01}
@@ -181,7 +182,8 @@ export class ProfileDetailsFirstRound extends Component {
                                     <FormControl
                                         componentClass="select"
                                         placeholder="select"
-                                        className="profiledetails__select"
+                                        // className="profile-details__select"
+                                        className={this.props.errorMessages.errInterviewer ? 'borderInterviewer' : ''}
                                         onChange={(e) => this.props.handleChange(e)}
                                         name="jury_round1_02"
                                         value={this.props.jury_round1_02}
