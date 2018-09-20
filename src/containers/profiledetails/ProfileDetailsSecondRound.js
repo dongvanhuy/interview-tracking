@@ -45,14 +45,14 @@ export class ProfileDetailsSecondRound extends Component {
                         <FormGroup className="date-time__two">
                             <ControlLabel>Date</ControlLabel>
                             <Datetime
-                                inputProps={{ readOnly: true }}
+                                inputProps={{ readOnly: true, placeholder: 'Select date and time' }}
                                 // open={this.state.showTimeRoundTwo}
-                                value={moment.utc(this.props.date_round2).format('DD-MM-YYYY HH:mm')}
+                                value={this.props.date_round2 ? moment.utc(this.props.date_round2).format('DD-MM-YYYY HH:mm') : ''}
                                 dateFormat="DD-MM-YYYY"
                                 timeFormat="HH:mm"
                                 ref={this.dateRound2}
                                 utc
-                                defaultValue="DD-MM-YYYY HH:mm"
+                                // defaultValue="DD-MM-YYYY HH:mm"
                                 onChange={(e) => this.props.handleChange({ target: { value: e, name: 'date_round2' } })}
                             />
                             <FontAwesomeIcon
