@@ -4,6 +4,7 @@ import {
     PROFILE_DETAILS_LOAD_FAIL,
     PROFILE_DETAILS_UPDATE_SUCCESS,
     PROFILE_DETAILS_UPDATE_FAIL,
+    PROFILE_DETAILS_CREATE,
     PROFILE_DETAILS_CREATE_SUCCESS,
     PROFILE_DETAILS_CREATE_FAIL,
     RESET_PROFILE_DETAILS_DATA,
@@ -13,7 +14,7 @@ import {
 const initialState = {
     dataProfileDetails: [],
     dataProfileUpdate: {},
-    dataProfilePost: [],
+    dataProfilePost: {},
     dataProfileRes: {},
     doSuccessfully: false,
 };
@@ -40,6 +41,10 @@ const actions = {
         statusCode: payload,
     }),
 
+    [PROFILE_DETAILS_CREATE]: (state, { payload }) => ({
+        ...state,
+        dataProfilePost: payload,
+    }),
     [PROFILE_DETAILS_CREATE_SUCCESS]: (state, { payload }) => ({
         ...state,
         dataProfileRes: payload,
@@ -49,6 +54,7 @@ const actions = {
     [PROFILE_DETAILS_CREATE_FAIL]: (state, { payload }) => ({
         ...state,
         statusCode: payload,
+        doSuccessfully: true,
     }),
 
     [CLOSE_MODAL_SUCCESS]: state => ({

@@ -14,6 +14,7 @@ import {
     updateProfileDetailsSuccess,
     createProfileDetailsSuccess,
     bookMeetingRoomSuccess,
+    createProfileDetailsFail,
 } from './ProfileDetailsAction';
 
 export const loadProfileDetailsEpic = (
@@ -51,28 +52,27 @@ export const createProfileDetailsEpic = (
         return createProfileDetailsService(param)
             .map(res => res.data)
             .map(createProfileDetailsSuccess)
-            .catch(err => console.log(err));
+            .catch(err => createProfileDetailsFail(err.response));
     });
 
-export const bookMeetingRoomEpic = (
-    action$,
-    store,
-    { bookMeetingRoomService },
-) =>
-    action$.ofType(BOOK_MEETING_ROOM).switchMap(action => {
-        const param = action.payload;
-        console.log('>>>>> param epic', param);
-        return bookMeetingRoomService(param)
-            .map(res => res.data)
-            .map(bookMeetingRoomSuccess)
-            .catch(err => console.log(err));
-    });
+// export const bookMeetingRoomEpic = (
+//     action$,
+//     store,
+//     { bookMeetingRoomService },
+// ) =>
+//     action$.ofType(BOOK_MEETING_ROOM).switchMap(action => {
+//         const param = action.payload;
+//         return bookMeetingRoomService(param)
+//             .map(res => res.data)
+//             .map(bookMeetingRoomSuccess)
+//             .catch(err => console.log(err));
+//     });
 
-// export const bookMeetingRoomEpic = (action$, store, { bookMeetingRoomService }) => action$.ofType(BOOK_MEETING_ROOM)
-//     .switchMap((action) => bookMeetingRoomService(action.payload)
-//         .map(res => res.data)
-//         .map(data => bookMeetingRoomSuccess(data))
-//         .catch(err => Observable.of({ type: BOOK_MEETING_ROOM_FAILED, payload: err.response })));
+export const bookMeetingRoomEpic = (action$, store, { bookMeetingRoomService }) => action$.ofType(BOOK_MEETING_ROOM)
+    .switchMap((action) => bookMeetingRoomService(action.payload)
+        .map(res => res.data)
+        .map(data => bookMeetingRoomSuccess(data))
+        .catch(err => Observable.of({ type: BOOK_MEETING_ROOM_FAILED, payload: err.response })));
 
 export default combineEpics(
     loadProfileDetailsEpic,
