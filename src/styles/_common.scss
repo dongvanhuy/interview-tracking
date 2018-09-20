@@ -199,8 +199,20 @@ main {
 .date-time {
   &__one,
   &__two {
+    // .rdt input{
+    //   border-color: red;
+    // }
     position: relative;
     // cursor: pointer;
+  }
+
+  &__one{
+    .borderStartMeeting input{
+      border-color: red;
+    }
+    .borderEndMeeting input{
+      border-color: red;
+    }
   }
 
   &__icon {

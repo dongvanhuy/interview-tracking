@@ -50,6 +50,7 @@ export class ProfileDetailsFirstRound extends Component {
                         <FormGroup>
                             <ControlLabel>Candidate's Full Name(<span className="span">*</span>) </ControlLabel>
                             <FormControl
+                                className={this.props.errorMessages.errFullname ? 'borderFullname' : ''}
                                 inputRef={ref => { this.textInput = ref; }}
                                 type="text"
                                 placeholder=""
@@ -72,6 +73,7 @@ export class ProfileDetailsFirstRound extends Component {
                         <FormGroup className="date-time__one">
                             <ControlLabel>Start Meeting(<span className="span">*</span>)</ControlLabel>
                             <Datetime
+                                className={this.props.errorMessages.errStartTimeMeeting ? 'borderStartMeeting' : ''}
                                 inputProps={{ readOnly: true }}
                                 value={moment.utc(this.props.start_time).format('DD-MM-YYYY HH:mm')}
                                 dateFormat="DD-MM-YYYY"
@@ -92,6 +94,7 @@ export class ProfileDetailsFirstRound extends Component {
                         <FormGroup className="date-time__one">
                             <ControlLabel>End Meeting(<span className="span">*</span>)</ControlLabel>
                             <Datetime
+                                className={this.props.errorMessages.errEndTimeMeeting ? 'borderEndMeeting' : ''}
                                 inputProps={{ readOnly: true }}
                                 value={moment.utc(this.props.end_time).format('DD-MM-YYYY HH:mm')}
                                 dateFormat="DD-MM-YYYY"
@@ -160,7 +163,8 @@ export class ProfileDetailsFirstRound extends Component {
                                     <FormControl
                                         componentClass="select"
                                         placeholder="select"
-                                        className="profiledetails__select"
+                                        // className="profile-details__select"
+                                        className={this.props.errorMessages.errInterviewer ? 'borderInterviewer' : ''}
                                         onChange={(e) => this.props.handleChange(e)}
                                         name="jury_round1_01"
                                         value={this.props.jury_round1_01}
@@ -178,7 +182,8 @@ export class ProfileDetailsFirstRound extends Component {
                                     <FormControl
                                         componentClass="select"
                                         placeholder="select"
-                                        className="profiledetails__select"
+                                        // className="profile-details__select"
+                                        className={this.props.errorMessages.errInterviewer ? 'borderInterviewer' : ''}
                                         onChange={(e) => this.props.handleChange(e)}
                                         name="jury_round1_02"
                                         value={this.props.jury_round1_02}

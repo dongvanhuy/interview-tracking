@@ -151,4 +151,12 @@
   &__recuiter {
     padding-top: 8px;
   }
+  .borderInterviewer {
+    border-color: red;
+  }
+  .form-group {
+    .borderFullname {
+      border-color: red;
+    }
+  }
 }
