@@ -19,6 +19,7 @@ export class ProfileDetailsSecondRound extends Component {
         this.setState({ showTimeRoundTwo: !show });
     }
     render() {
+        const { users } = this.props;
         return (
             <React.Fragment>
                 <h2 className="profile-details__title">2st Round</h2>
@@ -31,13 +32,11 @@ export class ProfileDetailsSecondRound extends Component {
                                 placeholder="select"
                                 className="profile-details__select"
                                 onChange={(e) => this.props.handleChange(e)}
-                                name="jury_round2"
-                                value={this.props.jury_round2}
+                                name="interviewer_round2"
+                                value={this.props.interviewer_round2}
                             >
                                 <option value="">Select</option>
-                                <option value="1">Huy Dong</option>
-                                <option value="2">Huy Chung</option>
-                                <option value="3">Trang Nguyen</option>
+                                {users.map(user => (<option key={user.id} value={user.email}>{user.fullname}</option>))}
                             </FormControl>
                         </FormGroup>
                     </Col>

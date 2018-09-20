@@ -5,7 +5,8 @@
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
-    "start": "react-scripts start",
+    "start-js": "react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
     "start-dev": "npm-run-all -p watch-css start",
     "build": "react-scripts build && workbox generateSW workbox-config.js",
     "all": "npm run build-css && npm run build",

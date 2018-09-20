@@ -26,6 +26,7 @@ const middleware = [
             updateProfileDetailsService: ApiService.patchDataProfileDetails,
             createProfileDetailsService: ApiService.postDataProfileDetails,
             bookMeetingRoomService: ApiService.bookMeetingRoom,
+            getUsersService: ApiService.getUsers,
         },
     }),
 ];
