@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { push } from 'react-router-redux';
 import { FormGroup, Grid } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
+import moment from 'moment';
 import 'react-toastify/dist/ReactToastify.min.css';
 import {
     createProfileDetails,
@@ -157,6 +158,7 @@ export class ProfileInfo extends Component {
   );
 
   render() {
+      console.log('>>>>>>>>>> datetime to start', moment.utc(this.state.start_time).format('DD-MM-YYYY HH:mm'));
       return (
           <React.Fragment>
               {this.state.loading && this.callLoading()}

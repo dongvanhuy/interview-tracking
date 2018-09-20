@@ -74,7 +74,7 @@ export class ProfileDetailsFirstRound extends Component {
                             <ControlLabel>Start Meeting(<span className="span">*</span>)</ControlLabel>
                             <Datetime
                                 className={this.props.errorMessages.errStartTimeMeeting ? 'borderStartMeeting' : ''}
-                                inputProps={{ readOnly: true, placeholder: 'Select date and time to start' }}
+                                inputProps={{ readOnly: true, placeholder: 'Select start time' }}
                                 value={this.props.start_time ? moment.utc(this.props.start_time).format('DD-MM-YYYY HH:mm') : ''}
                                 dateFormat="DD-MM-YYYY"
                                 timeFormat="HH:mm"
@@ -95,7 +95,7 @@ export class ProfileDetailsFirstRound extends Component {
                             <ControlLabel>End Meeting(<span className="span">*</span>)</ControlLabel>
                             <Datetime
                                 className={this.props.errorMessages.errEndTimeMeeting ? 'borderEndMeeting' : ''}
-                                inputProps={{ readOnly: true, placeholder: 'Select date and time to finish' }}
+                                inputProps={{ readOnly: true, placeholder: 'Select end time' }}
                                 value={this.props.end_time ? moment.utc(this.props.end_time).format('DD-MM-YYYY HH:mm') : ''}
                                 dateFormat="DD-MM-YYYY"
                                 timeFormat="HH:mm"
