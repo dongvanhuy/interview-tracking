@@ -199,6 +199,9 @@ main {
 .date-time {
   &__one,
   &__two {
+    // .rdt input{
+    //   border-color: red;
+    // }
     position: relative;
     // cursor: pointer;
   }
@@ -250,4 +253,16 @@ main {
 .error_msg,
 .span {
   color: red;
+}
+
+.profile-details .form-group .borderFullname{
+  border-color: red;
+}
+
+.date-time__one .borderStartMeeting input{
+  border-color: red;
+}
+
+.date-time__one .borderEndMeeting input{
+  border-color: red;
 }
