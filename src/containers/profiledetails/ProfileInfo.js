@@ -43,34 +43,38 @@ export class ProfileInfo extends Component {
         // save data successfull
         if (this.props.doSuccessfully !== nextProps.doSuccessfully && nextProps.doSuccessfully) {
             console.log('>>>> save data successfully');
-            // book meeting room
-            const params = {
-                Subject: 'Interview',
-                Body: {
-                    ContentType: 'HTML',
-                    Content: 'I think it will meet our requirements!',
-                },
-                Start: {
-                    DateTime: '2018-09-17T18:00:00',
-                    TimeZone: 'Pacific Standard Time',
-                },
-                End: {
-                    DateTime: '2018-09-17T19:00:00',
-                    TimeZone: 'Pacific Standard Time',
-                },
-                Attendees: [
-                    {
-                        EmailAddress: {
-                            Address: 'trangthi.nguyen@hubcba.com',
-                            Name: 'Trang Nguyen',
-                        },
-                        Type: 'Required',
-                    },
-                ],
-            };
-            console.log('>>> params', params);
-            this.props.bookMeetingRoom(params);
+            this.bookMeetingRoom();
         }
+        // if (this.props.doSuccessfully !== nextProps.doSuccessfully && nextProps.doSuccessfully) {
+        //     console.log('>>>> save data successfully');
+        //     // book meeting room
+        //     const params = {
+        //         Subject: 'Interview',
+        //         Body: {
+        //             ContentType: 'HTML',
+        //             Content: 'I think it will meet our requirements!',
+        //         },
+        //         Start: {
+        //             DateTime: '2018-09-17T18:00:00',
+        //             TimeZone: 'Pacific Standard Time',
+        //         },
+        //         End: {
+        //             DateTime: '2018-09-17T19:00:00',
+        //             TimeZone: 'Pacific Standard Time',
+        //         },
+        //         Attendees: [
+        //             {
+        //                 EmailAddress: {
+        //                     Address: 'trangthi.nguyen@hubcba.com',
+        //                     Name: 'Trang Nguyen',
+        //                 },
+        //                 Type: 'Required',
+        //             },
+        //         ],
+        //     };
+        //     console.log('>>> params', params);
+        //     this.props.bookMeetingRoom(params);
+        // }
     }
 
   initState = {
@@ -120,6 +124,48 @@ export class ProfileInfo extends Component {
       },
 
   };
+
+  bookMeetingRoom = () => {
+      // const dataSave = this.props.dataProfilePost;
+      const dataSave = this.state;
+      console.log('>>>>>> dataSave', dataSave);
+      // book meeting room
+      const params = {
+          Subject: `Interview for ${dataSave.candidate_fullname}`,
+          Body: {
+              ContentType: 'HTML',
+              Content: 'The interview will be begin at this time!',
+          },
+          Start: {
+              // DateTime: '2018-09-18T18:00:00',
+              dateTime: dataSave.start_time,
+              TimeZone: 'Pacific Standard Time',
+          },
+          End: {
+              dateTime: dataSave.end_time,
+              // DateTime: '2018-09-18T19:00:00',
+              TimeZone: 'Pacific Standard Time',
+          },
+          Attendees: [
+              {
+                  EmailAddress: {
+                      Address: dataSave.jury_round1_01,
+                      Name: '',
+                  },
+                  Type: 'Required',
+              },
+              {
+                  EmailAddress: {
+                      Address: dataSave.jury_round1_02,
+                      Name: '',
+                  },
+                  Type: 'Required',
+              },
+          ],
+      };
+      console.log('>>> params', params);
+      this.props.bookMeetingRoom(params);
+  }
 
   resetForm = () => {
       this.setState({ ...this.initState }, () => {
@@ -240,6 +286,7 @@ const mapStateToProps = state => ({
     profileDetails: state.profileDetails.dataProfileDetails,
     doSuccessfully: state.profileDetails.doSuccessfully,
     dataProfileRes: state.profileDetails.dataProfileRes,
+    // dataProfilePost: state.profileDetails.dataProfilePost,
 });
 const mapDispatchToProps = {
     createProfileDetails,

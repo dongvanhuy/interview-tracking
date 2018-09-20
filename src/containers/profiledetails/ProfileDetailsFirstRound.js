@@ -170,9 +170,11 @@ export class ProfileDetailsFirstRound extends Component {
                                         value={this.props.jury_round1_01}
                                     >
                                         <option value="">Select</option>
-                                        <option value="1">Huy Dong</option>
-                                        <option value="2">Huy Chung</option>
-                                        <option value="3">Trang Nguyen</option>
+                                        <option value="tle42@csc.com">Tai Le</option>
+                                        <option value="hdong4@csc.com">Huy Dong</option>
+                                        <option value="hchung3@csc.com">Huy Chung</option>
+                                        <option value="tnguyen450@csc.com">Trang Nguyen</option>
+                                        <option value="tdang36@csc.com">Tuyen Dang</option>
                                     </FormControl>
                                 </FormGroup>
                                 {errorMessages.errInterviewer && <span className="error_msg">{errorMessages.errInterviewer}</span>}
@@ -189,9 +191,11 @@ export class ProfileDetailsFirstRound extends Component {
                                         value={this.props.jury_round1_02}
                                     >
                                         <option value="">Select</option>
-                                        <option value="1">Huy Dong</option>
-                                        <option value="2">Huy Chung</option>
-                                        <option value="3">Trang Nguyen</option>
+                                        <option value="tle42@csc.com">Tai Le</option>
+                                        <option value="hdong4@csc.com">Huy Dong</option>
+                                        <option value="hchung3@csc.com">Huy Chung</option>
+                                        <option value="tnguyen450@csc.com">Trang Nguyen</option>
+                                        <option value="tdang36@csc.com">Tuyen Dang</option>
                                     </FormControl>
                                 </FormGroup>
                             </Col>
