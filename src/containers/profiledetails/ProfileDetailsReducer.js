@@ -6,17 +6,20 @@ import {
     PROFILE_DETAILS_UPDATE_FAIL,
     PROFILE_DETAILS_CREATE,
     PROFILE_DETAILS_CREATE_SUCCESS,
-    PROFILE_DETAILS_CREATE_FAIL,
     RESET_PROFILE_DETAILS_DATA,
     CLOSE_MODAL_SUCCESS,
+    GET_USERS,
+    GET_USERS_SUCCESS,
+    GET_USERS_FAILED,
 } from '../../store/actionTypes';
 
 const initialState = {
     dataProfileDetails: [],
     dataProfileUpdate: {},
-    dataProfilePost: [],
+    dataProfilePost: {},
     dataProfileRes: {},
     doSuccessfully: null,
+    users: [],
 };
 
 const actions = {
@@ -46,6 +49,10 @@ const actions = {
         doSuccessfully: null,
     }),
 
+    [PROFILE_DETAILS_CREATE]: (state, { payload }) => ({
+        ...state,
+        dataProfilePost: payload,
+    }),
     [PROFILE_DETAILS_CREATE_SUCCESS]: (state, { payload }) => ({
         ...state,
         dataProfileRes: payload,
@@ -60,6 +67,18 @@ const actions = {
     [RESET_PROFILE_DETAILS_DATA]: state => ({
         ...state,
         dataProfileDetails: [],
+    }),
+    [GET_USERS]: state => ({
+        ...state,
+        users: [],
+    }),
+    [GET_USERS_SUCCESS]: (state, { payload }) => ({
+        ...state,
+        users: payload,
+    }),
+    [GET_USERS_FAILED]: state => ({
+        ...state,
+        users: [],
     }),
 };
 

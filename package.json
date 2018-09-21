@@ -5,7 +5,8 @@
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
-    "start": "react-scripts start",
+    "start-js": "react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
     "start-dev": "npm-run-all -p watch-css start",
     "build": "react-scripts build && workbox generateSW workbox-config.js",
     "all": "npm run build-css && npm run build",
@@ -101,7 +102,8 @@
     "universal-cookie": "^2.1.2",
     "url-loader": "0.5.9",
     "uuid": "^3.1.0",
-    "whatwg-fetch": "2.0.3"
+    "whatwg-fetch": "2.0.3",
+    "workbox-cli": "^3.5.0"
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.14.1",

@@ -10,6 +10,7 @@ import {
     loadProfileDetails,
     updateProfileDetails,
     resetStateProfileDetail,
+    getUsers,
 } from './ProfileDetailsAction';
 import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
 import { ProfileDetailsSecondRound } from './ProfileDetailsSecondRound';
@@ -35,8 +36,8 @@ export class ProfileDetails extends Component {
           recruiter: '',
           eng_level: '',
           eng_level_cmt: '',
-          jury_round1_01: '',
-          jury_round1_02: '',
+          interviewer_round1_01: '',
+          interviewer_round1_02: '',
           date_round1: '',
           tech_competency_round1: '',
           tech_competency_round1_cmt: '',
@@ -46,7 +47,7 @@ export class ProfileDetails extends Component {
           title_round1: '',
           round1_status: '',
           cmt_result_round1: '',
-          jury_round2: '',
+          interviewer_round2: '',
           date_round2: '',
           tech_competency_round2: '',
           tech_competency_round2_cmt: '',
@@ -75,6 +76,7 @@ export class ProfileDetails extends Component {
   componentWillMount() {
       this.props.resetStateProfileDetail();
       this.props.loadProfileDetails(this.props.candidateId);
+      this.props.getUsers();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -155,7 +157,7 @@ export class ProfileDetails extends Component {
   );
 
   render() {
-      console.log('>>>>>>>>>>>', this.state);
+      const { users } = this.props;
       return (
           <React.Fragment>
               <LoadingInProgress show={!this.props.profileDetails[0]} />
@@ -164,10 +166,12 @@ export class ProfileDetails extends Component {
                   <Grid>
                       <ProfileDetailsFirstRound
                           handleChange={this.handleChange}
+                          users={users}
                           {...this.state}
                       />
                       <ProfileDetailsSecondRound
                           handleChange={this.handleChange}
+                          users={users}
                           {...this.state}
                       />
                       <FormGroup className="profile-details__btn">
@@ -207,6 +211,7 @@ const mapStateToProps = state => ({
         ? state.router.location.state.candidateId
         : state.profile.profileSelectedId,
     dataProfileRes: state.profileDetails.dataProfileUpdate,
+    users: state.profileDetails.users,
 });
 
 const mapDispatchToProps = {
@@ -214,6 +219,7 @@ const mapDispatchToProps = {
     updateProfileDetails,
     push,
     resetStateProfileDetail,
+    getUsers,
 };
 
 export default connect(

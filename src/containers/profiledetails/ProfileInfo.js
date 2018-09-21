@@ -8,6 +8,8 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import {
     createProfileDetails,
     resetStateProfileDetail,
+    bookMeetingRoom,
+    getUsers,
 } from './ProfileDetailsAction';
 import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
 import { ProfileDetailsSecondRound } from './ProfileDetailsSecondRound';
@@ -19,6 +21,9 @@ export class ProfileInfo extends Component {
         super(props);
         this.state = this.initState;
         this.checkValidateForm = this.checkValidateForm.bind(this);
+    }
+    componentWillMount() {
+        this.props.getUsers();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -39,6 +44,11 @@ export class ProfileInfo extends Component {
                 });
             }
         }
+
+        // save data successfull
+        if (this.props.doSuccessfully !== nextProps.doSuccessfully && nextProps.doSuccessfully) {
+            this.bookMeetingRoom();
+        }
     }
 
   initState = {
@@ -50,8 +60,8 @@ export class ProfileInfo extends Component {
       end_time: '',
       eng_level: '',
       eng_level_cmt: '',
-      jury_round1_01: '',
-      jury_round1_02: '',
+      interviewer_round1_01: '',
+      interviewer_round1_02: '',
       date_round1: '',
       tech_competency_round1: '',
       tech_competency_round1_cmt: '',
@@ -61,7 +71,7 @@ export class ProfileInfo extends Component {
       title_round1: '',
       round1_status: '',
       cmt_result_round1: '',
-      jury_round2: '',
+      interviewer_round2: '',
       date_round2: '',
       tech_competency_round2: '',
       tech_competency_round2_cmt: '',
@@ -90,6 +100,46 @@ export class ProfileInfo extends Component {
 
   };
 
+  bookMeetingRoom = () => {
+      // const dataSave = this.props.dataProfilePost;
+      const dataSave = this.state;
+      // book meeting room
+      const params = {
+          Subject: `Interview for ${dataSave.candidate_fullname}`,
+          Body: {
+              ContentType: 'HTML',
+              Content: 'The interview will be begin at this time!',
+          },
+          Start: {
+              // DateTime: '2018-09-18T18:00:00',
+              dateTime: dataSave.start_time,
+              TimeZone: 'Pacific Standard Time',
+          },
+          End: {
+              dateTime: dataSave.end_time,
+              // DateTime: '2018-09-18T19:00:00',
+              TimeZone: 'Pacific Standard Time',
+          },
+          Attendees: [
+              {
+                  EmailAddress: {
+                      Address: dataSave.interviewer_round1_01,
+                      Name: '',
+                  },
+                  Type: 'Required',
+              },
+              {
+                  EmailAddress: {
+                      Address: dataSave.interviewer_round1_02,
+                      Name: '',
+                  },
+                  Type: 'Required',
+              },
+          ],
+      };
+      this.props.bookMeetingRoom(params);
+  }
+
   resetForm = () => {
       this.setState({ ...this.initState }, () => {
           this.setState({ candidate_fullname: '' });
@@ -100,8 +150,8 @@ export class ProfileInfo extends Component {
       const fullName = this.state.candidate_fullname;
       const startTime = this.state.start_time;
       const endTime = this.state.end_time;
-      const interviewer1 = this.state.jury_round1_01;
-      const interviewer2 = this.state.jury_round1_02;
+      const interviewer1 = this.state.interviewer_round1_01;
+      const interviewer2 = this.state.interviewer_round1_02;
       const { errorMessages } = this.state;
       const result = moment(this.state.start_time).isBefore(this.state.end_time, 'minute');
 
@@ -124,7 +174,7 @@ export class ProfileInfo extends Component {
           stateInit.candidate_fullname !== '' ? stateInit.errorMessages.errFullname = '' : stateInit.errorMessages.errFullname = 'Write in this field, pls.';
           stateInit.start_time !== '' ? stateInit.errorMessages.errStartTimeMeeting = '' : stateInit.errorMessages.errStartTimeMeeting = 'Choose a start time, pls.';
           stateInit.end_time !== '' ? stateInit.errorMessages.errEndTimeMeeting = '' : stateInit.errorMessages.errEndTimeMeeting = 'Choose a end time, pls.';
-          stateInit.jury_round1_01 !== '' || stateInit.jury_round1_02 !== '' ? stateInit.errorMessages.errInterviewer = '' : stateInit.errorMessages.errInterviewer = 'Choose an interviewer(s), pls.';
+          stateInit.interviewer_round1_01 !== '' || stateInit.interviewer_round1_02 !== '' ? stateInit.errorMessages.errInterviewer = '' : stateInit.errorMessages.errInterviewer = 'Choose an interviewer(s), pls.';
           !result ? stateInit.errorMessages.errTime = 'Please choose reasonable datetime.' : stateInit.errorMessages.errTime = '';
       }
       this.setState({ ...stateInit });
@@ -142,6 +192,8 @@ export class ProfileInfo extends Component {
       } else {
           window.scrollTo(0, 0);
       }
+
+      //   this.onBookMeeting();
   };
 
   handleOK = () => {
@@ -163,7 +215,7 @@ export class ProfileInfo extends Component {
   );
 
   render() {
-      console.log('>>>>>>>>>>> result', this.state.errorMessages.errTime);
+      const { users } = this.props;
       return (
           <React.Fragment>
               {this.state.loading && this.callLoading()}
@@ -171,10 +223,12 @@ export class ProfileInfo extends Component {
                   <Grid>
                       <ProfileDetailsFirstRound
                           handleChange={this.handleChange}
+                          users={users}
                           {...this.state}
                       />
                       <ProfileDetailsSecondRound
                           handleChange={this.handleChange}
+                          users={users}
                           {...this.state}
                       />
                       <FormGroup className="profile-details__btn">
@@ -212,11 +266,15 @@ const mapStateToProps = state => ({
     profileDetails: state.profileDetails.dataProfileDetails,
     doSuccessfully: state.profileDetails.doSuccessfully,
     dataProfileRes: state.profileDetails.dataProfileRes,
+    users: state.profileDetails.users,
+    // dataProfilePost: state.profileDetails.dataProfilePost,
 });
 const mapDispatchToProps = {
     createProfileDetails,
-    push,
+    push, // ACTION GUI EPIC GUI API
+    bookMeetingRoom,
     resetStateProfileDetail,
+    getUsers,
 };
 
 export default connect(
