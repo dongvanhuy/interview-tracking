@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { Modal, Button } from 'react-bootstrap/lib';
 
 export default class ConfirmationModal extends Component {
-  defaultProps = {
-      show: false,
-      messages: '',
-      handleClose: () => {},
-      handleOK: () => {},
-  };
+   static defaultProps = {
+       show: false,
+       messages: '',
+       handleClose: () => {},
+       handleOK: () => {},
+   };
 
   propsTypes = {
       show: PropTypes.bool,
@@ -29,7 +29,7 @@ export default class ConfirmationModal extends Component {
                       <Modal.Title>Confirmation</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                      <h3>{this.props.messages}</h3>
+                      <p>{this.props.messages}</p>
                       <p>{this.props.ps}</p>
                   </Modal.Body>
                   <Modal.Footer>

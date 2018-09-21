@@ -4,19 +4,22 @@ import {
     PROFILE_DETAILS_LOAD_FAIL,
     PROFILE_DETAILS_UPDATE_SUCCESS,
     PROFILE_DETAILS_UPDATE_FAIL,
+    PROFILE_DETAILS_CREATE,
     PROFILE_DETAILS_CREATE_SUCCESS,
-    PROFILE_DETAILS_CREATE_FAIL,
     RESET_PROFILE_DETAILS_DATA,
     CLOSE_MODAL_SUCCESS,
+    GET_USERS,
+    GET_USERS_SUCCESS,
+    GET_USERS_FAILED,
 } from '../../store/actionTypes';
 
 const initialState = {
     dataProfileDetails: [],
-    dataProfilePatch: [],
-    dataProfilePost: [],
+    dataProfileUpdate: {},
+    dataProfilePost: {},
     dataProfileRes: {},
-    updateSuccess: false,
-    statusCode: {},
+    doSuccessfully: null,
+    users: [],
 };
 
 const actions = {
@@ -32,34 +35,50 @@ const actions = {
 
     [PROFILE_DETAILS_UPDATE_SUCCESS]: (state, { payload }) => ({
         ...state,
-        dataProfilePatch: payload,
-        updateSuccess: true,
+        dataProfileUpdate: payload,
+        doSuccessfully: true,
     }),
 
     [PROFILE_DETAILS_UPDATE_FAIL]: (state, { payload }) => ({
         ...state,
         statusCode: payload,
+        doSuccessfully: false,
+    }),
+    [PROFILE_DETAILS_CREATE]: (state) => ({
+        ...state,
+        doSuccessfully: null,
     }),
 
+    [PROFILE_DETAILS_CREATE]: (state, { payload }) => ({
+        ...state,
+        dataProfilePost: payload,
+    }),
     [PROFILE_DETAILS_CREATE_SUCCESS]: (state, { payload }) => ({
         ...state,
         dataProfileRes: payload,
-        updateSuccess: true,
-    }),
-
-    [PROFILE_DETAILS_CREATE_FAIL]: (state, { payload }) => ({
-        ...state,
-        statusCode: payload,
+        doSuccessfully: true,
     }),
 
     [CLOSE_MODAL_SUCCESS]: state => ({
         ...state,
-        updateSuccess: false,
+        doSuccessfully: false,
     }),
 
     [RESET_PROFILE_DETAILS_DATA]: state => ({
         ...state,
         dataProfileDetails: [],
+    }),
+    [GET_USERS]: state => ({
+        ...state,
+        users: [],
+    }),
+    [GET_USERS_SUCCESS]: (state, { payload }) => ({
+        ...state,
+        users: payload,
+    }),
+    [GET_USERS_FAILED]: state => ({
+        ...state,
+        users: [],
     }),
 };
 

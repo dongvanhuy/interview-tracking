@@ -4,7 +4,12 @@ import { push } from 'react-router-redux';
 import { FormGroup, Grid } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
-import { createProfileDetails } from './ProfileDetailsAction';
+import {
+    createProfileDetails,
+    resetStateProfileDetail,
+    bookMeetingRoom,
+    getUsers,
+} from './ProfileDetailsAction';
 import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
 import { ProfileDetailsSecondRound } from './ProfileDetailsSecondRound';
 import ConfirmationModal from '../common/confirmationModal/ConfirmationModal';
@@ -13,100 +18,176 @@ import loading from '../../assets/images/loading.svg';
 export class ProfileInfo extends Component {
     constructor(props) {
         super(props);
+        this.state = this.initState;
         this.checkValidateForm = this.checkValidateForm.bind(this);
-        this.state = {
-            candidate_id: '',
-            candidate_fullname: '',
-            position_apply: '',
-            recruiter: '',
-            date_meeting: '',
-            eng_level: '',
-            eng_level_cmt: '',
-            jury_round1_01: '',
-            jury_round1_02: '',
-            date_round1: '',
-            tech_competency_round1: '',
-            tech_competency_round1_cmt: '',
-            cultural_fit_round1: '',
-            cultural_fit_round1_cmt: '',
-            ype_round1: '',
-            title_round1: '',
-            round1_status: '',
-            cmt_result_round1: '',
-            jury_round2: '',
-            date_round2: '',
-            tech_competency_round2: '',
-            tech_competency_round2_cmt: '',
-            cultural_fit_round2: '',
-            cultural_fit_round2_cmt: '',
-            business_acument: '',
-            business_acument_cmt: '',
-            soft_skill: '',
-            soft_skill_cmt: '',
-            people_management: '',
-            people_management_cmt: '',
-            ype_round2: '',
-            title_round2: '',
-            round2_status: '',
-            cmt_result_round2: '',
-            showConfirmation: false,
-            loading: false,
-        };
+    }
+    componentWillMount() {
+        this.props.getUsers();
     }
 
     componentWillReceiveProps(nextProps) {
-        if (
-            this.props.dataProfileRes !== nextProps.dataProfileRes &&
-      nextProps.dataProfileRes &&
-      nextProps.dataProfileRes.status === 200
-        ) {
+        if (this.props.doSuccessfully !== nextProps.doSuccessfully) {
             this.setState({ loading: false });
-            toast.success('ADD SUCCESSFULLY', {
-                autoClose: 2000,
-                hideProgressBar: true,
-            });
-        } else {
-            this.setState({ loading: true });
+            if (nextProps.doSuccessfully === true) {
+                this.resetForm();
+                toast('ADD SUCCESSFULLY', {
+                    autoClose: 2000,
+                    position: 'top-center',
+                    hideProgressBar: true,
+                });
+            } else {
+                toast('SERVER IS DIED', {
+                    autoClose: 2000,
+                    position: 'top-center',
+                    hideProgressBar: true,
+                });
+            }
+        }
+
+        // save data successfull
+        if (this.props.doSuccessfully !== nextProps.doSuccessfully && nextProps.doSuccessfully) {
+            this.bookMeetingRoom();
         }
     }
 
-  checkValidateForm = (name, value) => {
-      const candidateName = document.getElementsByName('candidate_fullname');
-      if (value === '' && name === 'candidate_fullname') {
-          candidateName[0].classList.add('error-message');
-      } else if (this.state.candidate_fullname === '' && name === undefined) {
-          candidateName[0].classList.add('error-message');
-      }
-      if (this.state.candidate_fullname !== '') {
-          candidateName[0].classList.remove('error-message');
-      }
+  initState = {
+      candidate_id: '',
+      candidate_fullname: '',
+      position_apply: '',
+      recruiter: '',
+      start_time: '',
+      end_time: '',
+      eng_level: '',
+      eng_level_cmt: '',
+      interviewer_round1_01: '',
+      interviewer_round1_02: '',
+      date_round1: '',
+      tech_competency_round1: '',
+      tech_competency_round1_cmt: '',
+      cultural_fit_round1: '',
+      cultural_fit_round1_cmt: '',
+      ype_round1: '',
+      title_round1: '',
+      round1_status: '',
+      cmt_result_round1: '',
+      interviewer_round2: '',
+      date_round2: '',
+      tech_competency_round2: '',
+      tech_competency_round2_cmt: '',
+      cultural_fit_round2: '',
+      cultural_fit_round2_cmt: '',
+      business_acument: '',
+      business_acument_cmt: '',
+      soft_skill: '',
+      soft_skill_cmt: '',
+      people_management: '',
+      people_management_cmt: '',
+      ype_round2: '',
+      title_round2: '',
+      round2_status: '',
+      cmt_result_round2: '',
+      showConfirmation: false,
+      loading: false,
+      isChecking: false,
+      errorMessages: {
+          errFullname: '',
+          errStartTimeMeeting: '',
+          errEndTimeMeeting: '',
+          errInterviewer: '',
+      },
+
   };
 
-  handleChange = (e, childAttr) => {
+  bookMeetingRoom = () => {
+      // const dataSave = this.props.dataProfilePost;
+      const dataSave = this.state;
+      // book meeting room
+      const params = {
+          Subject: `Interview for ${dataSave.candidate_fullname}`,
+          Body: {
+              ContentType: 'HTML',
+              Content: 'The interview will be begin at this time!',
+          },
+          Start: {
+              // DateTime: '2018-09-18T18:00:00',
+              dateTime: dataSave.start_time,
+              TimeZone: 'Pacific Standard Time',
+          },
+          End: {
+              dateTime: dataSave.end_time,
+              // DateTime: '2018-09-18T19:00:00',
+              TimeZone: 'Pacific Standard Time',
+          },
+          Attendees: [
+              {
+                  EmailAddress: {
+                      Address: dataSave.interviewer_round1_01,
+                      Name: '',
+                  },
+                  Type: 'Required',
+              },
+              {
+                  EmailAddress: {
+                      Address: dataSave.interviewer_round1_02,
+                      Name: '',
+                  },
+                  Type: 'Required',
+              },
+          ],
+      };
+      this.props.bookMeetingRoom(params);
+  }
+
+  resetForm = () => {
+      this.setState({ ...this.initState }, () => {
+          this.setState({ candidate_fullname: '' });
+      });
+  };
+
+  checkValidateForm = () => {
+      const fullName = this.state.candidate_fullname;
+      const startTime = this.state.start_time;
+      const endTime = this.state.end_time;
+      const interviewer1 = this.state.interviewer_round1_01;
+      const interviewer2 = this.state.interviewer_round1_02;
+      const { errorMessages } = this.state;
+
+      fullName === '' ? errorMessages.errFullname = 'Write in this field, pls.' : errorMessages.errFullname = '';
+      startTime === '' ? errorMessages.errStartTimeMeeting = 'Choose a start time, pls.' : errorMessages.errStartTimeMeeting = '';
+      endTime === '' ? errorMessages.errEndTimeMeeting = 'Choose a end time, pls.' : errorMessages.errEndTimeMeeting = '';
+      interviewer1 === '' && interviewer2 === '' ? errorMessages.errInterviewer = 'Choose an interviewer(s), pls.' : errorMessages.errInterviewer = '';
+
+      this.setState({ ...errorMessages, isChecking: true });
+  };
+
+  handleChange = e => {
       const { value, name } = e.target;
       const stateInit = this.state;
-      if (childAttr === undefined) {
-          stateInit[name] = value;
-          this.setState({ ...stateInit });
-      } else {
-          stateInit[name] = childAttr;
-          this.setState({ ...stateInit });
+      const { isChecking } = this.state;
+      stateInit[name] = value;
+      if (isChecking) {
+          stateInit.candidate_fullname !== '' ? stateInit.errorMessages.errFullname = '' : stateInit.errorMessages.errFullname = 'Write in this field, pls.';
+          stateInit.start_time !== '' ? stateInit.errorMessages.errStartTimeMeeting = '' : stateInit.errorMessages.errStartTimeMeeting = 'Choose a start time, pls.';
+          stateInit.end_time !== '' ? stateInit.errorMessages.errEndTimeMeeting = '' : stateInit.errorMessages.errEndTimeMeeting = 'Choose a end time, pls.';
+          stateInit.interviewer_round1_01 !== '' || stateInit.interviewer_round1_02 !== '' ? stateInit.errorMessages.errInterviewer = '' : stateInit.errorMessages.errInterviewer = 'Choose an interviewer(s), pls.';
       }
-      this.checkValidateForm(name, value);
+      this.setState({ ...stateInit });
   };
 
   submitForm = e => {
       e.preventDefault();
       this.checkValidateForm();
-      const errorMessages = document.getElementsByClassName('error-message');
-      if (errorMessages.length > 0) {
-          errorMessages[0].focus();
-      } else {
-      //   this.props.createProfileDetails(this.state);
+      const { errorMessages } = this.state;
+
+      if (errorMessages.errFullname === '' && errorMessages.errStartTimeMeeting === '' && errorMessages.errEndTimeMeeting === '' && errorMessages.errInterviewer === '') {
           this.setState({
               showConfirmation: true,
           });
+      } else {
+          window.scrollTo(0, 0);
       }
+
+      //   this.onBookMeeting();
   };
 
   handleOK = () => {
@@ -128,6 +209,7 @@ export class ProfileInfo extends Component {
   );
 
   render() {
+      const { users } = this.props;
       return (
           <React.Fragment>
               {this.state.loading && this.callLoading()}
@@ -135,10 +217,12 @@ export class ProfileInfo extends Component {
                   <Grid>
                       <ProfileDetailsFirstRound
                           handleChange={this.handleChange}
+                          users={users}
                           {...this.state}
                       />
                       <ProfileDetailsSecondRound
                           handleChange={this.handleChange}
+                          users={users}
                           {...this.state}
                       />
                       <FormGroup className="profile-details__btn">
@@ -174,12 +258,17 @@ export class ProfileInfo extends Component {
 
 const mapStateToProps = state => ({
     profileDetails: state.profileDetails.dataProfileDetails,
-    show: state.profileDetails.updateSuccess,
+    doSuccessfully: state.profileDetails.doSuccessfully,
     dataProfileRes: state.profileDetails.dataProfileRes,
+    users: state.profileDetails.users,
+    // dataProfilePost: state.profileDetails.dataProfilePost,
 });
 const mapDispatchToProps = {
     createProfileDetails,
     push, // ACTION GUI EPIC GUI API
+    bookMeetingRoom,
+    resetStateProfileDetail,
+    getUsers,
 };
 
 export default connect(
