@@ -41,7 +41,7 @@ export class ProfileDetailsFirstRound extends Component {
     }
 
     render() {
-        const { errorMessages } = this.props;
+        const { errorMessages, users } = this.props;
         return (
             <React.Fragment>
                 <Row className="show-grid">
@@ -146,9 +146,10 @@ export class ProfileDetailsFirstRound extends Component {
                                 onChange={(e) => this.props.handleChange(e)}
                             >
                                 <option value="">Select</option>
-                                <option value="Duyen Tran">Duyen Tran</option>
+                                {users.map(user => (<option key={user.id} value={user.email}>{user.fullname}</option>))}
+                                {/* <option value="Duyen Tran">Duyen Tran</option>
                                 <option value="Vy Phan">Vy Phan</option>
-                                <option value="Nhu Huynh">Nhu Huynh</option>
+                                <option value="Nhu Huynh">Nhu Huynh</option> */}
                             </FormControl>
                         </FormGroup>
                     </Col>
@@ -166,13 +167,16 @@ export class ProfileDetailsFirstRound extends Component {
                                         // className="profile-details__select"
                                         className={this.props.errorMessages.errInterviewer ? 'borderInterviewer' : ''}
                                         onChange={(e) => this.props.handleChange(e)}
-                                        name="jury_round1_01"
-                                        value={this.props.jury_round1_01}
+                                        name="interviewer_round1_01"
+                                        value={this.props.interviewer_round1_01}
                                     >
                                         <option value="">Select</option>
-                                        <option value="1">Huy Dong</option>
-                                        <option value="2">Huy Chung</option>
-                                        <option value="3">Trang Nguyen</option>
+                                        {users.map(user => (<option key={user.id} value={user.email}>{user.fullname}</option>))}
+                                        {/* <option value="tle42@csc.com">Tai Le</option>
+                                        <option value="hdong4@csc.com">Huy Dong</option>
+                                        <option value="hchung3@csc.com">Huy Chung</option>
+                                        <option value="tnguyen450@csc.com">Trang Nguyen</option>
+                                        <option value="tdang36@csc.com">Tuyen Dang</option> */}
                                     </FormControl>
                                 </FormGroup>
                                 {errorMessages.errInterviewer && <span className="error_msg">{errorMessages.errInterviewer}</span>}
@@ -185,13 +189,16 @@ export class ProfileDetailsFirstRound extends Component {
                                         // className="profile-details__select"
                                         className={this.props.errorMessages.errInterviewer ? 'borderInterviewer' : ''}
                                         onChange={(e) => this.props.handleChange(e)}
-                                        name="jury_round1_02"
-                                        value={this.props.jury_round1_02}
+                                        name="interviewer_round1_02"
+                                        value={this.props.interviewer_round1_02}
                                     >
                                         <option value="">Select</option>
-                                        <option value="1">Huy Dong</option>
-                                        <option value="2">Huy Chung</option>
-                                        <option value="3">Trang Nguyen</option>
+                                        {users.map(user => (<option key={user.id} value={user.email}>{user.fullname}</option>))}
+                                        {/* <option value="tle42@csc.com">Tai Le</option>
+                                        <option value="hdong4@csc.com">Huy Dong</option>
+                                        <option value="hchung3@csc.com">Huy Chung</option>
+                                        <option value="tnguyen450@csc.com">Trang Nguyen</option>
+                                        <option value="tdang36@csc.com">Tuyen Dang</option> */}
                                     </FormControl>
                                 </FormGroup>
                             </Col>
