@@ -19,6 +19,8 @@ export class ProfileDetailsSecondRound extends Component {
         this.setState({ showTimeRoundTwo: !show });
     }
     render() {
+        const yesterday = Datetime.moment().subtract(1, 'day');
+        const valid = (current) => current.isAfter(yesterday) && current.day() !== 0 && current.day() !== 6;
         return (
             <React.Fragment>
                 <h2 className="profile-details__title">2st Round</h2>
@@ -53,6 +55,7 @@ export class ProfileDetailsSecondRound extends Component {
                                 ref={this.dateRound2}
                                 utc
                                 // defaultValue="DD-MM-YYYY HH:mm"
+                                isValidDate={valid}
                                 onChange={(e) => this.props.handleChange({ target: { value: e, name: 'date_round2' } })}
                             />
                             <FontAwesomeIcon
