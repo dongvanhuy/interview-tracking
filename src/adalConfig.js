@@ -5,8 +5,7 @@ export const adalConfig = {
     // clientId: 'fede1873-aa95-4256-b554-1aa5a89e26ef',
     clientId: '036e0394-cb25-47bc-8102-e21d3e5292a5',
     endpoints: {
-        // api: 'fede1873-aa95-4256-b554-1aa5a89e26ef', // the same client id
-        api: '036e0394-cb25-47bc-8102-e21d3e5292a5',
+        api: '036e0394-cb25-47bc-8102-e21d3e5292a5', // the same client id
     },
     postLogoutRedirectUri: 'https://dxc-interview-tracking-release.azurewebsites.net/',
     cacheLocation: 'localStorage',
