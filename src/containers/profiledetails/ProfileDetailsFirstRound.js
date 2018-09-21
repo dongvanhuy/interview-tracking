@@ -42,6 +42,8 @@ export class ProfileDetailsFirstRound extends Component {
 
     render() {
         const { errorMessages, users } = this.props;
+        const yesterday = Datetime.moment().subtract(1, 'day');
+        const valid = (current) => current.isAfter(yesterday) && current.day() !== 0 && current.day() !== 6;
         return (
             <React.Fragment>
                 <Row className="show-grid">
@@ -73,14 +75,15 @@ export class ProfileDetailsFirstRound extends Component {
                         <FormGroup className="date-time__one">
                             <ControlLabel>Start Meeting(<span className="span">*</span>)</ControlLabel>
                             <Datetime
+                                isValidDate={valid}
                                 className={this.props.errorMessages.errStartTimeMeeting ? 'borderStartMeeting' : ''}
-                                inputProps={{ readOnly: true }}
-                                value={moment.utc(this.props.start_time).format('DD-MM-YYYY HH:mm')}
+                                inputProps={{ readOnly: true, placeholder: 'Select start time' }}
+                                value={this.props.start_time ? moment.utc(this.props.start_time).format('DD-MM-YYYY HH:mm') : ''}
                                 dateFormat="DD-MM-YYYY"
                                 timeFormat="HH:mm"
                                 ref={this.startMeeting}
                                 utc
-                                defaultValue="DD-MM-YYYY HH:mm"
+                                // defaultValue="DD-MM-YYYY HH:mm"
                                 onChange={(e) => this.props.handleChange({ target: { value: e, name: 'start_time' } })}
                             />
                             <FontAwesomeIcon
@@ -94,14 +97,15 @@ export class ProfileDetailsFirstRound extends Component {
                         <FormGroup className="date-time__one">
                             <ControlLabel>End Meeting(<span className="span">*</span>)</ControlLabel>
                             <Datetime
+                                isValidDate={valid}
                                 className={this.props.errorMessages.errEndTimeMeeting ? 'borderEndMeeting' : ''}
-                                inputProps={{ readOnly: true }}
-                                value={moment.utc(this.props.end_time).format('DD-MM-YYYY HH:mm')}
+                                inputProps={{ readOnly: true, placeholder: 'Select end time' }}
+                                value={this.props.end_time ? moment.utc(this.props.end_time).format('DD-MM-YYYY HH:mm') : ''}
                                 dateFormat="DD-MM-YYYY"
                                 timeFormat="HH:mm"
                                 ref={this.endMeeting}
                                 utc
-                                defaultValue="DD-MM-YYYY HH:mm"
+                                // defaultValue="DD-MM-YYYY HH:mm"
                                 onChange={(e) => this.props.handleChange({ target: { value: e, name: 'end_time' } })}
                             />
                             <FontAwesomeIcon
@@ -111,6 +115,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 onClick={() => this.endMeeting.current.openCalendar()}
                             />
                             {errorMessages.errEndTimeMeeting && <span className="error_msg">{errorMessages.errEndTimeMeeting}</span>}
+                            {errorMessages.errTime && <span className="error_msg">{errorMessages.errTime}</span>}
                         </FormGroup>
                     </Col>
                     <Col xs={12} sm={6} md={6} lg={6}>
@@ -208,14 +213,15 @@ export class ProfileDetailsFirstRound extends Component {
                         <FormGroup className="date-time__one">
                             <ControlLabel>Date</ControlLabel>
                             <Datetime
-                                inputProps={{ readOnly: true }}
+                                inputProps={{ readOnly: true, placeholder: 'Select date and time' }}
                                 // open={this.state.showTimeRoundOne}
-                                value={moment.utc(this.props.date_round1).format('DD-MM-YYYY HH:mm')}
+                                value={this.props.date_round1 ? moment.utc(this.props.date_round1).format('DD-MM-YYYY HH:mm') : ''}
                                 dateFormat="DD-MM-YYYY"
                                 timeFormat="HH:mm"
                                 ref={this.dateRound1}
                                 utc
-                                defaultValue="DD-MM-YYYY HH:mm"
+                                // defaultValue="DD-MM-YYYY HH:mm"
+                                isValidDate={valid}
                                 onChange={(e) => this.props.handleChange({ target: { value: e, name: 'date_round1' } })}
                             />
                             <FontAwesomeIcon

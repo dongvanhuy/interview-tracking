@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { push } from 'react-router-redux';
 import { FormGroup, Grid } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
+import moment from 'moment';
 import 'react-toastify/dist/ReactToastify.min.css';
 import {
     createProfileDetails,
@@ -94,6 +95,7 @@ export class ProfileInfo extends Component {
           errStartTimeMeeting: '',
           errEndTimeMeeting: '',
           errInterviewer: '',
+          errTime: '',
       },
 
   };
@@ -151,11 +153,13 @@ export class ProfileInfo extends Component {
       const interviewer1 = this.state.interviewer_round1_01;
       const interviewer2 = this.state.interviewer_round1_02;
       const { errorMessages } = this.state;
+      const result = moment(this.state.start_time).isBefore(this.state.end_time, 'minute');
 
       fullName === '' ? errorMessages.errFullname = 'Write in this field, pls.' : errorMessages.errFullname = '';
       startTime === '' ? errorMessages.errStartTimeMeeting = 'Choose a start time, pls.' : errorMessages.errStartTimeMeeting = '';
       endTime === '' ? errorMessages.errEndTimeMeeting = 'Choose a end time, pls.' : errorMessages.errEndTimeMeeting = '';
       interviewer1 === '' && interviewer2 === '' ? errorMessages.errInterviewer = 'Choose an interviewer(s), pls.' : errorMessages.errInterviewer = '';
+      !result ? errorMessages.errTime = ' Please choose reasonable datetime.' : errorMessages.errTime = '';
 
       this.setState({ ...errorMessages, isChecking: true });
   };
@@ -165,11 +169,13 @@ export class ProfileInfo extends Component {
       const stateInit = this.state;
       const { isChecking } = this.state;
       stateInit[name] = value;
+      const result = moment(this.state.start_time).isBefore(this.state.end_time, 'minute');
       if (isChecking) {
           stateInit.candidate_fullname !== '' ? stateInit.errorMessages.errFullname = '' : stateInit.errorMessages.errFullname = 'Write in this field, pls.';
           stateInit.start_time !== '' ? stateInit.errorMessages.errStartTimeMeeting = '' : stateInit.errorMessages.errStartTimeMeeting = 'Choose a start time, pls.';
           stateInit.end_time !== '' ? stateInit.errorMessages.errEndTimeMeeting = '' : stateInit.errorMessages.errEndTimeMeeting = 'Choose a end time, pls.';
           stateInit.interviewer_round1_01 !== '' || stateInit.interviewer_round1_02 !== '' ? stateInit.errorMessages.errInterviewer = '' : stateInit.errorMessages.errInterviewer = 'Choose an interviewer(s), pls.';
+          !result ? stateInit.errorMessages.errTime = 'Please choose reasonable datetime.' : stateInit.errorMessages.errTime = '';
       }
       this.setState({ ...stateInit });
   };
@@ -179,7 +185,7 @@ export class ProfileInfo extends Component {
       this.checkValidateForm();
       const { errorMessages } = this.state;
 
-      if (errorMessages.errFullname === '' && errorMessages.errStartTimeMeeting === '' && errorMessages.errEndTimeMeeting === '' && errorMessages.errInterviewer === '') {
+      if (errorMessages.errFullname === '' && errorMessages.errStartTimeMeeting === '' && errorMessages.errEndTimeMeeting === '' && errorMessages.errInterviewer === '' && errorMessages.errTime === '') {
           this.setState({
               showConfirmation: true,
           });
