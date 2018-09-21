@@ -131,7 +131,14 @@ export class Profile extends Component {
                       className="btn btn-default"
                       onClick={() => this.viewDetailId(item.candidate_id)}
                   >
-                      <i className="fa fa-pencil" /> Edit
+                      <i className="fa fa-pencil" />
+                  </button>
+                  <button
+                      type="button"
+                      className="btn btn-default"
+                      onClick={() => this.viewDetailId(item.candidate_id)}
+                  >
+                      <i className="fa fa-trash-o" />
                   </button>
               </Td>
           </Tr>
@@ -151,7 +158,14 @@ export class Profile extends Component {
                       className="btn btn-default"
                       onClick={() => this.viewDetailId(item.candidate_id)}
                   >
-                      <i className="fa fa-pencil" /> Edit
+                      <i className="fa fa-pencil" />
+                  </button>
+                  <button
+                      type="button"
+                      className="btn btn-default"
+                      onClick={() => this.viewDetailId(item.candidate_id)}
+                  >
+                      <i className="fa fa-trash-o" />
                   </button>
               </Td>
           </Tr>
@@ -171,7 +185,14 @@ export class Profile extends Component {
                       className="btn btn-default"
                       onClick={() => this.viewDetailId(item.candidate_id)}
                   >
-                      <i className="fa fa-pencil" /> Edit
+                      <i className="fa fa-pencil" />
+                  </button>
+                  <button
+                      type="button"
+                      className="btn btn-default"
+                      onClick={() => this.viewDetailId(item.candidate_id)}
+                  >
+                      <i className="fa fa-trash-o" />
                   </button>
               </Td>
           </Tr>
@@ -191,7 +212,14 @@ export class Profile extends Component {
                       className="btn btn-default"
                       onClick={() => this.viewDetailId(item.candidate_id)}
                   >
-                      <i className="fa fa-pencil" /> Edit
+                      <i className="fa fa-pencil" />
+                  </button>
+                  <button
+                      type="button"
+                      className="btn btn-default"
+                      onClick={() => this.viewDetailId(item.candidate_id)}
+                  >
+                      <i className="fa fa-trash-o" />
                   </button>
               </Td>
           </Tr>
@@ -360,7 +388,7 @@ export class Profile extends Component {
                   handleClose={() => this.turnOff()}
                   handleOK={() => this.turnOff()}
                   paragraph="Server is died."
-              />;
+              />
           </section>
       );
   }
