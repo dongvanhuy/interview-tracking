@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropsTypes from 'prop-types';
 import FontAwesomeIcon from 'react-fontawesome';
+import classNames from 'classnames';
 import { Grid, Row, Button, Col } from 'react-bootstrap';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
@@ -16,6 +17,8 @@ import {
     loadProfileThisMonth,
     loadProfileThisOther,
 } from './ProfileAction';
+
+import { getUsers } from '../profileDetails/ProfileDetailsAction';
 import WarningModal from '../common/warningModal/WarningModal';
 
 export class Profile extends Component {
@@ -41,6 +44,7 @@ export class Profile extends Component {
   }
 
   componentWillMount() {
+      this.props.getUsers();
       this.props.loadProfile();
       this.props.loadProfileThisWeek();
       this.props.loadProfileThisMonth();
@@ -55,10 +59,16 @@ export class Profile extends Component {
       }
   }
 
+  getFullname = (email) => {
+      const { users } = this.props;
+      const userFilter = users.filter(user => user.email === email);
+      return userFilter.length > 0 ? userFilter[0].fullname : '';
+  }
+
   viewDetailId = id => {
       this.props.viewDetailDataId(id);
       this.props.push({
-          pathname: '/profile-details',
+          pathname: `/profile-info/${id}`,
           state: {
               candidateId: id,
           },
@@ -78,8 +88,8 @@ export class Profile extends Component {
                   <Tr>
                       <Th>#</Th>
                       <Th>Time</Th>
-                      <Th>Name</Th>
-                      <Th>Recruiter</Th>
+                      <Th>Candidate</Th>
+                      <Th>Interviewer</Th>
                       <Th>Skill</Th>
                       <Th className="text-status">Status</Th>
                       <Th>Action</Th>
@@ -97,6 +107,35 @@ export class Profile extends Component {
   addProfileDetail = () => {
       this.props.push('/profile-info');
   };
+
+  renderStatus = (status) => {
+      const cls = classNames('label', {
+          'label-success': status === 'Passed',
+          'label-danger': status === 'Fail',
+          'label-default': status === 'KIV',
+      });
+      return status ? <span className={cls}>{status}</span> : '';
+  }
+
+  renderItem = (item, index) => (
+      <Tr key={uid()}>
+          <Td>{index + 1}</Td>
+          <Td>{moment.utc(item.start_time).format('DD-MM-YYYY HH:mm')}</Td>
+          <Td>{item.candidate_fullname}</Td>
+          <Td>{this.getFullname(item.interviewer_round1_01)}</Td>
+          <Td>{item.position_apply}</Td>
+          <Td className="text-status">{this.renderStatus(item.round1_status)}</Td>
+          <Td className="text-center">
+              <button
+                  type="button"
+                  className="btn btn-default"
+                  onClick={() => this.viewDetailId(item.candidate_id)}
+              >
+                  <i className="fa fa-pencil" /> Edit
+              </button>
+          </Td>
+      </Tr>
+  )
 
   render() {
       const {
@@ -117,84 +156,34 @@ export class Profile extends Component {
           </tr>
       );
 
+      const renderTHead = (
+          <Thead>
+              <Tr>
+                  <Th style={{ width: 50 }}>#</Th>
+                  <Th className="time-td">Time</Th>
+                  <Th>Candidate</Th>
+                  <Th>Interviewer</Th>
+                  <Th>Skill</Th>
+                  <Th className="text-status status-td">Status</Th>
+                  <Th className="action-td">Action</Th>
+              </Tr>
+          </Thead>
+      );
+
       const rows = profileToday.map((item, index) => (
-          <Tr key={uid()}>
-              <Td>{index + 1}</Td>
-              <Td>{moment.utc(item.date_meeting).format('DD-MM-YYYY HH:mm')}</Td>
-              <Td>{item.candidate_fullname}</Td>
-              <Td>{item.recruiter}</Td>
-              <Td>{item.position_apply}</Td>
-              <Td className="text-status">{item.round1_status}</Td>
-              <Td className="text-center">
-                  <button
-                      type="button"
-                      className="btn btn-default"
-                      onClick={() => this.viewDetailId(item.candidate_id)}
-                  >
-                      <i className="fa fa-pencil" /> Edit
-                  </button>
-              </Td>
-          </Tr>
+          this.renderItem(item, index)
       ));
 
       const rowsthisweek = profilethisweek.map((item, index) => (
-          <Tr key={uid()}>
-              <Td>{index + 1}</Td>
-              <Td>{moment.utc(item.date_meeting).format('DD-MM-YYYY HH:mm')}</Td>
-              <Td>{item.candidate_fullname}</Td>
-              <Td>{item.recruiter}</Td>
-              <Td>{item.position_apply}</Td>
-              <Td className="text-status">{item.round1_status}</Td>
-              <Td className="text-center">
-                  <button
-                      type="button"
-                      className="btn btn-default"
-                      onClick={() => this.viewDetailId(item.candidate_id)}
-                  >
-                      <i className="fa fa-pencil" /> Edit
-                  </button>
-              </Td>
-          </Tr>
+          this.renderItem(item, index)
       ));
 
       const rowsthismonth = profilethismonth.map((item, index) => (
-          <Tr key={uid()}>
-              <Td>{index + 1}</Td>
-              <Td>{moment.utc(item.date_meeting).format('DD-MM-YYYY HH:mm')}</Td>
-              <Td>{item.candidate_fullname}</Td>
-              <Td>{item.recruiter}</Td>
-              <Td>{item.position_apply}</Td>
-              <Td className="text-status">{item.round1_status}</Td>
-              <Td className="text-center">
-                  <button
-                      type="button"
-                      className="btn btn-default"
-                      onClick={() => this.viewDetailId(item.candidate_id)}
-                  >
-                      <i className="fa fa-pencil" /> Edit
-                  </button>
-              </Td>
-          </Tr>
+          this.renderItem(item, index)
       ));
 
       const rowsthisother = profilethisother.map((item, index) => (
-          <Tr key={uid()}>
-              <Td>{index + 1}</Td>
-              <Td>{moment.utc(item.date_meeting).format('DD-MM-YYYY HH:mm')}</Td>
-              <Td>{item.candidate_fullname}</Td>
-              <Td>{item.recruiter}</Td>
-              <Td>{item.position_apply}</Td>
-              <Td className="text-status">{item.round1_status}</Td>
-              <Td className="text-center">
-                  <button
-                      type="button"
-                      className="btn btn-default"
-                      onClick={() => this.viewDetailId(item.candidate_id)}
-                  >
-                      <i className="fa fa-pencil" /> Edit
-                  </button>
-              </Td>
-          </Tr>
+          this.renderItem(item, index)
       ));
 
       return (
@@ -217,17 +206,7 @@ export class Profile extends Component {
                                           md={12}
                                           lg={12}
                                       >
-                                          <Thead>
-                                              <Tr>
-                                                  <Th>#</Th>
-                                                  <Th>Time</Th>
-                                                  <Th>Name</Th>
-                                                  <Th>Recruiter</Th>
-                                                  <Th>Skill</Th>
-                                                  <Th className="text-status">Status</Th>
-                                                  <Th>Action</Th>
-                                              </Tr>
-                                          </Thead>
+                                          {renderTHead}
                                           <Tbody>
                                               {profileToday.length < 1 ? rowsDefault : rows}
                                           </Tbody>
@@ -251,17 +230,7 @@ export class Profile extends Component {
                                           md={12}
                                           lg={12}
                                       >
-                                          <Thead>
-                                              <Tr>
-                                                  <Th>#</Th>
-                                                  <Th>Time</Th>
-                                                  <Th>Name</Th>
-                                                  <Th>Recruiter</Th>
-                                                  <Th>Skill</Th>
-                                                  <Th>Status</Th>
-                                                  <Th>Action</Th>
-                                              </Tr>
-                                          </Thead>
+                                          {renderTHead}
                                           <Tbody>
                                               {profilethisweek.length < 1
                                                   ? rowsDefault
@@ -288,17 +257,7 @@ export class Profile extends Component {
                                           md={12}
                                           lg={12}
                                       >
-                                          <Thead>
-                                              <Tr>
-                                                  <Th>#</Th>
-                                                  <Th>Time</Th>
-                                                  <Th>Name</Th>
-                                                  <Th>Recruiter</Th>
-                                                  <Th>Skill</Th>
-                                                  <Th>Status</Th>
-                                                  <Th>Action</Th>
-                                              </Tr>
-                                          </Thead>
+                                          {renderTHead}
                                           <Tbody>
                                               {profilethismonth.length < 1
                                                   ? rowsDefault
@@ -325,17 +284,7 @@ export class Profile extends Component {
                                           md={12}
                                           lg={12}
                                       >
-                                          <Thead>
-                                              <Tr>
-                                                  <Th>#</Th>
-                                                  <Th>Time</Th>
-                                                  <Th>Name</Th>
-                                                  <Th>Recruiter</Th>
-                                                  <Th>Skill</Th>
-                                                  <Th>Status</Th>
-                                                  <Th>Action</Th>
-                                              </Tr>
-                                          </Thead>
+                                          {renderTHead}
                                           <Tbody>
                                               {profilethisother.length < 1
                                                   ? rowsDefault
@@ -359,7 +308,7 @@ export class Profile extends Component {
                   show={this.state.isOpen}
                   handleClose={() => this.turnOff()}
                   handleOK={() => this.turnOff()}
-                  paragraph="Server is died."
+                  paragraph="Oops. Something went wrong. Please try again or contact your administrator."
               />;
           </section>
       );
@@ -377,6 +326,7 @@ const mapStateToProps = state => ({
     isLoadingMonth: state.profile.isLoadingMonth,
     isLoadingOther: state.profile.isLoadingOther,
     loadDataFailed: state.profile.loadDataFailed,
+    users: state.profileDetails.users,
 });
 
 const mapDispatchToProps = {
@@ -385,6 +335,7 @@ const mapDispatchToProps = {
     loadProfileThisMonth,
     loadProfileThisOther,
     viewDetailDataId,
+    getUsers,
     push,
 };
 
