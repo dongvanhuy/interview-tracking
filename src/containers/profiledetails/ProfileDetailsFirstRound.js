@@ -3,6 +3,10 @@ import { FormGroup, FormControl, ControlLabel, Row, Col } from 'react-bootstrap'
 import Datetime from 'react-datetime';
 import FontAwesomeIcon from 'react-fontawesome';
 import moment from 'moment';
+import AutoSuggestUser from '../common/AutoSuggestUser';
+// import Autosuggest from 'react-autosuggest';
+// import AutosuggestHighlightMatch from 'autosuggest-highlight/match';
+// import AutosuggestHighlightParse from 'autosuggest-highlight/parse';
 
 export class ProfileDetailsFirstRound extends Component {
     constructor(props) {
@@ -15,11 +19,45 @@ export class ProfileDetailsFirstRound extends Component {
         showTimeRoundOne: false,
         showStartMeeting: false,
         showEndMeeting: false,
+        recruiterInputProps: {
+            placeholder: 'Loading recruiter...',
+            value: this.props.recruiter,
+            onChange: this.recruiterChange,
+            className: 'form-control',
+        },
     }
 
     componentDidMount() {
         this.focus();
     }
+
+    // onRecruiterChange = (event, { newValue }) => {
+    //     const { users } = this.props;
+    //     if (!newValue || newValue.trim() === '' || users.filter(user => user.fullname.toString() !== newValue)) {
+    //         // this.setState({
+    //         //     branchCode: '',
+    //         // });
+    //         this.props.recruiter = '';
+    //     }
+    //     this.setState({
+    //         recruiterInputProps: { ...this.state.recruiterInputProps, value: newValue },
+    //     });
+    // };
+
+    // recruiterChange = (e, { suggestion: selectedUser }) => {
+    //     console.log('>>>> selectedUser change', selectedUser);
+    //     // this.setState({
+    //     //     branchCode: selectedBranch.branchNumber,
+    //     // });
+    //     this.props.recruiter = selectedUser.email;
+    // };
+
+    recruiterChange = (event, { newValue }) => {
+        // this.setState({
+        //   value: newValue
+        // });
+        this.props.recruiter = newValue;
+    };
 
     showTimeOne = () => {
         const show = this.state.showTimeRoundOne;
@@ -156,6 +194,15 @@ export class ProfileDetailsFirstRound extends Component {
                                 <option value="Vy Phan">Vy Phan</option>
                                 <option value="Nhu Huynh">Nhu Huynh</option> */}
                             </FormControl>
+                            {/* <AutoSuggestUser
+                                users={users || []}
+                                value={this.props.recruiter}
+                                // onUserSelected={this.recruiterChange}
+                                // inputProps={{
+                                //     ...this.state.recruiterInputProps,
+                                //     // disabled: disable,
+                                // }}
+                            /> */}
                         </FormGroup>
                     </Col>
                 </Row>
