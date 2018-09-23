@@ -13,6 +13,7 @@ import loading from '../../assets/images/loading.svg';
 import {
     loadProfile,
     viewDetailDataId,
+    deleteProfileId,
     loadProfileThisWeek,
     loadProfileThisMonth,
     loadProfileThisOther,
@@ -20,6 +21,7 @@ import {
 
 import { getUsers } from '../profileDetails/ProfileDetailsAction';
 import WarningModal from '../common/warningModal/WarningModal';
+import ConfirmationModal from '../common/confirmationModal/ConfirmationModal';
 
 export class Profile extends Component {
   static propsTypes = {
@@ -40,6 +42,7 @@ export class Profile extends Component {
       super(props);
       this.state = {
           isOpen: false,
+          showConfirmation: false,
       };
   }
 
@@ -74,6 +77,23 @@ export class Profile extends Component {
           },
       });
   };
+
+  deleteDetailId = id => {
+      //   this.props.deleteProfileId(id);
+      this.setState({
+          showConfirmation: true,
+          candidateId: id,
+      });
+      console.log('>>>>>>>>> id', id);
+  }
+
+  handleOK = () => {
+      this.setState({
+          showConfirmation: false,
+      });
+      this.props.deleteProfileId(this.state.candidateId);
+  };
+
 
   callLoading = () => (
       <div className="loading-block">
@@ -131,7 +151,14 @@ export class Profile extends Component {
                   className="btn btn-default"
                   onClick={() => this.viewDetailId(item.candidate_id)}
               >
-                  <i className="fa fa-pencil" /> Edit
+                  <i className="fa fa-pencil" />
+              </button>
+              <button
+                  type="button"
+                  className="btn btn-default"
+                  onClick={() => this.deleteDetailId(item.candidate_id)}
+              >
+                  <i className="fa fa-trash-o" />
               </button>
           </Td>
       </Tr>
@@ -309,7 +336,14 @@ export class Profile extends Component {
                   handleClose={() => this.turnOff()}
                   handleOK={() => this.turnOff()}
                   paragraph="Oops. Something went wrong. Please try again or contact your administrator."
-              />;
+              />
+              <ConfirmationModal
+                  show={this.state.showConfirmation}
+                  handleClose={() => this.setState({ showConfirmation: false })}
+                  handleOK={() => this.handleOK()}
+                  messages="Are you sure you want to delete profile?"
+                  ps="This action can't undo. Please determine clearly before clicking OK."
+              />
           </section>
       );
   }
@@ -335,6 +369,7 @@ const mapDispatchToProps = {
     loadProfileThisMonth,
     loadProfileThisOther,
     viewDetailDataId,
+    deleteProfileId,
     getUsers,
     push,
 };
