@@ -54,7 +54,7 @@ export const loadProfileThisOtherEpic = (
             .map(res => loadProfileThisOtherSuccess(res))
             .catch(err => loadProfileThisOtherFail(err)));
 
-export const deleteProfileId = (
+export const deleteProfileIdEpic = (
     action$,
     store,
     { deleteProfileIdService },
@@ -72,4 +72,5 @@ export default combineEpics(
     loadProfileThisWeekEpic,
     loadProfileThisMonthEpic,
     loadProfileThisOtherEpic,
+    deleteProfileIdEpic,
 );
