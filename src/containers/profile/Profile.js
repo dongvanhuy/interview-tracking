@@ -12,6 +12,7 @@ import loading from '../../assets/images/loading.svg';
 import {
     loadProfile,
     viewDetailDataId,
+    deleteProfileId,
     loadProfileThisWeek,
     loadProfileThisMonth,
     loadProfileThisOther,
@@ -50,7 +51,7 @@ export class Profile extends Component {
   componentWillReceiveProps(nextProps) {
       if (this.props.loadDataFailed !== nextProps.loadDataFailed) {
           this.setState({
-              isOpen: true,
+            //   isOpen: true,
           });
       }
   }
@@ -64,6 +65,11 @@ export class Profile extends Component {
           },
       });
   };
+
+  deleteDetailId = id => {
+      this.props.deleteProfileId(id);
+      console.log('>>>>>>>>> id', id);
+  }
 
   callLoading = () => (
       <div className="loading-block">
@@ -136,7 +142,7 @@ export class Profile extends Component {
                   <button
                       type="button"
                       className="btn btn-default"
-                      onClick={() => this.viewDetailId(item.candidate_id)}
+                      onClick={() => this.deleteDetailId(item.candidate_id)}
                   >
                       <i className="fa fa-trash-o" />
                   </button>
@@ -163,7 +169,7 @@ export class Profile extends Component {
                   <button
                       type="button"
                       className="btn btn-default"
-                      onClick={() => this.viewDetailId(item.candidate_id)}
+                      onClick={() => this.deleteDetailId(item.candidate_id)}
                   >
                       <i className="fa fa-trash-o" />
                   </button>
@@ -190,7 +196,7 @@ export class Profile extends Component {
                   <button
                       type="button"
                       className="btn btn-default"
-                      onClick={() => this.viewDetailId(item.candidate_id)}
+                      onClick={() => this.deleteDetailId(item.candidate_id)}
                   >
                       <i className="fa fa-trash-o" />
                   </button>
@@ -217,7 +223,7 @@ export class Profile extends Component {
                   <button
                       type="button"
                       className="btn btn-default"
-                      onClick={() => this.viewDetailId(item.candidate_id)}
+                      onClick={() => this.deleteDetailId(item.candidate_id)}
                   >
                       <i className="fa fa-trash-o" />
                   </button>
@@ -413,6 +419,7 @@ const mapDispatchToProps = {
     loadProfileThisMonth,
     loadProfileThisOther,
     viewDetailDataId,
+    deleteProfileId,
     push,
 };
 

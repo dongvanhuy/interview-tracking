@@ -81,6 +81,16 @@ export default class ApiService {
       })
     );
 
+  static deleteProfileId = data =>
+    Observable.fromPromise(
+      axios.delete(`${API_HOST}/api/interviewees/delete`, data, {
+        data: {},
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+    );
+
   static getUsers = () =>
     Observable.fromPromise(
       axios.get(`${API_HOST}/api/users`, {

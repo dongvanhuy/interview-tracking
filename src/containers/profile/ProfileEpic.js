@@ -4,6 +4,7 @@ import {
     PROFILE_THISWEEK_LOAD,
     PROFILE_THISMONTH_LOAD,
     PROFILE_THISOTHER_LOAD,
+    PROFILE_ID_DELETE,
 } from '../../store/actionTypes';
 import {
     loadProfileSuccess,
@@ -14,13 +15,13 @@ import {
     loadProfileThisMonthFail,
     loadProfileThisOtherSuccess,
     loadProfileThisOtherFail,
+    deleteProfileIdSuccess,
 } from './ProfileAction';
 
 export const loadProfileEpic = (action$, store, { loadDataCandidateService }) =>
     action$.ofType(PROFILE_LOAD).switchMap(() =>
         loadDataCandidateService()
             .map(res => loadProfileSuccess(res))
-            // .map(res => loadProfileFail(res))
             .catch(err => loadProfileFail(err)));
 
 export const loadProfileThisWeekEpic = (
@@ -52,6 +53,19 @@ export const loadProfileThisOtherEpic = (
         loadDataProfileThisOtherService()
             .map(res => loadProfileThisOtherSuccess(res))
             .catch(err => loadProfileThisOtherFail(err)));
+
+export const deleteProfileId = (
+    action$,
+    store,
+    { deleteProfileIdService },
+) =>
+    action$.ofType(PROFILE_ID_DELETE).switchMap(action => {
+        console.log('>>>>>>>>> da vo');
+        const param = action.payload;
+        return deleteProfileIdService(param)
+            .map(res => deleteProfileIdSuccess(res))
+            .catch(err => console.log('>>>>>>>>> err', err));
+    });
 
 export default combineEpics(
     loadProfileEpic,
