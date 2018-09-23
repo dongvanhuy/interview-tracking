@@ -13,6 +13,8 @@ import {
     PROFILE_THISOTHER_LOAD,
     PROFILE_THISOTHER_LOAD_SUCCESS,
     PROFILE_THISOTHER_LOAD_FAIL,
+    PROFILE_ID_DELETE,
+    PROFILE_ID_DELETE_SUCCESS,
 } from '../../store/actionTypes';
 
 export const loadProfile = createAction(PROFILE_LOAD);
@@ -28,6 +30,9 @@ export const loadProfileThisMonthSuccess = createAction(PROFILE_THISMONTH_LOAD_S
 export const loadProfileThisMonthFail = createAction(PROFILE_THISMONTH_LOAD_FAIL);
 
 export const viewDetailDataId = createAction(VIEW_DETAIL_DATA_ID);
+
+export const deleteProfileId = createAction(PROFILE_ID_DELETE);
+export const deleteProfileIdSuccess = createAction(PROFILE_ID_DELETE_SUCCESS);
 
 export const loadProfileThisOther = createAction(PROFILE_THISOTHER_LOAD);
 export const loadProfileThisOtherSuccess = createAction(PROFILE_THISOTHER_LOAD_SUCCESS);
