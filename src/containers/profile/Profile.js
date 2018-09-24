@@ -43,6 +43,7 @@ export class Profile extends Component {
       this.state = {
           isOpen: false,
           showConfirmation: false,
+          loading: false,
       };
   }
 
@@ -96,6 +97,7 @@ export class Profile extends Component {
           showConfirmation: false,
       });
       this.props.deleteProfileId(this.state.candidateId);
+      this.setState({ loading: true });
   };
 
 
@@ -126,7 +128,15 @@ export class Profile extends Component {
       </div>
   );
 
-  turnOff=() => this.setState({ isOpen: false });
+  loadingPage = () => (
+      <div className="loading-block-prof">
+          <div className="loading-block-prof__spinner">
+              <img src={loading} alt="loading" />
+          </div>
+      </div>
+  );
+
+  turnOff = () => this.setState({ isOpen: false });
 
   addProfileDetail = () => {
       this.props.push('/profile-info');
@@ -218,137 +228,140 @@ export class Profile extends Component {
       ));
 
       return (
-          <section className="list-candidate-page">
-              <div className="list">
-                  <Grid>
-                      <Row className="show-grid">
-                          <div className="list-table">
-                              <Col xs={6} sm={6} md={6} lg={6}>
-                                  <h2 className="list-table__title">Today</h2>
-                              </Col>
-                              <Col xs={12} sm={12} md={12} lg={12}>
-                                  {isLoadingToday ? (
-                                      this.callLoading()
-                                  ) : (
-                                      <Table
-                                          className="list-cadidate-table"
-                                          xs={12}
-                                          sm={12}
-                                          md={12}
-                                          lg={12}
-                                      >
-                                          {renderTHead}
-                                          <Tbody>
-                                              {profileToday.length < 1 ? rowsDefault : rows}
-                                          </Tbody>
-                                      </Table>
-                                  )}
-                              </Col>
-                          </div>
+          <React.Fragment>
+              {this.state.loading && this.loadingPage()}
+              <section className="list-candidate-page">
+                  <div className="list">
+                      <Grid>
+                          <Row className="show-grid">
+                              <div className="list-table">
+                                  <Col xs={6} sm={6} md={6} lg={6}>
+                                      <h2 className="list-table__title">Today</h2>
+                                  </Col>
+                                  <Col xs={12} sm={12} md={12} lg={12}>
+                                      {isLoadingToday ? (
+                                          this.callLoading()
+                                      ) : (
+                                          <Table
+                                              className="list-cadidate-table"
+                                              xs={12}
+                                              sm={12}
+                                              md={12}
+                                              lg={12}
+                                          >
+                                              {renderTHead}
+                                              <Tbody>
+                                                  {profileToday.length < 1 ? rowsDefault : rows}
+                                              </Tbody>
+                                          </Table>
+                                      )}
+                                  </Col>
+                              </div>
 
-                          <div className="list-table">
-                              <Col xs={12} sm={12} md={12} lg={12}>
-                                  <h2 className="list-table__title">This week</h2>
-                              </Col>
-                              <Col xs={12} sm={12} md={12} lg={12}>
-                                  {isLoadingWeek ? (
-                                      this.callLoading()
-                                  ) : (
-                                      <Table
-                                          className="list-cadidate-table"
-                                          xs={12}
-                                          sm={12}
-                                          md={12}
-                                          lg={12}
-                                      >
-                                          {renderTHead}
-                                          <Tbody>
-                                              {profilethisweek.length < 1
-                                                  ? rowsDefault
-                                                  : rowsthisweek}
-                                          </Tbody>
-                                      </Table>
-                                  )}
-                              </Col>
-                          </div>
+                              <div className="list-table">
+                                  <Col xs={12} sm={12} md={12} lg={12}>
+                                      <h2 className="list-table__title">This week</h2>
+                                  </Col>
+                                  <Col xs={12} sm={12} md={12} lg={12}>
+                                      {isLoadingWeek ? (
+                                          this.callLoading()
+                                      ) : (
+                                          <Table
+                                              className="list-cadidate-table"
+                                              xs={12}
+                                              sm={12}
+                                              md={12}
+                                              lg={12}
+                                          >
+                                              {renderTHead}
+                                              <Tbody>
+                                                  {profilethisweek.length < 1
+                                                      ? rowsDefault
+                                                      : rowsthisweek}
+                                              </Tbody>
+                                          </Table>
+                                      )}
+                                  </Col>
+                              </div>
 
-                          <div className="list-table">
-                              <Col xs={12} sm={12} md={12} lg={12}>
-                                  <h2 className="list-table__title">This month</h2>
-                              </Col>
+                              <div className="list-table">
+                                  <Col xs={12} sm={12} md={12} lg={12}>
+                                      <h2 className="list-table__title">This month</h2>
+                                  </Col>
 
-                              <Col xs={12} sm={12} md={12} lg={12}>
-                                  {isLoadingMonth ? (
-                                      this.callLoading()
-                                  ) : (
-                                      <Table
-                                          className="list-cadidate-table"
-                                          xs={12}
-                                          sm={12}
-                                          md={12}
-                                          lg={12}
-                                      >
-                                          {renderTHead}
-                                          <Tbody>
-                                              {profilethismonth.length < 1
-                                                  ? rowsDefault
-                                                  : rowsthismonth}
-                                          </Tbody>
-                                      </Table>
-                                  )}
-                              </Col>
-                          </div>
+                                  <Col xs={12} sm={12} md={12} lg={12}>
+                                      {isLoadingMonth ? (
+                                          this.callLoading()
+                                      ) : (
+                                          <Table
+                                              className="list-cadidate-table"
+                                              xs={12}
+                                              sm={12}
+                                              md={12}
+                                              lg={12}
+                                          >
+                                              {renderTHead}
+                                              <Tbody>
+                                                  {profilethismonth.length < 1
+                                                      ? rowsDefault
+                                                      : rowsthismonth}
+                                              </Tbody>
+                                          </Table>
+                                      )}
+                                  </Col>
+                              </div>
 
-                          <div className="list-table">
-                              <Col xs={12} sm={12} md={12} lg={12}>
-                                  <h2 className="list-table__title">This other</h2>
-                              </Col>
+                              <div className="list-table">
+                                  <Col xs={12} sm={12} md={12} lg={12}>
+                                      <h2 className="list-table__title">This other</h2>
+                                  </Col>
 
-                              <Col xs={12} sm={12} md={12} lg={12}>
-                                  {isLoadingOther ? (
-                                      this.callLoading()
-                                  ) : (
-                                      <Table
-                                          className="list-cadidate-table"
-                                          xs={12}
-                                          sm={12}
-                                          md={12}
-                                          lg={12}
-                                      >
-                                          {renderTHead}
-                                          <Tbody>
-                                              {profilethisother.length < 1
-                                                  ? rowsDefault
-                                                  : rowsthisother}
-                                          </Tbody>
-                                      </Table>
-                                  )}
-                              </Col>
-                          </div>
-                      </Row>
-                  </Grid>
-              </div>
-              <Button
-                  title="Add candidate"
-                  className="add-cadidate-btn"
-                  onClick={() => this.addProfileDetail()}
-              >
-                  <FontAwesomeIcon name="plus" size="2x" />
-              </Button>
-              <WarningModal
-                  show={this.state.isOpen}
-                  handleClose={() => this.turnOff()}
-                  handleOK={() => this.turnOff()}
-                  paragraph="Oops. Something went wrong. Please try again or contact your administrator."
-              />
-              <ConfirmationModal
-                  show={this.state.showConfirmation}
-                  handleClose={() => this.setState({ showConfirmation: false })}
-                  handleOK={() => this.handleOK()}
-                  messages="Are you sure you want to delete profile?"
-                  ps="This action can't undo. Please determine clearly before clicking OK."
-              />
-          </section>
+                                  <Col xs={12} sm={12} md={12} lg={12}>
+                                      {isLoadingOther ? (
+                                          this.callLoading()
+                                      ) : (
+                                          <Table
+                                              className="list-cadidate-table"
+                                              xs={12}
+                                              sm={12}
+                                              md={12}
+                                              lg={12}
+                                          >
+                                              {renderTHead}
+                                              <Tbody>
+                                                  {profilethisother.length < 1
+                                                      ? rowsDefault
+                                                      : rowsthisother}
+                                              </Tbody>
+                                          </Table>
+                                      )}
+                                  </Col>
+                              </div>
+                          </Row>
+                      </Grid>
+                  </div>
+                  <Button
+                      title="Add candidate"
+                      className="add-cadidate-btn"
+                      onClick={() => this.addProfileDetail()}
+                  >
+                      <FontAwesomeIcon name="plus" size="2x" />
+                  </Button>
+                  <WarningModal
+                      show={this.state.isOpen}
+                      handleClose={() => this.turnOff()}
+                      handleOK={() => this.turnOff()}
+                      paragraph="Oops. Something went wrong. Please try again or contact your administrator."
+                  />
+                  <ConfirmationModal
+                      show={this.state.showConfirmation}
+                      handleClose={() => this.setState({ showConfirmation: false })}
+                      handleOK={() => this.handleOK()}
+                      messages="Are you sure you want to delete profile?"
+                      ps="This action can't undo. Please determine clearly before clicking OK."
+                  />
+              </section>
+          </React.Fragment>
       );
   }
 }
