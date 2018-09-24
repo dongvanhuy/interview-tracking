@@ -60,6 +60,10 @@ export class Profile extends Component {
               isOpen: true,
           });
       }
+
+      if (this.props.isDeleted !== nextProps.isDeleted) {
+          window.location.reload();
+      }
   }
 
   getFullname = (email) => {
@@ -360,6 +364,7 @@ const mapStateToProps = state => ({
     isLoadingMonth: state.profile.isLoadingMonth,
     isLoadingOther: state.profile.isLoadingOther,
     loadDataFailed: state.profile.loadDataFailed,
+    isDeleted: state.profile.isDeleted,
     users: state.profileDetails.users,
 });
 

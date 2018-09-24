@@ -25,6 +25,7 @@ const initialState = {
     isLoadingMonth: false,
     isLoadingOther: false,
     loadDataFailed: false,
+    isDeleted: false,
 };
 
 const actions = {
@@ -92,6 +93,7 @@ const actions = {
     [PROFILE_ID_DELETE_SUCCESS]: (state, { payload }) => ({
         ...state,
         dataRes: payload,
+        isDeleted: true,
     }),
 };
 
