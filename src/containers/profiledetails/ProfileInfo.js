@@ -61,7 +61,7 @@ export class ProfileInfo extends Component {
                 } else {
                     this.resetForm();
                     toast('You have successfully add new profile', {
-                        autoClose: 10000,
+                        autoClose: 105000,
                         position: 'top-center',
                         hideProgressBar: true,
                         className: 'customToaster',

@@ -232,10 +232,11 @@ main {
     padding: 0px;
     width: 100%;
     &--top-center {
-      top: 22%;
+      top: 0%;
       left: 0;
       margin-left: 0;
       animation: example 4s linear forwards;
+      // animation-iteration-count: infinite;
     }
   }
   .Toastify &__toast--default {
@@ -245,7 +246,7 @@ main {
 }
 
 @keyframes example {
-  // 0%   {top:0px; opacity: 0;}
+  0%   {top:0px; opacity: 0;}
   50%  {top:100px; opacity: 1;}
   100% {top:0px; opacity: 0;}
 }
