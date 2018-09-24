@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { updateLoginInfo } from './LoginActions';
-import { authContext, getAccessToken } from '../../adalConfig';
+import { authContext } from '../../adalConfig';
 import logo from '../../../src/assets/images/dxcBlack.png';
 
 export class Login extends Component {
@@ -24,8 +24,6 @@ export class Login extends Component {
 
     loadUser = () => {
         const user = authContext.getCachedUser();
-        const token = getAccessToken;
-        console.log('token', token);
         if (authContext.isCallback(window.location.hash)) {
         // Handle redirect after token requests
             authContext.handleWindowCallback();
@@ -35,7 +33,6 @@ export class Login extends Component {
                 // console.log('error', `${err}`);
             }
         } else if (user) {
-            sessionStorage.setItem('token', token);
             sessionStorage.setItem('surname', user.profile.family_name);
             sessionStorage.setItem('givenName', user.profile.given_name);
             this.setState(

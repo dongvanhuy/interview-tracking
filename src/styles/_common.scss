@@ -15,12 +15,18 @@
   src: url("../assets/fonts/glyphicons-halflings-regular.woff2");
 }
 
-@mixin button-yellow() {
+@mixin button-yellow {
   background-color: $color-yellow;
 }
 
+@media all and (display-mode: standalone) {
+  body {
+    background-color: $color-yellow;
+  }
+}
+
 body {
-  font-family: "GTWalsheimProRegular", Arial, sans-serif;
+  font-family: 'GTWalsheimProRegular', Arial, sans-serif;
   font-size: 20px;
   background: $color-white;
   height: 100vh;
