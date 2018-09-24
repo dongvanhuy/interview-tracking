@@ -235,10 +235,6 @@ export class ProfileInfo extends Component {
       } else {
           this.props.createProfileDetails(this.state);
       }
-
-      //   this.setState({
-      //       loading: true,
-      //   });
   };
 
   callLoading = () => (
