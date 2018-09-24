@@ -65,12 +65,14 @@ export class ProfileDetailsFirstRound extends Component {
                         <FormGroup>
                             <ControlLabel>Position Interview</ControlLabel>
                             <FormControl
+                                className={this.props.errorMessages.errPosition ? 'borderPosition' : ''}
                                 type="text"
                                 placeholder=""
                                 name="position_apply"
                                 value={this.props.position_apply}
                                 onChange={(e) => this.props.handleChange(e)}
                             />
+                            {errorMessages.errPosition && <span className="error_msg">{errorMessages.errPosition}</span>}
                         </FormGroup>
                         <FormGroup className="date-time__one">
                             <ControlLabel>Start Meeting(<span className="span">*</span>)</ControlLabel>

@@ -235,12 +235,19 @@ main {
       top: 22%;
       left: 0;
       margin-left: 0;
+      animation: example 4s linear forwards;
     }
   }
   .Toastify &__toast--default {
     background: #009999;
     color: $color-white;
   }
+}
+
+@keyframes example {
+  // 0%   {top:0px; opacity: 0;}
+  50%  {top:100px; opacity: 1;}
+  100% {top:0px; opacity: 0;}
 }
 
 .loading-block-prof {

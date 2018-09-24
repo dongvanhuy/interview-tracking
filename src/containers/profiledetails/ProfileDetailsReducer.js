@@ -3,6 +3,7 @@ import {
     PROFILE_DETAILS_LOAD,
     PROFILE_DETAILS_LOAD_SUCCESS,
     PROFILE_DETAILS_LOAD_FAIL,
+    PROFILE_DETAILS_UPDATE,
     PROFILE_DETAILS_UPDATE_SUCCESS,
     PROFILE_DETAILS_UPDATE_FAIL,
     PROFILE_DETAILS_CREATE,
@@ -43,6 +44,11 @@ const actions = {
         dataProfileDetails: [],
     }),
 
+    [PROFILE_DETAILS_UPDATE]: (state) => ({
+        ...state,
+        doSuccessfully: null,
+    }),
+
     [PROFILE_DETAILS_UPDATE_SUCCESS]: (state, { payload }) => ({
         ...state,
         dataProfileUpdate: payload,
@@ -54,13 +60,10 @@ const actions = {
         statusCode: payload,
         doSuccessfully: false,
     }),
-    [PROFILE_DETAILS_CREATE]: (state) => ({
-        ...state,
-        doSuccessfully: null,
-    }),
 
     [PROFILE_DETAILS_CREATE]: (state, { payload }) => ({
         ...state,
+        doSuccessfully: null,
         dataProfilePost: payload,
     }),
     [PROFILE_DETAILS_CREATE_SUCCESS]: (state, { payload }) => ({
