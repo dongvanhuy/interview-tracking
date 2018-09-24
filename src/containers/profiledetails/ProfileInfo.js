@@ -56,6 +56,7 @@ export class ProfileInfo extends Component {
                         autoClose: 2000,
                         position: 'top-center',
                         hideProgressBar: true,
+                        className: 'customToaster',
                     });
                 } else {
                     this.resetForm();
@@ -71,6 +72,7 @@ export class ProfileInfo extends Component {
                     autoClose: 2000,
                     position: 'top-center',
                     hideProgressBar: true,
+                    className: 'customToaster',
                 });
             }
         }
