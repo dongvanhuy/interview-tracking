@@ -112,7 +112,7 @@ export class Profile extends Component {
           >
               <Thead>
                   <Tr>
-                      <Th>#</Th>
+                      <Th>STT</Th>
                       <Th>Time</Th>
                       <Th>Candidate</Th>
                       <Th>Interviewer</Th>
@@ -152,24 +152,25 @@ export class Profile extends Component {
   }
 
   renderItem = (item, index) => (
-      <Tr key={uid()}>
+      <Tr key={uid()} className="tableComponent">
           <Td>{index + 1}</Td>
           <Td>{moment.utc(item.start_time).format('DD-MM-YYYY HH:mm')}</Td>
           <Td>{item.candidate_fullname}</Td>
           <Td>{this.getFullname(item.interviewer_round1_01)}</Td>
           <Td>{item.position_apply}</Td>
           <Td className="text-status">{this.renderStatus(item.round1_status)}</Td>
+          <Td className="text-status">{this.renderStatus(item.round2_status)}</Td>
           <Td className="text-center">
               <button
                   type="button"
-                  className="btn btn-default"
+                  className="btn btn-default button-common button-common__left"
                   onClick={() => this.viewDetailId(item.candidate_id)}
               >
                   <i className="fa fa-pencil" />
               </button>
               <button
                   type="button"
-                  className="btn btn-default"
+                  className="btn btn-default button-common button-common__right"
                   onClick={() => this.deleteDetailId(item.candidate_id)}
               >
                   <i className="fa fa-trash-o" />
@@ -200,12 +201,13 @@ export class Profile extends Component {
       const renderTHead = (
           <Thead>
               <Tr>
-                  <Th style={{ width: 50 }}>#</Th>
+                  <Th style={{ width: 50 }}>STT</Th>
                   <Th className="time-td">Time</Th>
                   <Th>Candidate</Th>
                   <Th>Interviewer</Th>
-                  <Th>Skill</Th>
-                  <Th className="text-status status-td">Status</Th>
+                  <Th>Position</Th>
+                  <Th className="text-status status-td">Status R1</Th>
+                  <Th className="text-status status-td">Status R2</Th>
                   <Th className="action-td">Action</Th>
               </Tr>
           </Thead>

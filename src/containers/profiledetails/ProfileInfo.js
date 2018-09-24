@@ -60,12 +60,13 @@ export class ProfileInfo extends Component {
                 } else {
                     this.resetForm();
                     toast('You have successfully add new profile', {
-                        autoClose: 2000,
+                        autoClose: 10000,
                         position: 'top-center',
                         hideProgressBar: true,
+                        className: 'customToaster',
                     });
                 }
-            } else {
+            } else if (nextProps.doSuccessfully === false) {
                 toast('SERVER IS DIED', {
                     autoClose: 2000,
                     position: 'top-center',
@@ -125,6 +126,7 @@ export class ProfileInfo extends Component {
           errEndTimeMeeting: '',
           errInterviewer: '',
           errTime: '',
+          errPosition: '',
       },
 
   };
@@ -177,6 +179,7 @@ export class ProfileInfo extends Component {
 
   checkValidateForm = () => {
       const fullName = this.state.candidate_fullname;
+      const position = this.state.position_apply;
       const startTime = this.state.start_time;
       const endTime = this.state.end_time;
       const interviewer1 = this.state.interviewer_round1_01;
@@ -185,6 +188,7 @@ export class ProfileInfo extends Component {
       const result = moment(this.state.start_time).isBefore(this.state.end_time, 'minute');
 
       fullName === '' ? errorMessages.errFullname = 'Write in this field, pls.' : errorMessages.errFullname = '';
+      position === '' ? errorMessages.errPosition = 'Write in this field, pls.' : errorMessages.errPosition = '';
       startTime === '' ? errorMessages.errStartTimeMeeting = 'Choose a start time, pls.' : errorMessages.errStartTimeMeeting = '';
       endTime === '' ? errorMessages.errEndTimeMeeting = 'Choose a end time, pls.' : errorMessages.errEndTimeMeeting = '';
       interviewer1 === '' && interviewer2 === '' ? errorMessages.errInterviewer = 'Choose an interviewer(s), pls.' : errorMessages.errInterviewer = '';
@@ -201,6 +205,7 @@ export class ProfileInfo extends Component {
       const result = moment(this.state.start_time).isBefore(this.state.end_time, 'minute');
       if (isChecking) {
           stateInit.candidate_fullname !== '' ? stateInit.errorMessages.errFullname = '' : stateInit.errorMessages.errFullname = 'Write in this field, pls.';
+          stateInit.position_apply !== '' ? stateInit.errorMessages.errPosition = '' : stateInit.errorMessages.errPosition = 'Write in this field, pls.';
           stateInit.start_time !== '' ? stateInit.errorMessages.errStartTimeMeeting = '' : stateInit.errorMessages.errStartTimeMeeting = 'Choose a start time, pls.';
           stateInit.end_time !== '' ? stateInit.errorMessages.errEndTimeMeeting = '' : stateInit.errorMessages.errEndTimeMeeting = 'Choose a end time, pls.';
           stateInit.interviewer_round1_01 !== '' || stateInit.interviewer_round1_02 !== '' ? stateInit.errorMessages.errInterviewer = '' : stateInit.errorMessages.errInterviewer = 'Choose an interviewer(s), pls.';
@@ -214,7 +219,7 @@ export class ProfileInfo extends Component {
       this.checkValidateForm();
       const { errorMessages } = this.state;
 
-      if (errorMessages.errFullname === '' && errorMessages.errStartTimeMeeting === '' && errorMessages.errEndTimeMeeting === '' && errorMessages.errInterviewer === '' && errorMessages.errTime === '') {
+      if (errorMessages.errFullname === '' && errorMessages.errPosition === '' && errorMessages.errStartTimeMeeting === '' && errorMessages.errEndTimeMeeting === '' && errorMessages.errInterviewer === '' && errorMessages.errTime === '') {
           this.setState({
               showConfirmation: true,
           });

@@ -54,13 +54,10 @@ const actions = {
         statusCode: payload,
         doSuccessfully: false,
     }),
-    [PROFILE_DETAILS_CREATE]: (state) => ({
-        ...state,
-        doSuccessfully: null,
-    }),
 
     [PROFILE_DETAILS_CREATE]: (state, { payload }) => ({
         ...state,
+        doSuccessfully: null,
         dataProfilePost: payload,
     }),
     [PROFILE_DETAILS_CREATE_SUCCESS]: (state, { payload }) => ({
