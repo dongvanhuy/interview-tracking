@@ -192,7 +192,7 @@ export class Profile extends Component {
       } = this.props;
       const rowsDefault = (
           <tr key={uid()}>
-              <td colSpan={7} style={{ textAlign: 'center' }}>
+              <td colSpan={8} style={{ textAlign: 'center' }}>
           Today, No Candidate.
               </td>
           </tr>

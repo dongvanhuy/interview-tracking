@@ -3,6 +3,7 @@ import {
     PROFILE_DETAILS_LOAD,
     PROFILE_DETAILS_LOAD_SUCCESS,
     PROFILE_DETAILS_LOAD_FAIL,
+    PROFILE_DETAILS_UPDATE,
     PROFILE_DETAILS_UPDATE_SUCCESS,
     PROFILE_DETAILS_UPDATE_FAIL,
     PROFILE_DETAILS_CREATE,
@@ -41,6 +42,11 @@ const actions = {
         loadingDetail: false,
         statusCode: payload,
         dataProfileDetails: [],
+    }),
+
+    [PROFILE_DETAILS_UPDATE]: (state) => ({
+        ...state,
+        doSuccessfully: null,
     }),
 
     [PROFILE_DETAILS_UPDATE_SUCCESS]: (state, { payload }) => ({

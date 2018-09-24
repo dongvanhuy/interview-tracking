@@ -68,7 +68,7 @@ export class ProfileInfo extends Component {
                     });
                 }
             } else if (nextProps.doSuccessfully === false) {
-                toast('SERVER IS DIED', {
+                toast('Oops. Something went wrong. Please try again or contact your administrator.', {
                     autoClose: 2000,
                     position: 'top-center',
                     hideProgressBar: true,
