@@ -10,6 +10,7 @@ import {
     PROFILE_THISMONTH_LOAD_FAIL,
     PROFILE_THISOTHER_LOAD_SUCCESS,
     PROFILE_THISOTHER_LOAD_FAIL,
+    PROFILE_ID_DELETE_SUCCESS,
 } from '../../store/actionTypes';
 
 const initialState = {
@@ -18,12 +19,13 @@ const initialState = {
     dataProfileThisMonth: [],
     dataProfileThisOther: [],
     profileSelectedId: null,
-    statusCode: [],
+    dataRes: {},
     isLoadingToday: false,
     isLoadingWeek: false,
     isLoadingMonth: false,
     isLoadingOther: false,
     loadDataFailed: false,
+    isDeleted: false,
 };
 
 const actions = {
@@ -44,7 +46,6 @@ const actions = {
     [PROFILE_LOAD_FAIL]: (state, { payload }) => ({
         ...state,
         isLoadingToday: false,
-        statusCode: [...state.statusCode, payload.status],
         loadDataFailed: true,
     }),
 
@@ -57,7 +58,6 @@ const actions = {
     [PROFILE_THISWEEK_LOAD_FAIL]: (state, { payload }) => ({
         ...state,
         isLoadingWeek: false,
-        statusCode: [...state.statusCode, payload.status],
         loadDataFailed: true,
     }),
 
@@ -70,7 +70,6 @@ const actions = {
     [PROFILE_THISMONTH_LOAD_FAIL]: (state, { payload }) => ({
         ...state,
         isLoadingMonth: false,
-        statusCode: [...state.statusCode, payload.status],
         loadDataFailed: true,
     }),
 
@@ -83,13 +82,18 @@ const actions = {
     [PROFILE_THISOTHER_LOAD_FAIL]: (state, { payload }) => ({
         ...state,
         isLoadingOther: false,
-        statusCode: [...state.statusCode, payload.status],
         loadDataFailed: true,
     }),
 
     [VIEW_DETAIL_DATA_ID]: (state, { payload }) => ({
         ...state,
         profileSelectedId: payload,
+    }),
+
+    [PROFILE_ID_DELETE_SUCCESS]: (state, { payload }) => ({
+        ...state,
+        dataRes: payload,
+        isDeleted: true,
     }),
 };
 

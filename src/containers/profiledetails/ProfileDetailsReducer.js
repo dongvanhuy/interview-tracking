@@ -1,5 +1,6 @@
 import { handleActions } from 'redux-actions';
 import {
+    PROFILE_DETAILS_LOAD,
     PROFILE_DETAILS_LOAD_SUCCESS,
     PROFILE_DETAILS_LOAD_FAIL,
     PROFILE_DETAILS_UPDATE_SUCCESS,
@@ -19,18 +20,27 @@ const initialState = {
     dataProfilePost: {},
     dataProfileRes: {},
     doSuccessfully: null,
+    loadingDetail: false,
     users: [],
 };
 
 const actions = {
+    [PROFILE_DETAILS_LOAD]: (state) => ({
+        ...state,
+        loadingDetail: true,
+        dataProfileDetails: [],
+    }),
     [PROFILE_DETAILS_LOAD_SUCCESS]: (state, { payload }) => ({
         ...state,
+        loadingDetail: false,
         dataProfileDetails: payload.data,
     }),
 
     [PROFILE_DETAILS_LOAD_FAIL]: (state, { payload }) => ({
         ...state,
+        loadingDetail: false,
         statusCode: payload,
+        dataProfileDetails: [],
     }),
 
     [PROFILE_DETAILS_UPDATE_SUCCESS]: (state, { payload }) => ({

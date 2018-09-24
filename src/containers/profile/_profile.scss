@@ -86,6 +86,21 @@
       padding-bottom: 0px;
     }
   }
+  .time-td {
+    @include tablet{
+      width: 150px;
+    }
+  }
+  .status-td {
+    @include tablet{
+      width: 110px;
+    }
+  }
+  .action-td {
+    @include tablet{
+      width: 110px;
+    }
+  }
 
   Thead {
     background-color: $color-black;
@@ -101,6 +116,15 @@
       padding: 10px;
       @include tablet{
         padding: 4px;
+        // .time {
+        //   width: 150px;
+        // }
+        // .status {
+        //   width: 150px;
+        // }
+        // .action {
+        //   width: 150px;
+        // }
       }
      }
   }

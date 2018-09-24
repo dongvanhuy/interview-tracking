@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Login from '../login/Login';
 import Profile from '../profile/Profile';
 import ProfileInfo from '../profileDetails/ProfileInfo';
-import ProfileDetails from '../profileDetails/ProfileDetails';
+// import ProfileDetails from '../profileDetails/ProfileDetails';
 import Header from '../header/header';
 
 export class Routes extends Component {
@@ -22,8 +22,9 @@ export class Routes extends Component {
                     <Header />
                     <Switch>
                         <Route exact path="/profile" component={Profile} />
-                        <Route exact path="/profile-details" component={ProfileDetails} />
-                        <Route exact path="/profile-info" component={ProfileInfo} />
+                        {/* <Route exact path="/profile-details" component={ProfileDetails} /> */}
+                        <Route exact path="/profile-info/:profileId" component={ProfileInfo} />
+                        <Route exact path="/profile-info/" component={ProfileInfo} />
                         <Redirect to="/profile" />
                     </Switch>
                 </React.Fragment>

@@ -5,7 +5,10 @@ import { FormGroup, Grid } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import moment from 'moment';
 import 'react-toastify/dist/ReactToastify.min.css';
+import { isEmpty } from '../../utils/Common';
 import {
+    loadProfileDetails,
+    updateProfileDetails,
     createProfileDetails,
     resetStateProfileDetail,
     bookMeetingRoom,
@@ -19,23 +22,49 @@ import loading from '../../assets/images/loading.svg';
 export class ProfileInfo extends Component {
     constructor(props) {
         super(props);
-        this.state = this.initState;
+        this.state = {
+            ...this.initState,
+            profileId: this.props.match.params.profileId,
+        };
         this.checkValidateForm = this.checkValidateForm.bind(this);
     }
     componentWillMount() {
+        const { profileId } = this.state;
         this.props.getUsers();
+        if (!isEmpty(profileId)) {
+            this.props.loadProfileDetails(profileId);
+        }
     }
 
     componentWillReceiveProps(nextProps) {
+        const { profileId } = this.state;
+        if (!this.props.profileDetails[0] && nextProps.profileDetails[0]) {
+            const dateRoundOne = moment(nextProps.profileDetails[0].date_round1).toISOString();
+            const dateRoundTwo = moment(nextProps.profileDetails[0].date_round2).toISOString();
+            this.setState({
+                ...nextProps.profileDetails[0],
+                date_round1: dateRoundOne,
+                date_round2: dateRoundTwo,
+            });
+        }
         if (this.props.doSuccessfully !== nextProps.doSuccessfully) {
             this.setState({ loading: false });
             if (nextProps.doSuccessfully === true) {
-                this.resetForm();
-                toast('ADD SUCCESSFULLY', {
-                    autoClose: 2000,
-                    position: 'top-center',
-                    hideProgressBar: true,
-                });
+                if (!isEmpty(profileId)) {
+                    // update
+                    toast('You have successfully update profile', {
+                        autoClose: 2000,
+                        position: 'top-center',
+                        hideProgressBar: true,
+                    });
+                } else {
+                    this.resetForm();
+                    toast('You have successfully add new profile', {
+                        autoClose: 2000,
+                        position: 'top-center',
+                        hideProgressBar: true,
+                    });
+                }
             } else {
                 toast('SERVER IS DIED', {
                     autoClose: 2000,
@@ -192,18 +221,20 @@ export class ProfileInfo extends Component {
       } else {
           window.scrollTo(0, 0);
       }
-
-      //   this.onBookMeeting();
   };
 
   handleOK = () => {
+      const { profileId } = this.state;
       this.setState({
           showConfirmation: false,
-      });
-      this.props.createProfileDetails(this.state);
-      this.setState({
           loading: true,
       });
+      if (!isEmpty(profileId)) {
+          this.state.profileId = profileId;
+          this.props.updateProfileDetails(this.state);
+      } else {
+          this.props.createProfileDetails(this.state);
+      }
   };
 
   callLoading = () => (
@@ -215,10 +246,10 @@ export class ProfileInfo extends Component {
   );
 
   render() {
-      const { users } = this.props;
+      const { users, loadingDetail } = this.props;
       return (
           <React.Fragment>
-              {this.state.loading && this.callLoading()}
+              {(this.state.loading || loadingDetail) && this.callLoading()}
               <form className="profile-details">
                   <Grid>
                       <ProfileDetailsFirstRound
@@ -253,7 +284,7 @@ export class ProfileInfo extends Component {
                   show={this.state.showConfirmation}
                   handleClose={() => this.setState({ showConfirmation: false })}
                   handleOK={() => this.handleOK()}
-                  messages="Are you sure to do this ?"
+                  messages="Are you sure you want to save new profile?"
                   ps="This action can't undo. Please determine clearly before clicking OK."
               />
               <ToastContainer />
@@ -262,15 +293,18 @@ export class ProfileInfo extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     profileDetails: state.profileDetails.dataProfileDetails,
     doSuccessfully: state.profileDetails.doSuccessfully,
     dataProfileRes: state.profileDetails.dataProfileRes,
     users: state.profileDetails.users,
+    loadingDetail: state.profileDetails.loadingDetail,
     // dataProfilePost: state.profileDetails.dataProfilePost,
 });
 const mapDispatchToProps = {
+    loadProfileDetails,
     createProfileDetails,
+    updateProfileDetails,
     push, // ACTION GUI EPIC GUI API
     bookMeetingRoom,
     resetStateProfileDetail,
