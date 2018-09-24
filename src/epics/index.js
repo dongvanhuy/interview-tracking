@@ -5,7 +5,7 @@ import profileDetailsEpic from '../containers/profileDetails/ProfileDetailsEpic'
 
 const epics = [
     profileEpic,
-    profileDetailsEpic
+    profileDetailsEpic,
 ];
 
 const rootEpic = combineEpics(...epics);
