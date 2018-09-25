@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { push } from 'react-router-redux';
 import { FormGroup, Grid } from 'react-bootstrap';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast, Slide } from 'react-toastify';
 import moment from 'moment';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { isEmpty } from '../../utils/Common';
@@ -36,6 +36,7 @@ export class ProfileInfo extends Component {
         }
     }
 
+
     componentWillReceiveProps(nextProps) {
         const { profileId } = this.state;
         if (!this.props.profileDetails[0] && nextProps.profileDetails[0]) {
@@ -49,22 +50,29 @@ export class ProfileInfo extends Component {
         }
         if (this.props.doSuccessfully !== nextProps.doSuccessfully) {
             this.setState({ loading: false });
+            // const demoCSS = cssTransition({
+            //     enter: 'demo',
+            //     exit: 'demo',
+            //     // default to 750ms, can be omitted
+            // });
             if (nextProps.doSuccessfully === true) {
                 if (!isEmpty(profileId)) {
                     // update
                     toast('You have successfully update profile', {
-                        autoClose: 2000,
+                        autoClose: 5000,
                         position: 'top-center',
+                        // transition: demoCSS,
                         hideProgressBar: true,
-                        className: 'customToaster',
+                        // className: 'customToaster',
                     });
                 } else {
                     this.resetForm();
                     toast('You have successfully add new profile', {
-                        autoClose: 105000,
+                        autoClose: 5000,
                         position: 'top-center',
+                        // transition: demoCSS,
                         hideProgressBar: true,
-                        className: 'customToaster',
+                        // className: 'customToaster',
                     });
                 }
             } else if (nextProps.doSuccessfully === false) {
@@ -294,7 +302,7 @@ export class ProfileInfo extends Component {
                   messages="Are you sure you want to save new profile?"
                   ps="This action can't undo. Please determine clearly before clicking OK."
               />
-              <ToastContainer />
+              <ToastContainer transition={Slide} />
           </React.Fragment>
       );
   }
