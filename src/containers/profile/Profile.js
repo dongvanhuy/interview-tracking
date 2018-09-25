@@ -84,7 +84,7 @@ export class Profile extends Component {
   };
 
   deleteDetailId = id => {
-      //   this.props.deleteProfileId(id);
+      // this.props.deleteProfileId(id);
       this.setState({
           showConfirmation: true,
           candidateId: id,
@@ -142,6 +142,14 @@ export class Profile extends Component {
       this.props.push('/profile-info');
   };
 
+  rowsDefault = (param) => (
+      <tr key={uid()}>
+          <td colSpan={8} style={{ textAlign: 'center' }}>
+              {param}
+          </td>
+      </tr>
+  );
+
   renderStatus = (status) => {
       const cls = classNames('label', {
           'label-success': status === 'Passed',
@@ -151,12 +159,13 @@ export class Profile extends Component {
       return status ? <span className={cls}>{status}</span> : '';
   }
 
+
   renderItem = (item, index) => (
       <Tr key={uid()} className="tableComponent">
           <Td>{index + 1}</Td>
           <Td>{moment.utc(item.start_time).format('DD-MM-YYYY HH:mm')}</Td>
           <Td>{item.candidate_fullname}</Td>
-          <Td>{this.getFullname(item.interviewer_round1_01)}</Td>
+          <Td>{this.getFullname(item.interviewer_round1_01 || item.interviewer_round1_02)}</Td>
           <Td>{item.position_apply}</Td>
           <Td className="text-status">{this.renderStatus(item.round1_status)}</Td>
           <Td className="text-status">{this.renderStatus(item.round2_status)}</Td>
@@ -190,13 +199,13 @@ export class Profile extends Component {
           isLoadingMonth,
           isLoadingOther,
       } = this.props;
-      const rowsDefault = (
-          <tr key={uid()}>
-              <td colSpan={8} style={{ textAlign: 'center' }}>
-          Today, No Candidate.
-              </td>
-          </tr>
-      );
+      // const rowsDefault = (
+      //     <tr key={uid()}>
+      //         <td colSpan={8} style={{ textAlign: 'center' }}>
+      //     Today, No Candidate.
+      //         </td>
+      //     </tr>
+      // );
 
       const renderTHead = (
           <Thead>
@@ -253,7 +262,7 @@ export class Profile extends Component {
                                           >
                                               {renderTHead}
                                               <Tbody>
-                                                  {profileToday.length < 1 ? rowsDefault : rows}
+                                                  {profileToday.length < 1 ? this.rowsDefault('Today, No Candidate.') : rows}
                                               </Tbody>
                                           </Table>
                                       )}
@@ -278,7 +287,7 @@ export class Profile extends Component {
                                               {renderTHead}
                                               <Tbody>
                                                   {profilethisweek.length < 1
-                                                      ? rowsDefault
+                                                      ? this.rowsDefault('This week, No Candidate.')
                                                       : rowsthisweek}
                                               </Tbody>
                                           </Table>
@@ -305,7 +314,7 @@ export class Profile extends Component {
                                               {renderTHead}
                                               <Tbody>
                                                   {profilethismonth.length < 1
-                                                      ? rowsDefault
+                                                      ? this.rowsDefault('This month, No Candidate.')
                                                       : rowsthismonth}
                                               </Tbody>
                                           </Table>
@@ -332,7 +341,7 @@ export class Profile extends Component {
                                               {renderTHead}
                                               <Tbody>
                                                   {profilethisother.length < 1
-                                                      ? rowsDefault
+                                                      ? this.rowsDefault('This other, No Candidate.')
                                                       : rowsthisother}
                                               </Tbody>
                                           </Table>

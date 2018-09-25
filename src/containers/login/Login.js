@@ -33,13 +33,12 @@ export class Login extends Component {
                 // console.log('error', `${err}`);
             }
         } else if (user) {
-            sessionStorage.setItem('surname', user.profile.family_name);
-            sessionStorage.setItem('givenName', user.profile.given_name);
+            sessionStorage.setItem('userName', user.profile.name);
+            sessionStorage.setItem('userEmail', user.userName);
             this.setState(
                 {
-                    email: user.profile.unique_name,
-                    givenName: user.profile.given_name,
-                    surname: user.profile.family_name,
+                    email: user.profile.email,
+                    userName: user.profile.name,
                     loginSuccess: true,
                 },
                 () => {
