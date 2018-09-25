@@ -156,7 +156,7 @@ export class Profile extends Component {
           <Td>{index + 1}</Td>
           <Td>{moment.utc(item.start_time).format('DD-MM-YYYY HH:mm')}</Td>
           <Td>{item.candidate_fullname}</Td>
-          <Td>{this.getFullname(item.interviewer_round1_01)}</Td>
+          <Td>{this.getFullname(item.interviewer_round1_01 || item.interviewer_round1_02)}</Td>
           <Td>{item.position_apply}</Td>
           <Td className="text-status">{this.renderStatus(item.round1_status)}</Td>
           <Td className="text-status">{this.renderStatus(item.round2_status)}</Td>
