@@ -102,6 +102,21 @@ button {
         color: darkgrey;
       }
     }
+
+    .icon-user {
+      align-self: center;
+      margin-left: 20px;
+    }
+  }
+
+  &__user {
+    text-align: right;
+  }
+
+  &__email {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 0;
   }
 
   &__mobile {
