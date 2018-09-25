@@ -194,15 +194,15 @@ export class ProfileDetailsFirstRound extends Component {
                                 <option value="Vy Phan">Vy Phan</option>
                                 <option value="Nhu Huynh">Nhu Huynh</option> */}
                             </FormControl>
-                            {/* <AutoSuggestUser
+                            <AutoSuggestUser
                                 users={users || []}
                                 value={this.props.recruiter}
-                                // onUserSelected={this.recruiterChange}
-                                // inputProps={{
-                                //     ...this.state.recruiterInputProps,
-                                //     // disabled: disable,
-                                // }}
-                            /> */}
+                                onUserSelected={this.recruiterChange}
+                                inputProps={{
+                                    ...this.state.recruiterInputProps,
+                                    // disabled: disable,
+                                }}
+                            />
                         </FormGroup>
                     </Col>
                 </Row>

@@ -15,16 +15,23 @@ export class AutoSuggestUser extends React.Component {
 
     constructor(props) {
         super(props);
+        console.log('>>>>> user aaa', this.props.users);
         this.state = {
             users: this.props.users || [],
             value: this.props.value,
-            // usersInputProps: {
-            //     placeholder: 'Select the user',
-            //     value: '',
-            //     onChange: this.onUserChange,
-            //     className: 'form-control',
-            // },
+            defaultInputProps: {
+                placeholder: 'Select the user',
+                value: '',
+                onChange: this.onUserChange,
+                className: 'form-control',
+            },
         };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            value: nextProps.value,
+        });
     }
 
     onDropDown = () => {
@@ -32,10 +39,19 @@ export class AutoSuggestUser extends React.Component {
         component.input.focus();
     }
 
-    onChange = (event, { newValue }) => {
+    onUserChange = (event, { newValue }) => {
+        console.log('>>>> on change');
         this.setState({
+            defaultInputProps: {
+                ...this.state.defaultInputProps,
+                value: newValue,
+            },
             value: newValue,
         });
+
+        // Trigger onChange prop
+        const { onChangeInput } = this.props;
+        onChangeInput && onChangeInput(newValue);
     };
 
     onSuggestionsFetchRequested = () => ({ value }) => {
@@ -88,16 +104,16 @@ export class AutoSuggestUser extends React.Component {
     );
 
     render() {
-        const { value, users } = this.state;
-        console.log('>>>> users', users);
+        const { value, defaultInputProps } = this.state;
+        // console.log('>>>> users', users);
         console.log('>>>> users 1', this.props.users);
-        // const { users } = this.props;
+        const { users, inputProps } = this.props;
 
-        const inputProps = {
-            placeholder: 'Type a programming language',
-            value,
-            onChange: this.onChange,
-        };
+        // const inputProps = {
+        //     placeholder: 'Type a programming language',
+        //     value,
+        //     onChange: this.onChange,
+        // };
 
         return (
             <React.Fragment>
@@ -109,7 +125,10 @@ export class AutoSuggestUser extends React.Component {
                     getSuggestionValue={this.getSuggestionValue}
                     renderSuggestion={this.renderUserSuggestion}
                     shouldRenderSuggestions={this.alwaysRender}
-                    inputProps={inputProps}
+                    inputProps={{
+                        ...defaultInputProps,
+                        ...inputProps,
+                    }}
                     // onSuggestionSelected={this.props.onUserSelected}
                     // inputProps={{
                     //     ...inputProps,
