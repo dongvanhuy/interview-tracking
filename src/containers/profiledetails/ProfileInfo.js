@@ -151,11 +151,11 @@ export class ProfileInfo extends Component {
               Content: 'The interview will be begin at this time!',
           },
           Start: {
-              dateTime: moment(dataSave.start_time).format('YYYY-MM-DDTHH:mm:ss'),
+              dateTime: moment.utc(dataSave.start_time).format('YYYY-MM-DDTHH:mm:ss'),
               TimeZone: 'SE Asia Standard Time',
           },
           End: {
-              dateTime: moment(dataSave.end_time).format('YYYY-MM-DDTHH:mm:ss'),
+              dateTime: moment.utc(dataSave.end_time).format('YYYY-MM-DDTHH:mm:ss'),
               TimeZone: 'SE Asia Standard Time',
           },
           Attendees: [
