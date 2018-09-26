@@ -133,13 +133,18 @@
   > tbody {
     > tr {
       // height: 20px;
-      > td {
+      > td.pivoted {
         vertical-align: middle;
-        border: 1px solid #ddd;
+        min-height: 40px;
+        border-bottom: 1px solid #eee !important;
         padding: 10px;
         @include tablet {
           padding: 4px;
+          border: 1px solid #eee !important;
         }
+      }
+      > td.text-center {
+        border: none !important;
       }
     }
   }
@@ -161,10 +166,12 @@
 
 .tableComponent {
   border-color: red;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc !important;
 }
 
 // .responsiveTable tr td.pivoted {
-//    border: 1px !important; 
-//    border-bottom: 0px; 
+//    border: 1px !important;
+//    border-bottom: 0px;
 // }
