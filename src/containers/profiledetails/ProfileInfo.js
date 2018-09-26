@@ -142,7 +142,6 @@ export class ProfileInfo extends Component {
   };
 
   bookMeetingRoom = () => {
-      // const dataSave = this.props.dataProfilePost;
       const dataSave = this.state;
       // book meeting room
       const params = {
@@ -152,14 +151,12 @@ export class ProfileInfo extends Component {
               Content: 'The interview will be begin at this time!',
           },
           Start: {
-              // DateTime: '2018-09-18T18:00:00',
-              dateTime: dataSave.start_time,
-              TimeZone: 'Pacific Standard Time',
+              dateTime: moment(dataSave.end_time).format('YYYY-MM-DDTHH:mm:ss'),
+              TimeZone: 'SE Asia Standard Time',
           },
           End: {
-              dateTime: dataSave.end_time,
-              // DateTime: '2018-09-18T19:00:00',
-              TimeZone: 'Pacific Standard Time',
+              dateTime: moment(dataSave.end_time).format('YYYY-MM-DDTHH:mm:ss'),
+              TimeZone: 'SE Asia Standard Time',
           },
           Attendees: [
               {
