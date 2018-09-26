@@ -63,7 +63,7 @@ export class ProfileDetailsFirstRound extends Component {
                             {errorMessages.errFullname && <span className="error_msg">{errorMessages.errFullname}</span>}
                         </FormGroup>
                         <FormGroup>
-                            <ControlLabel>Position Interview</ControlLabel>
+                            <ControlLabel>Position Interview(<span className="span">*</span>) </ControlLabel>
                             <FormControl
                                 className={this.props.errorMessages.errPosition ? 'borderPosition' : ''}
                                 type="text"
@@ -85,7 +85,6 @@ export class ProfileDetailsFirstRound extends Component {
                                 timeFormat="HH:mm"
                                 ref={this.startMeeting}
                                 utc
-                                // defaultValue="DD-MM-YYYY HH:mm"
                                 onChange={(e) => this.props.handleChange({ target: { value: e, name: 'start_time' } })}
                             />
                             <FontAwesomeIcon
@@ -107,7 +106,6 @@ export class ProfileDetailsFirstRound extends Component {
                                 timeFormat="HH:mm"
                                 ref={this.endMeeting}
                                 utc
-                                // defaultValue="DD-MM-YYYY HH:mm"
                                 onChange={(e) => this.props.handleChange({ target: { value: e, name: 'end_time' } })}
                             />
                             <FontAwesomeIcon
@@ -154,9 +152,6 @@ export class ProfileDetailsFirstRound extends Component {
                             >
                                 <option value="">Select</option>
                                 {users.map(user => (<option key={user.id} value={user.email}>{user.fullname}</option>))}
-                                {/* <option value="Duyen Tran">Duyen Tran</option>
-                                <option value="Vy Phan">Vy Phan</option>
-                                <option value="Nhu Huynh">Nhu Huynh</option> */}
                             </FormControl>
                         </FormGroup>
                     </Col>
@@ -171,7 +166,6 @@ export class ProfileDetailsFirstRound extends Component {
                                     <FormControl
                                         componentClass="select"
                                         placeholder="select"
-                                        // className="profile-details__select"
                                         className={this.props.errorMessages.errInterviewer ? 'borderInterviewer' : ''}
                                         onChange={(e) => this.props.handleChange(e)}
                                         name="interviewer_round1_01"
@@ -179,11 +173,6 @@ export class ProfileDetailsFirstRound extends Component {
                                     >
                                         <option value="">Select</option>
                                         {users.map(user => (<option key={user.id} value={user.email}>{user.fullname}</option>))}
-                                        {/* <option value="tle42@csc.com">Tai Le</option>
-                                        <option value="hdong4@csc.com">Huy Dong</option>
-                                        <option value="hchung3@csc.com">Huy Chung</option>
-                                        <option value="tnguyen450@csc.com">Trang Nguyen</option>
-                                        <option value="tdang36@csc.com">Tuyen Dang</option> */}
                                     </FormControl>
                                 </FormGroup>
                                 {errorMessages.errInterviewer && <span className="error_msg">{errorMessages.errInterviewer}</span>}
@@ -201,11 +190,6 @@ export class ProfileDetailsFirstRound extends Component {
                                     >
                                         <option value="">Select</option>
                                         {users.map(user => (<option key={user.id} value={user.email}>{user.fullname}</option>))}
-                                        {/* <option value="tle42@csc.com">Tai Le</option>
-                                        <option value="hdong4@csc.com">Huy Dong</option>
-                                        <option value="hchung3@csc.com">Huy Chung</option>
-                                        <option value="tnguyen450@csc.com">Trang Nguyen</option>
-                                        <option value="tdang36@csc.com">Tuyen Dang</option> */}
                                     </FormControl>
                                 </FormGroup>
                             </Col>
@@ -216,13 +200,11 @@ export class ProfileDetailsFirstRound extends Component {
                             <ControlLabel>Date</ControlLabel>
                             <Datetime
                                 inputProps={{ readOnly: true, placeholder: 'Select date and time' }}
-                                // open={this.state.showTimeRoundOne}
                                 value={this.props.date_round1 ? moment.utc(this.props.date_round1).format('DD-MM-YYYY HH:mm') : ''}
                                 dateFormat="DD-MM-YYYY"
                                 timeFormat="HH:mm"
                                 ref={this.dateRound1}
                                 utc
-                                // defaultValue="DD-MM-YYYY HH:mm"
                                 isValidDate={valid}
                                 onChange={(e) => this.props.handleChange({ target: { value: e, name: 'date_round1' } })}
                             />

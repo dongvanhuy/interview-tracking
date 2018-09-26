@@ -102,7 +102,7 @@ export class ProfileInfo extends Component {
       eng_level_cmt: '',
       interviewer_round1_01: '',
       interviewer_round1_02: '',
-      date_round1: '',
+      date_round1: null,
       tech_competency_round1: '',
       tech_competency_round1_cmt: '',
       cultural_fit_round1: '',
@@ -112,7 +112,7 @@ export class ProfileInfo extends Component {
       round1_status: '',
       cmt_result_round1: '',
       interviewer_round2: '',
-      date_round2: '',
+      date_round2: null,
       tech_competency_round2: '',
       tech_competency_round2_cmt: '',
       cultural_fit_round2: '',
@@ -142,7 +142,6 @@ export class ProfileInfo extends Component {
   };
 
   bookMeetingRoom = () => {
-      // const dataSave = this.props.dataProfilePost;
       const dataSave = this.state;
       // book meeting room
       const params = {
@@ -152,14 +151,12 @@ export class ProfileInfo extends Component {
               Content: 'The interview will be begin at this time!',
           },
           Start: {
-              // DateTime: '2018-09-18T18:00:00',
-              dateTime: dataSave.start_time,
-              TimeZone: 'Pacific Standard Time',
+              dateTime: moment.utc(dataSave.start_time).format('YYYY-MM-DDTHH:mm:ss'),
+              TimeZone: 'SE Asia Standard Time',
           },
           End: {
-              dateTime: dataSave.end_time,
-              // DateTime: '2018-09-18T19:00:00',
-              TimeZone: 'Pacific Standard Time',
+              dateTime: moment.utc(dataSave.end_time).format('YYYY-MM-DDTHH:mm:ss'),
+              TimeZone: 'SE Asia Standard Time',
           },
           Attendees: [
               {
