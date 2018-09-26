@@ -63,7 +63,7 @@ export class ProfileDetailsFirstRound extends Component {
                             {errorMessages.errFullname && <span className="error_msg">{errorMessages.errFullname}</span>}
                         </FormGroup>
                         <FormGroup>
-                            <ControlLabel>Position Interview</ControlLabel>
+                            <ControlLabel>Position Interview(<span className="span">*</span>) </ControlLabel>
                             <FormControl
                                 className={this.props.errorMessages.errPosition ? 'borderPosition' : ''}
                                 type="text"

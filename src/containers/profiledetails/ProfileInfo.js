@@ -102,7 +102,7 @@ export class ProfileInfo extends Component {
       eng_level_cmt: '',
       interviewer_round1_01: '',
       interviewer_round1_02: '',
-      date_round1: '',
+      date_round1: null,
       tech_competency_round1: '',
       tech_competency_round1_cmt: '',
       cultural_fit_round1: '',
@@ -112,7 +112,7 @@ export class ProfileInfo extends Component {
       round1_status: '',
       cmt_result_round1: '',
       interviewer_round2: '',
-      date_round2: '',
+      date_round2: null,
       tech_competency_round2: '',
       tech_competency_round2_cmt: '',
       cultural_fit_round2: '',
@@ -151,11 +151,11 @@ export class ProfileInfo extends Component {
               Content: 'The interview will be begin at this time!',
           },
           Start: {
-              dateTime: moment(dataSave.end_time).format('YYYY-MM-DDTHH:mm:ss'),
+              dateTime: moment.utc(dataSave.start_time).format('YYYY-MM-DDTHH:mm:ss'),
               TimeZone: 'SE Asia Standard Time',
           },
           End: {
-              dateTime: moment(dataSave.end_time).format('YYYY-MM-DDTHH:mm:ss'),
+              dateTime: moment.utc(dataSave.end_time).format('YYYY-MM-DDTHH:mm:ss'),
               TimeZone: 'SE Asia Standard Time',
           },
           Attendees: [
