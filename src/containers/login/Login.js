@@ -17,8 +17,7 @@ export class Login extends Component {
 
     initState = {
         email: '',
-        givenName: '',
-        surname: '',
+        userName: '',
         loginSuccess: false,
     };
 

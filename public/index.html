@@ -15,10 +15,11 @@
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
   
   <!-- Add to home screen for Safari on iOS -->
-  <meta name="apple-mobile-web-app-title" content="Interview Tracking">
-  <link rel="apple-touch-startup-image" sizes="1124x2208" href="ios/ios-launchimage-1242-2208.png" />
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Interview Tracking">
+  <meta name="msapplication-starturl" content="/">
+  <link rel="apple-touch-startup-image" sizes="1124x2208" href="ios/ios-launchimage-1242-2208.png" />
   <link rel="apple-touch-icon" sizes="76x76" href="ios/ios-appicon-76-76.png">
   <link rel="apple-touch-icon" sizes="120x120" href="ios/ios-appicon-120-120.png">
   <link rel="apple-touch-icon" sizes="152x152" href="ios/ios-appicon-152-152.png">
@@ -41,10 +42,14 @@
   <div class="root"></div>
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('install', function () {
-        navigator.serviceWorker.register('/service-worker.js');
-      }
-    )};
+      window.addEventListener('install', () => {
+        navigator.serviceWorker.register('service-worker.js');
+      });
+
+      window.addEventListener('fetch', () => {
+        navigator.serviceWorker.register('service-worker.js');
+      });
+    }
   </script>
 </body>
 
