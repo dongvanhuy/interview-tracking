@@ -21,7 +21,7 @@ import {
     loadProfileThisOther,
 } from './ProfileAction';
 
-import { getUsers } from '../profileDetails/ProfileDetailsAction';
+import { getUsers, getUsersFailed } from '../profileDetails/ProfileDetailsAction';
 import WarningModal from '../common/warningModal/WarningModal';
 import ConfirmationModal from '../common/confirmationModal/ConfirmationModal';
 
@@ -55,6 +55,9 @@ export class Profile extends Component {
       this.props.loadProfileThisWeek();
       this.props.loadProfileThisMonth();
       this.props.loadProfileThisOther();
+      if (!window.navigator.onLine) {
+          this.props.getUsersFailed();
+      }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -144,11 +147,11 @@ export class Profile extends Component {
   };
 
   rowsDefault = (param) => (
-      <tr key={uid()}>
-          <td colSpan={8} style={{ textAlign: 'center' }}>
+      <div className="profile-no-data">
+          <p colSpan={8} className="text-center profile-no-data__txt">
               {param}
-          </td>
-      </tr>
+          </p>
+      </div>
   );
 
   renderStatus = (status) => {
@@ -268,12 +271,12 @@ export class Profile extends Component {
 
       return (
           <React.Fragment>
-              {this.state.loading && this.loadingPage()}
+              {isLoading && this.loadingPage()}
               <section className="list-candidate-page">
                   <div className="list">
                       <Grid>
                           <Row className="show-grid hidden-not-xs">
-                              {isLoading && this.callLoading()}
+                              {/* {isLoading && this.callLoading()} */}
                               {isNoData && this.rowsDefault('No Candidate.')}
                               {profileToday.length > 0 &&
                               <div className="list-table">
@@ -281,22 +284,18 @@ export class Profile extends Component {
                                       <h2 className="list-table__title">Today</h2>
                                   </Col>
                                   <Col xs={12} sm={12} md={12} lg={12}>
-                                      {isLoadingToday ? (
-                                          this.callLoading()
-                                      ) : (
-                                          <Table
-                                              className="list-cadidate-table"
-                                              xs={12}
-                                              sm={12}
-                                              md={12}
-                                              lg={12}
-                                          >
-                                              {renderTHead}
-                                              <Tbody>
-                                                  {profileToday.length < 1 ? this.rowsDefault('Today, No Candidate.') : rows}
-                                              </Tbody>
-                                          </Table>
-                                      )}
+                                      <Table
+                                          className="list-cadidate-table"
+                                          xs={12}
+                                          sm={12}
+                                          md={12}
+                                          lg={12}
+                                      >
+                                          {renderTHead}
+                                          <Tbody>
+                                              {profileToday.length < 1 ? this.rowsDefault('Today, No Candidate.') : rows}
+                                          </Tbody>
+                                      </Table>
                                   </Col>
                               </div>
                               }
@@ -306,24 +305,20 @@ export class Profile extends Component {
                                       <h2 className="list-table__title">This week</h2>
                                   </Col>
                                   <Col xs={12} sm={12} md={12} lg={12}>
-                                      {isLoadingWeek ? (
-                                          this.callLoading()
-                                      ) : (
-                                          <Table
-                                              className="list-cadidate-table"
-                                              xs={12}
-                                              sm={12}
-                                              md={12}
-                                              lg={12}
-                                          >
-                                              {renderTHead}
-                                              <Tbody>
-                                                  {profilethisweek.length < 1
-                                                      ? this.rowsDefault('This week, No Candidate.')
-                                                      : rowsthisweek}
-                                              </Tbody>
-                                          </Table>
-                                      )}
+                                      <Table
+                                          className="list-cadidate-table"
+                                          xs={12}
+                                          sm={12}
+                                          md={12}
+                                          lg={12}
+                                      >
+                                          {renderTHead}
+                                          <Tbody>
+                                              {profilethisweek.length < 1
+                                                  ? this.rowsDefault('This week, No Candidate.')
+                                                  : rowsthisweek}
+                                          </Tbody>
+                                      </Table>
                                   </Col>
                               </div>
                               }
@@ -334,24 +329,20 @@ export class Profile extends Component {
                                   </Col>
 
                                   <Col xs={12} sm={12} md={12} lg={12}>
-                                      {isLoadingMonth ? (
-                                          this.callLoading()
-                                      ) : (
-                                          <Table
-                                              className="list-cadidate-table"
-                                              xs={12}
-                                              sm={12}
-                                              md={12}
-                                              lg={12}
-                                          >
-                                              {renderTHead}
-                                              <Tbody>
-                                                  {profilethismonth.length < 1
-                                                      ? this.rowsDefault('This month, No Candidate.')
-                                                      : rowsthismonth}
-                                              </Tbody>
-                                          </Table>
-                                      )}
+                                      <Table
+                                          className="list-cadidate-table"
+                                          xs={12}
+                                          sm={12}
+                                          md={12}
+                                          lg={12}
+                                      >
+                                          {renderTHead}
+                                          <Tbody>
+                                              {profilethismonth.length < 1
+                                                  ? this.rowsDefault('This month, No Candidate.')
+                                                  : rowsthismonth}
+                                          </Tbody>
+                                      </Table>
                                   </Col>
                               </div>
                               }
@@ -362,24 +353,20 @@ export class Profile extends Component {
                                   </Col>
 
                                   <Col xs={12} sm={12} md={12} lg={12}>
-                                      {isLoadingOther ? (
-                                          this.callLoading()
-                                      ) : (
-                                          <Table
-                                              className="list-cadidate-table"
-                                              xs={12}
-                                              sm={12}
-                                              md={12}
-                                              lg={12}
-                                          >
-                                              {renderTHead}
-                                              <Tbody>
-                                                  {profilethisother.length < 1
-                                                      ? this.rowsDefault('This other, No Candidate.')
-                                                      : rowsthisother}
-                                              </Tbody>
-                                          </Table>
-                                      )}
+                                      <Table
+                                          className="list-cadidate-table"
+                                          xs={12}
+                                          sm={12}
+                                          md={12}
+                                          lg={12}
+                                      >
+                                          {renderTHead}
+                                          <Tbody>
+                                              {profilethisother.length < 1
+                                                  ? this.rowsDefault('This other, No Candidate.')
+                                                  : rowsthisother}
+                                          </Tbody>
+                                      </Table>
                                   </Col>
                               </div>
                               }
@@ -398,7 +385,7 @@ export class Profile extends Component {
                                       <div className="action text-center candidate-table__header-th">Action</div>
                                   </div>
                                   <div className="candidate-table__body">
-                                      {isLoading && this.callLoading()}
+                                      {/* {isLoading && this.callLoading()} */}
                                       {isNoData && this.rowsDefault('No Candidate.')}
                                       {profileToday.length > 0 &&
                                       <div className="candidate-table__body--items">
@@ -498,6 +485,7 @@ const mapDispatchToProps = {
     deleteProfileId,
     getUsers,
     push,
+    getUsersFailed,
 };
 
 export default connect(

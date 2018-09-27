@@ -250,4 +250,15 @@
     }
 
   }
+  .profile-no-data {
+    border: 1px solid $border-color-gray;
+    min-height: 100px;
+    margin-top: 30px;
+    @include tablet {
+      margin-top: 0px; 
+    }
+    &__txt {
+      margin-top: 30px;
+    }
+  }
 }

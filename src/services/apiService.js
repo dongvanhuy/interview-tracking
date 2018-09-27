@@ -4,7 +4,6 @@ import config from "../config";
 import { getAccessToken } from "../adalConfig";
 
 const accessToken = localStorage.getItem('adal.access.token.key');
-console.log('>>> accessToken', accessToken);
 
 const API_HOST = config.apiService.host;
 export default class ApiService {

@@ -11,6 +11,7 @@ import {
     PROFILE_THISOTHER_LOAD_SUCCESS,
     PROFILE_THISOTHER_LOAD_FAIL,
     PROFILE_ID_DELETE_SUCCESS,
+    GET_USERS_FAILED,
 } from '../../store/actionTypes';
 
 const initialState = {
@@ -27,6 +28,7 @@ const initialState = {
     loadDataFailed: false,
     isDeleted: false,
 };
+
 
 const actions = {
     [PROFILE_LOAD]: state => ({
@@ -94,6 +96,13 @@ const actions = {
         ...state,
         dataRes: payload,
         isDeleted: true,
+    }),
+    [GET_USERS_FAILED]: (state) => ({
+        ...state,
+        isLoadingToday: false,
+        isLoadingWeek: false,
+        isLoadingMonth: false,
+        isLoadingOther: false,
     }),
 };
 
