@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { DropdownButton, MenuItem, ButtonToolbar, ListGroup, ListGroupItem } from 'react-bootstrap';
-import FontAwesomeIcon from 'react-fontawesome';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import logo from '../../../src/assets/images/dxcLogo.svg';
 import iconUser from '../../../src/assets/images/human.png';
+import burgerIcon from '../../../src/assets/images/burgerIcon.png';
 import { authContext } from '../../adalConfig';
 
 export class Header extends Component {
@@ -42,7 +42,10 @@ export class Header extends Component {
                         {/* <FontAwesomeIcon className="icon-user" name="user-circle" size="2x" /> */}
                     </div>
                     <div className="interview-header__mobile hidden-sm hidden-md hidden-lg">
-                        <FontAwesomeIcon name="bars" size="2x" onClick={() => this.addActiveClass()} />
+                        <div onClick={() => this.addActiveClass()}>
+                            <img className="icon-user" src={burgerIcon} alt="icon user" width="38" />
+                        </div>
+                        {/* <FontAwesomeIcon name="bars" size="2x" onClick={() => this.addActiveClass()} /> */}
                         <ListGroup className={!this.state.showMenu && 'invisible'}>
                             <ListGroupItem>{`${sessionStorage.getItem('userEmail')}`}</ListGroupItem>
                             <ListGroupItem onClick={() => authContext.logOut()}>Logout</ListGroupItem>
