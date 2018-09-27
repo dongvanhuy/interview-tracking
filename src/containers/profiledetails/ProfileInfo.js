@@ -259,6 +259,7 @@ export class ProfileInfo extends Component {
 
   render() {
       const { users, loadingDetail } = this.props;
+      const { profileId } = this.state;
       return (
           <React.Fragment>
               {(this.state.loading || loadingDetail) && this.callLoading()}
@@ -296,7 +297,8 @@ export class ProfileInfo extends Component {
                   show={this.state.showConfirmation}
                   handleClose={() => this.setState({ showConfirmation: false })}
                   handleOK={() => this.handleOK()}
-                  messages="Are you sure you want to save new profile?"
+                  title={!isEmpty(profileId) ? 'Update' : 'Save'}
+                  messages={!isEmpty(profileId) ? 'Are you sure you want to update new profile?' : 'Are you sure you want to save new profile?'}
                   ps="This action can't undo. Please determine clearly before clicking OK."
               />
               <ToastContainer transition={Slide} />
