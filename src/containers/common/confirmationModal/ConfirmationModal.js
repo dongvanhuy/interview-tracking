@@ -26,7 +26,7 @@ export default class ConfirmationModal extends Component {
                   className="success-modal"
               >
                   <Modal.Header closeButton>
-                      <Modal.Title>Confirmation</Modal.Title>
+                      <Modal.Title>{this.props.title || 'Confirmation'}</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
                       <p>{this.props.messages}</p>
