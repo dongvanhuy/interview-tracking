@@ -89,7 +89,6 @@ export class Profile extends Component {
           showConfirmation: true,
           candidateId: id,
       });
-      console.log('>>>>>>>>> id', id);
   }
 
   handleOK = () => {
@@ -103,7 +102,7 @@ export class Profile extends Component {
 
   callLoading = () => (
       <div className="loading-block">
-          <Table
+          {/* <Table
               className="list-cadidate-table"
               xs={12}
               sm={12}
@@ -111,8 +110,8 @@ export class Profile extends Component {
               lg={12}
           >
               <Thead>
-                  <Tr>
-                      <Th>STT</Th>
+                  <Tr className="row">
+                      <Th>#</Th>
                       <Th>Time</Th>
                       <Th>Candidate</Th>
                       <Th>Interviewer</Th>
@@ -121,7 +120,7 @@ export class Profile extends Component {
                       <Th>Action</Th>
                   </Tr>
               </Thead>
-          </Table>
+          </Table> */}
           <div className="loading-block__spinner">
               <img src={loading} alt="loading" />
           </div>
@@ -159,16 +158,15 @@ export class Profile extends Component {
       return status ? <span className={cls}>{status}</span> : '';
   }
 
-
   renderItem = (item, index) => (
       <Tr key={uid()} className="tableComponent">
-          <Td>{index + 1}</Td>
+          {/* <Td>{index + 1}</Td> */}
           <Td>{moment.utc(item.start_time).format('DD-MM-YYYY HH:mm')}</Td>
           <Td>{item.candidate_fullname}</Td>
           <Td>{this.getFullname(item.interviewer_round1_01 || item.interviewer_round1_02)}</Td>
           <Td>{item.position_apply}</Td>
-          <Td className="text-status">{this.renderStatus(item.round1_status)}</Td>
-          <Td className="text-status">{this.renderStatus(item.round2_status)}</Td>
+          <Td className="text-status">{item.round1_status}</Td>
+          <Td className="text-status">{item.round2_status}</Td>
           <Td className="text-center">
               <button
                   type="button"
@@ -188,6 +186,34 @@ export class Profile extends Component {
       </Tr>
   )
 
+  renderItemTable = (item, index) => (
+      <div key={uid()} className="candidate-table__body--item">
+          {/* <div className="number candidate-table__body--col">{index + 1}</div> */}
+          <div className="time candidate-table__body--col">{moment.utc(item.start_time).format('DD-MM-YYYY HH:mm')}</div>
+          <div className="candidate candidate-table__body--col">{item.candidate_fullname}</div>
+          <div className="interviewer candidate-table__body--col">{this.getFullname(item.interviewer_round1_01 || item.interviewer_round1_02)}</div>
+          <div className="position candidate-table__body--col">{item.position_apply}</div>
+          <div className="status candidate-table__body--col">{item.round1_status}</div>
+          <div className="status candidate-table__body--col">{item.round2_status}</div>
+          <div className="action candidate-table__body--col">
+              <button
+                  type="button"
+                  className="btn btn-default button-common button-common__left"
+                  onClick={() => this.viewDetailId(item.candidate_id)}
+              >
+                  <i className="fa fa-pencil" />
+              </button>
+              <button
+                  type="button"
+                  className="btn btn-default button-common button-common__right"
+                  onClick={() => this.deleteDetailId(item.candidate_id)}
+              >
+                  <i className="fa fa-trash-o" />
+              </button>
+          </div>
+      </div>
+  )
+
   render() {
       const {
           profileToday,
@@ -199,24 +225,17 @@ export class Profile extends Component {
           isLoadingMonth,
           isLoadingOther,
       } = this.props;
-      // const rowsDefault = (
-      //     <tr key={uid()}>
-      //         <td colSpan={8} style={{ textAlign: 'center' }}>
-      //     Today, No Candidate.
-      //         </td>
-      //     </tr>
-      // );
 
       const renderTHead = (
           <Thead>
               <Tr>
-                  <Th style={{ width: 50 }}>STT</Th>
-                  <Th className="time-td">Time</Th>
+                  {/* <Th>#</Th> */}
+                  <Th>Time</Th>
                   <Th>Candidate</Th>
                   <Th>Interviewer</Th>
                   <Th>Position</Th>
-                  <Th className="text-status status-td">Status R1</Th>
-                  <Th className="text-status status-td">Status R2</Th>
+                  <Th className="text-status">Status R1</Th>
+                  <Th className="text-status">Status R2</Th>
                   <Th className="action-td">Action</Th>
               </Tr>
           </Thead>
@@ -238,13 +257,19 @@ export class Profile extends Component {
           this.renderItem(item, index)
       ));
 
+      const isLoading = isLoadingToday || isLoadingMonth || isLoadingWeek || isLoadingOther;
+      const isNoData = !isLoading && (profileToday.length === 0 && profilethisweek.length === 0 && profilethismonth.length === 0 && profilethisother.length === 0);
+
       return (
           <React.Fragment>
               {this.state.loading && this.loadingPage()}
               <section className="list-candidate-page">
                   <div className="list">
                       <Grid>
-                          <Row className="show-grid">
+                          <Row className="show-grid hidden-not-xs">
+                              {isLoading && this.callLoading()}
+                              {isNoData && this.rowsDefault('No Candidate.')}
+                              {profileToday.length > 0 &&
                               <div className="list-table">
                                   <Col xs={6} sm={6} md={6} lg={6}>
                                       <h2 className="list-table__title">Today</h2>
@@ -268,7 +293,8 @@ export class Profile extends Component {
                                       )}
                                   </Col>
                               </div>
-
+                              }
+                              {profilethisweek.length > 0 &&
                               <div className="list-table">
                                   <Col xs={12} sm={12} md={12} lg={12}>
                                       <h2 className="list-table__title">This week</h2>
@@ -294,7 +320,8 @@ export class Profile extends Component {
                                       )}
                                   </Col>
                               </div>
-
+                              }
+                              {profilethismonth.length > 0 &&
                               <div className="list-table">
                                   <Col xs={12} sm={12} md={12} lg={12}>
                                       <h2 className="list-table__title">This month</h2>
@@ -321,7 +348,8 @@ export class Profile extends Component {
                                       )}
                                   </Col>
                               </div>
-
+                              }
+                              { profilethisother.length > 0 &&
                               <div className="list-table">
                                   <Col xs={12} sm={12} md={12} lg={12}>
                                       <h2 className="list-table__title">This other</h2>
@@ -348,7 +376,68 @@ export class Profile extends Component {
                                       )}
                                   </Col>
                               </div>
+                              }
                           </Row>
+                          {/* list profiles on laptop */}
+                          <div className="list-candidate-page row hidden-xs">
+                              <div className="candidate-table">
+                                  <div className="candidate-table__header">
+                                      {/* <div className="number candidate-table__header-th">#</div> */}
+                                      <div className="time candidate-table__header-th">Time</div>
+                                      <div className="candidate candidate-table__header-th">Candidate</div>
+                                      <div className="interviewer candidate-table__header-th">Interviewer</div>
+                                      <div className="position candidate-table__header-th">Position</div>
+                                      <div className="status candidate-table__header-th">Status R1</div>
+                                      <div className="status candidate-table__header-th">Status R2</div>
+                                      <div className="action text-center candidate-table__header-th">Action</div>
+                                  </div>
+                                  <div className="candidate-table__body">
+                                      {isLoading && this.callLoading()}
+                                      {isNoData && this.rowsDefault('No Candidate.')}
+                                      {profileToday.length > 0 &&
+                                      <div className="candidate-table__body--items">
+                                          <div className="candidate-table__body--title">Today</div>
+                                          <div>
+                                              {profileToday.map((item, index) => (
+                                                  this.renderItemTable(item, index)
+                                              ))}
+                                          </div>
+                                      </div>
+                                      }
+                                      {profilethisweek.length > 0 &&
+                                      <div className="candidate-table__body--items">
+                                          <div className="candidate-table__body--title">This week</div>
+                                          <div>
+                                              {profilethisweek.map((item, index) => (
+                                                  this.renderItemTable(item, index)
+                                              ))}
+                                          </div>
+                                      </div>
+                                      }
+                                      {profilethismonth.length > 0 &&
+                                      <div className="candidate-table__body--items">
+                                          <div className="candidate-table__body--title">This month</div>
+                                          <div>
+                                              {profilethismonth.map((item, index) => (
+                                                  this.renderItemTable(item, index)
+                                              ))}
+                                          </div>
+                                      </div>
+                                      }
+                                      {profilethisother.length > 0 &&
+                                      <div className="candidate-table__body--items">
+                                          <div className="candidate-table__body--title">This other</div>
+                                          <div>
+                                              {profilethisother.map((item, index) => (
+                                                  this.renderItemTable(item, index)
+                                              ))}
+                                          </div>
+                                      </div>
+                                      }
+                                  </div>
+
+                              </div>
+                          </div>
                       </Grid>
                   </div>
                   <Button
@@ -368,6 +457,7 @@ export class Profile extends Component {
                       show={this.state.showConfirmation}
                       handleClose={() => this.setState({ showConfirmation: false })}
                       handleOK={() => this.handleOK()}
+                      title="Delete"
                       messages="Are you sure you want to delete profile?"
                       ps="This action can't undo. Please determine clearly before clicking OK."
                   />
