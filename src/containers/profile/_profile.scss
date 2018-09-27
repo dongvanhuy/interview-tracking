@@ -12,8 +12,8 @@
   .add-cadidate-btn {
     position: fixed;
     border-radius: 100%;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     right: 10px;
     bottom: 10px;
     z-index: 10;
@@ -149,6 +149,9 @@
 
 .button-common {
   width: 45%;
+  background: transparent;
+  border: none;
+  box-shadow: none;
   &__left {
     margin-right: 2px;
   }
@@ -177,7 +180,7 @@
 
 
 .candidate-table {
-  margin: 15px;
+
   .time {
     width: 150px;
   }
@@ -201,14 +204,20 @@
     height: 50px;
     display: table;
     font-weight: bold;
+    text-align: center;
     // background-color: #eee;
     background-color: $color-black;
     color: $color-yellow;
+    border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
 
     &-th {
       display: table-cell;
-      border: 1px solid #ddd;
+      border-right: 1px solid $border-color-gray;
       padding: 10px;
+      &:last-child {
+        border-right: none;
+      }
     }
   }
 
@@ -219,24 +228,25 @@
       background-color: lightgrey;
       border: none;
       font-size: 14px;
-      padding-top: 3px;
-      padding-bottom: 2px;
-      padding-left: 10px;
-      padding-right: 50px;
+      padding: 10px;
       font-family: "ProximaNova-Bold", Arial, sans-serif;
 
     }
 
     &--item {
-      border-bottom: 1px solid #eee !important;
+      border-bottom: 1px solid $border-color-gray !important;
       width: 100%;
       display: table;
+      text-align: center;
     }
 
     &--col {
       display: table-cell;
-      border: 1px solid #eee;
+      border-right: 1px solid $border-color-gray;
       padding: 8px;
+      &:first-child {
+        border-left: 1px solid $border-color-gray;
+      }
     }
 
   }

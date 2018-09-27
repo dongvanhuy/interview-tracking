@@ -1,12 +1,11 @@
 {
   "name": "Interview Tracking",
-  "short_name": "Interview v1.0",
+  "short_name": "Interview v1.7",
   "theme_color": "#000000",
   "background_color": "#FFFFFF",
-  "display": "standalone",
-  "orientation": "portrait-primary",
-  "scope": ".",
+  "orientation": "any",
   "start_url": "/index.html",
+  "display": "fullscreen",
   "icons": [
     {
       "src": "images/icon-72x72.png",

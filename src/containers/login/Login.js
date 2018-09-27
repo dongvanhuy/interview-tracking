@@ -54,6 +54,7 @@ export class Login extends Component {
 
     login = e => {
         e.preventDefault();
+        authContext.config.redirectUri = window.location.href.replace('index.html', '');
         authContext.login();
     };
 

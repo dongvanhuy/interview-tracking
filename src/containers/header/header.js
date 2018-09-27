@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { DropdownButton, MenuItem, ButtonToolbar, ListGroup, ListGroupItem } from 'react-bootstrap';
 import FontAwesomeIcon from 'react-fontawesome';
 import logo from '../../../src/assets/images/dxcLogo.svg';
+import iconUser from '../../../src/assets/images/human.png';
 import { authContext } from '../../adalConfig';
 
 export class Header extends Component {
@@ -37,7 +38,8 @@ export class Header extends Component {
                             <p className="interview-header__email">{sessionStorage.getItem('userEmail')}</p>
                             <Link className="interview-header__logout" to="" onClick={() => authContext.logOut()}>Logout</Link>
                         </div>
-                        <FontAwesomeIcon className="icon-user" name="user-circle" size="2x" />
+                        <img className="icon-user" src={iconUser} alt="icon user" width="38" />
+                        {/* <FontAwesomeIcon className="icon-user" name="user-circle" size="2x" /> */}
                     </div>
                     <div className="interview-header__mobile hidden-sm hidden-md hidden-lg">
                         <FontAwesomeIcon name="bars" size="2x" onClick={() => this.addActiveClass()} />

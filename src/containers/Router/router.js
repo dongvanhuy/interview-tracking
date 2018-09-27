@@ -10,28 +10,6 @@ import Header from '../header/header';
 
 export class Routes extends Component {
     render() {
-    // let routes = (
-    //     <Switch>
-    //         <Route exact path="/" component={Login} />
-    //         <Redirect to="/" />
-    //     </Switch>
-    // );
-    // if (this.props.loginStatus) {
-    //     routes = (
-    //         <React.Fragment>
-    //             <Header />
-    //             <Switch>
-    //                 <Route exact path="/profile" component={Profile} />
-    //                 {/* <Route exact path="/profile-details" component={ProfileDetails} /> */}
-    //                 <Route exact path="/profile-info/:profileId" component={ProfileInfo} />
-    //                 <Route exact path="/profile-info/" component={ProfileInfo} />
-    //                 <Redirect to="/profile" />
-    //             </Switch>
-    //         </React.Fragment>
-    //     );
-    // }
-    // return routes;
-
         const login = (
             <Switch>
                 <Route path="/" component={Login} />
@@ -51,6 +29,7 @@ export class Routes extends Component {
                     <Route exact path="/profile-info/" component={ProfileInfo} />
                     <Redirect to="/profile" />
                 </Switch>
+                <p className="footer-info text-center container">© 2018 DXC Technology Company. All rights reserved.</p>
             </React.Fragment>
         );
 
