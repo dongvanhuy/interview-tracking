@@ -17,8 +17,7 @@ export class Login extends Component {
 
     initState = {
         email: '',
-        givenName: '',
-        surname: '',
+        userName: '',
         loginSuccess: false,
     };
 
@@ -33,7 +32,6 @@ export class Login extends Component {
                 // console.log('error', `${err}`);
             }
         } else if (user) {
-            console.log('user', user);
             sessionStorage.setItem('userName', user.profile.name);
             sessionStorage.setItem('userEmail', user.userName);
             this.setState(
@@ -56,6 +54,7 @@ export class Login extends Component {
 
     login = e => {
         e.preventDefault();
+        authContext.config.redirectUri = window.location.href.replace('index.html', '');
         authContext.login();
     };
 

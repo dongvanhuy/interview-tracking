@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropsTypes from 'prop-types';
-import FontAwesomeIcon from 'react-fontawesome';
 import classNames from 'classnames';
 import { Grid, Row, Button, Col } from 'react-bootstrap';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
@@ -10,6 +9,9 @@ import moment from 'moment';
 import { push } from 'react-router-redux';
 import uid from 'uuid';
 import loading from '../../assets/images/loading.svg';
+import plus from '../../assets/images/plus.png';
+import deleteIcon from '../../assets/images/delete.svg';
+import editIcon from '../../assets/images/edit.png';
 import {
     loadProfile,
     viewDetailDataId,
@@ -170,17 +172,19 @@ export class Profile extends Component {
           <Td className="text-center">
               <button
                   type="button"
-                  className="btn btn-default button-common button-common__left"
+                  className="btn button-common button-common__left"
                   onClick={() => this.viewDetailId(item.candidate_id)}
               >
-                  <i className="fa fa-pencil" />
+                  <img src={editIcon} alt="edit" width="25" />
+                  {/* <i className="fa fa-pencil" /> */}
               </button>
               <button
                   type="button"
-                  className="btn btn-default button-common button-common__right"
+                  className="btn button-common button-common__right"
                   onClick={() => this.deleteDetailId(item.candidate_id)}
               >
-                  <i className="fa fa-trash-o" />
+                  <img src={deleteIcon} alt="delete" width="25" />
+                  {/* <i className="fa fa-trash-o" /> */}
               </button>
           </Td>
       </Tr>
@@ -198,17 +202,19 @@ export class Profile extends Component {
           <div className="action candidate-table__body--col">
               <button
                   type="button"
-                  className="btn btn-default button-common button-common__left"
+                  className="btn button-common button-common__left"
                   onClick={() => this.viewDetailId(item.candidate_id)}
               >
-                  <i className="fa fa-pencil" />
+                  <img src={editIcon} alt="edit" width="25" />
+                  {/* <i className="fa fa-pencil" /> */}
               </button>
               <button
                   type="button"
-                  className="btn btn-default button-common button-common__right"
+                  className="btn button-common button-common__right"
                   onClick={() => this.deleteDetailId(item.candidate_id)}
               >
-                  <i className="fa fa-trash-o" />
+                  <img src={deleteIcon} alt="delete" width="25" />
+                  {/* <i className="fa fa-trash-o" /> */}
               </button>
           </div>
       </div>
@@ -380,7 +386,7 @@ export class Profile extends Component {
                           </Row>
                           {/* list profiles on laptop */}
                           <div className="list-candidate-page row hidden-xs">
-                              <div className="candidate-table">
+                              <div className="candidate-table container">
                                   <div className="candidate-table__header">
                                       {/* <div className="number candidate-table__header-th">#</div> */}
                                       <div className="time candidate-table__header-th">Time</div>
@@ -445,7 +451,8 @@ export class Profile extends Component {
                       className="add-cadidate-btn"
                       onClick={() => this.addProfileDetail()}
                   >
-                      <FontAwesomeIcon name="plus" size="2x" />
+                      <img src={plus} className="plus-icon" alt="plus" width="30" />
+                      {/* <FontAwesomeIcon name="plus" size="2x" /> */}
                   </Button>
                   <WarningModal
                       show={this.state.isOpen}

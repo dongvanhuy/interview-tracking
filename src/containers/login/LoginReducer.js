@@ -3,17 +3,14 @@ import { UPDATE_LOGIN_INFO } from '../../store/actionTypes';
 
 const initialState = {
     email: '',
-    givenName: '',
-    surname: '',
+    userName: '',
     loginSuccess: false,
 };
 
 const actions = {
-    [UPDATE_LOGIN_INFO]: (state, { payload }) => {
-        return {
-            ...payload,
-        };
-    },
+    [UPDATE_LOGIN_INFO]: (state, { payload }) => ({
+        ...payload,
+    }),
 };
 
 export default handleActions(actions, initialState);
