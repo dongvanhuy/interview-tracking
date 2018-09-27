@@ -4,8 +4,9 @@
   "theme_color": "#000000",
   "background_color": "#FFFFFF",
   "orientation": "any",
-  "start_url": "/index.html",
-  "display": "fullscreen",
+  "scope": "/",
+  "start_url": "index.html",
+  "display": "standalone",
   "icons": [
     {
       "src": "images/icon-72x72.png",
