@@ -15,6 +15,25 @@ export class Login extends Component {
         this.loadUser();
     }
 
+    // getCurrentUser = (accessToken) => {
+    //     const xhr = new XMLHttpRequest();
+    //     xhr.open('GET', 'https://graph.microsoft.com/v1.0/me', true);
+    //     xhr.setRequestHeader('Authorization', `Bearer ${accessToken}`);
+    //     xhr.onreadystatechange = () => {
+    //         if (xhr.readyState === 4 && xhr.status === 200) {
+    //             // Do something with the response
+    //             // console.log('xhr.responseText', xhr.responseText);
+    //             // document.getElementById('api_response').textContent =
+    //             //     JSON.stringify(JSON.parse(xhr.responseText), null, '  ');
+    //         } else {
+    //             // TODO: Do something with the error (or non-200 responses)
+    //             // document.getElementById('api_response').textContent =
+    //             //     `ERROR:\n\n${xhr.responseText}`;
+    //         }
+    //     };
+    //     xhr.send();
+    // }
+
     initState = {
         email: '',
         userName: '',
@@ -44,6 +63,20 @@ export class Login extends Component {
                     this.props.updateLoginInfo(this.state);
                 },
             );
+            // Get an access token to the Microsoft Graph API
+            authContext.acquireToken(
+                'https://graph.microsoft.com',
+                (error, token) => {
+                    if (error || !token) {
+                        // TODO: Handle error obtaining access token
+                        document.getElementById('api_response').textContent =
+                            `ERROR:\n\n${error}`;
+                        return;
+                    }
+                    // Use the access token
+                    sessionStorage.setItem('accessToken', token);
+                },
+            );
         } else {
             sessionStorage.clear();
             this.setState({ ...this.initState }, () => {
@@ -54,7 +87,6 @@ export class Login extends Component {
 
     login = e => {
         e.preventDefault();
-        authContext.config.redirectUri = window.location.href.replace('index.html', '');
         authContext.login();
     };
 

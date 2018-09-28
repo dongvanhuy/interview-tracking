@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import Login from '../login/Login';
 import Profile from '../profile/Profile';
 import ProfileInfo from '../profileDetails/ProfileInfo';
-// import ProfileDetails from '../profileDetails/ProfileDetails';
 import Header from '../header/header';
 
 export class Routes extends Component {
@@ -15,7 +14,6 @@ export class Routes extends Component {
                 <Route path="/" component={Login} />
             </Switch>
         );
-
         const loginSuccess = (
             <React.Fragment>
                 <Header />
@@ -36,6 +34,7 @@ export class Routes extends Component {
         return (
             <React.Fragment>
                 {this.props.loginStatus ? loginSuccess : login}
+                {/* {true ? loginSuccess : login} */}
             </React.Fragment>
         );
     }
