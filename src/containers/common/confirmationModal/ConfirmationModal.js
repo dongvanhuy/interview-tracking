@@ -17,6 +17,10 @@ export default class ConfirmationModal extends Component {
       handleOK: PropTypes.func,
   };
 
+  handleClick = () => {
+      this.props.handleOK();
+  }
+
   render() {
       return (
           <React.Fragment>
@@ -34,7 +38,7 @@ export default class ConfirmationModal extends Component {
                   </Modal.Body>
                   <Modal.Footer>
                       <Button
-                          onClick={() => this.props.handleOK()}
+                          onClick={this.handleClick}
                           className="success-modal__button-yellow"
                       >
               OK

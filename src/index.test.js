@@ -1,8 +1,9 @@
-/* eslint-disable global-require,no-global-assign */
-import Index from './index';
+import Index from "./index";
 
-const util = require('util');
+const util = require("util");
 
-it('renders App to DOM', () => {
+describe("renders App to DOM", () => {
+  it("should render", () => {
     expect(util.inspect(Index)).toMatchSnapshot();
+  });
 });

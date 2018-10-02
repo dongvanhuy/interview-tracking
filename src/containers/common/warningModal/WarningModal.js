@@ -9,6 +9,9 @@ class WarningModal extends Component {
         handleOK: () => {},
     };
 
+    handleClick = () => {
+        this.props.handleOK();
+    }
 
     render() {
         return (
@@ -26,7 +29,7 @@ class WarningModal extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button
-                            onClick={() => this.props.handleOK()}
+                            onClick={this.handleClick}
                         >
                 OK
                         </Button>
