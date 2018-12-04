@@ -242,7 +242,8 @@ export class ProfileInfo extends Component {
           loading: true,
       });
       if (!isEmpty(profileId)) {
-          this.state.profileId = profileId;
+          //   this.state.profileId = profileId;
+          this.setState({ profileId });
           this.props.updateProfileDetails(this.state);
       } else {
           this.props.createProfileDetails(this.state);

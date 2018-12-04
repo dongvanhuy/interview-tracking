@@ -159,7 +159,7 @@ export class ProfileDetailsFirstRound extends Component {
                 <h2 className="profile-details__title">1st Round</h2>
                 <Row className="show-grid">
                     <Col xs={12} sm={9} md={9} lg={9}>
-                        <ControlLabel>Interviewer(s)'s name(<span className="span">*</span>)</ControlLabel>
+                        <ControlLabel>Interviewer(s)'s email(<span className="span">*</span>)</ControlLabel>
                         <Row className="show-grid">
                             <Col xs={12} sm={6} md={6} lg={6}>
                                 <FormGroup>
@@ -170,10 +170,7 @@ export class ProfileDetailsFirstRound extends Component {
                                         onChange={(e) => this.props.handleChange(e)}
                                         name="interviewer_round1_01"
                                         value={this.props.interviewer_round1_01}
-                                    >
-                                        {/* <option value="">Select</option> */}
-                                        {/* {users.map(user => (<option key={user.id} value={user.email}>{user.fullname}</option>))} */}
-                                    </FormControl>
+                                    />
                                 </FormGroup>
                                 {errorMessages.errInterviewer && <span className="error_msg">{errorMessages.errInterviewer}</span>}
                             </Col>
@@ -186,10 +183,7 @@ export class ProfileDetailsFirstRound extends Component {
                                         onChange={(e) => this.props.handleChange(e)}
                                         name="interviewer_round1_02"
                                         value={this.props.interviewer_round1_02}
-                                    >
-                                        {/* <option value="">Select</option>
-                                        {users.map(user => (<option key={user.id} value={user.email}>{user.fullname}</option>))} */}
-                                    </FormControl>
+                                    />
                                 </FormGroup>
                             </Col>
                         </Row>

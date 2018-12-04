@@ -28,13 +28,13 @@ export class ProfileDetailsSecondRound extends Component {
       const yesterday = Datetime.moment().subtract(1, 'day');
       const valid = current =>
           current.isAfter(yesterday) && current.day() !== 0 && current.day() !== 6;
-      const { users } = this.props;
+      //   const { users } = this.props;
       return (
           <React.Fragment>
               <h2 className="profile-details__title">2st Round</h2>
               <Row className="show-grid">
                   <Col xs={12} sm={4} md={4} lg={4}>
-                      <ControlLabel>Interviewer(s)'s name</ControlLabel>
+                      <ControlLabel>Interviewer(s)'s email</ControlLabel>
                       <FormGroup>
                           <FormControl
                               type="text"
@@ -43,14 +43,7 @@ export class ProfileDetailsSecondRound extends Component {
                               onChange={e => this.props.handleChange(e)}
                               name="interviewer_round2"
                               value={this.props.interviewer_round2}
-                          >
-                              {/* <option value="">Select</option>
-                              {users.map(user => (
-                                  <option key={user.id} value={user.email}>
-                                      {user.fullname}
-                                  </option>
-                              ))} */}
-                          </FormControl>
+                          />
                       </FormGroup>
                   </Col>
                   <Col xs={12} sm={3} md={3} lg={3}>
