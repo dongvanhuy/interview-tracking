@@ -164,15 +164,15 @@ export class ProfileDetailsFirstRound extends Component {
                             <Col xs={12} sm={6} md={6} lg={6}>
                                 <FormGroup>
                                     <FormControl
-                                        componentClass="select"
-                                        placeholder="select"
+                                        type="text"
+                                        placeholder="Vui lòng ghi email tại đây ..."
                                         className={this.props.errorMessages.errInterviewer ? 'borderInterviewer' : ''}
                                         onChange={(e) => this.props.handleChange(e)}
                                         name="interviewer_round1_01"
                                         value={this.props.interviewer_round1_01}
                                     >
-                                        <option value="">Select</option>
-                                        {users.map(user => (<option key={user.id} value={user.email}>{user.fullname}</option>))}
+                                        {/* <option value="">Select</option> */}
+                                        {/* {users.map(user => (<option key={user.id} value={user.email}>{user.fullname}</option>))} */}
                                     </FormControl>
                                 </FormGroup>
                                 {errorMessages.errInterviewer && <span className="error_msg">{errorMessages.errInterviewer}</span>}
@@ -180,16 +180,15 @@ export class ProfileDetailsFirstRound extends Component {
                             <Col xs={12} sm={6} md={6} lg={6}>
                                 <FormGroup>
                                     <FormControl
-                                        componentClass="select"
-                                        placeholder="select"
-                                        // className="profile-details__select"
+                                        type="text"
+                                        placeholder="Vui lòng ghi email tại đây ..."
                                         className={this.props.errorMessages.errInterviewer ? 'borderInterviewer' : ''}
                                         onChange={(e) => this.props.handleChange(e)}
                                         name="interviewer_round1_02"
                                         value={this.props.interviewer_round1_02}
                                     >
-                                        <option value="">Select</option>
-                                        {users.map(user => (<option key={user.id} value={user.email}>{user.fullname}</option>))}
+                                        {/* <option value="">Select</option>
+                                        {users.map(user => (<option key={user.id} value={user.email}>{user.fullname}</option>))} */}
                                     </FormControl>
                                 </FormGroup>
                             </Col>

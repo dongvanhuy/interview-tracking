@@ -37,19 +37,19 @@ export class ProfileDetailsSecondRound extends Component {
                       <ControlLabel>Interviewer(s)'s name</ControlLabel>
                       <FormGroup>
                           <FormControl
-                              componentClass="select"
-                              placeholder="select"
+                              type="text"
+                              placeholder="Vui lòng ghi email tại đây ..."
                               className="profile-details__select"
                               onChange={e => this.props.handleChange(e)}
                               name="interviewer_round2"
                               value={this.props.interviewer_round2}
                           >
-                              <option value="">Select</option>
+                              {/* <option value="">Select</option>
                               {users.map(user => (
                                   <option key={user.id} value={user.email}>
                                       {user.fullname}
                                   </option>
-                              ))}
+                              ))} */}
                           </FormControl>
                       </FormGroup>
                   </Col>
