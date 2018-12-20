@@ -142,7 +142,7 @@ export class ProfileDetailsFirstRound extends Component {
                         </FormGroup>
                         <FormGroup className="profile-details__recuiter">
                             <ControlLabel>Recruiter</ControlLabel>
-                            <FormControl
+                            {/* <FormControl
                                 componentClass="select"
                                 className="profile-details__select"
                                 name="recruiter"
@@ -151,8 +151,15 @@ export class ProfileDetailsFirstRound extends Component {
                                 onChange={(e) => this.props.handleChange(e)}
                             >
                                 <option value="">Select</option>
-                                {users.map(user => (<option key={user.id} value={user.email}>{user.fullname}</option>))}
-                            </FormControl>
+                                {users.map(user => (<option key={user.id} value={user.mail}>{user.displayName}</option>))}
+                            </FormControl> */}
+                            <FormControl
+                                type="text"
+                                placeholder=""
+                                name="recruiter"
+                                value={this.props.recruiter}
+                                onChange={(e) => this.props.handleChange(e)}
+                            />
                         </FormGroup>
                     </Col>
                 </Row>
@@ -165,7 +172,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 <FormGroup>
                                     <FormControl
                                         type="text"
-                                        placeholder="Vui lòng ghi email tại đây ..."
+                                        placeholder="Please enter the email ..."
                                         className={this.props.errorMessages.errInterviewer ? 'borderInterviewer' : ''}
                                         onChange={(e) => this.props.handleChange(e)}
                                         name="interviewer_round1_01"
@@ -178,7 +185,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 <FormGroup>
                                     <FormControl
                                         type="text"
-                                        placeholder="Vui lòng ghi email tại đây ..."
+                                        placeholder="Please enter the email ..."
                                         className={this.props.errorMessages.errInterviewer ? 'borderInterviewer' : ''}
                                         onChange={(e) => this.props.handleChange(e)}
                                         name="interviewer_round1_02"
