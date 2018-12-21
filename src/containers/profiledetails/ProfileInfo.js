@@ -314,6 +314,22 @@ export class ProfileInfo extends Component {
               {(this.state.loading || loadingDetail) && this.callLoading()}
               <form className="profile-details">
                   <Grid>
+                      <FormGroup className="profile-details__btn profile-details__btn--top">
+                          <button
+                              type="button"
+                              className="profile-details__cancel"
+                              onClick={() => this.props.push('/profile')}
+                          >
+                            CANCEL
+                          </button>
+                          <button
+                              type="button"
+                              className="profile-details__submit"
+                              onClick={e => this.submitForm(e)}
+                          >
+                            SAVE
+                          </button>
+                      </FormGroup>
                       <ProfileDetailsFirstRound
                           handleChange={this.handleChange}
                           users={users}
@@ -330,14 +346,14 @@ export class ProfileInfo extends Component {
                               className="profile-details__cancel"
                               onClick={() => this.props.push('/profile')}
                           >
-                CANCEL
+                            CANCEL
                           </button>
                           <button
                               type="button"
                               className="profile-details__submit"
                               onClick={e => this.submitForm(e)}
                           >
-                SAVE
+                            SAVE
                           </button>
                       </FormGroup>
                   </Grid>

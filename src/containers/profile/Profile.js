@@ -45,7 +45,7 @@ export class Profile extends Component {
       this.state = {
           isOpen: false,
           showConfirmation: false,
-          loading: false,
+          //   loading: false,
       };
   }
 
@@ -72,11 +72,13 @@ export class Profile extends Component {
       }
   }
 
-  getFullname = (email) => {
-      const { users } = this.props;
-      const userFilter = users.filter(user => user.email === email);
-      return userFilter.length > 0 ? userFilter[0].fullname : '';
-  }
+    //   getFullname = (email) => {
+    //       const { users } = this.props;
+    //       const userFilter = users.filter(user => user.email === email);
+    //       return userFilter.length > 0 ? userFilter[0].fullname : '';
+    //   }
+
+  getFullname = (email) => email;
 
   viewDetailId = id => {
       this.props.viewDetailDataId(id);
@@ -101,7 +103,7 @@ export class Profile extends Component {
           showConfirmation: false,
       });
       this.props.deleteProfileId(this.state.candidateId);
-      this.setState({ loading: true });
+      //   this.setState({ loading: true });
   };
 
 
@@ -163,7 +165,7 @@ export class Profile extends Component {
       return status ? <span className={cls}>{status}</span> : '';
   }
 
-  renderItem = (item, index) => (
+  renderItem = (item) => (
       <Tr key={uid()} className="tableComponent">
           {/* <Td>{index + 1}</Td> */}
           <Td>{moment.utc(item.start_time).format('DD-MM-YYYY HH:mm')}</Td>
@@ -193,7 +195,7 @@ export class Profile extends Component {
       </Tr>
   )
 
-  renderItemTable = (item, index) => (
+  renderItemTable = (item) => (
       <div key={uid()} className="candidate-table__body--item">
           {/* <div className="number candidate-table__body--col">{index + 1}</div> */}
           <div className="time candidate-table__body--col">{moment.utc(item.start_time).format('DD-MM-YYYY HH:mm')}</div>

@@ -182,22 +182,35 @@
 .candidate-table {
 
   .time {
-    width: 150px;
+    width: 100px;
+    @include desktop {
+      width: 150px;
+    }
   }
   .candidate {
-    width: 30%;
+    // width: 30%;
   }
   .interviewer {
-    width: 150px;
+    width: 100px;
+    word-break: break-all;
+    @include desktop {
+      width: 150px;
+    }
   }
   .position {
-    width: 150px;
+    width: 100px;
+    @include desktop {
+      width: 150px;
+    }
   }
   .status {
     width: 100px;
   }
   .action {
-    width: 130px;
+    width: 70px;
+    @include desktop {
+      width: 130px;
+    }
   }
   &__header {
     width: 100%;

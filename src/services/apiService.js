@@ -89,7 +89,7 @@ export default class ApiService {
         }
       })
     );
-
+// https://graph.microsoft.com/v1.0/users || `${API_HOST}/api/users`
   static getUsers = () =>
     Observable.fromPromise(
       axios.get(`${API_HOST}/api/users`, {
