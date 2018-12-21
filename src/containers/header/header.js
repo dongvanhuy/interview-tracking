@@ -1,17 +1,21 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-script-url */
 import React, { Component } from 'react';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { UserAgentApplication } from 'msal';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import config from '../../appConfig';
 import logo from '../../../src/assets/images/dxcLogo.svg';
 import iconUser from '../../../src/assets/images/human.png';
 import burgerIcon from '../../../src/assets/images/burgerIcon.png';
-import { authContext } from '../../adalConfig';
 
 export class Header extends Component {
     constructor(props) {
         super(props);
+        this.userAgentApplication = new UserAgentApplication(config.appId, null, null);
         this.state = {
             showMenu: false,
         };
@@ -20,6 +24,10 @@ export class Header extends Component {
         const active = this.state.showMenu;
         this.setState({ showMenu: !active });
     };
+
+    logout() {
+        this.userAgentApplication.logout();
+    }
 
     render() {
         return (
@@ -36,7 +44,7 @@ export class Header extends Component {
                     <div className="interview-header__info hidden-xs">
                         <div className="interview-header__user">
                             <p className="interview-header__email">{sessionStorage.getItem('userEmail')}</p>
-                            <Link className="interview-header__logout" to="" onClick={() => authContext.logOut()}>Logout</Link>
+                            <Link className="interview-header__logout" to="" onClick={() => this.logout()}>Logout</Link>
                         </div>
                         <img className="icon-user" src={iconUser} alt="icon user" width="38" />
                         {/* <FontAwesomeIcon className="icon-user" name="user-circle" size="2x" /> */}
@@ -48,7 +56,7 @@ export class Header extends Component {
                         {/* <FontAwesomeIcon name="bars" size="2x" onClick={() => this.addActiveClass()} /> */}
                         <ListGroup className={!this.state.showMenu && 'invisible'}>
                             <ListGroupItem>{`${sessionStorage.getItem('userEmail')}`}</ListGroupItem>
-                            <ListGroupItem onClick={() => authContext.logOut()}>Logout</ListGroupItem>
+                            <ListGroupItem onClick={() => this.logout()}>Logout</ListGroupItem>
                         </ListGroup>
                     </div>
                 </section>

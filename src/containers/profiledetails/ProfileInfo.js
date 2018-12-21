@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { push } from 'react-router-redux';
@@ -35,7 +36,6 @@ export class ProfileInfo extends Component {
             this.props.loadProfileDetails(profileId);
         }
     }
-
 
     componentWillReceiveProps(nextProps) {
         const { profileId } = this.state;
@@ -76,17 +76,23 @@ export class ProfileInfo extends Component {
                     });
                 }
             } else if (nextProps.doSuccessfully === false) {
-                toast('Oops. Something went wrong. Please try again or contact your administrator.', {
-                    autoClose: 2000,
-                    position: 'top-center',
-                    hideProgressBar: true,
-                    className: 'customToaster',
-                });
+                toast(
+                    'Oops. Something went wrong. Please try again or contact your administrator.',
+                    {
+                        autoClose: 2000,
+                        position: 'top-center',
+                        hideProgressBar: true,
+                        className: 'customToaster',
+                    },
+                );
             }
         }
 
         // save data successfull
-        if (this.props.doSuccessfully !== nextProps.doSuccessfully && nextProps.doSuccessfully) {
+        if (
+            this.props.doSuccessfully !== nextProps.doSuccessfully &&
+      nextProps.doSuccessfully
+        ) {
             this.bookMeetingRoom();
         }
     }
@@ -138,7 +144,6 @@ export class ProfileInfo extends Component {
           errTime: '',
           errPosition: '',
       },
-
   };
 
   bookMeetingRoom = () => {
@@ -151,11 +156,11 @@ export class ProfileInfo extends Component {
               Content: 'The interview will be begin at this time!',
           },
           Start: {
-              dateTime: moment.utc(dataSave.start_time).format('YYYY-MM-DDTHH:mm:ss'),
+              DateTime: moment.utc(dataSave.start_time).format('YYYY-MM-DDTHH:mm:ss'),
               TimeZone: 'SE Asia Standard Time',
           },
           End: {
-              dateTime: moment.utc(dataSave.end_time).format('YYYY-MM-DDTHH:mm:ss'),
+              DateTime: moment.utc(dataSave.end_time).format('YYYY-MM-DDTHH:mm:ss'),
               TimeZone: 'SE Asia Standard Time',
           },
           Attendees: [
@@ -175,8 +180,9 @@ export class ProfileInfo extends Component {
               },
           ],
       };
+
       this.props.bookMeetingRoom(params);
-  }
+  };
 
   resetForm = () => {
       this.setState({ ...this.initState }, () => {
@@ -192,14 +198,29 @@ export class ProfileInfo extends Component {
       const interviewer1 = this.state.interviewer_round1_01;
       const interviewer2 = this.state.interviewer_round1_02;
       const { errorMessages } = this.state;
-      const result = moment(this.state.start_time).isBefore(this.state.end_time, 'minute');
+      const result = moment(this.state.start_time).isBefore(
+          this.state.end_time,
+          'minute',
+      );
 
-      fullName === '' ? errorMessages.errFullname = 'Write in this field, pls.' : errorMessages.errFullname = '';
-      position === '' ? errorMessages.errPosition = 'Write in this field, pls.' : errorMessages.errPosition = '';
-      startTime === '' ? errorMessages.errStartTimeMeeting = 'Choose a start time, pls.' : errorMessages.errStartTimeMeeting = '';
-      endTime === '' ? errorMessages.errEndTimeMeeting = 'Choose a end time, pls.' : errorMessages.errEndTimeMeeting = '';
-      interviewer1 === '' && interviewer2 === '' ? errorMessages.errInterviewer = 'Choose an interviewer(s), pls.' : errorMessages.errInterviewer = '';
-      !result ? errorMessages.errTime = ' Please choose reasonable datetime.' : errorMessages.errTime = '';
+      fullName === ''
+          ? (errorMessages.errFullname = 'Write in this field, pls.')
+          : (errorMessages.errFullname = '');
+      position === ''
+          ? (errorMessages.errPosition = 'Write in this field, pls.')
+          : (errorMessages.errPosition = '');
+      startTime === ''
+          ? (errorMessages.errStartTimeMeeting = 'Choose a start time, pls.')
+          : (errorMessages.errStartTimeMeeting = '');
+      endTime === ''
+          ? (errorMessages.errEndTimeMeeting = 'Choose a end time, pls.')
+          : (errorMessages.errEndTimeMeeting = '');
+      interviewer1 === '' && interviewer2 === ''
+          ? (errorMessages.errInterviewer = 'Choose an interviewer(s), pls.')
+          : (errorMessages.errInterviewer = '');
+      !result
+          ? (errorMessages.errTime = ' Please choose reasonable datetime.')
+          : (errorMessages.errTime = '');
 
       this.setState({ ...errorMessages, isChecking: true });
   };
@@ -209,14 +230,34 @@ export class ProfileInfo extends Component {
       const stateInit = this.state;
       const { isChecking } = this.state;
       stateInit[name] = value;
-      const result = moment(this.state.start_time).isBefore(this.state.end_time, 'minute');
+      const result = moment(this.state.start_time).isBefore(
+          this.state.end_time,
+          'minute',
+      );
       if (isChecking) {
-          stateInit.candidate_fullname !== '' ? stateInit.errorMessages.errFullname = '' : stateInit.errorMessages.errFullname = 'Write in this field, pls.';
-          stateInit.position_apply !== '' ? stateInit.errorMessages.errPosition = '' : stateInit.errorMessages.errPosition = 'Write in this field, pls.';
-          stateInit.start_time !== '' ? stateInit.errorMessages.errStartTimeMeeting = '' : stateInit.errorMessages.errStartTimeMeeting = 'Choose a start time, pls.';
-          stateInit.end_time !== '' ? stateInit.errorMessages.errEndTimeMeeting = '' : stateInit.errorMessages.errEndTimeMeeting = 'Choose a end time, pls.';
-          stateInit.interviewer_round1_01 !== '' || stateInit.interviewer_round1_02 !== '' ? stateInit.errorMessages.errInterviewer = '' : stateInit.errorMessages.errInterviewer = 'Choose an interviewer(s), pls.';
-          !result ? stateInit.errorMessages.errTime = 'Please choose reasonable datetime.' : stateInit.errorMessages.errTime = '';
+          stateInit.candidate_fullname !== ''
+              ? (stateInit.errorMessages.errFullname = '')
+              : (stateInit.errorMessages.errFullname = 'Write in this field, pls.');
+          stateInit.position_apply !== ''
+              ? (stateInit.errorMessages.errPosition = '')
+              : (stateInit.errorMessages.errPosition = 'Write in this field, pls.');
+          stateInit.start_time !== ''
+              ? (stateInit.errorMessages.errStartTimeMeeting = '')
+              : (stateInit.errorMessages.errStartTimeMeeting =
+            'Choose a start time, pls.');
+          stateInit.end_time !== ''
+              ? (stateInit.errorMessages.errEndTimeMeeting = '')
+              : (stateInit.errorMessages.errEndTimeMeeting =
+            'Choose a end time, pls.');
+          stateInit.interviewer_round1_01 !== '' ||
+      stateInit.interviewer_round1_02 !== ''
+              ? (stateInit.errorMessages.errInterviewer = '')
+              : (stateInit.errorMessages.errInterviewer =
+            'Choose an interviewer(s), pls.');
+          !result
+              ? (stateInit.errorMessages.errTime =
+            'Please choose reasonable datetime.')
+              : (stateInit.errorMessages.errTime = '');
       }
       this.setState({ ...stateInit });
   };
@@ -226,7 +267,14 @@ export class ProfileInfo extends Component {
       this.checkValidateForm();
       const { errorMessages } = this.state;
 
-      if (errorMessages.errFullname === '' && errorMessages.errPosition === '' && errorMessages.errStartTimeMeeting === '' && errorMessages.errEndTimeMeeting === '' && errorMessages.errInterviewer === '' && errorMessages.errTime === '') {
+      if (
+          errorMessages.errFullname === '' &&
+      errorMessages.errPosition === '' &&
+      errorMessages.errStartTimeMeeting === '' &&
+      errorMessages.errEndTimeMeeting === '' &&
+      errorMessages.errInterviewer === '' &&
+      errorMessages.errTime === ''
+      ) {
           this.setState({
               showConfirmation: true,
           });
@@ -242,7 +290,7 @@ export class ProfileInfo extends Component {
           loading: true,
       });
       if (!isEmpty(profileId)) {
-          //   this.state.profileId = profileId;
+      //   this.state.profileId = profileId;
           this.setState({ profileId });
           this.props.updateProfileDetails(this.state);
       } else {
@@ -299,7 +347,11 @@ export class ProfileInfo extends Component {
                   handleClose={() => this.setState({ showConfirmation: false })}
                   handleOK={() => this.handleOK()}
                   title={!isEmpty(profileId) ? 'Update' : 'Save'}
-                  messages={!isEmpty(profileId) ? 'Are you sure you want to update new profile?' : 'Are you sure you want to save new profile?'}
+                  messages={
+                      !isEmpty(profileId)
+                          ? 'Are you sure you want to update new profile?'
+                          : 'Are you sure you want to save new profile?'
+                  }
                   ps="This action can't undo. Please determine clearly before clicking OK."
               />
               <ToastContainer transition={Slide} />
@@ -308,7 +360,7 @@ export class ProfileInfo extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
     profileDetails: state.profileDetails.dataProfileDetails,
     doSuccessfully: state.profileDetails.doSuccessfully,
     dataProfileRes: state.profileDetails.dataProfileRes,

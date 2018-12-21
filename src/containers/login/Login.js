@@ -1,94 +1,83 @@
+/* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { UserAgentApplication } from 'msal';
 import { push } from 'react-router-redux';
+// import { getAuthUrl } from '../../authHelper';
 import { updateLoginInfo } from './LoginActions';
-import { authContext } from '../../adalConfig';
+import { getUserDetails } from '../../GraphService';
+// import { authContext } from '../../adalConfig';
+import config from '../../appConfig';
 import logo from '../../../src/assets/images/dxcBlack.png';
 
 export class Login extends Component {
     constructor(props) {
         super(props);
+        this.userAgentApplication = new UserAgentApplication(config.appId, null, null);
         this.state = this.initState;
     }
 
-    componentDidMount() {
-        this.loadUser();
-    }
+    async getUserProfile() {
+        try {
+            // Get the access token silently
+            // If the cache contains a non-expired token, this function
+            // will just return the cached token. Otherwise, it will
+            // make a request to the Azure OAuth endpoint to get a token
 
-    // getCurrentUser = (accessToken) => {
-    //     const xhr = new XMLHttpRequest();
-    //     xhr.open('GET', 'https://graph.microsoft.com/v1.0/me', true);
-    //     xhr.setRequestHeader('Authorization', `Bearer ${accessToken}`);
-    //     xhr.onreadystatechange = () => {
-    //         if (xhr.readyState === 4 && xhr.status === 200) {
-    //             // Do something with the response
-    //             // console.log('xhr.responseText', xhr.responseText);
-    //             // document.getElementById('api_response').textContent =
-    //             //     JSON.stringify(JSON.parse(xhr.responseText), null, '  ');
-    //         } else {
-    //             // TODO: Do something with the error (or non-200 responses)
-    //             // document.getElementById('api_response').textContent =
-    //             //     `ERROR:\n\n${xhr.responseText}`;
-    //         }
-    //     };
-    //     xhr.send();
-    // }
+            const accessToken = await this.userAgentApplication.acquireTokenSilent(config.scopes);
+            if (accessToken) {
+                sessionStorage.setItem('accessTokenInterviewTracking', accessToken);
+                // Get the user's profile from Graph
+                const user = await getUserDetails(accessToken);
+                sessionStorage.setItem('userName', user.displayName);
+                sessionStorage.setItem('userEmail', user.userPrincipalName);
+                this.setState({
+                    error: null,
+                    email: user.mail || user.userPrincipalName,
+                    userName: user.displayName,
+                    loginSuccess: true,
+                });
+                this.props.updateLoginInfo(this.state);
+            }
+        } catch (err) {
+            let error = {};
+            sessionStorage.clear();
+            if (typeof (err) === 'string') {
+                const errParts = err.split('|');
+                error = errParts.length > 1 ?
+                    { message: errParts[1], debug: errParts[0] } :
+                    { message: err };
+            } else {
+                error = {
+                    message: err.message,
+                    debug: JSON.stringify(err),
+                };
+            }
+            this.setState({ error, ...this.initState }, () => {
+                this.props.updateLoginInfo(this.state);
+            });
+        }
+    }
 
     initState = {
         email: '',
         userName: '',
+        error: null,
         loginSuccess: false,
     };
 
-    loadUser = () => {
-        const user = authContext.getCachedUser();
-        if (authContext.isCallback(window.location.hash)) {
-        // Handle redirect after token requests
-            authContext.handleWindowCallback();
-            const err = authContext.getLoginError();
-            if (err) {
-                // TODO: Handle errors signing in and getting tokens
-                // console.log('error', `${err}`);
-            }
-        } else if (user) {
-            sessionStorage.setItem('userName', user.profile.name);
-            sessionStorage.setItem('userEmail', user.userName);
-            this.setState(
-                {
-                    email: user.profile.email,
-                    userName: user.profile.name,
-                    loginSuccess: true,
-                },
-                () => {
-                    this.props.updateLoginInfo(this.state);
-                },
-            );
-            // Get an access token to the Microsoft Graph API
-            authContext.acquireToken(
-                'https://graph.microsoft.com',
-                (error, token) => {
-                    if (error || !token) {
-                        // TODO: Handle error obtaining access token
-                        document.getElementById('api_response').textContent =
-                            `ERROR:\n\n${error}`;
-                        return;
-                    }
-                    // Use the access token
-                    sessionStorage.setItem('accessToken', token);
-                },
-            );
-        } else {
-            sessionStorage.clear();
-            this.setState({ ...this.initState }, () => {
-                this.props.updateLoginInfo(this.state);
+    async login() {
+        try {
+            await this.userAgentApplication.loginPopup(config.scopes);
+            await this.getUserProfile();
+        } catch (err) {
+            const errParts = err.split('|');
+            this.setState({
+                loginSuccess: false,
+                error: { message: errParts[1], debug: errParts[0] },
             });
         }
-    };
-
-    login = e => {
-        e.preventDefault();
-        authContext.login();
-    };
+    }
 
     render() {
         if (this.props.loginStatus) {
@@ -102,7 +91,7 @@ export class Login extends Component {
                         <h3>Interview Tracking</h3>
                     </div>
                     <div className="login__content">
-                        <button type="button" onClick={e => this.login(e)}>
+                        <button type="button" onClick={() => this.login()}>
                 Sign in with global pass
                         </button>
                     </div>
