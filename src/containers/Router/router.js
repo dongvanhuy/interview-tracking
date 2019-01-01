@@ -1,13 +1,24 @@
 import React, { Component } from 'react';
 import { Route, withRouter, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import { UserAgentApplication } from 'msal';
 import Login from '../login/Login';
+import config from '../../appConfig';
 import Profile from '../profile/Profile';
 import ProfileInfo from '../profileDetails/ProfileInfo';
 import Header from '../header/header';
+import { updateLoginInfo } from '../login/LoginActions';
 
 export class Routes extends Component {
+    constructor(props) {
+        super(props);
+        this.userAgentApplication = new UserAgentApplication(config.appId, null, null);
+        const user = this.userAgentApplication.getUser();
+        if (user) {
+            // Enhance user object with data from Graph
+            this.props.updateLoginInfo({ loginSuccess: true });
+        }
+    }
     render() {
         const login = (
             <Switch>
@@ -34,7 +45,6 @@ export class Routes extends Component {
         return (
             <React.Fragment>
                 {this.props.loginStatus ? loginSuccess : login}
-                {/* {true ? loginSuccess : login} */}
             </React.Fragment>
         );
     }
@@ -44,4 +54,4 @@ const mapStateToProps = state => ({
     loginStatus: state.loginUser.loginSuccess,
 });
 
-export default withRouter(connect(mapStateToProps)(Routes));
+export default withRouter(connect(mapStateToProps, { updateLoginInfo })(Routes));

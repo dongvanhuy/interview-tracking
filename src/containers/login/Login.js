@@ -14,6 +14,10 @@ export class Login extends Component {
     constructor(props) {
         super(props);
         this.userAgentApplication = new UserAgentApplication(config.appId, null, null);
+        // const user = this.userAgentApplication.getUser();
+        // if (user) {
+        //     this.getUserProfile();
+        // }
         this.state = this.initState;
     }
 
@@ -80,9 +84,9 @@ export class Login extends Component {
     }
 
     render() {
-        if (this.props.loginStatus) {
-            this.props.push('/profile');
-        }
+        // if (this.props.loginStatus) {
+        //     this.props.push('/profile');
+        // }
         return (
             <section className="login">
                 <div className="login__rightSide">

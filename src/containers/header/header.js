@@ -27,6 +27,7 @@ export class Header extends Component {
 
     logout() {
         this.userAgentApplication.logout();
+        sessionStorage.clear();
     }
 
     render() {
@@ -64,6 +65,7 @@ export class Header extends Component {
         );
     }
 }
+
 
 export default connect(
     null,
