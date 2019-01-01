@@ -14,10 +14,6 @@ export class Login extends Component {
     constructor(props) {
         super(props);
         this.userAgentApplication = new UserAgentApplication(config.appId, null, null);
-        // const user = this.userAgentApplication.getUser();
-        // if (user) {
-        //     this.getUserProfile();
-        // }
         this.state = this.initState;
     }
 
@@ -30,9 +26,9 @@ export class Login extends Component {
 
             const accessToken = await this.userAgentApplication.acquireTokenSilent(config.scopes);
             if (accessToken) {
-                sessionStorage.setItem('accessTokenInterviewTracking', accessToken);
                 // Get the user's profile from Graph
                 const user = await getUserDetails(accessToken);
+                sessionStorage.setItem('accessToken', accessToken);
                 sessionStorage.setItem('userName', user.displayName);
                 sessionStorage.setItem('userEmail', user.userPrincipalName);
                 this.setState({
@@ -40,6 +36,7 @@ export class Login extends Component {
                     email: user.mail || user.userPrincipalName,
                     userName: user.displayName,
                     loginSuccess: true,
+                    accessToken,
                 });
                 this.props.updateLoginInfo(this.state);
             }
@@ -68,6 +65,7 @@ export class Login extends Component {
         userName: '',
         error: null,
         loginSuccess: false,
+        accessToken: null,
     };
 
     async login() {

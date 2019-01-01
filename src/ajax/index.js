@@ -1,9 +1,24 @@
 import axios from 'axios';
+
+let store;
 /**
  * Setup headers
  * @param {Object} config axios request config
  */
 function request(config) {
+    const state = store.getState();
+    const { accessToken } = state.loginUser;
+    const { headers } = config;
+
+    Object.assign(headers, {
+        'Content-Type': 'application/json',
+    });
+
+    if (accessToken) {
+        Object.assign(headers, {
+            Authorization: `Bearer ${accessToken}`,
+        });
+    }
     return config;
 }
 
@@ -28,7 +43,8 @@ function response(res) {
  * Setup ajax interceptors
  * @param {Store} reduxStore A global redux store
  */
-export default function setup() {
+export default function setup(reduxStore) {
+    store = reduxStore;
     return {
         request: axios.interceptors.request.use(request),
         response: axios.interceptors.response.use(response, responseError),

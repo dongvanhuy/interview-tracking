@@ -14,9 +14,17 @@ export class Routes extends Component {
         super(props);
         this.userAgentApplication = new UserAgentApplication(config.appId, null, null);
         const user = this.userAgentApplication.getUser();
-        if (user) {
+        const accessToken = sessionStorage.getItem('accessToken');
+        const userName = sessionStorage.getItem('userName');
+        const email = sessionStorage.getItem('userEmail');
+        if (user && accessToken) {
             // Enhance user object with data from Graph
-            this.props.updateLoginInfo({ loginSuccess: true });
+            this.props.updateLoginInfo({
+                loginSuccess: true,
+                accessToken,
+                email,
+                userName,
+            });
         }
     }
     render() {
@@ -52,6 +60,7 @@ export class Routes extends Component {
 
 const mapStateToProps = state => ({
     loginStatus: state.loginUser.loginSuccess,
+    accessToken: state.loginUser.accessToken,
 });
 
 export default withRouter(connect(mapStateToProps, { updateLoginInfo })(Routes));

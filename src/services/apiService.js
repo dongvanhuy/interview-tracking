@@ -2,57 +2,40 @@ import { Observable } from "rxjs";
 import axios from "axios";
 import config from "../config";
 
-const accessToken = sessionStorage.getItem('accessTokenInterviewTracking');
-
 const API_HOST = config.apiService.host;
 export default class ApiService {
   static loadDataCandidate = () =>
     Observable.fromPromise(
       axios.get(`${API_HOST}/api/interviewees/today`, {
-        data: {},
-        headers: {
-          "Content-Type": "application/json"
-        }
+        data: {}
       })
     );
 
   static loadDataProfileThisWeek = () =>
     Observable.fromPromise(
       axios.get(`${API_HOST}/api/interviewees/thisweek`, {
-        data: {},
-        headers: {
-          "Content-Type": "application/json"
-        }
+        data: {}
       })
     );
 
   static loadDataProfileThisMonth = () =>
     Observable.fromPromise(
       axios.get(`${API_HOST}/api/interviewees/thismonth`, {
-        data: {},
-        headers: {
-          "Content-Type": "application/json"
-        }
+        data: {}
       })
     );
 
   static loadDataProfileThisOther = () =>
     Observable.fromPromise(
       axios.get(`${API_HOST}/api/interviewees/listall-without-thismonth`, {
-        data: {},
-        headers: {
-          "Content-Type": "application/json"
-        }
+        data: {}
       })
     );
 
   static loadDataProfileDetails = data =>
     Observable.fromPromise(
       axios.get(`${API_HOST}/api/interviewees/info/${data}`, {
-        data: {},
-        headers: {
-          "Content-Type": "application/json"
-        }
+        data: {}
       })
     );
 
@@ -63,9 +46,6 @@ export default class ApiService {
         data,
         {
           data: {},
-          headers: {
-            "Content-Type": "application/json"
-          }
         }
       )
     );
@@ -73,20 +53,14 @@ export default class ApiService {
   static postDataProfileDetails = data =>
     Observable.fromPromise(
       axios.post(`${API_HOST}/api/interviewees/create`, data, {
-        data: {},
-        headers: {
-          "Content-Type": "application/json"
-        }
+        data: {}
       })
     );
 
   static deleteProfileId = data =>
     Observable.fromPromise(
       axios.delete(`${API_HOST}/api/interviewees/info/${data}`, data, {
-        data: {},
-        headers: {
-          "Content-Type": "application/json"
-        }
+        data: {}
       })
     );
 // https://graph.microsoft.com/v1.0/users || `${API_HOST}/api/users`
@@ -94,21 +68,14 @@ export default class ApiService {
     Observable.fromPromise(
       axios.get(`${API_HOST}/api/users`, {
         data: {},
-        headers: {
-          "Content-Type": "application/json"
-        }
       })
     );
 
     // https://outlook.office.com/api/v2.0/me/events
     // https://graph.microsoft.com/v1.0/me/events
-    static bookMeetingRoom = (data, token) => Observable.fromPromise(
+    static bookMeetingRoom = (data) => Observable.fromPromise(
       axios.post(`https://graph.microsoft.com/v1.0/me/events`, data , {
-        data: {},
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`,
-        }
+        data: {}
       })
     );
 }

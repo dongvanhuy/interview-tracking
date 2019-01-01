@@ -5,6 +5,7 @@ const initialState = {
     email: '',
     userName: '',
     loginSuccess: false,
+    accessToken: null,
 };
 
 const actions = {
