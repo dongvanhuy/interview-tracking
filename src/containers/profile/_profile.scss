@@ -255,6 +255,7 @@
 
     &--col {
       display: table-cell;
+      vertical-align: middle;
       border-right: 1px solid $border-color-gray;
       padding: 8px;
       &:first-child {

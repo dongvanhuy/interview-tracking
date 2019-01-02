@@ -74,7 +74,7 @@ export class Login extends Component {
 
     async login() {
         try {
-            await this.userAgentApplication.loginRedirect(config.scopes);
+            await this.userAgentApplication.loginPopup(config.scopes);
             await this.getUserProfile();
         } catch (err) {
             const errParts = err.split('|');
@@ -86,9 +86,6 @@ export class Login extends Component {
     }
 
     render() {
-        if (this.props.loginStatus) {
-            this.props.push('/profile');
-        }
         return (
             <section className="login">
                 <div className="login__rightSide">

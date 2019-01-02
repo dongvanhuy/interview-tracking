@@ -26,8 +26,8 @@ export class Header extends Component {
     };
 
     logout() {
-        this.userAgentApplication.logout();
         sessionStorage.clear();
+        this.userAgentApplication.logout();
     }
 
     render() {
@@ -44,7 +44,7 @@ export class Header extends Component {
                     </Link>
                     <div className="interview-header__info hidden-xs">
                         <div className="interview-header__user">
-                            <p className="interview-header__email">{sessionStorage.getItem('userEmail')}</p>
+                            <p className="interview-header__email">{sessionStorage.getItem('userName')}</p>
                             <Link className="interview-header__logout" to="" onClick={() => this.logout()}>Logout</Link>
                         </div>
                         <img className="icon-user" src={iconUser} alt="icon user" width="38" />
@@ -56,7 +56,7 @@ export class Header extends Component {
                         </div>
                         {/* <FontAwesomeIcon name="bars" size="2x" onClick={() => this.addActiveClass()} /> */}
                         <ListGroup className={!this.state.showMenu && 'invisible'}>
-                            <ListGroupItem>{`${sessionStorage.getItem('userEmail')}`}</ListGroupItem>
+                            <ListGroupItem>{`${sessionStorage.getItem('userName')}`}</ListGroupItem>
                             <ListGroupItem onClick={() => this.logout()}>Logout</ListGroupItem>
                         </ListGroup>
                     </div>
