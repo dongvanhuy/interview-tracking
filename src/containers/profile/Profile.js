@@ -10,8 +10,8 @@ import { push } from 'react-router-redux';
 import uid from 'uuid';
 import loading from '../../assets/images/loading.svg';
 import plus from '../../assets/images/plus.png';
-import deleteIcon from '../../assets/images/delete.svg';
-import editIcon from '../../assets/images/edit.png';
+import deleteIcon from '../../assets/images/delete.png';
+import editIcon from '../../assets/images/edit-icon.png';
 import {
     loadProfile,
     viewDetailDataId,
@@ -210,7 +210,7 @@ export class Profile extends Component {
                   className="btn button-common button-common__left"
                   onClick={() => this.viewDetailId(item.candidate_id)}
               >
-                  <img src={editIcon} alt="edit" width="25" />
+                  <img src={editIcon} alt="edit" width="20" />
                   {/* <i className="fa fa-pencil" /> */}
               </button>
               <button
@@ -218,7 +218,7 @@ export class Profile extends Component {
                   className="btn button-common button-common__right"
                   onClick={() => this.deleteDetailId(item.candidate_id)}
               >
-                  <img src={deleteIcon} alt="delete" width="25" />
+                  <img src={deleteIcon} alt="delete" width="20" />
                   {/* <i className="fa fa-trash-o" /> */}
               </button>
           </div>

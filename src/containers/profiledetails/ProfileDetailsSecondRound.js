@@ -48,7 +48,7 @@ export class ProfileDetailsSecondRound extends Component {
                   </Col>
                   <Col xs={12} sm={3} md={3} lg={3}>
                       <FormGroup className="date-time__two">
-                          <ControlLabel>Date</ControlLabel>
+                          {/* <ControlLabel>Date</ControlLabel>
                           <Datetime
                               inputProps={{
                                   readOnly: true,
@@ -79,7 +79,7 @@ export class ProfileDetailsSecondRound extends Component {
                               size="2x"
                               className="date-time__icon"
                               onClick={() => this.dateRound2.current.openCalendar()}
-                          />
+                          /> */}
                       </FormGroup>
                   </Col>
               </Row>

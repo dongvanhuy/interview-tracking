@@ -74,6 +74,40 @@ export class ProfileDetailsFirstRound extends Component {
                             />
                             {errorMessages.errPosition && <span className="error_msg">{errorMessages.errPosition}</span>}
                         </FormGroup>
+                        <FormGroup>
+                            <ControlLabel>English Level</ControlLabel>
+                            <FormControl
+                                type="text"
+                                placeholder=""
+                                name="eng_level"
+                                value={this.props.eng_level}
+                                onChange={(e) => this.props.handleChange(e)}
+                            />
+                        </FormGroup>
+                        <FormGroup className="profile-details__recuiter">
+                            <ControlLabel>Recruiter Name</ControlLabel>
+                            {/* <FormControl
+                                componentClass="select"
+                                className="profile-details__select"
+                                name="recruiter"
+                                value={this.props.recruiter}
+                                placeholder="Select"
+                                onChange={(e) => this.props.handleChange(e)}
+                            >
+                                <option value="">Select</option>
+                                {users.map(user => (<option key={user.id} value={user.mail}>{user.displayName}</option>))}
+                            </FormControl> */}
+                            <FormControl
+                                type="text"
+                                placeholder=""
+                                name="recruiter"
+                                value={this.props.recruiter}
+                                onChange={(e) => this.props.handleChange(e)}
+                            />
+                        </FormGroup>
+                    </Col>
+                    <Col xs={12} sm={6} md={6} lg={6}>
+                        <h2 className="profile-details__title">HR Interview</h2>
                         <FormGroup className="date-time__one">
                             <ControlLabel>Start Meeting(<span className="span">*</span>)</ControlLabel>
                             <Datetime
@@ -117,20 +151,27 @@ export class ProfileDetailsFirstRound extends Component {
                             {errorMessages.errEndTimeMeeting && <span className="error_msg">{errorMessages.errEndTimeMeeting}</span>}
                             {errorMessages.errTime && <span className="error_msg">{errorMessages.errTime}</span>}
                         </FormGroup>
-                    </Col>
-                    <Col xs={12} sm={6} md={6} lg={6}>
-                        <h2 className="profile-details__title">HR Interview</h2>
                         <FormGroup>
-                            <ControlLabel>English Level</ControlLabel>
                             <FormControl
                                 type="text"
-                                placeholder=""
-                                name="eng_level"
-                                value={this.props.eng_level}
+                                placeholder="Please enter the email ..."
+                                className={this.props.errorMessages.errInterviewer ? 'borderInterviewer' : ''}
                                 onChange={(e) => this.props.handleChange(e)}
+                                name="interviewer_round1_01"
+                                value={this.props.interviewer_round1_01}
                             />
                         </FormGroup>
                         <FormGroup>
+                            <FormControl
+                                type="text"
+                                placeholder="Please enter the email ..."
+                                className={this.props.errorMessages.errInterviewer ? 'borderInterviewer' : ''}
+                                onChange={(e) => this.props.handleChange(e)}
+                                name="interviewer_round1_02"
+                                value={this.props.interviewer_round1_02}
+                            />
+                        </FormGroup>
+                        {/* <FormGroup>
                             <ControlLabel>Note</ControlLabel>
                             <FormControl
                                 componentClass="textarea"
@@ -139,28 +180,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={this.props.eng_level_cmt}
                                 onChange={(e) => this.props.handleChange(e)}
                             />
-                        </FormGroup>
-                        <FormGroup className="profile-details__recuiter">
-                            <ControlLabel>Recruiter</ControlLabel>
-                            {/* <FormControl
-                                componentClass="select"
-                                className="profile-details__select"
-                                name="recruiter"
-                                value={this.props.recruiter}
-                                placeholder="Select"
-                                onChange={(e) => this.props.handleChange(e)}
-                            >
-                                <option value="">Select</option>
-                                {users.map(user => (<option key={user.id} value={user.mail}>{user.displayName}</option>))}
-                            </FormControl> */}
-                            <FormControl
-                                type="text"
-                                placeholder=""
-                                name="recruiter"
-                                value={this.props.recruiter}
-                                onChange={(e) => this.props.handleChange(e)}
-                            />
-                        </FormGroup>
+                        </FormGroup> */}
                     </Col>
                 </Row>
                 <h2 className="profile-details__title">1st Round</h2>
@@ -196,7 +216,9 @@ export class ProfileDetailsFirstRound extends Component {
                         </Row>
                     </Col>
                     <Col xs={12} sm={3} md={3} lg={3}>
-                        <FormGroup className="date-time__one">
+                        {/* Time track meeting for Round 1 */}
+
+                        {/* <FormGroup className="date-time__one">
                             <ControlLabel>Date</ControlLabel>
                             <Datetime
                                 inputProps={{ readOnly: true, placeholder: 'Select date and time' }}
@@ -214,7 +236,9 @@ export class ProfileDetailsFirstRound extends Component {
                                 className="date-time__icon"
                                 onClick={() => this.dateRound1.current.openCalendar()}
                             />
-                        </FormGroup>
+                        </FormGroup> */}
+
+                        {/* /Time track meeting for Round 1 */}
                     </Col>
                 </Row>
                 <FormGroup>

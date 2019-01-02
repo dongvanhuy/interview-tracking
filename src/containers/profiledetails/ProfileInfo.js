@@ -89,12 +89,12 @@ export class ProfileInfo extends Component {
         }
 
         // save data successfull
-        if (
-            this.props.doSuccessfully !== nextProps.doSuccessfully &&
-      nextProps.doSuccessfully
-        ) {
-            this.bookMeetingRoom();
-        }
+    //     if (
+    //         this.props.doSuccessfully !== nextProps.doSuccessfully &&
+    //   nextProps.doSuccessfully
+    //     ) {
+    //         this.bookMeetingRoom();
+    //     }
     }
 
   initState = {
@@ -146,7 +146,7 @@ export class ProfileInfo extends Component {
       },
   };
 
-  bookMeetingRoom = () => {
+  handleBookMeetingRoom = () => {
       const dataSave = this.state;
       // book meeting room
       const params = {
@@ -354,6 +354,13 @@ export class ProfileInfo extends Component {
                               onClick={e => this.submitForm(e)}
                           >
                             SAVE
+                          </button>
+                          <button
+                              type="button"
+                              className="profile-details__submit"
+                              onClick={this.handleBookMeetingRoom}
+                          >
+                            BOOK MEETING
                           </button>
                       </FormGroup>
                   </Grid>

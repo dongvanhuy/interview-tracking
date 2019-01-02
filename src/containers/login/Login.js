@@ -14,6 +14,10 @@ export class Login extends Component {
     constructor(props) {
         super(props);
         this.userAgentApplication = new UserAgentApplication(config.appId, null, null);
+        const user = this.userAgentApplication.getUser();
+        if (user) {
+            this.getUserProfile();
+        }
         this.state = this.initState;
     }
 
@@ -70,7 +74,7 @@ export class Login extends Component {
 
     async login() {
         try {
-            await this.userAgentApplication.loginPopup(config.scopes);
+            await this.userAgentApplication.loginRedirect(config.scopes);
             await this.getUserProfile();
         } catch (err) {
             const errParts = err.split('|');
@@ -82,9 +86,9 @@ export class Login extends Component {
     }
 
     render() {
-        // if (this.props.loginStatus) {
-        //     this.props.push('/profile');
-        // }
+        if (this.props.loginStatus) {
+            this.props.push('/profile');
+        }
         return (
             <section className="login">
                 <div className="login__rightSide">
@@ -98,7 +102,7 @@ export class Login extends Component {
                         </button>
                     </div>
                     <p className="login__footer">
-            © 2018 DXC Technology Company. All rights reserved.
+            © 2019 DXC Technology Company. All rights reserved.
                     </p>
                 </div>
             </section>

@@ -9,24 +9,27 @@ import ProfileInfo from '../profileDetails/ProfileInfo';
 import Header from '../header/header';
 import { updateLoginInfo } from '../login/LoginActions';
 
+
+// const accessToken = sessionStorage.getItem('accessToken');
+// const userName = sessionStorage.getItem('userName');
+// const email = sessionStorage.getItem('userEmail');
 export class Routes extends Component {
     constructor(props) {
         super(props);
         this.userAgentApplication = new UserAgentApplication(config.appId, null, null);
-        const user = this.userAgentApplication.getUser();
-        const accessToken = sessionStorage.getItem('accessToken');
-        const userName = sessionStorage.getItem('userName');
-        const email = sessionStorage.getItem('userEmail');
-        if (user && accessToken) {
-            // Enhance user object with data from Graph
-            this.props.updateLoginInfo({
-                loginSuccess: true,
-                accessToken,
-                email,
-                userName,
-            });
-        }
+        // const user = this.userAgentApplication.getUser();
+        // if (user && accessToken) {
+        //     // Enhance user object with data from Graph
+        //     this.props.updateLoginInfo({
+        //         loginSuccess: true,
+        //         accessToken,
+        //         email,
+        //         userName,
+        //     });
+        // }
     }
+
+
     render() {
         const login = (
             <Switch>
