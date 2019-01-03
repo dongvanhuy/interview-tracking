@@ -13,6 +13,8 @@ import {
     GET_USERS,
     GET_USERS_SUCCESS,
     GET_USERS_FAILED,
+    SHOW_MODAL_BOOK_MEETING_ACTION,
+    HIDE_MODAL_BOOK_MEETING_ACTION,
 } from '../../store/actionTypes';
 
 const initialState = {
@@ -22,6 +24,7 @@ const initialState = {
     dataProfileRes: {},
     doSuccessfully: null,
     loadingDetail: false,
+    showBookMeetingStatus: false,
     users: [],
 };
 
@@ -92,6 +95,14 @@ const actions = {
     [GET_USERS_FAILED]: state => ({
         ...state,
         users: [],
+    }),
+    [SHOW_MODAL_BOOK_MEETING_ACTION]: state => ({
+        ...state,
+        showBookMeetingStatus: true,
+    }),
+    [HIDE_MODAL_BOOK_MEETING_ACTION]: state => ({
+        ...state,
+        showBookMeetingStatus: false,
     }),
 };
 

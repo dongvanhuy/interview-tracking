@@ -74,6 +74,9 @@ export class ProfileDetailsFirstRound extends Component {
                             />
                             {errorMessages.errPosition && <span className="error_msg">{errorMessages.errPosition}</span>}
                         </FormGroup>
+                    </Col>
+                    <Col xs={12} sm={6} md={6} lg={6}>
+                        <h2 className="profile-details__title">HR Interview</h2>
                         <FormGroup>
                             <ControlLabel>English Level</ControlLabel>
                             <FormControl
@@ -103,72 +106,6 @@ export class ProfileDetailsFirstRound extends Component {
                                 name="recruiter"
                                 value={this.props.recruiter}
                                 onChange={(e) => this.props.handleChange(e)}
-                            />
-                        </FormGroup>
-                    </Col>
-                    <Col xs={12} sm={6} md={6} lg={6}>
-                        <h2 className="profile-details__title">HR Interview</h2>
-                        <FormGroup className="date-time__one">
-                            <ControlLabel>Start Meeting(<span className="span">*</span>)</ControlLabel>
-                            <Datetime
-                                isValidDate={valid}
-                                className={this.props.errorMessages.errStartTimeMeeting ? 'borderStartMeeting' : ''}
-                                inputProps={{ readOnly: true, placeholder: 'Select start time' }}
-                                value={this.props.start_time ? moment.utc(this.props.start_time).format('DD-MM-YYYY HH:mm') : ''}
-                                dateFormat="DD-MM-YYYY"
-                                timeFormat="HH:mm"
-                                ref={this.startMeeting}
-                                utc
-                                onChange={(e) => this.props.handleChange({ target: { value: e, name: 'start_time' } })}
-                            />
-                            <FontAwesomeIcon
-                                name="calendar"
-                                size="2x"
-                                className="date-time__icon"
-                                onClick={() => this.startMeeting.current.openCalendar()}
-                            />
-                            {errorMessages.errStartTimeMeeting && <span className="error_msg">{errorMessages.errStartTimeMeeting}</span>}
-                        </FormGroup>
-                        <FormGroup className="date-time__one">
-                            <ControlLabel>End Meeting(<span className="span">*</span>)</ControlLabel>
-                            <Datetime
-                                isValidDate={valid}
-                                className={this.props.errorMessages.errEndTimeMeeting ? 'borderEndMeeting' : ''}
-                                inputProps={{ readOnly: true, placeholder: 'Select end time' }}
-                                value={this.props.end_time ? moment.utc(this.props.end_time).format('DD-MM-YYYY HH:mm') : ''}
-                                dateFormat="DD-MM-YYYY"
-                                timeFormat="HH:mm"
-                                ref={this.endMeeting}
-                                utc
-                                onChange={(e) => this.props.handleChange({ target: { value: e, name: 'end_time' } })}
-                            />
-                            <FontAwesomeIcon
-                                name="calendar"
-                                size="2x"
-                                className="date-time__icon"
-                                onClick={() => this.endMeeting.current.openCalendar()}
-                            />
-                            {errorMessages.errEndTimeMeeting && <span className="error_msg">{errorMessages.errEndTimeMeeting}</span>}
-                            {errorMessages.errTime && <span className="error_msg">{errorMessages.errTime}</span>}
-                        </FormGroup>
-                        <FormGroup>
-                            <FormControl
-                                type="text"
-                                placeholder="Please enter the email ..."
-                                className={this.props.errorMessages.errInterviewer ? 'borderInterviewer' : ''}
-                                onChange={(e) => this.props.handleChange(e)}
-                                name="interviewer_round1_01"
-                                value={this.props.interviewer_round1_01}
-                            />
-                        </FormGroup>
-                        <FormGroup>
-                            <FormControl
-                                type="text"
-                                placeholder="Please enter the email ..."
-                                className={this.props.errorMessages.errInterviewer ? 'borderInterviewer' : ''}
-                                onChange={(e) => this.props.handleChange(e)}
-                                name="interviewer_round1_02"
-                                value={this.props.interviewer_round1_02}
                             />
                         </FormGroup>
                         {/* <FormGroup>

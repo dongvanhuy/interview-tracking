@@ -12,9 +12,12 @@ import {
     updateProfileDetails,
     createProfileDetails,
     resetStateProfileDetail,
-    bookMeetingRoom,
     getUsers,
+    bookMeetingAction,
+    showModalBookMeetingAction,
+    hideModalBookMeetingAction,
 } from './ProfileDetailsAction';
+import { BookingMeetingModal } from './BookingMeetingModal';
 import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
 import { ProfileDetailsSecondRound } from './ProfileDetailsSecondRound';
 import ConfirmationModal from '../common/confirmationModal/ConfirmationModal';
@@ -102,8 +105,6 @@ export class ProfileInfo extends Component {
       candidate_fullname: '',
       position_apply: '',
       recruiter: '',
-      start_time: '',
-      end_time: '',
       eng_level: '',
       eng_level_cmt: '',
       interviewer_round1_01: '',
@@ -138,50 +139,12 @@ export class ProfileInfo extends Component {
       isChecking: false,
       errorMessages: {
           errFullname: '',
-          errStartTimeMeeting: '',
-          errEndTimeMeeting: '',
-          errInterviewer: '',
-          errTime: '',
           errPosition: '',
       },
   };
 
-  handleBookMeetingRoom = () => {
-      const dataSave = this.state;
-      // book meeting room
-      const params = {
-          Subject: `Interview for ${dataSave.candidate_fullname}`,
-          Body: {
-              ContentType: 'HTML',
-              Content: 'The interview will be begin at this time!',
-          },
-          Start: {
-              DateTime: moment.utc(dataSave.start_time).format('YYYY-MM-DDTHH:mm:ss'),
-              TimeZone: 'SE Asia Standard Time',
-          },
-          End: {
-              DateTime: moment.utc(dataSave.end_time).format('YYYY-MM-DDTHH:mm:ss'),
-              TimeZone: 'SE Asia Standard Time',
-          },
-          Attendees: [
-              {
-                  EmailAddress: {
-                      Address: dataSave.interviewer_round1_01,
-                      Name: '',
-                  },
-                  Type: 'Required',
-              },
-              {
-                  EmailAddress: {
-                      Address: dataSave.interviewer_round1_02,
-                      Name: '',
-                  },
-                  Type: 'Required',
-              },
-          ],
-      };
-
-      this.props.bookMeetingRoom(params);
+  handleBookMeetingRoom = (params) => {
+      this.props.bookMeetingAction(params);
   };
 
   resetForm = () => {
@@ -193,15 +156,9 @@ export class ProfileInfo extends Component {
   checkValidateForm = () => {
       const fullName = this.state.candidate_fullname;
       const position = this.state.position_apply;
-      const startTime = this.state.start_time;
-      const endTime = this.state.end_time;
       const interviewer1 = this.state.interviewer_round1_01;
       const interviewer2 = this.state.interviewer_round1_02;
       const { errorMessages } = this.state;
-      const result = moment(this.state.start_time).isBefore(
-          this.state.end_time,
-          'minute',
-      );
 
       fullName === ''
           ? (errorMessages.errFullname = 'Write in this field, pls.')
@@ -209,18 +166,9 @@ export class ProfileInfo extends Component {
       position === ''
           ? (errorMessages.errPosition = 'Write in this field, pls.')
           : (errorMessages.errPosition = '');
-      startTime === ''
-          ? (errorMessages.errStartTimeMeeting = 'Choose a start time, pls.')
-          : (errorMessages.errStartTimeMeeting = '');
-      endTime === ''
-          ? (errorMessages.errEndTimeMeeting = 'Choose a end time, pls.')
-          : (errorMessages.errEndTimeMeeting = '');
       interviewer1 === '' && interviewer2 === ''
           ? (errorMessages.errInterviewer = 'Choose an interviewer(s), pls.')
           : (errorMessages.errInterviewer = '');
-      !result
-          ? (errorMessages.errTime = ' Please choose reasonable datetime.')
-          : (errorMessages.errTime = '');
 
       this.setState({ ...errorMessages, isChecking: true });
   };
@@ -230,10 +178,6 @@ export class ProfileInfo extends Component {
       const stateInit = this.state;
       const { isChecking } = this.state;
       stateInit[name] = value;
-      const result = moment(this.state.start_time).isBefore(
-          this.state.end_time,
-          'minute',
-      );
       if (isChecking) {
           stateInit.candidate_fullname !== ''
               ? (stateInit.errorMessages.errFullname = '')
@@ -241,23 +185,11 @@ export class ProfileInfo extends Component {
           stateInit.position_apply !== ''
               ? (stateInit.errorMessages.errPosition = '')
               : (stateInit.errorMessages.errPosition = 'Write in this field, pls.');
-          stateInit.start_time !== ''
-              ? (stateInit.errorMessages.errStartTimeMeeting = '')
-              : (stateInit.errorMessages.errStartTimeMeeting =
-            'Choose a start time, pls.');
-          stateInit.end_time !== ''
-              ? (stateInit.errorMessages.errEndTimeMeeting = '')
-              : (stateInit.errorMessages.errEndTimeMeeting =
-            'Choose a end time, pls.');
           stateInit.interviewer_round1_01 !== '' ||
       stateInit.interviewer_round1_02 !== ''
               ? (stateInit.errorMessages.errInterviewer = '')
               : (stateInit.errorMessages.errInterviewer =
             'Choose an interviewer(s), pls.');
-          !result
-              ? (stateInit.errorMessages.errTime =
-            'Please choose reasonable datetime.')
-              : (stateInit.errorMessages.errTime = '');
       }
       this.setState({ ...stateInit });
   };
@@ -270,10 +202,7 @@ export class ProfileInfo extends Component {
       if (
           errorMessages.errFullname === '' &&
       errorMessages.errPosition === '' &&
-      errorMessages.errStartTimeMeeting === '' &&
-      errorMessages.errEndTimeMeeting === '' &&
-      errorMessages.errInterviewer === '' &&
-      errorMessages.errTime === ''
+      errorMessages.errInterviewer === ''
       ) {
           this.setState({
               showConfirmation: true,
@@ -297,6 +226,13 @@ export class ProfileInfo extends Component {
           this.props.createProfileDetails(this.state);
       }
   };
+  showModalBookMeeting = () => {
+      this.props.showModalBookMeetingAction();
+  }
+
+  handleCloseBookMeeting = () => {
+      this.props.hideModalBookMeetingAction();
+  }
 
   callLoading = () => (
       <div className="loading-block-prof">
@@ -307,14 +243,15 @@ export class ProfileInfo extends Component {
   );
 
   render() {
-      const { users, loadingDetail } = this.props;
+      const { users, loadingDetail, showBookMeeting } = this.props;
       const { profileId } = this.state;
+      const candidateName = this.state.candidate_fullname;
       return (
           <React.Fragment>
               {(this.state.loading || loadingDetail) && this.callLoading()}
               <form className="profile-details">
                   <Grid>
-                      <FormGroup className="profile-details__btn profile-details__btn--top">
+                      {/* <FormGroup className="profile-details__btn profile-details__btn--top">
                           <button
                               type="button"
                               className="profile-details__cancel"
@@ -329,7 +266,7 @@ export class ProfileInfo extends Component {
                           >
                             SAVE
                           </button>
-                      </FormGroup>
+                      </FormGroup> */}
                       <ProfileDetailsFirstRound
                           handleChange={this.handleChange}
                           users={users}
@@ -358,7 +295,7 @@ export class ProfileInfo extends Component {
                           <button
                               type="button"
                               className="profile-details__submit"
-                              onClick={this.handleBookMeetingRoom}
+                              onClick={this.showModalBookMeeting}
                           >
                             BOOK MEETING
                           </button>
@@ -378,6 +315,13 @@ export class ProfileInfo extends Component {
                   ps="This action can't undo. Please determine clearly before clicking OK."
               />
               <ToastContainer transition={Slide} />
+              <BookingMeetingModal
+                  show={showBookMeeting}
+                  title="Booking Meeting"
+                  handleClose={this.handleCloseBookMeeting}
+                  candidateName={candidateName}
+                  bookMeeting={(params) => this.handleBookMeetingRoom(params)}
+              />
           </React.Fragment>
       );
   }
@@ -389,6 +333,7 @@ const mapStateToProps = state => ({
     dataProfileRes: state.profileDetails.dataProfileRes,
     users: state.profileDetails.users,
     loadingDetail: state.profileDetails.loadingDetail,
+    showBookMeeting: state.profileDetails.showBookMeetingStatus,
     // dataProfilePost: state.profileDetails.dataProfilePost,
 });
 const mapDispatchToProps = {
@@ -396,9 +341,11 @@ const mapDispatchToProps = {
     createProfileDetails,
     updateProfileDetails,
     push, // ACTION GUI EPIC GUI API
-    bookMeetingRoom,
     resetStateProfileDetail,
     getUsers,
+    bookMeetingAction,
+    showModalBookMeetingAction,
+    hideModalBookMeetingAction,
 };
 
 export default connect(

@@ -73,7 +73,7 @@ export default class ApiService {
 
     // https://outlook.office.com/api/v2.0/me/events
     // https://graph.microsoft.com/v1.0/me/events
-    static bookMeetingRoom = (data) => Observable.fromPromise(
+    static bookMeeting = (data) => Observable.fromPromise(
       axios.post(`https://graph.microsoft.com/v1.0/me/events`, data , {
         data: {}
       })

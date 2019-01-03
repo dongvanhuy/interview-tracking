@@ -4,8 +4,8 @@ import {
     PROFILE_DETAILS_LOAD,
     PROFILE_DETAILS_UPDATE,
     PROFILE_DETAILS_CREATE,
-    BOOK_MEETING_ROOM,
-    BOOK_MEETING_ROOM_FAILED,
+    BOOK_MEETING_ACTION,
+    BOOK_MEETING_ACTION_FAILED,
     GET_USERS,
     GET_USERS_FAILED,
 } from '../../store/actionTypes';
@@ -15,9 +15,10 @@ import {
     updateProfileDetailsSuccess,
     updateProfileDetailsFail,
     createProfileDetailsSuccess,
-    bookMeetingRoomSuccess,
+    bookMeetingActionSuccess,
     createProfileDetailsFail,
     getUsersSuccess,
+    hideModalBookMeetingAction,
 } from './ProfileDetailsAction';
 
 export const loadProfileDetailsEpic = (
@@ -57,11 +58,12 @@ export const createProfileDetailsEpic = (
             .catch(err => createProfileDetailsFail(err.response));
     });
 
-export const bookMeetingRoomEpic = (action$, store, { bookMeetingRoomService }) => action$.ofType(BOOK_MEETING_ROOM)
-    .switchMap((action) => bookMeetingRoomService(action.payload)
+export const bookMeetingEpic = (action$, store, { bookMeetingService }) => action$.ofType(BOOK_MEETING_ACTION)
+    .switchMap((action) => bookMeetingService(action.payload)
         .map(res => res.data)
-        .map(data => bookMeetingRoomSuccess(data))
-        .catch(err => Observable.of({ type: BOOK_MEETING_ROOM_FAILED, payload: err.response })));
+        .map(data => bookMeetingActionSuccess(data))
+        .map(hideModalBookMeetingAction)
+        .catch(err => Observable.of({ type: BOOK_MEETING_ACTION_FAILED, payload: err.response })));
 
 export const getUsersEpic = (action$, store, { getUsersService }) => action$.ofType(GET_USERS)
     .switchMap((action) => getUsersService(action.payload)
@@ -73,6 +75,6 @@ export default combineEpics(
     loadProfileDetailsEpic,
     updateProfileDetailsEpic,
     createProfileDetailsEpic,
-    bookMeetingRoomEpic,
+    bookMeetingEpic,
     getUsersEpic,
 );

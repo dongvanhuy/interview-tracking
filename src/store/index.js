@@ -26,7 +26,7 @@ const middleware = [
             deleteProfileIdService: ApiService.deleteProfileId,
             updateProfileDetailsService: ApiService.patchDataProfileDetails,
             createProfileDetailsService: ApiService.postDataProfileDetails,
-            bookMeetingRoomService: ApiService.bookMeetingRoom,
+            bookMeetingService: ApiService.bookMeeting,
             getUsersService: ApiService.getUsers,
         },
     }),
