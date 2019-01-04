@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { UserAgentApplication } from 'msal';
 import { push } from 'react-router-redux';
+import jwt from 'jsonwebtoken';
 // import { getAuthUrl } from '../../authHelper';
+
 import { updateLoginInfo } from './LoginActions';
 import { getUserDetails } from '../../GraphService';
 // import { authContext } from '../../adalConfig';
@@ -31,6 +33,8 @@ export class Login extends Component {
             const accessToken = await this.userAgentApplication.acquireTokenSilent(config.scopes);
             if (accessToken) {
                 // Get the user's profile from Graph
+                const payload = jwt.decode(accessToken);
+                const rsaToken = jwt.sign(payload, 'Rt6tSVHJtGd9c5neK1dST3ThSwyvNdo3hNUjHxnP5p4=');
                 const user = await getUserDetails(accessToken);
                 sessionStorage.setItem('accessToken', accessToken);
                 sessionStorage.setItem('userName', user.displayName);
@@ -41,6 +45,7 @@ export class Login extends Component {
                     userName: user.displayName,
                     loginSuccess: true,
                     accessToken,
+                    rsaToken,
                 });
                 this.props.updateLoginInfo(this.state);
             }
@@ -70,6 +75,7 @@ export class Login extends Component {
         error: null,
         loginSuccess: false,
         accessToken: null,
+        rsaToken: null,
     };
 
     async login() {

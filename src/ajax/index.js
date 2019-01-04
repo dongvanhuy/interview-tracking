@@ -7,16 +7,16 @@ let store;
  */
 function request(config) {
     const state = store.getState();
-    const { accessToken } = state.loginUser;
+    const { rsaToken } = state.loginUser;
     const { headers } = config;
 
     Object.assign(headers, {
         'Content-Type': 'application/json',
     });
 
-    if (accessToken) {
+    if (rsaToken) {
         Object.assign(headers, {
-            Authorization: `Bearer ${accessToken}`,
+            rsaToken,
         });
     }
     return config;

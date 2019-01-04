@@ -59,11 +59,15 @@ export const createProfileDetailsEpic = (
     });
 
 export const bookMeetingEpic = (action$, store, { bookMeetingService }) => action$.ofType(BOOK_MEETING_ACTION)
-    .switchMap((action) => bookMeetingService(action.payload)
-        .map(res => res.data)
-        .map(data => bookMeetingActionSuccess(data))
-        .map(hideModalBookMeetingAction)
-        .catch(err => Observable.of({ type: BOOK_MEETING_ACTION_FAILED, payload: err.response })));
+    .switchMap((action) => {
+        const state = store.getState();
+        const { accessToken } = state.loginUser;
+        return bookMeetingService(action.payload, accessToken)
+            .map(res => res.data)
+            .map(data => bookMeetingActionSuccess(data))
+            .map(hideModalBookMeetingAction)
+            .catch(err => Observable.of({ type: BOOK_MEETING_ACTION_FAILED, payload: err.response }))
+    });
 
 export const getUsersEpic = (action$, store, { getUsersService }) => action$.ofType(GET_USERS)
     .switchMap((action) => getUsersService(action.payload)

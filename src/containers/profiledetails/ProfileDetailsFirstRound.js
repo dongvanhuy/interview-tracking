@@ -143,7 +143,6 @@ export class ProfileDetailsFirstRound extends Component {
                                     <FormControl
                                         type="text"
                                         placeholder="Please enter the email ..."
-                                        className={this.props.errorMessages.errInterviewer ? 'borderInterviewer' : ''}
                                         onChange={(e) => this.props.handleChange(e)}
                                         name="interviewer_round1_02"
                                         value={this.props.interviewer_round1_02}
@@ -155,13 +154,14 @@ export class ProfileDetailsFirstRound extends Component {
                     <Col xs={12} sm={3} md={3} lg={3}>
                         {/* Time track meeting for Round 1 */}
 
-                        {/* <FormGroup className="date-time__one">
-                            <ControlLabel>Date</ControlLabel>
+                        <FormGroup className="date-time__one">
+                            <ControlLabel>Date(<span className="span">*</span>)</ControlLabel>
                             <Datetime
                                 inputProps={{ readOnly: true, placeholder: 'Select date and time' }}
-                                value={this.props.date_round1 ? moment.utc(this.props.date_round1).format('DD-MM-YYYY HH:mm') : ''}
-                                dateFormat="DD-MM-YYYY"
-                                timeFormat="HH:mm"
+                                className={this.props.errorMessages.errDateRound1 ? 'borderInterviewer' : ''}
+                                value={this.props.date_round1 ? moment.utc(this.props.date_round1).format('DD/MM/YYYY') : ''}
+                                dateFormat="DD/MM/YYYY"
+                                timeFormat={false}
                                 ref={this.dateRound1}
                                 utc
                                 isValidDate={valid}
@@ -173,7 +173,8 @@ export class ProfileDetailsFirstRound extends Component {
                                 className="date-time__icon"
                                 onClick={() => this.dateRound1.current.openCalendar()}
                             />
-                        </FormGroup> */}
+                            {errorMessages.errDateRound1 && <span className="error_msg">{errorMessages.errDateRound1}</span>}
+                        </FormGroup>
 
                         {/* /Time track meeting for Round 1 */}
                     </Col>

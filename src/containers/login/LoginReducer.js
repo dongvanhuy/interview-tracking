@@ -6,6 +6,7 @@ const initialState = {
     userName: '',
     loginSuccess: false,
     accessToken: null,
+    rsaToken: null,
 };
 
 const actions = {

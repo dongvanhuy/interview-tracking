@@ -3,6 +3,7 @@ import axios from "axios";
 import config from "../config";
 
 const API_HOST = config.apiService.host;
+
 export default class ApiService {
   static loadDataCandidate = () =>
     Observable.fromPromise(
@@ -73,9 +74,12 @@ export default class ApiService {
 
     // https://outlook.office.com/api/v2.0/me/events
     // https://graph.microsoft.com/v1.0/me/events
-    static bookMeeting = (data) => Observable.fromPromise(
+    static bookMeeting = (data, accessToken) => Observable.fromPromise(
       axios.post(`https://graph.microsoft.com/v1.0/me/events`, data , {
-        data: {}
+        data: {},
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        }
       })
     );
 }

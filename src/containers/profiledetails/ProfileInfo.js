@@ -109,7 +109,7 @@ export class ProfileInfo extends Component {
       eng_level_cmt: '',
       interviewer_round1_01: '',
       interviewer_round1_02: '',
-      date_round1: null,
+      date_round1: '',
       tech_competency_round1: '',
       tech_competency_round1_cmt: '',
       cultural_fit_round1: '',
@@ -119,7 +119,7 @@ export class ProfileInfo extends Component {
       round1_status: '',
       cmt_result_round1: '',
       interviewer_round2: '',
-      date_round2: null,
+      date_round2: '',
       tech_competency_round2: '',
       tech_competency_round2_cmt: '',
       cultural_fit_round2: '',
@@ -140,6 +140,7 @@ export class ProfileInfo extends Component {
       errorMessages: {
           errFullname: '',
           errPosition: '',
+          errDateRound1: '',
       },
   };
 
@@ -156,6 +157,7 @@ export class ProfileInfo extends Component {
   checkValidateForm = () => {
       const fullName = this.state.candidate_fullname;
       const position = this.state.position_apply;
+      const time = this.state.date_round1;
       const interviewer1 = this.state.interviewer_round1_01;
       const interviewer2 = this.state.interviewer_round1_02;
       const { errorMessages } = this.state;
@@ -166,6 +168,9 @@ export class ProfileInfo extends Component {
       position === ''
           ? (errorMessages.errPosition = 'Write in this field, pls.')
           : (errorMessages.errPosition = '');
+      time === ''
+          ? (errorMessages.errDateRound1 = 'Choose a time, pls.')
+          : (errorMessages.errDateRound1 = '');
       interviewer1 === '' && interviewer2 === ''
           ? (errorMessages.errInterviewer = 'Choose an interviewer(s), pls.')
           : (errorMessages.errInterviewer = '');
@@ -182,6 +187,9 @@ export class ProfileInfo extends Component {
           stateInit.candidate_fullname !== ''
               ? (stateInit.errorMessages.errFullname = '')
               : (stateInit.errorMessages.errFullname = 'Write in this field, pls.');
+          stateInit.date_round1 !== ''
+              ? (stateInit.errorMessages.errDateRound1 = '')
+              : (stateInit.errorMessages.errDateRound1 = 'Choose a time, pls.');
           stateInit.position_apply !== ''
               ? (stateInit.errorMessages.errPosition = '')
               : (stateInit.errorMessages.errPosition = 'Write in this field, pls.');
@@ -202,7 +210,8 @@ export class ProfileInfo extends Component {
       if (
           errorMessages.errFullname === '' &&
       errorMessages.errPosition === '' &&
-      errorMessages.errInterviewer === ''
+      errorMessages.errInterviewer === '' &&
+      errorMessages.errDateRound1 === ''
       ) {
           this.setState({
               showConfirmation: true,

@@ -168,7 +168,7 @@ export class Profile extends Component {
   renderItem = (item) => (
       <Tr key={uid()} className="tableComponent">
           {/* <Td>{index + 1}</Td> */}
-          <Td>{moment.utc(item.start_time).format('DD-MM-YYYY HH:mm')}</Td>
+          <Td>{moment.utc(item.date_round1).format('DD/MM/YYYY')}</Td>
           <Td>{item.candidate_fullname}</Td>
           <Td>{this.getFullname(item.interviewer_round1_01 || item.interviewer_round1_02)}</Td>
           <Td>{item.position_apply}</Td>
@@ -198,7 +198,7 @@ export class Profile extends Component {
   renderItemTable = (item) => (
       <div key={uid()} className="candidate-table__body--item">
           {/* <div className="number candidate-table__body--col">{index + 1}</div> */}
-          <div className="time candidate-table__body--col">{moment.utc(item.start_time).format('DD-MM-YYYY HH:mm')}</div>
+          <div className="time candidate-table__body--col">{moment.utc(item.date_round1).format('DD/MM/YYYY')}</div>
           <div className="candidate candidate-table__body--col">{item.candidate_fullname}</div>
           <div className="interviewer candidate-table__body--col">{this.getFullname(item.interviewer_round1_01 || item.interviewer_round1_02)}</div>
           <div className="position candidate-table__body--col">{item.position_apply}</div>
