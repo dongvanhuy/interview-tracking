@@ -5,9 +5,8 @@ import React, { Component } from 'react';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { UserAgentApplication } from 'msal';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
-import config from '../../appConfig';
+import { authContext } from '../../adalConfig';
 import logo from '../../../src/assets/images/dxcLogo.svg';
 import iconUser from '../../../src/assets/images/human.png';
 import burgerIcon from '../../../src/assets/images/burgerIcon.png';
@@ -15,7 +14,6 @@ import burgerIcon from '../../../src/assets/images/burgerIcon.png';
 export class Header extends Component {
     constructor(props) {
         super(props);
-        this.userAgentApplication = new UserAgentApplication(config.appId, null, null);
         this.state = {
             showMenu: false,
         };
@@ -27,7 +25,7 @@ export class Header extends Component {
 
     logout() {
         sessionStorage.clear();
-        this.userAgentApplication.logout();
+        authContext.logOut();
     }
 
     render() {
