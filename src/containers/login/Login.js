@@ -9,13 +9,15 @@ import jwt from 'jsonwebtoken';
 import { updateLoginInfo } from './LoginActions';
 import { getUserDetails } from '../../GraphService';
 // import { authContext } from '../../adalConfig';
-import config from '../../appConfig';
+import appConfig from '../../appConfig';
+import config from '../../config';
 import logo from '../../../src/assets/images/dxcBlack.png';
+
 
 export class Login extends Component {
     constructor(props) {
         super(props);
-        this.userAgentApplication = new UserAgentApplication(config.appId, null, null);
+        this.userAgentApplication = new UserAgentApplication(appConfig.appId, null, null);
         const user = this.userAgentApplication.getUser();
         if (user) {
             this.getUserProfile();
@@ -29,26 +31,13 @@ export class Login extends Component {
             // If the cache contains a non-expired token, this function
             // will just return the cached token. Otherwise, it will
             // make a request to the Azure OAuth endpoint to get a token
-
-            const accessToken = await this.userAgentApplication.acquireTokenSilent(config.scopes);
-            if (accessToken) {
-                // Get the user's profile from Graph
-                const payload = jwt.decode(accessToken);
-                const rsaToken = jwt.sign(payload, 'Rt6tSVHJtGd9c5neK1dST3ThSwyvNdo3hNUjHxnP5p4=');
-                const user = await getUserDetails(accessToken);
-                sessionStorage.setItem('accessToken', accessToken);
-                sessionStorage.setItem('userName', user.displayName);
-                sessionStorage.setItem('userEmail', user.userPrincipalName);
-                this.setState({
-                    error: null,
-                    email: user.mail || user.userPrincipalName,
-                    userName: user.displayName,
-                    loginSuccess: true,
-                    accessToken,
-                    rsaToken,
+            this.userAgentApplication.acquireTokenSilent(appConfig.scopes).then((accessToken) => {
+                this.updateLogin(accessToken);
+            }, () => {
+                this.userAgentApplication.acquireTokenPopup(appConfig.scopes).then((accessToken) => {
+                    this.updateLogin(accessToken);
                 });
-                this.props.updateLoginInfo(this.state);
-            }
+            });
         } catch (err) {
             let error = {};
             sessionStorage.clear();
@@ -78,9 +67,31 @@ export class Login extends Component {
         rsaToken: null,
     };
 
+    updateLogin = (accessToken) => {
+        if (accessToken) {
+            // Get the user's profile from Graph
+            const payload = jwt.decode(accessToken);
+            const rsaToken = jwt.sign(payload, config.secretKey);
+            getUserDetails(accessToken).then((user) => {
+                sessionStorage.setItem('accessToken', accessToken);
+                sessionStorage.setItem('userName', user.displayName);
+                sessionStorage.setItem('userEmail', user.userPrincipalName);
+                this.setState({
+                    error: null,
+                    email: user.mail || user.userPrincipalName,
+                    userName: user.displayName,
+                    loginSuccess: true,
+                    accessToken,
+                    rsaToken,
+                });
+                this.props.updateLoginInfo(this.state);
+            });
+        }
+    }
+
     async login() {
         try {
-            await this.userAgentApplication.loginPopup(config.scopes);
+            await this.userAgentApplication.loginPopup(appConfig.scopes);
             await this.getUserProfile();
         } catch (err) {
             const errParts = err.split('|');
@@ -99,6 +110,7 @@ export class Login extends Component {
                         <img src={logo} alt="logo" />
                         <h3>Interview Tracking</h3>
                     </div>
+
                     <div className="login__content">
                         <button type="button" onClick={() => this.login()}>
                 Sign in with global pass
