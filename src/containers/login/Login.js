@@ -19,10 +19,9 @@ export class Login extends Component {
         this.state = this.initState;
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.loadUser();
     }
-
 
     initState = {
         email: '',
@@ -52,8 +51,7 @@ export class Login extends Component {
                  (error, token) => {
                     if (error || !token) {
                         // TODO: Handle error obtaining access token
-                        document.getElementById('api_response').textContent =
-                            'ERROR:\n\n' + error;
+                        console.log(error);
                         return;
                     }
                     const payload = jwt.decode(token);

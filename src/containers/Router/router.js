@@ -30,8 +30,7 @@ export class Routes extends Component {
         }
         return (
             <Switch>
-                <Route exact path="/" component={Login} />
-                <Redirect to="/" />
+                <Route path="/" component={Login} />
             </Switch>
         );
     }
