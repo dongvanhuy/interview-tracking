@@ -146,6 +146,7 @@ export class ProfileInfo extends Component {
 
   handleBookMeetingRoom = (params) => {
       this.props.bookMeetingAction(params);
+      this.props.hideModalBookMeetingAction();
   };
 
   resetForm = () => {
