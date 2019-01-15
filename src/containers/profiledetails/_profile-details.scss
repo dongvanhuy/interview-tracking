@@ -6,7 +6,7 @@
   }
   textarea.form-control {
     resize: none;
-    height: 112px;
+    height: 120px;
   }
   .control-label {
     font-size: 16px;
@@ -169,6 +169,21 @@
     }
     .borderPosition {
       border-color: red;
+    }
+  }
+
+  .back-to-home {
+    margin-bottom: 0;
+    padding-top: 20px;
+    &__link {
+      background: transparent;
+      border: none;
+    }
+    &__icon {
+      cursor: pointer;
+    }
+    &:hover {
+      color: $color-yellow;
     }
   }
 }

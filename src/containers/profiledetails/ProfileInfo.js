@@ -22,6 +22,7 @@ import { ProfileDetailsFirstRound } from './ProfileDetailsFirstRound';
 import { ProfileDetailsSecondRound } from './ProfileDetailsSecondRound';
 import ConfirmationModal from '../common/confirmationModal/ConfirmationModal';
 import loading from '../../assets/images/loading.svg';
+import FontAwesomeIcon from 'react-fontawesome';
 
 export class ProfileInfo extends Component {
     constructor(props) {
@@ -146,6 +147,7 @@ export class ProfileInfo extends Component {
 
   handleBookMeetingRoom = (params) => {
       this.props.bookMeetingAction(params);
+      this.handleOK();
       this.props.hideModalBookMeetingAction();
   };
 
@@ -261,22 +263,21 @@ export class ProfileInfo extends Component {
               {(this.state.loading || loadingDetail) && this.callLoading()}
               <form className="profile-details">
                   <Grid>
-                      {/* <FormGroup className="profile-details__btn profile-details__btn--top">
+                      <FormGroup className="back-to-home">
+                            <FontAwesomeIcon
+                                name="home"
+                                size="2x"
+                                className="back-to-home__icon"
+                                onClick={() => this.props.push('/profile')}
+                            />
                           <button
                               type="button"
-                              className="profile-details__cancel"
+                              className="back-to-home__link"
                               onClick={() => this.props.push('/profile')}
                           >
-                            CANCEL
+                            Back to homepage
                           </button>
-                          <button
-                              type="button"
-                              className="profile-details__submit"
-                              onClick={e => this.submitForm(e)}
-                          >
-                            SAVE
-                          </button>
-                      </FormGroup> */}
+                      </FormGroup>
                       <ProfileDetailsFirstRound
                           handleChange={this.handleChange}
                           users={users}

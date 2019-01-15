@@ -74,9 +74,6 @@ export class ProfileDetailsFirstRound extends Component {
                             />
                             {errorMessages.errPosition && <span className="error_msg">{errorMessages.errPosition}</span>}
                         </FormGroup>
-                    </Col>
-                    <Col xs={12} sm={6} md={6} lg={6}>
-                        <h2 className="profile-details__title">HR Interview</h2>
                         <FormGroup>
                             <ControlLabel>English Level</ControlLabel>
                             <FormControl
@@ -87,6 +84,9 @@ export class ProfileDetailsFirstRound extends Component {
                                 onChange={(e) => this.props.handleChange(e)}
                             />
                         </FormGroup>
+                    </Col>
+                    <Col xs={12} sm={6} md={6} lg={6}>
+                        <h2 className="profile-details__title">HR Interview</h2>
                         <FormGroup className="profile-details__recuiter">
                             <ControlLabel>Recruiter Name</ControlLabel>
                             {/* <FormControl
@@ -108,7 +108,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 onChange={(e) => this.props.handleChange(e)}
                             />
                         </FormGroup>
-                        {/* <FormGroup>
+                        <FormGroup>
                             <ControlLabel>Note</ControlLabel>
                             <FormControl
                                 componentClass="textarea"
@@ -117,7 +117,7 @@ export class ProfileDetailsFirstRound extends Component {
                                 value={this.props.eng_level_cmt}
                                 onChange={(e) => this.props.handleChange(e)}
                             />
-                        </FormGroup> */}
+                        </FormGroup>
                     </Col>
                 </Row>
                 <h2 className="profile-details__title">1st Round</h2>

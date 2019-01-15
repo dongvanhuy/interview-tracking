@@ -38,7 +38,7 @@ export class ProfileDetailsSecondRound extends Component {
                       <FormGroup>
                           <FormControl
                               type="text"
-                              placeholder="Vui lòng ghi email tại đây ..."
+                              placeholder="Please enter the email..."
                               className="profile-details__select"
                               onChange={e => this.props.handleChange(e)}
                               name="interviewer_round2"
