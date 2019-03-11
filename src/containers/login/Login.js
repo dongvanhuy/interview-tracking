@@ -49,13 +49,13 @@ export class Login extends Component {
             authContext.acquireToken(
                 'https://graph.microsoft.com',
                  (error, token) => {
-                    if (error || !token) {
-                        // TODO: Handle error obtaining access token
-                        console.log(error);
-                        return;
-                    }
-                    const payload = jwt.decode(token);
-                    const rsaToken = jwt.sign(payload, config.secretKey);
+                    // if (error || !token) {
+                    //     // TODO: Handle error obtaining access token
+                    //     console.log(error);
+                    //     return;
+                    // }
+                    //const payload = jwt.decode(token);
+                    //const rsaToken = jwt.sign(payload, config.secretKey);
                     // Use the access token
                     sessionStorage.setItem('accessToken', token);
                     this.setState(
@@ -64,7 +64,7 @@ export class Login extends Component {
                             userName: user.profile.name,
                             loginSuccess: true,
                             accessToken: token,
-                            rsaToken,
+                            // rsaToken,
                         },
                         () => {
                             this.props.updateLoginInfo(this.state);

@@ -7,6 +7,7 @@ import { ToastContainer, toast, Slide } from 'react-toastify';
 import moment from 'moment';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { isEmpty } from '../../utils/Common';
+import classNames from 'classnames';
 import {
     loadProfileDetails,
     updateProfileDetails,
@@ -91,14 +92,29 @@ export class ProfileInfo extends Component {
                 );
             }
         }
-
-        // save data successfull
-    //     if (
-    //         this.props.doSuccessfully !== nextProps.doSuccessfully &&
-    //   nextProps.doSuccessfully
-    //     ) {
-    //         this.bookMeetingRoom();
-    //     }
+        if (
+            this.props.doSuccessfully !== nextProps.doSuccessfully && nextProps.doSuccessfully &&
+      nextProps.bookMeetingSuccess
+        ) {
+            toast('You have successfully booking meeting', {
+                autoClose: 5000,
+                position: 'top-center',
+                // transition: demoCSS,
+                hideProgressBar: true,
+                // className: 'customToaster',
+            });
+        } else if(this.props.doSuccessfully !== nextProps.doSuccessfully && nextProps.doSuccessfully === false &&
+            nextProps.bookMeetingSuccess === false) {
+                toast(
+                    'Oops. Something went wrong. Please try again or contact your administrator.',
+                    {
+                        autoClose: 2000,
+                        position: 'top-center',
+                        hideProgressBar: true,
+                        className: 'customToaster',
+                    },
+                );
+            }
     }
 
   initState = {
@@ -147,8 +163,6 @@ export class ProfileInfo extends Component {
 
   handleBookMeetingRoom = (params) => {
       this.props.bookMeetingAction(params);
-      this.handleOK();
-      this.props.hideModalBookMeetingAction();
   };
 
   resetForm = () => {
@@ -256,7 +270,7 @@ export class ProfileInfo extends Component {
 
   render() {
       const { users, loadingDetail, showBookMeeting } = this.props;
-      const { profileId } = this.state;
+      const { profileId, candidate_fullname } = this.state;
       const candidateName = this.state.candidate_fullname;
       return (
           <React.Fragment>
@@ -307,6 +321,7 @@ export class ProfileInfo extends Component {
                               type="button"
                               className="profile-details__submit"
                               onClick={this.showModalBookMeeting}
+                              hidden={candidate_fullname === ''}
                           >
                             BOOK MEETING
                           </button>
@@ -341,6 +356,7 @@ export class ProfileInfo extends Component {
 const mapStateToProps = state => ({
     profileDetails: state.profileDetails.dataProfileDetails,
     doSuccessfully: state.profileDetails.doSuccessfully,
+    bookMeetingSuccess: state.profileDetails.bookMeetingSuccess,
     dataProfileRes: state.profileDetails.dataProfileRes,
     users: state.profileDetails.users,
     loadingDetail: state.profileDetails.loadingDetail,

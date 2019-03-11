@@ -175,6 +175,10 @@
   .back-to-home {
     margin-bottom: 0;
     padding-top: 20px;
+    text-align: center;
+    @include tablet {
+      text-align: left;
+    }
     &__link {
       background: transparent;
       border: none;

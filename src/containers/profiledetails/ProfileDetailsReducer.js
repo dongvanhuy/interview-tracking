@@ -15,6 +15,8 @@ import {
     GET_USERS_FAILED,
     SHOW_MODAL_BOOK_MEETING_ACTION,
     HIDE_MODAL_BOOK_MEETING_ACTION,
+    BOOK_MEETING_ACTION_SUCCESS,
+    BOOK_MEETING_ACTION_FAILED,
 } from '../../store/actionTypes';
 
 const initialState = {
@@ -25,6 +27,7 @@ const initialState = {
     doSuccessfully: null,
     loadingDetail: false,
     showBookMeetingStatus: false,
+    bookMeetingSuccess: null,
     users: [],
 };
 
@@ -103,6 +106,16 @@ const actions = {
     [HIDE_MODAL_BOOK_MEETING_ACTION]: state => ({
         ...state,
         showBookMeetingStatus: false,
+    }),
+    [BOOK_MEETING_ACTION_SUCCESS]: (state, { payload }) => ({
+        ...state,
+        bookMeetingSuccess: true,
+        doSuccessfully: true,
+    }),
+    [BOOK_MEETING_ACTION_FAILED]: (state, { payload }) => ({
+        ...state,
+        bookMeetingSuccess: false,
+        doSuccessfully: false,
     }),
 };
 

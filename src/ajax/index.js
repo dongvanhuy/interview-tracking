@@ -14,11 +14,11 @@ function request(config) {
         'Content-Type': 'application/json',
     });
 
-    if (rsaToken) {
-        Object.assign(headers, {
-            rsaToken,
-        });
-    }
+    // if (rsaToken) {
+    //     Object.assign(headers, {
+    //         rsaToken,
+    //     });
+    // }
     return config;
 }
 
